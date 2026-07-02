@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Microsoft Office lock / temp files
+~$*
+
+# PPTX skill working artifacts
+unpacked/
+thumbnails*.jpg
+.playwright-mcp/
+
+# Secrets / env
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Confidential WSQ assessments — never push
+assessemnt/
