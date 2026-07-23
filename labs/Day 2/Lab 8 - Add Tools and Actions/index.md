@@ -19,7 +19,7 @@ By the end of this lab, you will be able to:
 ## Scenario
 So far your **Company Helpdesk** agent can *answer* questions (using Knowledge). But staff at **ACME Pte Ltd** also want it to *do* things — for example, email the support team when someone needs help escalated.
 
-**Knowledge lets an agent answer; Tools let it act.** In this lab you will give your agent a tool so a chat conversation can trigger real work, such as sending an email. This is the bridge to the end-to-end agent-plus-flow workflows you will build in Day 3.
+**Knowledge lets an agent answer; Tools let it act.** In this lab you will give your agent a tool so a chat conversation can trigger real work, such as sending an email. This is the bridge to the end-to-end agent-plus-flow workflow you will build in Lab 10.
 
 > **Knowledge vs Tools:**
 > - **Knowledge** = read and answer from your documents (Lab 7).
@@ -31,7 +31,7 @@ So far your **Company Helpdesk** agent can *answer* questions (using Knowledge).
 
 ### Step 1: Open the Tools tab (~5 minutes)
 
-1. Go to **https://copilotstudio.microsoft.com** and confirm the **environment selector** (top-right) shows **Course Sandbox** — the same environment as your Power Automate flows.
+1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and confirm the **environment selector** (top-right) shows **Course Sandbox** — the same environment as your Power Automate flows.
 2. Open your **Company Helpdesk** agent from Lab 6.
 3. Select the **Tools** tab (this was labelled **Actions** in older versions).
 4. Select **+ Add a tool**. Microsoft groups tools into several **core tool types**:
@@ -129,7 +129,7 @@ If you leave the **Send notification email** connector tool (Steps 2–4) **enab
 4. Under **Inputs**, for the `Request summary` input set **Fill using** → **Dynamically fill with AI** so the agent writes the summary from the conversation (or **Custom value** to bind a variable), just like the fixed-vs-AI choice in Step 4.
 5. Under **Completion**, set **After running** → **Write the response with generative AI** so the agent confirms the result in natural language. **Save**.
 
-> **Tip:** Every flow used as a tool follows the same three-part shape: **When an agent calls the flow** (trigger) → **do the work** → **Respond to the agent** (give a result back). You will reuse this pattern throughout Day 3.
+> **Tip:** Every flow used as a tool follows the same three-part shape: **When an agent calls the flow** (trigger) → **do the work** → **Respond to the agent** (give a result back). You will reuse this pattern in Lab 10.
 
 ### Step 6: Test the agent performing the action (~8 minutes)
 
@@ -179,7 +179,7 @@ You have successfully completed this lab when:
 - Use a **flow** (not a single connector action) when the work is **multi-step** — e.g. **Add a row into a table** to log a record and return a result.
 - When two tools overlap, the agent may pick the wrong one — **turn off** the competing tool while you test, then re-enable it once each tool has a precise description.
 - A broken connection causes an **Unauthorized** error — reconnect with a mailbox-enabled account.
-- Flows-as-tools are the foundation of the end-to-end workflows you build in Day 3.
+- Flows-as-tools are the foundation of the end-to-end workflow you build in Lab 10.
 
 ## Duration
 ~45 minutes

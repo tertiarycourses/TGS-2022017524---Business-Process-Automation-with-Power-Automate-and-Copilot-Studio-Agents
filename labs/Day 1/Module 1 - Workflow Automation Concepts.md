@@ -1,6 +1,6 @@
 # Module 1: Introduction to Workflow Automation
 
-> **Read this before the Day 1 labs.** It explains the "why" behind everything you'll build over the next three days. ~20 minutes.
+> **Read this before the Day 1 labs.** It explains the "why" behind everything you'll build over the next two days. ~20 minutes.
 
 By the end of this reading you will be able to:
 
@@ -35,7 +35,7 @@ In this course you automate workflows with **two** Microsoft tools that work as 
 - **Power Automate** — builds the automated steps (the **flows**) that do the work.
 - **Copilot Studio** — builds AI **agents** that understand natural-language requests and feed clean, structured data into those flows.
 
-You'll learn Power Automate first (Day 1), then agents (Day 2), then how to combine them (Day 3).
+You'll learn Power Automate first (Day 1), then agents and how to combine them with your flows (Day 2).
 
 ---
 
@@ -123,13 +123,12 @@ Read that left to right: an event happens, the flow performs a series of steps, 
 
 ---
 
-## 4. How the three days fit together
+## 4. How the two days fit together
 
 | Day | You build | New skill | What it gives you |
 |-----|-----------|-----------|-------------------|
 | **Day 1** | Flows in **Power Automate** | Triggers, actions, outputs | The "hands" that do work — email, Excel logging, approvals |
-| **Day 2** | Agents in **Copilot Studio** | Structured capture, tools | The "brain & mouth" that talk to people and produce clean data |
-| **Day 3** | Agents **+** flows together | Orchestration | Complete **end-to-end** business workflows, then your own |
+| **Day 2** | Agents in **Copilot Studio**, connected to your flows | Structured capture, tools, agent + flow | The "brain & mouth" that talk to people, produce clean data, and hand it to a flow — a complete **end-to-end** workflow |
 
 Day 1 is all about Power Automate. You'll master the trigger → action → output rhythm by building real flows you can run today.
 

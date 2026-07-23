@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-3-day WSQ Lesson Plan (DOCX) for
+2-day WSQ Lesson Plan (DOCX) for
 "Business Process Automation with Power Automate and Copilot Studio Agents"
 (TGS-2022017524), Tertiary Infotech Academy Pte Ltd house format.
 
 Daily window 9:00am - 6:00pm (1-hour lunch; tea breaks within).
-Day 3 ends with the assessment block: WA 1 hr + PP 1 hr, 4:00 - 6:00pm.
-The Slides column maps every session to courseware/facilitator-slides.pptx
-(108 slides after the WSQ revision).
+Day 1: Power Automate. Day 2: Copilot Studio agents, ending with the
+assessment block: WA 1 hr + PP 1 hr, 4:00 - 6:00pm.
+The Slides column maps every session to courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v3.pptx
+(86 slides after the 2-day restructure).
 
 Writes: courseware/LP-<course>.docx
 """
@@ -25,7 +26,7 @@ from docx.oxml import OxmlElement
 # script lives at .claude/skills/wsq-lesson-plan/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "2.0"
+VERSION = "3.0"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -35,6 +36,10 @@ VERSIONS = [
      "Course Development Team"],
     ["2.0", "2 Jul 2026", "WSQ revision — new course title, 9:00am-6:00pm schedule, "
      "Day-3 assessment block (WA 1 hr + PP 1 hr), slide mapping for the 108-slide deck.",
+     "Course Development Team"],
+    ["3.0", "3 Jul 2026", "Course restructured from 3 days to 2 days — Day 1: Power Automate, "
+     "Day 2: Copilot Studio agents ending with the assessment block (WA 1 hr + PP 1 hr, 4:00-6:00pm). "
+     "Modules 4-5 and Labs 12-16 retired; slide mapping updated for the 86-slide v3 deck.",
      "Course Development Team"],
 ]
 
@@ -55,7 +60,7 @@ def add_cover(doc):
     _cline(doc, "For", 12, color=GREY, after=8)
     _cline(doc, TITLE, 20, bold=True, color=DARK, after=14)
     _cline(doc, f"TGS Ref No: {COURSE_CODE}", 12, color=GREY, after=6)
-    _cline(doc, "Duration: 3 Days  ·  9:00am – 6:00pm", 12, color=GREY, after=20)
+    _cline(doc, "Duration: 2 Days  ·  9:00am – 6:00pm", 12, color=GREY, after=20)
     _cline(doc, "Conducted by", 12, color=GREY, after=6)
     _cline(doc, ORG, 13, bold=True, after=2)
     _cline(doc, f"UEN: {UEN}", 10, color=GREY, after=18)
@@ -145,40 +150,24 @@ DAY1 = [
 ]
 DAY2 = [
     ("9:00 – 9:15",  "15 min", "Day 1 recap & Q&A", DISC, "topic", "47–49"),
-    ("9:15 – 10:15", "60 min", "Module 3: Building Business Agents with Copilot Studio — prompt design for structured output", LEC, "topic", "50–59"),
-    ("10:15 – 10:30","15 min", "Tea break", BRK, "break", "—"),
-    ("10:30 – 11:15","45 min", "Lab 6: Create Your First Agent — instructions, knowledge, Test pane", HND, "lab", "65–66"),
-    ("11:15 – 12:00","45 min", "Lab 7: Add Knowledge to Your Agent (Grounding / RAG)", HND, "lab", "67"),
-    ("12:00 – 12:45","45 min", "Lab 8: Add Tools and Actions — connectors & flows as tools", HND, "lab", "68"),
-    ("12:45 – 1:45", "60 min", "Lunch", BRK, "break", "—"),
-    ("1:45 – 2:45",  "60 min", "Lab 9: Sales Enquiry Assistant — capture structured data", HND, "lab", "69"),
-    ("2:45 – 3:45",  "60 min", "Lab 10: Procurement Request Workflow — agent calls a flow", HND, "lab", "60–64, 70"),
-    ("3:45 – 4:00",  "15 min", "Tea break", BRK, "break", "—"),
-    ("4:00 – 4:45",  "45 min", "Lab 10 (cont.): log + notify, wire inputs, test end-to-end", HND, "lab", "70"),
-    ("4:45 – 5:30",  "45 min", "Lab 11: Automated Response Generation (AI prompts)", HND, "lab", "71–72"),
-    ("5:30 – 6:00",  "30 min", "Testing & debugging agents + Day 2 recap & Q&A", DISC, "topic", "72–73"),
-]
-DAY3 = [
-    ("9:00 – 9:15",  "15 min", "Day 2 recap & Q&A", DISC, "topic", "73–74"),
-    ("9:15 – 9:45",  "30 min", "Module 4: End-to-End Orchestration Concepts", LEC, "topic", "75–81"),
-    ("9:45 – 10:30", "45 min", "Lab 12: Email Enquiry → Excel Logging → Notification", HND, "lab", "82"),
-    ("10:30 – 10:40","10 min", "Tea break", BRK, "break", "—"),
-    ("10:40 – 11:40","60 min", "Lab 13: Invoice Upload → Approval Workflow (file trigger)", HND, "lab", "83"),
-    ("11:40 – 12:40","60 min", "Lab 14: Purchase Request → Manager Approval — build", HND, "lab", "84"),
-    ("12:40 – 1:25", "45 min", "Lunch", BRK, "break", "—"),
-    ("1:25 – 1:50",  "25 min", "Lab 14 (cont.): threshold condition, notify, test all paths", HND, "lab", "84"),
-    ("1:50 – 2:35",  "45 min", "Lab 15: Order Processing (Agent + Flow) — confirm, log, restock alert", HND, "lab", "85–86"),
-    ("2:35 – 2:45",  "10 min", "Tea break", BRK, "break", "—"),
-    ("2:45 – 3:00",  "15 min", "Module 5: Business Workflow Workshop briefing", LEC, "topic", "87–93"),
-    ("3:00 – 3:50",  "50 min", "Lab 16: Capstone Workshop — design, build & present your own workflow", HND, "lab", "94–95"),
-    ("3:50 – 4:00",  "10 min", "Course wrap-up, LMS courseware download, briefing for assessment", DISC, "topic", "96–107"),
+    ("9:15 – 10:00", "45 min", "Module 3: Building Business Agents with Copilot Studio — prompt design for structured output", LEC, "topic", "50–59"),
+    ("10:00 – 10:40","40 min", "Lab 6: Create Your First Agent — instructions, knowledge, Test pane", HND, "lab", "65–66"),
+    ("10:40 – 10:55","15 min", "Tea break", BRK, "break", "—"),
+    ("10:55 – 11:35","40 min", "Lab 7: Add Knowledge to Your Agent (Grounding / RAG)", HND, "lab", "67"),
+    ("11:35 – 12:15","40 min", "Lab 8: Add Tools and Actions — connectors & flows as tools", HND, "lab", "68"),
+    ("12:15 – 1:15", "60 min", "Lunch", BRK, "break", "—"),
+    ("1:15 – 2:00",  "45 min", "Lab 9: Sales Enquiry Assistant — capture structured data", HND, "lab", "69"),
+    ("2:00 – 2:50",  "50 min", "Lab 10: Procurement Request Workflow — agent calls a flow, log + notify, test end-to-end", HND, "lab", "60–64, 70"),
+    ("2:50 – 3:00",  "10 min", "Tea break", BRK, "break", "—"),
+    ("3:00 – 3:30",  "30 min", "Lab 11: Automated Response Generation (AI prompts)", HND, "lab", "71–72"),
+    ("3:30 – 4:00",  "30 min", "Testing & debugging agents, Day 2 recap, course wrap-up & briefing for assessment", DISC, "topic", "72–85"),
     ("4:00 – 5:00",  "60 min", "Written Assessment (WA / SAQ) — open book", ASMT, "assess", "—"),
     ("5:00 – 6:00",  "60 min", "Practical Performance (PP) Assessment — open book", ASMT, "assess", "—"),
 ]
 
 def total(rows):
     return sum(int(r[1].split()[0]) for r in rows)
-for nm, rows in [("Day 1",DAY1),("Day 2",DAY2),("Day 3",DAY3)]:
+for nm, rows in [("Day 1",DAY1),("Day 2",DAY2)]:
     assert total(rows) == 540, f"{nm} = {total(rows)} min (expected 540)"
 
 # ---------------------------------------------------------------- build doc
@@ -190,19 +179,20 @@ prodoc.add_version_control(doc, VERSIONS)
 prodoc.add_toc(doc, levels="1-1")
 
 heading(doc, "Course Overview", 1)
-para(doc, "This 3-day, hands-on WSQ course teaches participants to automate real business processes by combining "
-          "Microsoft Power Automate flows with AI agents built in Microsoft Copilot Studio. Every topic follows "
-          "a concept → demonstration → hands-on lab pattern; participants finish with working automations, a "
-          "capstone project of their own, and sit the WSQ assessment on Day 3.")
+para(doc, "This 2-day, hands-on WSQ course teaches participants to automate real business processes by combining "
+          "Microsoft Power Automate flows with AI agents built in Microsoft Copilot Studio. Day 1 covers workflow "
+          "automation concepts and Power Automate; Day 2 covers business agents in Copilot Studio and connecting "
+          "them to flows. Every topic follows a concept → demonstration → hands-on lab pattern; participants "
+          "finish with working automations and sit the WSQ assessment at the end of Day 2.")
 info_table(doc, [
     ("Course Title", TITLE),
     ("TGS Ref No", COURSE_CODE),
-    ("Duration", "3 Days (9:00am – 6:00pm), incl. 1-hour lunch and tea breaks; assessment on Day 3, 4:00 – 6:00pm"),
+    ("Duration", "2 Days (9:00am – 6:00pm), incl. 1-hour lunch and tea breaks; assessment on Day 2, 4:00 – 6:00pm"),
     ("Delivery", "Instructor-led, hands-on (physical / virtual)"),
     ("Audience", "Business and operations staff who want to automate repetitive work; no coding required"),
     ("Prerequisites", "Basic Microsoft 365 familiarity (Outlook, Excel); a Power Platform environment (see Lab 0)"),
-    ("Labs", "17 step-by-step labs across 3 days, plus 5 concept modules"),
-    ("Assessment", "Written Assessment (SAQ) 1 hr + Practical Performance (PP) 1 hr — Day 3, 4:00 – 6:00pm, open book"),
+    ("Labs", "12 step-by-step labs across 2 days (Labs 0–11), plus 3 concept modules"),
+    ("Assessment", "Written Assessment (SAQ) 1 hr + Practical Performance (PP) 1 hr — Day 2, 4:00 – 6:00pm, open book"),
 ])
 
 heading(doc, "Learning Outcomes", 1)
@@ -212,17 +202,15 @@ bullets(doc, [
     "Build Power Automate flows that send emails, log data to Excel, run approvals, and use scheduled and form triggers.",
     "Create business agents in Copilot Studio, ground them with knowledge (RAG), and give them tools.",
     "Connect agents to Power Automate flows and pass structured data between them.",
-    "Orchestrate complete end-to-end workflows for sales, finance, procurement, and order processing.",
-    "Design, build, and present an original end-to-end automation in a capstone project.",
+    "Combine agents and flows into complete end-to-end business automations (e.g. procurement request handling).",
 ])
 
 heading(doc, "Daily Schedule", 1)
 para(doc, "The Slides column maps each session to the matching slides in the facilitator deck "
-          "(facilitator-slides.pptx, 108 slides) so trainers can pace delivery against the deck.")
+          "(Business Process Automation with Power Automate and Copilot Studio Agents-v3.pptx, 86 slides) so trainers can pace delivery against the deck.")
 for nm, theme, rows in [
     ("Day 1 — Foundations & Power Automate", "Workflow concepts + your first five flows", DAY1),
-    ("Day 2 — Building Business Agents with Copilot Studio", "Agents, knowledge/RAG, tools, and agent + flow", DAY2),
-    ("Day 3 — End-to-End Automation, Workshop & Assessment", "Combine agents + flows, build your own, then sit the assessment", DAY3),
+    ("Day 2 — Building Business Agents with Copilot Studio & Assessment", "Agents, knowledge/RAG, tools, agent + flow end-to-end, then sit the assessment", DAY2),
 ]:
     heading(doc, nm, 2)
     para(doc, theme + ".")
@@ -240,23 +228,22 @@ info_table(doc, [
 ])
 
 heading(doc, "Assessment", 1)
-para(doc, "The summative WSQ assessment is taken on Day 3, 4:00 – 6:00pm, and is open book "
+para(doc, "The summative WSQ assessment is taken on Day 2, 4:00 – 6:00pm, and is open book "
           "(slides, Learner Guide and approved materials only):")
 bullets(doc, [
-    "Written Assessment (WA / SAQ) — 1 hour, 4:00 – 5:00pm. Open-ended short-answer questions testing the knowledge from Modules 1–4.",
+    "Written Assessment (WA / SAQ) — 1 hour, 4:00 – 5:00pm. Open-ended short-answer questions testing the knowledge from Modules 1–3.",
     "Practical Performance (PP) — 1 hour, 5:00 – 6:00pm. Candidates build a working flow and agent, mirroring the hands-on labs.",
     "Assessment flow: TRAQOM survey (QR on the LMS) → Assessment digital attendance → WA then PP → submit answers on the LMS → sign the Assessment Summary Record.",
     "WSQ funding requires a minimum of 75% attendance AND a Competent (C) assessment outcome.",
     f"Courseware and the assessment are on the LMS: {LMS}",
 ])
-para(doc, "Formative assessment is continuous: each lab includes a Checkpoint that the facilitator verifies, and the "
-          "Day-3 capstone (Lab 16) is presented against the published quality bar (clear trigger, data logged, at "
-          "least one condition, an approval or AI-generated response, notifications for every outcome, and a tested "
-          "happy path + branches).")
+para(doc, "Formative assessment is continuous: each lab includes a Checkpoint that the facilitator verifies before "
+          "the class moves on, and Lab 10 (Procurement Request Workflow) serves as the integrative check that a "
+          "participant can wire an agent to a flow end-to-end ahead of the Practical Performance assessment.")
 
 add_footer(doc)
 prodoc.enable_update_fields(doc)
 out = os.path.join(REPO, f"courseware/LP-{TITLE}.docx")
 doc.save(out)
-print("Day totals:", {n: total(r) for n,r in [("D1",DAY1),("D2",DAY2),("D3",DAY3)]})
+print("Day totals:", {n: total(r) for n,r in [("D1",DAY1),("D2",DAY2)]})
 print("Wrote", out)

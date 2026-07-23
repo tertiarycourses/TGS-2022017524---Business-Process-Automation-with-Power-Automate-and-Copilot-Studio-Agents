@@ -23,7 +23,7 @@ from docx.oxml import OxmlElement
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "2.0"
+VERSION = "3.0"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -32,6 +32,10 @@ VERSIONS = [
      "Course Development Team"],
     ["2.0", "2 Jul 2026", "WSQ revision — new course title, labs updated to the current "
      "Copilot Studio / Power Automate UI, Course Sandbox environment, WSQ cover page.",
+     "Course Development Team"],
+    ["3.0", "3 Jul 2026", "Course restructured from 3 days to 2 days — Day 1: Power Automate "
+     "(Labs 0-5), Day 2: Copilot Studio agents (Labs 6-11) ending with the WSQ assessment. "
+     "Modules 4-5 and Labs 12-16 retired.",
      "Course Development Team"],
 ]
 
@@ -86,15 +90,6 @@ DAYS = [
         "labs/Day 2/Lab 9 - Sales Enquiry Assistant/index.md",
         "labs/Day 2/Lab 10 - Procurement Request Workflow/index.md",
         "labs/Day 2/Lab 11 - Automated Response Generation/index.md",
-    ]),
-    ("Day 3 — End-to-End Workflow Automation & Workshop", [
-        "labs/Day 3/Module 4 - End-to-End Orchestration Concepts.md",
-        "labs/Day 3/Module 5 - Business Workflow Workshop.md",
-        "labs/Day 3/Lab 12 - Email to Excel to Notification/index.md",
-        "labs/Day 3/Lab 13 - Invoice Upload Approval/index.md",
-        "labs/Day 3/Lab 14 - Purchase Request Approval/index.md",
-        "labs/Day 3/Lab 15 - Order Processing Workflow/index.md",
-        "labs/Day 3/Lab 16 - Capstone Workshop/index.md",
     ]),
 ]
 
@@ -193,15 +188,15 @@ def rule(): B.append(("rule",))
 # Title + intro
 B.append(("h1", "Learner Guide"))
 p(f"Welcome! This Learner Guide takes you **click-by-click** through every hands-on lab in the WSQ course "
-  f"**{TITLE}** (Course Code: {COURSE_CODE}). Over three days you go from your first Power Automate flow, "
-  f"to AI business agents in Microsoft Copilot Studio, to complete end-to-end automated workflows — and finish "
-  f"by building your own in a capstone project.")
+  f"**{TITLE}** (Course Code: {COURSE_CODE}). Over two days you go from your first Power Automate flow "
+  f"to AI business agents in Microsoft Copilot Studio — and finish by connecting an agent to your flows in a "
+  f"complete end-to-end automated workflow.")
 p("Work through the labs **in order**: each one builds on the skills of the lab before it. Whenever you see a "
   "**Checkpoint**, stop and confirm your flow or agent behaves as described before moving on. The "
   "**Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.")
 note("Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5). "
-     "Day 2: Business agents in Copilot Studio (Labs 6-11). "
-     "Day 3: End-to-end workflows + capstone (Labs 12-16).")
+     "Day 2: Business agents in Copilot Studio + agent-and-flow end-to-end workflows (Labs 6-11), "
+     "then the WSQ assessment (4:00-6:00 PM).")
 rule()
 
 # Common errors reference (mirrors the deck's quick-fix slide)
@@ -246,12 +241,18 @@ for day_title, files in DAYS:
 # ============================================================================
 # Renderers (markdown + docx)
 # ============================================================================
+def _anchor(txt):
+    # GitHub slug rules: lowercase, strip punctuation, EACH space becomes a
+    # hyphen (so "A — B" and "A & B" produce double hyphens, not one).
+    return re.sub(r"[^\w\- ]", "", txt.lower()).replace(" ", "-")
+
 def _toc(blocks):
     out = ["## Table of Contents", ""]
     for b in blocks:
         if b[0] == "h2":
-            a = re.sub(r"[^\w\s-]", "", b[1].lower()); a = "-".join(a.split())
-            out.append(f"- [{b[1]}](#{a})")
+            out.append(f"- [{b[1]}](#{_anchor(b[1])})")
+        elif b[0] == "h3":
+            out.append(f"  - [{b[1]}](#{_anchor(b[1])})")
     out.append("")
     return "\n".join(out)
 

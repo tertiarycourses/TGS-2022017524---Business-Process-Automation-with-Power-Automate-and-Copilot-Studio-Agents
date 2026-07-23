@@ -17,7 +17,7 @@ With Power Automate you can:
 - Run approvals, send notifications, and schedule recurring jobs
 - Be called by a Copilot Studio **agent** as a tool (you'll do this on Day 2)
 
-You build flows at **https://make.powerautomate.com**, inside the environment you set up in **Lab 0**.
+You build flows at **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**, inside the environment you set up in **Lab 0**.
 
 > **Low-code, not no-thought.** You don't write code, but you do think like a designer: what starts the flow, what it does, and what data moves between steps.
 
@@ -29,8 +29,8 @@ There are four flavours of flow. They differ only in *how they start* — once r
 |-----------|-----------|---------|-----|
 | **Instant** | A person clicking Run / a button | Send a confirmation email on demand | Lab 1–3 |
 | **Scheduled** | A clock/timetable (Recurrence) | Daily reminder at 9 AM | Lab 4 |
-| **Automated** | An event | New form response, new email, new file | Lab 5, Day 3 |
-| **Agent flow** | A Copilot Studio agent | Agent logs a request and notifies the team | Day 2–3 |
+| **Automated** | An event | New form response, new email, new file | Lab 5 |
+| **Agent flow** | A Copilot Studio agent | Agent logs a request and notifies the team | Day 2 |
 
 ---
 
@@ -40,8 +40,8 @@ Every flow starts with **exactly one trigger** — the event that kicks it off. 
 
 | Trigger | Connector / name | Fires when… | Used in |
 |---------|------------------|-------------|---------|
-| **Email received** | Office 365 Outlook — *"When a new email arrives (V3)"* | Mail lands in a folder | Day 3, Lab 10 |
-| **File upload** | OneDrive / SharePoint — *"When a file is created"* | A document is dropped into a folder | Day 3, Lab 11 |
+| **Email received** | Office 365 Outlook — *"When a new email arrives (V3)"* | Mail lands in a folder | Further practice |
+| **File upload** | OneDrive / SharePoint — *"When a file is created"* | A document is dropped into a folder | Further practice |
 | **Form submission** | Microsoft Forms — *"When a new response is submitted"* | Someone submits your form | Lab 5 |
 | **Schedule** | *"Recurrence"* | A timetable you define is reached | Lab 4 |
 | **Manual** | *"Manually trigger a flow"* | You press **Run** | Labs 1–3 |
@@ -115,7 +115,7 @@ The build-and-verify loop is the same in every lab:
 2. **Test** it — manually, or by triggering the real event.
 3. Review the **run history** — **green = success, red = error** — to confirm it worked or to debug.
 
-Get comfortable with this loop today; you'll repeat it dozens of times across the three days.
+Get comfortable with this loop today; you'll repeat it dozens of times across the two days.
 
 ---
 

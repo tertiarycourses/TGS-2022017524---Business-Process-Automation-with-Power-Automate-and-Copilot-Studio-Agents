@@ -24,7 +24,7 @@ At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager 
 ## Step-by-Step Guide
 
 ### Step 1: Create the flow and add inputs (~7 minutes)
-1. Go to **https://make.powerautomate.com**.
+1. Go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**.
 2. Top-right, confirm the environment selector reads **Course Sandbox**. If not, click it and switch.
 3. In the left menu, click **+ Create**.
 4. Under "Start from blank", click **Instant cloud flow**.
@@ -71,16 +71,34 @@ At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager 
 2. Search `send an email` and select **Send an email (V2)** (from **Office 365 Outlook**). Complete the connection if prompted (it must show a green check).
 3. Configure:
    - **To:** insert the dynamic token **RequesterEmail** (a trigger input).
-   - **Subject:** `Your request has been APPROVED`
-   - **Body:** type `Hi `, insert **RequesterName**, type `, your request "`, insert **RequestDetails**, type `" has been approved. You may proceed.`
+   - **Subject** — copy and paste:
+
+     ```
+     Your request has been APPROVED
+     ```
+
+   - **Body** — copy and paste the template below, then **replace each `[...]` placeholder** with the matching dynamic token (delete the placeholder, leave the cursor there, and insert the token from the lightning-bolt panel):
+
+     ```
+     Hi [RequesterName], your request "[RequestDetails]" has been approved. You may proceed.
+     ```
 
 **In the "If no" branch:**
 1. Click **Add an action** *inside the If no branch*.
 2. Select **Send an email (V2)** again.
 3. Configure:
    - **To:** insert **RequesterEmail**
-   - **Subject:** `Your request has been REJECTED`
-   - **Body:** type `Hi `, insert **RequesterName**, type `, unfortunately your request "`, insert **RequestDetails**, type `" was not approved. Please contact your manager for details.`
+   - **Subject** — copy and paste:
+
+     ```
+     Your request has been REJECTED
+     ```
+
+   - **Body** — copy and paste, then replace the `[...]` placeholders with the matching dynamic tokens as before:
+
+     ```
+     Hi [RequesterName], unfortunately your request "[RequestDetails]" was not approved. Please contact your manager for details.
+     ```
 
 > **⚠️ Warning:** Only use **single-value** dynamic fields here — the trigger inputs (**RequesterName**, **RequesterEmail**, **RequestDetails**) and, if you want it, the approval **Outcome**. Do **not** insert any approval **Responses** field. Power Automate auto-wraps an action in a **For each** loop the moment you insert a list/array value, which breaks this simple flow. If a **For each** appears around your email, delete it and re-add a plain **Send an email (V2)** using only single-value fields.
 

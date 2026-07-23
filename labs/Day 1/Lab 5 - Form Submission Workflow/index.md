@@ -24,7 +24,7 @@ At **ACME Pte Ltd**, customers fill in an online enquiry form. The moment they *
 ## Step-by-Step Guide
 
 ### Step 1: Create the form in Microsoft Forms (~10 minutes)
-1. Open a new browser tab and go to **https://forms.office.com** (it redirects to the current home, **https://forms.cloud.microsoft** — both work).
+1. Open a new browser tab and go to **<a href="https://forms.office.com" target="_blank" rel="noopener">https://forms.office.com</a>** (it redirects to the current home, **<a href="https://forms.cloud.microsoft" target="_blank" rel="noopener">https://forms.cloud.microsoft</a>** — both work).
 2. Sign in with the **same account** you use for Power Automate in the **Course Sandbox** tenant.
 3. Click **+ New Form**.
 4. Click the title at the top and enter: `Customer Enquiry Form`.
@@ -44,7 +44,7 @@ At **ACME Pte Ltd**, customers fill in an online enquiry form. The moment they *
 4. **Save this URL** somewhere — it's the link you'd send to customers, and you'll use it to test at the end.
 
 ### Step 3: Create the automated flow (~5 minutes)
-1. Go back to **https://make.powerautomate.com** (confirm the environment is **Course Sandbox**).
+1. Go back to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>** (confirm the environment is **Course Sandbox**).
 2. Left menu → **+ Create** → **Automated cloud flow**.
 3. **Flow name:** `Lab 5 - Form Submission to Email and Excel`.
 4. In "Choose your flow's trigger", search `Forms` and select **When a new response is submitted** (Microsoft Forms).
@@ -130,7 +130,7 @@ The trigger only gives you a response **Id** — you need another action to read
 - A **Microsoft Forms** trigger turns a public form into an automatic workflow — no buttons to press.
 - **Get response details** is required to read the individual answers behind the Response Id.
 - The **Date** column is filled by an **fx** token (`formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')`), never typed text.
-- One submission can fan out to **multiple actions** (notify **and** log) — the core pattern for Day 3.
+- One submission can fan out to **multiple actions** (notify **and** log) — the core pattern behind every end-to-end business automation.
 
 ## Duration
 ~50 minutes

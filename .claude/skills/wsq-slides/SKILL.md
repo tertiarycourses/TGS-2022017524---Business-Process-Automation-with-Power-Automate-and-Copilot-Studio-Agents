@@ -15,9 +15,9 @@ description: >
 # WSQ Slides Skill
 
 > **THIS COURSE:** **Business Process Automation with Power Automate and Copilot Studio Agents**
-> · TGS Ref No: **TGS-2022017524** · 3-day course (Day 1: Power Automate foundations,
-> Day 2: Copilot Studio agents, Day 3: end-to-end orchestration + capstone + assessment).
-> The deck is `courseware/facilitator-slides.pptx` (all-white theme, Arial, 16:9) — see the
+> · TGS Ref No: **TGS-2022017524** · 2-day course (Day 1: Power Automate foundations,
+> Day 2: Copilot Studio agents + agent-and-flow end-to-end, ending with the assessment).
+> The deck is `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v3.pptx` (all-white theme, Arial, 16:9) — see the
 > project `course-slides` skill for how to edit it in place. Course page:
 > https://www.tertiarycourses.com.sg/wsq-create-copilot-chatbots-and-agents-with-microsoft-copilot-studio.html
 > (the website still shows the old course title; the title above is the current one).
@@ -251,3 +251,33 @@ Lesson Plan document) with its start and end time.
   (Consolas / Courier New) for code blocks.
 - Always run visual QA (render the new/changed slides to images, inspect for overlap and
   clipping) before delivering.
+
+## Versioning rule (MANDATORY — every update)
+
+Every content update to a courseware artifact MUST, in the same change:
+
+1. **Bump the version number** (and the version date) in the generator/template — e.g. `VERSION="vNN"` for slide decks (the version is also part of the output filename), `VERSION = "N.N"` plus a new `VERSIONS` entry for DOCX documents.
+2. **Document the change in the Document Version Control Record** — add a row (Version Number | Effective Date of Release | Summary of Included Changes | Author) wherever the document carries one (Learner Guide / Lesson Plan). For slide decks the bumped version must appear on the cover page and in the filename.
+3. **Regenerate the outputs**, remove (`git rm`) the superseded versioned files, and update any references to the versioned filename (README, slides that cite the document, etc.).
+
+Never regenerate an artifact with content changes while keeping the old version number.
+
+## HARD RULES — WSQ deck admin slides (non-negotiable)
+
+Every WSQ slide deck built with this skill MUST satisfy all of the following:
+
+1. **About the Trainer — always TWO slides, as visual profile cards** (avatar badge + name/role panel + labelled info tiles — never plain bullets): first a blank **General Trainer** template (grey theme, "?" avatar, fill-in lines: Name, Title/Designation, Qualifications, Areas of expertise, Training & industry experience, Contact) for the trainer to complete, then the **named trainer** (accent theme, initials avatar, filled tiles).
+2. **Assessment Flow — a horizontal numbered flow diagram** (numbered chips joined by chevrons): TRAQOM → Assessment digital attendance → Sit WA then PP → Submit on the LMS → Sign the Assessment Summary Record.
+3. **TRAQOM · SSG Digital Attendance slide** at the FRONT of the deck and repeated at the END.
+4. **Assessment admin pages repeated at the END**, immediately before Thank You, in this order: Assessment (reminder) → Assessment Flow (flow diagram) → Digital Attendance (Mandatory).
+5. **Briefing for Assessment comes BEFORE the Assessment slide** in the front admin section.
+6. **Use the wsq-slides visual components everywhere** (tile_grid, flow_h, trainer_slide, cards, flows — port them from the wsq-slides skill's reference/build_slides.py); never hand-roll plain bullet walls for admin slides (Ground Rules, Learning Outcomes, etc.).
+
+## GitHub Pages — NOT used for WSQ courseware repos
+
+WSQ courseware repositories (TGS-coded course repos with `courseware/` + `labs/`) do
+**not** deploy to GitHub Pages. Do not create a `deploy-pages.yml` workflow, do not
+enable the Pages site, and skip any "deploy static site" phase for these repos. The
+repo homepage should point to the course page on www.tertiarycourses.com.sg instead.
+Lab web apps are run locally by learners (or demoed via localhost) — they don't need
+a hosted deployment.

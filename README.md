@@ -2,22 +2,26 @@
 
 [![Course](https://img.shields.io/badge/Course-Tertiary%20Courses-blue)](https://www.tertiarycourses.com.sg/)
 [![SkillsFuture](https://img.shields.io/badge/SkillsFuture-Funded-green)](https://www.skillsfuture.gov.sg/)
-[![Duration](https://img.shields.io/badge/Duration-3%20Days-orange)]()
-[![Labs](https://img.shields.io/badge/Labs-17%20Hands--On-purple)]()
+[![Duration](https://img.shields.io/badge/Duration-2%20Days-orange)]()
+[![Labs](https://img.shields.io/badge/Labs-12%20Hands--On-purple)]()
 
 This repository contains hands-on lab materials for the **Business Process Automation with Power Automate and Copilot Studio Agents** course. Learn to automate real business processes — sales, finance, procurement, and order processing — by combining **Power Automate** flows with AI **agents** built in **Microsoft Copilot Studio**.
 
 The course is **practical and step-by-step**: every lab is written so a complete beginner can follow along, starting from creating your account through to building full end-to-end automated workflows.
+
+## Screenshot
+
+![Business Process Automation courseware](screenshot.png)
 
 ## Course Overview
 
 | Aspect | Details |
 |--------|---------|
 | **Course Code** | TGS-2022017524 (WSQ) |
-| **Duration** | 3 Days (9:00 AM – 6:00 PM) |
+| **Duration** | 2 Days (9:00 AM – 6:00 PM) |
 | **Mode** | Physical / Zoom / On-site Corporate |
 | **Level** | Beginner to Intermediate |
-| **Assessment** | Day 3, 4:00–6:00 PM — Written Assessment (1 hr) + Practical Performance (1 hr), open book |
+| **Assessment** | Day 2, 4:00–6:00 PM — Written Assessment (1 hr) + Practical Performance (1 hr), open book |
 | **Certification** | WSQ Statement of Attainment |
 | **Prerequisites** | Basic Microsoft 365 familiarity (Outlook, Excel). No coding required. |
 
@@ -30,7 +34,7 @@ Upon completion, you will be able to:
 - Build Power Automate flows that send emails, log data to Excel, and run approvals
 - Create practical business agents in Copilot Studio and design prompts for structured outputs
 - Connect agents to Power Automate flows and pass outputs between them
-- Orchestrate complete end-to-end workflows for sales, finance, procurement, and order processing
+- Combine agents and flows into complete end-to-end business automations (e.g. procurement request handling)
 
 ---
 
@@ -51,9 +55,9 @@ Understand workflow automation concepts and build your first automated flows.
 | **Lab 4** | [Scheduled Trigger Workflow](labs/Day%201/Lab%204%20-%20Scheduled%20Trigger%20Workflow/index.md) | Run a flow automatically on a schedule (daily reminder/digest email) |
 | **Lab 5** | [Form Submission Workflow](labs/Day%201/Lab%205%20-%20Form%20Submission%20Workflow/index.md) | A Microsoft Form (shareable URL) that emails the team and logs to Excel on submit |
 
-### Day 2 — Building Business Agents with Copilot Studio
+### Day 2 — Building Business Agents with Copilot Studio & Assessment
 
-Create AI agents that understand requests and feed structured data into your flows.
+Create AI agents that understand requests and feed structured data into your flows, then sit the WSQ assessment (4:00–6:00 PM).
 
 | Lab | Title | Description |
 |-----|-------|-------------|
@@ -64,20 +68,6 @@ Create AI agents that understand requests and feed structured data into your flo
 | **Lab 9** | [Sales Enquiry Assistant](labs/Day%202/Lab%209%20-%20Sales%20Enquiry%20Assistant/index.md) | An agent that captures sales enquiries as structured data |
 | **Lab 10** | [Procurement Request Workflow](labs/Day%202/Lab%2010%20-%20Procurement%20Request%20Workflow/index.md) | An agent that collects procurement requests and triggers a flow |
 | **Lab 11** | [Automated Response Generation](labs/Day%202/Lab%2011%20-%20Automated%20Response%20Generation/index.md) | Use AI prompts to draft professional responses automatically |
-
-### Day 3 — End-to-End Workflow Automation & Workshop
-
-Combine agents and flows into complete business processes, then build your own.
-
-| Lab | Title | Description |
-|-----|-------|-------------|
-| **Module 4** | [End-to-End Orchestration Concepts](labs/Day%203/Module%204%20-%20End-to-End%20Orchestration%20Concepts.md) | How agents + Power Automate work together; managing outputs and next steps |
-| **Lab 12** | [Email Enquiry → Excel Logging → Notification](labs/Day%203/Lab%2012%20-%20Email%20to%20Excel%20to%20Notification/index.md) | Capture an enquiry, log it, and notify the team |
-| **Lab 13** | [Invoice Upload → Approval Workflow](labs/Day%203/Lab%2013%20-%20Invoice%20Upload%20Approval/index.md) | Trigger an approval when an invoice file is uploaded |
-| **Lab 14** | [Purchase Request → Manager Approval → Notification](labs/Day%203/Lab%2014%20-%20Purchase%20Request%20Approval/index.md) | A full procurement approval chain with notifications |
-| **Lab 15** | [Order Processing Workflow](labs/Day%203/Lab%2015%20-%20Order%20Processing%20Workflow/index.md) | An agent captures an order; the flow confirms, logs, and raises a restock alert |
-| **Module 5** | [Business Workflow Workshop](labs/Day%203/Module%205%20-%20Business%20Workflow%20Workshop.md) | Workshop briefing: business domains, design method, and quality bar |
-| **Lab 16** | [Capstone Workshop](labs/Day%203/Lab%2016%20-%20Capstone%20Workshop/index.md) | Build your own end-to-end workflow for Sales, Finance, Procurement, or Order Processing |
 
 ---
 
@@ -97,7 +87,7 @@ TGS-2022017524/
 │   │   ├── Lab 3 - Simple Approval Workflow/
 │   │   ├── Lab 4 - Scheduled Trigger Workflow/
 │   │   └── Lab 5 - Form Submission Workflow/
-│   ├── Day 2/                              # Business Agents with Copilot Studio
+│   └── Day 2/                              # Business Agents with Copilot Studio
 │   │   ├── Module 3 - Business Agents Concepts.md
 │   │   ├── Lab 6 - Create Your First Agent/
 │   │   ├── Lab 7 - Add Knowledge to Your Agent/
@@ -105,16 +95,8 @@ TGS-2022017524/
 │   │   ├── Lab 9 - Sales Enquiry Assistant/
 │   │   ├── Lab 10 - Procurement Request Workflow/
 │   │   └── Lab 11 - Automated Response Generation/
-│   └── Day 3/                              # End-to-End Workflow Automation
-│   │   ├── Module 4 - End-to-End Orchestration Concepts.md
-│   │   ├── Lab 12 - Email to Excel to Notification/
-│   │   ├── Lab 13 - Invoice Upload Approval/
-│   │   ├── Lab 14 - Purchase Request Approval/
-│   │   ├── Lab 15 - Order Processing Workflow/
-│   │   ├── Module 5 - Business Workflow Workshop.md
-│   │   └── Lab 16 - Capstone Workshop/
 ├── courseware/                             # Ready-to-deliver materials (PPTX/DOCX/PDF only)
-│   ├── facilitator-slides.pptx / .pdf      # Slide deck (108 slides, WSQ)
+│   ├── Business Process Automation with Power Automate and Copilot Studio Agents-v3.pptx / .pdf      # Slide deck (86 slides, WSQ)
 │   ├── LG-<course>.docx / .pdf              # Learner Guide (Word) — generated
 │   └── LP-<course>.docx / .pdf              # Lesson Plan (Word) — generated
 ├── .claude/skills/                         # Course build scripts live in the skills
@@ -137,14 +119,14 @@ The `courseware/` folder holds the ready-to-deliver materials, and a full partic
 |----------|------|-----|
 | **Learner Guide (Markdown)** | [LEARNER-GUIDE.md](LEARNER-GUIDE.md) | Participants — every lab, click-by-click |
 | **Learner Guide (Word)** | `courseware/LG-<course>.docx` | Print / distribute |
-| **Lesson Plan (Word)** | `courseware/LP-<course>.docx` | Facilitator — 3-day schedule |
-| **Slide Deck** | `courseware/facilitator-slides.pptx` | Facilitator — 108 slides |
+| **Lesson Plan (Word)** | `courseware/LP-<course>.docx` | Facilitator — 2-day schedule |
+| **Slide Deck** | `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v3.pptx` | Facilitator — 86 slides |
 | **Written Assessment (WA/SAQ)** | `assessemnt/WA (SAQ) - <course>.docx` (+ answer key) | Open-ended knowledge assessment (6 questions) — confidential, not in the repo |
 | **Practical Performance (PP)** | `assessemnt/PP Assessment - <course>.docx` (+ answer key) | Practical assessment (3 lab-based tasks) — confidential, not in the repo |
 
 > The learner guide and lesson plan are **generated from a single source** (the lab markdown). After editing any lab, re-run `python3 .claude/skills/wsq-learner-guide/build_learner_guide.py` and `python3 .claude/skills/wsq-lesson-plan/build_lesson_plan.py` to keep them in sync.
 >
-> **PDFs** (`facilitator-slides.pdf`, `LG-….pdf`, `LP-….pdf`) are generated from the PPTX/DOCX via LibreOffice and are committed for convenience.
+> **PDFs** (`Business Process Automation with Power Automate and Copilot Studio Agents-v3.pdf`, `LG-….pdf`, `LP-….pdf`) are generated from the PPTX/DOCX via LibreOffice and are committed for convenience.
 >
 > **Assessments** (WA + PP question papers, answer keys, and their generator) are **confidential** and are not included in this repository.
 
@@ -169,7 +151,7 @@ Before starting, you need a Microsoft account with access to Power Platform. **L
 1. Start with **Lab 0** to set up your accounts — do this before the course if possible.
 2. Work through the labs **in order**; each builds on skills from the previous one.
 3. Read the **Module** concept pages at the start of each day for the "why" behind the labs.
-4. Use **Lab 16 (Capstone Workshop)** to apply everything to a workflow relevant to your own job.
+4. Use **Lab 10 (Procurement Request Workflow)** as your end-to-end template — an agent wired to a flow — then adapt it to a workflow relevant to your own job.
 
 ---
 

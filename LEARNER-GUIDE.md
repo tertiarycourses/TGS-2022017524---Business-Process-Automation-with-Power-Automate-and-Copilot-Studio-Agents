@@ -1,6 +1,6 @@
 # Learner Guide
 
-**Course Code:** TGS-2022017524  ·  **Version 2.0**
+**Course Code:** TGS-2022017524  ·  **Version 3.0**
 
 ### Document Version Control Record
 
@@ -8,19 +8,34 @@
 | --- | --- | --- | --- |
 | 1.0 | 24 Jun 2026 | Initial release — full 3-day, 17-lab learner guide. | Course Development Team |
 | 2.0 | 2 Jul 2026 | WSQ revision — new course title, labs updated to the current Copilot Studio / Power Automate UI, Course Sandbox environment, WSQ cover page. | Course Development Team |
+| 3.0 | 3 Jul 2026 | Course restructured from 3 days to 2 days — Day 1: Power Automate (Labs 0-5), Day 2: Copilot Studio agents (Labs 6-11) ending with the WSQ assessment. Modules 4-5 and Labs 12-16 retired. | Course Development Team |
 
 ## Table of Contents
 
-- [Common Errors & Quick Fixes](#common-errors-quick-fixes)
-- [Day 1 — Foundations & Power Automate](#day-1-foundations-power-automate)
-- [Day 2 — Building Business Agents with Copilot Studio](#day-2-building-business-agents-with-copilot-studio)
-- [Day 3 — End-to-End Workflow Automation & Workshop](#day-3-end-to-end-workflow-automation-workshop)
+- [Common Errors & Quick Fixes](#common-errors--quick-fixes)
+- [Day 1 — Foundations & Power Automate](#day-1--foundations--power-automate)
+  - [Module 1: Introduction to Workflow Automation](#module-1-introduction-to-workflow-automation)
+  - [Module 2: Introduction to Power Automate](#module-2-introduction-to-power-automate)
+  - [Lab 0: Environment Setup — Create Your Copilot Studio & Power Automate Accounts](#lab-0-environment-setup--create-your-copilot-studio--power-automate-accounts)
+  - [Lab 1: Automated Email Workflow](#lab-1-automated-email-workflow)
+  - [Lab 2: Excel Data Logging Workflow](#lab-2-excel-data-logging-workflow)
+  - [Lab 3: Simple Approval Workflow](#lab-3-simple-approval-workflow)
+  - [Lab 4: Scheduled Trigger Workflow](#lab-4-scheduled-trigger-workflow)
+  - [Lab 5: Form Submission Workflow](#lab-5-form-submission-workflow)
+- [Day 2 — Building Business Agents with Copilot Studio](#day-2--building-business-agents-with-copilot-studio)
+  - [Module 3: Building Business Agents with Copilot Studio](#module-3-building-business-agents-with-copilot-studio)
+  - [Lab 6: Create Your First Copilot Studio Agent](#lab-6-create-your-first-copilot-studio-agent)
+  - [Lab 7: Add Knowledge to Your Agent (Grounding / RAG)](#lab-7-add-knowledge-to-your-agent-grounding--rag)
+  - [Lab 8: Add Tools and Actions to Your Agent](#lab-8-add-tools-and-actions-to-your-agent)
+  - [Lab 9: Sales Enquiry Assistant](#lab-9-sales-enquiry-assistant)
+  - [Lab 10: Procurement Request Workflow](#lab-10-procurement-request-workflow)
+  - [Lab 11: Automated Response Generation](#lab-11-automated-response-generation)
 
-Welcome! This Learner Guide takes you **click-by-click** through every hands-on lab in the WSQ course **Business Process Automation with Power Automate and Copilot Studio Agents** (Course Code: TGS-2022017524). Over three days you go from your first Power Automate flow, to AI business agents in Microsoft Copilot Studio, to complete end-to-end automated workflows — and finish by building your own in a capstone project.
+Welcome! This Learner Guide takes you **click-by-click** through every hands-on lab in the WSQ course **Business Process Automation with Power Automate and Copilot Studio Agents** (Course Code: TGS-2022017524). Over two days you go from your first Power Automate flow to AI business agents in Microsoft Copilot Studio — and finish by connecting an agent to your flows in a complete end-to-end automated workflow.
 
 Work through the labs **in order**: each one builds on the skills of the lab before it. Whenever you see a **Checkpoint**, stop and confirm your flow or agent behaves as described before moving on. The **Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.
 
-> Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5). Day 2: Business agents in Copilot Studio (Labs 6-11). Day 3: End-to-end workflows + capstone (Labs 12-16).
+> Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5). Day 2: Business agents in Copilot Studio + agent-and-flow end-to-end workflows (Labs 6-11), then the WSQ assessment (4:00-6:00 PM).
 
 ---
 
@@ -43,7 +58,7 @@ Keep this handy — these are the issues learners hit most often, with the one-l
 
 ### Module 1: Introduction to Workflow Automation
 
-> **Read this before the Day 1 labs.** It explains the "why" behind everything you'll build over the next three days. ~20 minutes.
+> **Read this before the Day 1 labs.** It explains the "why" behind everything you'll build over the next two days. ~20 minutes.
 
 By the end of this reading you will be able to:
 
@@ -78,7 +93,7 @@ In this course you automate workflows with **two** Microsoft tools that work as 
 - **Power Automate** — builds the automated steps (the **flows**) that do the work.
 - **Copilot Studio** — builds AI **agents** that understand natural-language requests and feed clean, structured data into those flows.
 
-You'll learn Power Automate first (Day 1), then agents (Day 2), then how to combine them (Day 3).
+You'll learn Power Automate first (Day 1), then agents and how to combine them with your flows (Day 2).
 
 ---
 
@@ -166,13 +181,12 @@ Read that left to right: an event happens, the flow performs a series of steps, 
 
 ---
 
-**4. How the three days fit together**
+**4. How the two days fit together**
 
 | Day | You build | New skill | What it gives you |
 | --- | --- | --- | --- |
 | **Day 1** | Flows in **Power Automate** | Triggers, actions, outputs | The "hands" that do work — email, Excel logging, approvals |
-| **Day 2** | Agents in **Copilot Studio** | Structured capture, tools | The "brain & mouth" that talk to people and produce clean data |
-| **Day 3** | Agents **+** flows together | Orchestration | Complete **end-to-end** business workflows, then your own |
+| **Day 2** | Agents in **Copilot Studio**, connected to your flows | Structured capture, tools, agent + flow | The "brain & mouth" that talk to people, produce clean data, and hand it to a flow — a complete **end-to-end** workflow |
 
 Day 1 is all about Power Automate. You'll master the trigger → action → output rhythm by building real flows you can run today.
 
@@ -201,7 +215,7 @@ With Power Automate you can:
 - Run approvals, send notifications, and schedule recurring jobs
 - Be called by a Copilot Studio **agent** as a tool (you'll do this on Day 2)
 
-You build flows at **https://make.powerautomate.com**, inside the environment you set up in **Lab 0**.
+You build flows at **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**, inside the environment you set up in **Lab 0**.
 
 > **Low-code, not no-thought.** You don't write code, but you do think like a designer: what starts the flow, what it does, and what data moves between steps.
 
@@ -213,8 +227,8 @@ There are four flavours of flow. They differ only in *how they start* — once r
 | --- | --- | --- | --- |
 | **Instant** | A person clicking Run / a button | Send a confirmation email on demand | Lab 1–3 |
 | **Scheduled** | A clock/timetable (Recurrence) | Daily reminder at 9 AM | Lab 4 |
-| **Automated** | An event | New form response, new email, new file | Lab 5, Day 3 |
-| **Agent flow** | A Copilot Studio agent | Agent logs a request and notifies the team | Day 2–3 |
+| **Automated** | An event | New form response, new email, new file | Lab 5 |
+| **Agent flow** | A Copilot Studio agent | Agent logs a request and notifies the team | Day 2 |
 
 ---
 
@@ -224,8 +238,8 @@ Every flow starts with **exactly one trigger** — the event that kicks it off. 
 
 | Trigger | Connector / name | Fires when… | Used in |
 | --- | --- | --- | --- |
-| **Email received** | Office 365 Outlook — *"When a new email arrives (V3)"* | Mail lands in a folder | Day 3, Lab 10 |
-| **File upload** | OneDrive / SharePoint — *"When a file is created"* | A document is dropped into a folder | Day 3, Lab 11 |
+| **Email received** | Office 365 Outlook — *"When a new email arrives (V3)"* | Mail lands in a folder | Further practice |
+| **File upload** | OneDrive / SharePoint — *"When a file is created"* | A document is dropped into a folder | Further practice |
 | **Form submission** | Microsoft Forms — *"When a new response is submitted"* | Someone submits your form | Lab 5 |
 | **Schedule** | *"Recurrence"* | A timetable you define is reached | Lab 4 |
 | **Manual** | *"Manually trigger a flow"* | You press **Run** | Labs 1–3 |
@@ -303,7 +317,7 @@ The build-and-verify loop is the same in every lab:
 2. **Test** it — manually, or by triggering the real event.
 3. Review the **run history** — **green = success, red = error** — to confirm it worked or to debug.
 
-Get comfortable with this loop today; you'll repeat it dozens of times across the three days.
+Get comfortable with this loop today; you'll repeat it dozens of times across the two days.
 
 ---
 
@@ -341,7 +355,7 @@ By the end of this lab, you will be able to:
 
 **Scenario**
 
-You work for **ACME Pte Ltd** and will spend the next three days automating ACME's business workflows. Before you can build anything, you need a clean place to work: a Microsoft 365 account, the Power Automate and Copilot Studio apps, and — importantly — **one shared environment** called **Course Sandbox** that both apps point to. Getting this right now means every later lab "just works."
+You work for **ACME Pte Ltd** and will spend the next two days automating ACME's business workflows. Before you can build anything, you need a clean place to work: a Microsoft 365 account, the Power Automate and Copilot Studio apps, and — importantly — **one shared environment** called **Course Sandbox** that both apps point to. Getting this right now means every later lab "just works."
 
 ---
 
@@ -351,7 +365,7 @@ You work for **ACME Pte Ltd** and will spend the next three days automating ACME
 
 This creates a brand-new *work* account such as `admin@yourname.onmicrosoft.com` with Microsoft 365 (Outlook, Excel, OneDrive, SharePoint) — exactly what Power Automate and Copilot Studio need. Skip this entirely if you already have a work/school account.
 
-1. Open a browser and go to **https://www.microsoft.com/microsoft-365/business** (or search "Microsoft 365 Business Standard free trial").
+1. Open a browser and go to **<a href="https://www.microsoft.com/microsoft-365/business" target="_blank" rel="noopener">https://www.microsoft.com/microsoft-365/business</a>** (or search "Microsoft 365 Business Standard free trial").
 2. Choose **Microsoft 365 Business Standard** and select **Try free for 1 month**.
 3. Enter an email address to start. When prompted, choose **Set up account** / **Create a new account**.
 4. Fill in your details (name, business name — you may use your own name, country, phone for verification).
@@ -368,7 +382,7 @@ This creates a brand-new *work* account such as `admin@yourname.onmicrosoft.com`
 
 **Step 1: Sign in to the Microsoft 365 portal (~5 minutes)**
 
-1. Go to **https://www.office.com** (or **https://m365.cloud.microsoft**).
+1. Go to **<a href="https://www.office.com" target="_blank" rel="noopener">https://www.office.com</a>** (or **<a href="https://m365.cloud.microsoft" target="_blank" rel="noopener">https://m365.cloud.microsoft</a>**).
 2. Select **Sign in** and enter your **work/school account** (Option A) or your new **Business trial account** (Option B), then your password.
 3. If this is your first sign-in, you may be asked to set up multi-factor authentication (MFA). Follow the prompts using your mobile phone.
 4. Once signed in, you should see the Microsoft 365 home page with app tiles (Outlook, Word, Excel, etc.).
@@ -381,9 +395,9 @@ This creates a brand-new *work* account such as `admin@yourname.onmicrosoft.com`
 
 **Step 2: Create your "Course Sandbox" environment (~7 minutes)**
 
-An **environment** is a container that holds your flows, agents, and data. For this course we'll create a dedicated **Sandbox** environment with **Dataverse** turned on, so Day 2/Day 3 Copilot Studio agents have a database to use.
+An **environment** is a container that holds your flows, agents, and data. For this course we'll create a dedicated **Sandbox** environment with **Dataverse** turned on, so the Day 2 Copilot Studio agents have a database to use.
 
-1. Open a new tab and go to the **Power Platform admin center**: **https://admin.powerplatform.microsoft.com**.
+1. Open a new tab and go to the **Power Platform admin center**: **<a href="https://admin.powerplatform.microsoft.com" target="_blank" rel="noopener">https://admin.powerplatform.microsoft.com</a>**.
 2. Sign in with the **same account** from Step 1.
 3. In the left menu, select **Manage → Environments**.
 4. Select **+ New** (top of the page).
@@ -399,7 +413,7 @@ An **environment** is a container that holds your flows, agents, and data. For t
 
 Power Automate is where you build the automated workflows (called **flows**).
 
-1. Open a new tab and go to **https://make.powerautomate.com**.
+1. Open a new tab and go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**.
 2. Sign in with the **same account**.
 3. The first time, you may be asked to **select your country/region** — choose the correct one and select **Get started**.
 4. You'll see the Power Automate home page with a left-hand menu: **Home, Create, Templates, Learn, My flows**, plus pinned items such as **Approvals** and a **More** menu (items like **Connections** live under **More**).
@@ -414,9 +428,9 @@ Power Automate is where you build the automated workflows (called **flows**).
 
 **Step 4: Sign in to Copilot Studio and match the same environment (~5 minutes)**
 
-Copilot Studio is where you build the AI **agents** (used on Day 2 and Day 3).
+Copilot Studio is where you build the AI **agents** (used on Day 2).
 
-1. Open a new tab and go to **https://copilotstudio.microsoft.com**.
+1. Open a new tab and go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>**.
 2. Sign in with the **same account** again.
 3. If prompted, select your **country/region** and select **Start free trial** (or **Try free**). This activates a **30-day Copilot Studio trial** at no cost (when it expires you can extend it once by another 30 days).
 4. Wait for the workspace to load. You'll see the Copilot Studio home page with options to **Create** an agent.
@@ -433,12 +447,12 @@ Run this quick checklist. Each item should already be true if the steps above su
 
 | # | Check | Where |
 | --- | --- | --- |
-| 1 | I can sign in and see app tiles | https://office.com |
+| 1 | I can sign in and see app tiles | <a href="https://office.com" target="_blank" rel="noopener">https://office.com</a> |
 | 2 | I can open Outlook and send myself an email | Outlook |
 | 3 | I can open Excel and it saves to OneDrive | Excel / OneDrive |
-| 4 | My **Course Sandbox** environment shows status **Ready** | https://admin.powerplatform.microsoft.com |
-| 5 | Power Automate home page loads and **Course Sandbox** is selected | https://make.powerautomate.com |
-| 6 | Copilot Studio loads, my trial is active, and **Course Sandbox** is selected | https://copilotstudio.microsoft.com |
+| 4 | My **Course Sandbox** environment shows status **Ready** | <a href="https://admin.powerplatform.microsoft.com" target="_blank" rel="noopener">https://admin.powerplatform.microsoft.com</a> |
+| 5 | Power Automate home page loads and **Course Sandbox** is selected | <a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a> |
+| 6 | Copilot Studio loads, my trial is active, and **Course Sandbox** is selected | <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> |
 | 7 | Power Automate and Copilot Studio show the **same** environment | Top-right selector in both |
 
 If all seven are checked, your environment is ready.
@@ -505,7 +519,7 @@ By the end of this lab, you will be able to:
 **Prerequisites**
 
 - Completed Lab 0 (accounts ready)
-- Signed in at https://make.powerautomate.com with **Course Sandbox** selected (top-right)
+- Signed in at <a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a> with **Course Sandbox** selected (top-right)
 - Outlook working with your account (a mailbox-enabled account)
 
 **Scenario**
@@ -518,7 +532,7 @@ At **ACME Pte Ltd**, every customer enquiry should get an instant, personalized 
 
 **Step 1: Start a new flow (~5 minutes)**
 
-1. Go to **https://make.powerautomate.com** and sign in.
+1. Go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>** and sign in.
 2. Confirm the **Environment selector** (top-right) shows **Course Sandbox** — the environment from Lab 0.
 3. In the left menu, select **Create**.
 4. Under "Start from blank", select **Instant cloud flow**.
@@ -548,15 +562,34 @@ We'll let whoever runs the flow type a customer name, so the email can be person
 > **⚠️ Warning:** Pick **Office 365 Outlook**, not Gmail, Outlook.com, or SMTP. Only Office 365 Outlook uses your course work account.
 
 1. If this is your first use of the connector, Power Automate creates a **connection**: select **Sign in**, choose your course account, and approve. A green ✓ next to the connection means it's ready.
-2. Configure the email fields in the action panel:  —  **To:** type your own email address (so you receive the test).  —  **Subject:** type `Thank you for your enquiry`  —  **Body:** build the message with the name inserted dynamically:
-3. Click inside the **Body** field and type: `Hi ` (with a trailing space)
-4. Select the **dynamic content** icon (the small lightning bolt) that appears in/next to the field.
-5. From the list, under **Manually trigger a flow**, choose **CustomerName**. It appears as a coloured **token** (chip) in the field.
-6. Click after the token and continue typing: `, thank you for reaching out to ACME Pte Ltd. We have received your enquiry and a team member will respond within 1 business day.`
+2. Configure the email fields in the action panel. The exact text is given in the copy boxes below — copy **only the text inside each box**.
+3. **To:** type your own email address, then press **Enter** so it resolves into a **chip** (a pill with an ×). If it stays as plain text, retype it.
+4. **Subject:** copy-paste this line:
+
+```text
+Thank you for your enquiry
+```
+
+5. **Body:** build the message in three parts — paste, insert token, paste:
+6. Click inside the **Body** field, paste this text, and then type one **space**:
+
+```text
+Hi
+```
+
+7. Select the **dynamic content** icon (the small lightning bolt) that appears in/next to the field.
+8. From the list, under **Manually trigger a flow**, choose **CustomerName**. It appears as a coloured **token** (chip) in the field.
+9. Click just after the token and paste the rest:
+
+```text
+, thank you for reaching out to ACME Pte Ltd. We have received your enquiry and a team member will respond within 1 business day.
+```
 
 > **Tip:** **Dynamic content** is how outputs from earlier steps get reused. The coloured `CustomerName` token is a placeholder — it's replaced with the real value when the flow runs.
 
-> **⚠️ Warning — don't paste stray characters.** Type the text yourself; don't copy backticks (`` ` ``) or quotation marks from this guide into the field, or they'll appear literally in the email.
+> **⚠️ Warning — paste as plain text.** If you copy from a PDF or Word copy of this guide, formatting (smart quotes, curly apostrophes, hidden line breaks) can come along. Paste with **Ctrl+Shift+V** (Mac: **Cmd+Shift+V**) to strip formatting, or copy from the plain-text boxes above. Never copy backticks (`` ` ``) into a field.
+
+> **✅ Check before saving:** To shows a **chip**, Subject is plain text, and the Body reads `Hi [CustomerName-token], thank you for reaching out…` with exactly one coloured token. If `CustomerName` appears as plain black text, delete it and re-insert it from the dynamic content list.
 
 **Step 4: Save and test (~5 minutes)**
 
@@ -638,7 +671,7 @@ By the end of this lab, you will be able to:
 
 - Completed Lab 1
 - Access to Excel via OneDrive (verified in Lab 0)
-- Signed in at https://make.powerautomate.com with **Course Sandbox** selected (top-right)
+- Signed in at <a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a> with **Course Sandbox** selected (top-right)
 
 **Scenario**
 
@@ -652,7 +685,7 @@ At **ACME Pte Ltd**, every customer enquiry must be recorded so nothing is lost.
 
 Power Automate can only read and write Excel data that is formatted as a **Table** — not loose cells.
 
-1. Go to **https://office.com**, open **Excel**, and create a **New blank workbook**.
+1. Go to **<a href="https://office.com" target="_blank" rel="noopener">https://office.com</a>**, open **Excel**, and create a **New blank workbook**.
 2. Rename it (click the file name at the top of the screen): `Enquiry Log`. It saves automatically to **OneDrive**.
 3. In **row 1**, type these five column headers, one per cell (headers must be in row 1):  —  A1: `Date`  —  B1: `Name`  —  C1: `Email`  —  D1: `Message`  —  E1: `Status`
 4. Select the header range **A1:E1**.
@@ -669,7 +702,7 @@ Power Automate can only read and write Excel data that is formatted as a **Table
 
 We'll use a manual trigger with inputs to *simulate* a submitted form. (Microsoft Forms uses the same downstream pattern — see Step 5.)
 
-1. Go to **https://make.powerautomate.com**, confirm **Course Sandbox** is selected top-right, then select **Create → Instant cloud flow**.
+1. Go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**, confirm **Course Sandbox** is selected top-right, then select **Create → Instant cloud flow**.
 2. **Flow name:** `Lab 2 - Log Enquiry to Excel`
 3. **Choose how to trigger this flow:** select **Manually trigger a flow**, then **Create**.
 4. Select the trigger card to open its panel, then select **+ Add an input** three times, choosing **Text** each time, and name them:  —  `Name`  —  `Email`  —  `Message`
@@ -714,7 +747,7 @@ Then select **Add** / **OK**. The value should appear in the field as a single *
 
 To turn this into a true *form submission* workflow:
 
-1. Create a form at **https://forms.office.com** with three questions: Name, Email, Message.
+1. Create a form at **<a href="https://forms.office.com" target="_blank" rel="noopener">https://forms.office.com</a>** with three questions: Name, Email, Message.
 2. Build a **new** flow with the trigger **When a new response is submitted** (Microsoft Forms connector).
 3. Add the **Get response details** action, then the same **Add a row into a table** action, mapping the Forms answers into the columns (and keep the same `formatDateTime(...)` fx expression for Date).
 
@@ -794,7 +827,7 @@ At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager 
 
 **Step 1: Create the flow and add inputs (~7 minutes)**
 
-1. Go to **https://make.powerautomate.com**.
+1. Go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**.
 2. Top-right, confirm the environment selector reads **Course Sandbox**. If not, click it and switch.
 3. In the left menu, click **+ Create**.
 4. Under "Start from blank", click **Instant cloud flow**.
@@ -830,13 +863,37 @@ At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager 
 
 1. Click **Add an action** *inside the If yes branch*.
 2. Search `send an email` and select **Send an email (V2)** (from **Office 365 Outlook**). Complete the connection if prompted (it must show a green check).
-3. Configure:  —  **To:** insert the dynamic token **RequesterEmail** (a trigger input).  —  **Subject:** `Your request has been APPROVED`  —  **Body:** type `Hi `, insert **RequesterName**, type `, your request "`, insert **RequestDetails**, type `" has been approved. You may proceed.`
+3. Configure:
+   - **To:** insert the dynamic token **RequesterEmail** (a trigger input).
+   - **Subject** — copy and paste:
+
+     ```
+     Your request has been APPROVED
+     ```
+
+   - **Body** — copy and paste the template below, then **replace each `[...]` placeholder** with the matching dynamic token (delete the placeholder, leave the cursor there, and insert the token from the lightning-bolt panel):
+
+     ```
+     Hi [RequesterName], your request "[RequestDetails]" has been approved. You may proceed.
+     ```
 
 **In the "If no" branch:**
 
 1. Click **Add an action** *inside the If no branch*.
 2. Select **Send an email (V2)** again.
-3. Configure:  —  **To:** insert **RequesterEmail**  —  **Subject:** `Your request has been REJECTED`  —  **Body:** type `Hi `, insert **RequesterName**, type `, unfortunately your request "`, insert **RequestDetails**, type `" was not approved. Please contact your manager for details.`
+3. Configure:
+   - **To:** insert **RequesterEmail**
+   - **Subject** — copy and paste:
+
+     ```
+     Your request has been REJECTED
+     ```
+
+   - **Body** — copy and paste, then replace the `[...]` placeholders with the matching dynamic tokens as before:
+
+     ```
+     Hi [RequesterName], unfortunately your request "[RequestDetails]" was not approved. Please contact your manager for details.
+     ```
 
 > **⚠️ Warning:** Only use **single-value** dynamic fields here — the trigger inputs (**RequesterName**, **RequesterEmail**, **RequestDetails**) and, if you want it, the approval **Outcome**. Do **not** insert any approval **Responses** field. Power Automate auto-wraps an action in a **For each** loop the moment you insert a list/array value, which breaks this simple flow. If a **For each** appears around your email, delete it and re-add a plain **Send an email (V2)** using only single-value fields.
 
@@ -924,7 +981,7 @@ At **ACME Pte Ltd**, some work isn't triggered by an event — it just needs to 
 
 **Step 1: Create a scheduled flow (~6 minutes)**
 
-1. Go to **https://make.powerautomate.com**.
+1. Go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**.
 2. Top-right, confirm the environment selector reads **Course Sandbox**. If not, click it and switch.
 3. In the left menu, click **+ Create**.
 4. Under "Start from blank", click **Scheduled cloud flow**.
@@ -1059,7 +1116,7 @@ At **ACME Pte Ltd**, customers fill in an online enquiry form. The moment they *
 
 **Step 1: Create the form in Microsoft Forms (~10 minutes)**
 
-1. Open a new browser tab and go to **https://forms.office.com** (it redirects to the current home, **https://forms.cloud.microsoft** — both work).
+1. Open a new browser tab and go to **<a href="https://forms.office.com" target="_blank" rel="noopener">https://forms.office.com</a>** (it redirects to the current home, **<a href="https://forms.cloud.microsoft" target="_blank" rel="noopener">https://forms.cloud.microsoft</a>** — both work).
 2. Sign in with the **same account** you use for Power Automate in the **Course Sandbox** tenant.
 3. Click **+ New Form**.
 4. Click the title at the top and enter: `Customer Enquiry Form`.
@@ -1078,7 +1135,7 @@ At **ACME Pte Ltd**, customers fill in an online enquiry form. The moment they *
 
 **Step 3: Create the automated flow (~5 minutes)**
 
-1. Go back to **https://make.powerautomate.com** (confirm the environment is **Course Sandbox**).
+1. Go back to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>** (confirm the environment is **Course Sandbox**).
 2. Left menu → **+ Create** → **Automated cloud flow**.
 3. **Flow name:** `Lab 5 - Form Submission to Email and Excel`.
 4. In "Choose your flow's trigger", search `Forms` and select **When a new response is submitted** (Microsoft Forms).
@@ -1155,7 +1212,7 @@ The trigger only gives you a response **Id** — you need another action to read
 - A **Microsoft Forms** trigger turns a public form into an automatic workflow — no buttons to press.
 - **Get response details** is required to read the individual answers behind the Response Id.
 - The **Date** column is filled by an **fx** token (`formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')`), never typed text.
-- One submission can fan out to **multiple actions** (notify **and** log) — the core pattern for Day 3.
+- One submission can fan out to **multiple actions** (notify **and** log) — the core pattern behind every end-to-end business automation.
 
 **Duration**
 
@@ -1311,7 +1368,7 @@ By the end of this lab, you will be able to:
 
 - Completed Lab 0 (Copilot Studio trial active)
 - Read Module 3
-- Signed in at https://copilotstudio.microsoft.com (same environment as Power Automate)
+- Signed in at <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> (same environment as Power Automate)
 
 **Scenario**
 
@@ -1329,11 +1386,11 @@ This lab is your guided tour of Copilot Studio. You will learn the interface and
 
 Before you build anything, make sure you are in the correct environment. This is the single most common cause of problems later in the course.
 
-1. Go to **https://copilotstudio.microsoft.com** and sign in with your course account.
+1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and sign in with your course account.
 2. Look at the **top-right corner** of the screen. You will see an **environment selector** (a small label showing the current environment name, often with a globe or building icon).
 3. Click it and select **Course Sandbox** (your course environment from Lab 0).
 
-> **⚠️ Warning:** Copilot Studio **must use the same environment as Power Automate**. If your agent is built in one environment and your flows live in another, they will not be able to connect to each other in Day 3. Always confirm the environment name in the top-right before you start. The environment also needs **Dataverse** enabled, because agents are stored there.
+> **⚠️ Warning:** Copilot Studio **must use the same environment as Power Automate**. If your agent is built in one environment and your flows live in another, they will not be able to connect to each other in Lab 10. Always confirm the environment name in the top-right before you start. The environment also needs **Dataverse** enabled, because agents are stored there.
 
 **Step 2: Create a blank agent and configure it (~10 minutes)**
 
@@ -1525,7 +1582,7 @@ Pick **one** source to start (you can add more later). Choose whichever is easie
 
 **Step 2: Open your agent's Knowledge tab (~3 minutes)**
 
-1. Go to **https://copilotstudio.microsoft.com** and confirm the **environment selector** (top-right) shows **Course Sandbox**.
+1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and confirm the **environment selector** (top-right) shows **Course Sandbox**.
 2. Open your **Company Helpdesk** agent from Lab 6.
 3. Select the **Knowledge** tab.
 4. Select **+ Add knowledge**.
@@ -1653,7 +1710,7 @@ By the end of this lab, you will be able to:
 
 So far your **Company Helpdesk** agent can *answer* questions (using Knowledge). But staff at **ACME Pte Ltd** also want it to *do* things — for example, email the support team when someone needs help escalated.
 
-**Knowledge lets an agent answer; Tools let it act.** In this lab you will give your agent a tool so a chat conversation can trigger real work, such as sending an email. This is the bridge to the end-to-end agent-plus-flow workflows you will build in Day 3.
+**Knowledge lets an agent answer; Tools let it act.** In this lab you will give your agent a tool so a chat conversation can trigger real work, such as sending an email. This is the bridge to the end-to-end agent-plus-flow workflow you will build in Lab 10.
 
 > **Knowledge vs Tools:** - **Knowledge** = read and answer from your documents (Lab 7). - **Tools/Actions** = perform actions in other systems — send an email, create a record, run a Power Automate flow (this lab).
 
@@ -1663,7 +1720,7 @@ So far your **Company Helpdesk** agent can *answer* questions (using Knowledge).
 
 **Step 1: Open the Tools tab (~5 minutes)**
 
-1. Go to **https://copilotstudio.microsoft.com** and confirm the **environment selector** (top-right) shows **Course Sandbox** — the same environment as your Power Automate flows.
+1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and confirm the **environment selector** (top-right) shows **Course Sandbox** — the same environment as your Power Automate flows.
 2. Open your **Company Helpdesk** agent from Lab 6.
 3. Select the **Tools** tab (this was labelled **Actions** in older versions).
 4. Select **+ Add a tool**. Microsoft groups tools into several **core tool types**:  —  **Prebuilt / custom connector action** — a single ready-made operation from a connector like Office 365 Outlook, Excel, or Teams (you use this in Steps 2–4).  —  **Agent flow** — a multi-step Power Automate flow with conditions and logic, used as one tool (you use this in Step 5).  —  **Prompt** — a single-turn AI prompt that returns text.  —  **REST API / MCP tool / Computer use** — connect to web services, a Model Context Protocol server, or GUI automation (advanced; out of scope here).
@@ -1755,7 +1812,7 @@ If you leave the **Send notification email** connector tool (Steps 2–4) **enab
 4. Under **Inputs**, for the `Request summary` input set **Fill using** → **Dynamically fill with AI** so the agent writes the summary from the conversation (or **Custom value** to bind a variable), just like the fixed-vs-AI choice in Step 4.
 5. Under **Completion**, set **After running** → **Write the response with generative AI** so the agent confirms the result in natural language. **Save**.
 
-> **Tip:** Every flow used as a tool follows the same three-part shape: **When an agent calls the flow** (trigger) → **do the work** → **Respond to the agent** (give a result back). You will reuse this pattern throughout Day 3.
+> **Tip:** Every flow used as a tool follows the same three-part shape: **When an agent calls the flow** (trigger) → **do the work** → **Respond to the agent** (give a result back). You will reuse this pattern in Lab 10.
 
 **Step 6: Test the agent performing the action (~8 minutes)**
 
@@ -1808,7 +1865,7 @@ You have successfully completed this lab when:
 - Use a **flow** (not a single connector action) when the work is **multi-step** — e.g. **Add a row into a table** to log a record and return a result.
 - When two tools overlap, the agent may pick the wrong one — **turn off** the competing tool while you test, then re-enable it once each tool has a precise description.
 - A broken connection causes an **Unauthorized** error — reconnect with a mailbox-enabled account.
-- Flows-as-tools are the foundation of the end-to-end workflows you build in Day 3.
+- Flows-as-tools are the foundation of the end-to-end workflow you build in Lab 10.
 
 **Duration**
 
@@ -1835,14 +1892,14 @@ By the end of this lab, you will be able to:
 3. Add **Ask a question** nodes that save answers into named **variables**
 4. Choose the right **Identify** type so text and numbers are captured cleanly
 5. Return a tidy **structured summary** that inserts every captured variable
-6. Understand how these variables will later feed a Power Automate flow (Lab 10 and Day 3)
+6. Understand how these variables will later feed a Power Automate flow (Lab 10)
 
 **Prerequisites**
 
 - Completed Lab 6
 - Read Module 3, especially *Prompt design for structured outputs*
 
-> **Tip:** Sign in to Copilot Studio at https://copilotstudio.microsoft.com and confirm the environment shown at the **top-right** says **Course Sandbox** before you start. Every lab on Day 2 must be built in this same environment, otherwise your agent and your flow will not be able to see each other later.
+> **Tip:** Sign in to Copilot Studio at <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> and confirm the environment shown at the **top-right** says **Course Sandbox** before you start. Every lab on Day 2 must be built in this same environment, otherwise your agent and your flow will not be able to see each other later.
 
 **Scenario**
 
@@ -2284,959 +2341,6 @@ You are ready to finish when all of the following are true:
 
 **Next Steps**
 
-You've completed Day 2. Proceed to Day 3 — Module 4: End-to-End Orchestration Concepts.
-
----
-
-## Day 3 — End-to-End Workflow Automation & Workshop
-
-### Module 4: End-to-End Workflow Automation
-
-> **Read this before the Day 3 labs.** ~15 minutes.
-
-You now have both halves of an automated business process. Today you join them into complete, end-to-end workflows — and learn the design discipline that keeps them reliable.
-
----
-
-**1. Agents + Power Automate = end-to-end automation**
-
-By now you've built both halves:
-
-- **Power Automate flows** (Day 1) — the *doing*: send email, log to Excel, run approvals.
-- **Copilot Studio agents** (Day 2) — the *understanding*: capture requests as structured data and call flows.
-
-**End-to-end automation** chains these into a complete business process where a **single trigger flows all the way through to a finished outcome** — with little or no manual work in between:
-
-```
- CAPTURE  →  RECORD  →  DECIDE  →  NOTIFY  →  CLOSE
- (agent/    (Excel    (approval  (email/    (final
-  email/     log)      or rule)   Teams)     status)
-  form)
-```
-
-One event goes in the top; a finished, recorded, communicated result comes out the bottom.
-
----
-
-**2. Workflow orchestration**
-
-**Orchestration** is arranging multiple steps — and sometimes multiple flows and agents — so they run in the right order, pass data correctly, and handle every outcome.
-
-A well-orchestrated workflow has five qualities:
-
-1. **A clear trigger** — one starting event (email arrives, file uploaded, agent finishes capturing).
-2. **Sequenced actions** — each step's **output** feeds the next step's **input**.
-3. **Branching** — conditions route the process (approved vs rejected, high value vs low value).
-4. **Notifications** — the right people are told at the right moments.
-5. **A definite end state** — the record is updated to its final status (Logged / Approved / Rejected / Completed).
-
-> **No dead ends.** Orchestration is mostly about making sure *every* path — including the unhappy ones — leads somewhere defined. A rejected request still needs an owner, a notification, and a final status.
-
-**Common orchestration patterns**
-
-You'll build one of each this morning. Notice how they grow in complexity:
-
-| Pattern | Shape | What's new | Day 3 lab |
-| --- | --- | --- | --- |
-| **Capture → Log → Notify** | Linear: record it, tell someone | Pure sequence, no branch | Lab 12 |
-| **Upload → Approve → Act** | File trigger, then human decision | Adds an approval + branch | Lab 13 |
-| **Request → Approve → Notify** | Multi-party approval chain | Adds routing by who/what | Lab 14 |
-
-> **Approver reminder (from Day 1):** the approver in any approval step must be a real **user in your tenant**, not an outside email address. Pick a colleague — or yourself — for testing.
-
----
-
-**3. Managing workflow outputs and next steps**
-
-Every step produces **outputs**. Managing them well is what separates a demo from a dependable workflow:
-
-- **Pass data forward** with dynamic content — sender's email → notification; captured quantity → approval title. (Use the **fx** expression editor for any small formatting, like a date or a trimmed string.)
-- **Use a Status column** as the source of truth: `New → Pending → Approved/Rejected → Done`. Update it at each stage so anyone can see where a request stands at a glance.
-- **Decide the next step for every outcome.** Never leave a branch empty — an approved request and a rejected request *both* need a defined follow-up.
-- **Notify deliberately.** Tell the requester the result; tell the team when action is needed. Avoid noisy, redundant emails.
-- **Make it traceable.** The Excel log **plus** the Power Automate **run history** together give you a complete audit trail.
-
-**Designing a workflow — a simple method**
-
-Use this every time *before* you start clicking in the designer:
-
-1. **Write the sentence:** *"When ___ happens, do ___, then ___, and finally ___."*
-2. **Identify the trigger** (the "when").
-3. **List the actions** in order (the "do / then / finally").
-4. **Mark the decision points** (where it branches).
-5. **Define each end state** (final status + who is notified).
-6. **Build, test the happy path, then test every branch.**
-
-> **Sentence first, build second.** If you can't say the workflow in one plain sentence, you're not ready to build it yet. The sentence reveals your trigger, your steps, and your end states before you touch the tool.
-
-You'll apply exactly this method in **Lab 16 (Capstone Workshop)**.
-
----
-
-**4. What you'll build on Day 3**
-
-- **Lab 12:** Email enquiry → log to Excel → notify the team (Capture → Log → Notify).
-- **Lab 13:** Invoice file uploaded → approval workflow (Upload → Approve → Act).
-- **Lab 14:** Purchase request → manager approval → notification (Request → Approve → Notify).
-- **Lab 15:** Order Processing — an agent captures an order, then the flow confirms, logs, and raises a restock alert.
-- **Lab 16:** Capstone — design and build your **own** end-to-end workflow for Sales, Finance, Procurement, or Order Processing.
-
-Labs 12–14 drill the three core patterns; Lab 15 brings the agent back into the loop; Lab 16 is where you put it all together yourself.
-
----
-
-**Next:** Lab 12: Email Enquiry → Excel Logging → Notification
-
----
-
-### Module 5: Business Workflow Workshop
-
-> **Read this before the Capstone (Lab 16).** ~10 minutes.
-
-This is your briefing for the capstone. Everything you've learned across three days now comes together in one workflow that you design, build, and explain.
-
----
-
-**1. Purpose of the workshop**
-
-You've now learned every building block:
-
-- **Power Automate** flows — email, Excel logging, approvals, scheduled and event triggers (Day 1)
-- **Copilot Studio** agents — instructions, knowledge/RAG, tools, structured capture (Day 2)
-- **End-to-end orchestration** — combining agents + flows across business domains (Day 3 morning)
-
-The workshop is where you **put it together yourself**: design and build a complete, working workflow for a real business process — and explain its value to the business.
-
-> Think of this as moving from *following* recipes to *cooking your own dish* with the techniques you've practised.
-
----
-
-**2. The four business domains**
-
-Your capstone targets one (or more) of these domains. Each maps directly to labs you've already built — so you're never starting from a blank page; you're adapting and combining work you understand.
-
-| Domain | Typical workflow | Built on |
-| --- | --- | --- |
-| **Sales** | Enquiry/lead capture → log → acknowledge → notify rep | Labs 9, 12 |
-| **Finance** | Invoice/expense submitted → approve by amount → notify | Labs 3, 13 |
-| **Procurement** | Purchase request → manager approval → notify + log | Labs 10, 14 |
-| **Order Processing** | Order captured → confirm → log → restock alert | Lab 15 |
-
-> **Pick the domain you understand best.** A workflow you can explain confidently is worth more than an ambitious one you can't finish.
-
----
-
-**3. Design method (recap from Module 4)**
-
-Run through this **before** you build — it's the same discipline from Module 4:
-
-1. **One sentence:** *"When ___ happens, do ___, then ___, and finally ___."*
-2. **Trigger:** manual / scheduled / form / email / file / agent call
-3. **Capture:** the fields/variables you need
-4. **Actions in order:** log, generate, approve, notify…
-5. **Decision points:** the condition(s) and each branch
-6. **End states:** final status + who is notified for each outcome
-
-If you can write step 1 cleanly, the rest of the design tends to fall into place.
-
----
-
-**4. Quality bar**
-
-A strong capstone workflow:
-
-- ✅ Has a clear **trigger** and runs **end to end**
-- ✅ **Captures or receives** data and **logs** it (Excel)
-- ✅ Includes at least one **condition** (branching)
-- ✅ Includes an **approval** *or* an **AI-generated** response
-- ✅ **Notifies** the right people for **every** outcome
-- ✅ Is **tested** on the happy path **and** every branch
-
-> Treat this as your self-check list. Before you call the capstone "done," walk down it and tick each item.
-
----
-
-**5. Tips for success**
-
-- **Start small, then add.** Get a basic happy-path flow working end to end first, then layer on conditions, approvals, and notifications.
-- **Test after each step** — don't build everything and then test once. Small tests catch problems while they're still easy to find.
-- **Reuse your earlier labs as templates** — see the Capstone's reuse list. Adapting working flows is faster and safer than rebuilding from scratch.
-- **Check connections are green before running** — a red connector or an **Unauthorized** error means: reconnect first.
-- **Remember the approver rule** — approvals must go to a real **user in your tenant** (yourself is fine for testing), never an outside personal email.
-- **Use a Status column** in Excel as the single source of truth, updated at each stage.
-- **Keep agent output structured** — clean variables in means clean flow inputs out.
-
-> **One sentence, built carefully, tested fully.** That's a winning capstone. Good luck.
-
----
-
-**Next:** Lab 16: Capstone Workshop
-
----
-
-### Lab 12: Email Enquiry → Excel Logging → Notification
-
-**Lab Title**
-
-End-to-End Workflow: Capture an Email Enquiry, Log It, and Notify the Team
-
-**Lab Objectives**
-
-By the end of this lab, you will be able to:
-
-1. Create an **automated cloud flow** that starts on its own when an email arrives
-2. Configure the **When a new email arrives (V3)** trigger with an optional subject filter
-3. **Log** each enquiry as a new row in an Excel table, with a clean timestamp
-4. **Notify** the sales team automatically with the enquiry details
-5. Orchestrate the classic **Capture → Log → Notify** pattern into one hands-off workflow
-
-**Prerequisites**
-
-- Completed Day 1 Labs 1–2 (email + Excel actions)
-- An Excel `Enquiry Log` with table `EnquiryTable` (from Lab 2) — or create one (Date, Name, Email, Message, Status)
-
-**Scenario**
-
-ACME Pte Ltd receives customer enquiries by email to a shared inbox. Right now, staff copy each enquiry into a spreadsheet by hand and forget to tell the sales team. In this lab you will build an automated flow in the **Course Sandbox** environment that, the moment an enquiry email arrives, **logs it to Excel** and **emails the sales team** — completely hands-off. This is the classic **Capture → Log → Notify** pattern.
-
----
-
-**Step-by-Step Guide**
-
-**Step 1: Create an automated cloud flow (~5 minutes)**
-
-1. In your browser, go to **https://make.powerautomate.com** and sign in.
-2. Top-right, confirm the environment selector shows **Course Sandbox**. If it shows a different environment, click it and switch — every tool in this course uses the same environment.
-3. In the left menu, select **Create**.
-4. Under **Start from blank**, select **Automated cloud flow**.
-5. In the **Build an automated cloud flow** dialog:  —  **Flow name:** `Lab 12 - Email Enquiry to Excel and Notify`  —  In **Choose your flow's trigger**, type `when a new email arrives` in the search box.  —  Select **When a new email arrives (V3)** under **Office 365 Outlook**.
-6. Select **Create**.
-
-> **Tip:** If this is your first Office 365 / Excel action, Power Automate may ask you to sign in to create a **connection**. Always sign in with your own course account. A working connection shows a green ✓ — you will rely on this later.
-
-**Step 2: Configure the email trigger (~10 minutes)**
-
-1. The flow opens in the new designer with the trigger card already placed. Select the **When a new email arrives (V3)** card to open its panel on the right.
-2. Set (if a field is not visible, open the **Advanced parameters** dropdown and select **Show all**):  —  **Folder:** `Inbox` (use the folder picker — do not type it)  —  **Importance:** `Any`  —  **Only with Attachments:** `No`  —  **Include Attachments:** `No`
-3. Still under **Advanced parameters**, set:  —  **Subject Filter:** `Enquiry`  —  This means only emails whose subject contains the word **Enquiry** will start the flow — which keeps your log clean while testing.
-
-> **Tip:** Without a subject filter, **every** incoming email starts the flow. During training, set a filter so unrelated mail (newsletters, replies) does not flood your Excel log.
-
-**Step 3: Log the enquiry to Excel (~12 minutes)**
-
-1. Under the trigger card, select the **+** (plus) → **Add an action**.
-2. Search `add a row into a table` and select **Add a row into a table** under **Excel Online (Business)**.
-3. In the action panel set:  —  **Location:** `OneDrive for Business`  —  **Document Library:** `OneDrive`  —  **File:** browse to and select **Enquiry Log.xlsx**  —  **Table:** select **EnquiryTable** from the dropdown
-4. The five table columns (Date, Name, Email, Message, Status) now appear. Map them:  —  **Name:** click the field, then from **Dynamic content** insert **From** (or **From** display name if you prefer)  —  **Email:** insert **Dynamic content → From**  —  **Message:** insert **Dynamic content → Body preview**  —  **Status:** type `New`
-5. For the **Date** column, enter an expression so the timestamp is clean:  —  Click the **Date** field, then open the **fx** (Expression) editor.  —  Type exactly: `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')`  —  Select **Add** (or **OK**). The field now shows a blue **fx token**, not the raw text.
-
-> **⚠️ Warning:** Enter the date through the **fx** editor so it becomes a token. If you type `formatDateTime(...)` directly into the box as plain text, Excel stores the literal text and you get a meaningless string instead of a date.
-
-**Step 4: Notify the sales team (~10 minutes)**
-
-1. Under the Excel action, select **+** → **Add an action**.
-2. Search `send an email` and select **Send an email (V2)** under **Office 365 Outlook**.
-3. Configure:  —  **To:** the sales team address — for testing, use your own email  —  **Subject:** type `New enquiry received: ` then insert **Dynamic content → Subject**  —  **Body:** type the message below, inserting the matching **Dynamic content** tokens where shown in braces:
-
-```
-     A new enquiry has arrived and been logged.
-
-     From: [From]
-     Subject: [Subject]
-     Message: [Body preview]
-
-     Status: New — please follow up.
-```
-
-1. Select **Save** (top right).
-
-> **⚠️ Warning:** If saving or testing later shows **"Unauthorized"** on the Send an email action, your Office 365 Outlook connection has expired or used the wrong account. Select the action and, at the bottom of its configuration pane (next to **Connected to …**), select **Change connection** and **reconnect** with a **mailbox-enabled** account. Every connection must show a green ✓ before the flow will run.
-
-**Step 5: Test the end-to-end workflow (~10 minutes)**
-
-1. Top right, select **Test** → **Manually** → **Test**.
-2. From another account (or the same one), **send an email** to your inbox with:  —  **Subject:** `Enquiry - bulk order`  —  **Body:** a short sentence, e.g. `Hi, I'd like a quote for 200 units.`
-3. Within about a minute the flow should trigger. Confirm:  —  Every step shows a **green ✓** in the run view.  —  A **new row** appears in **Enquiry Log.xlsx** with the sender, message, and a readable date/time.  —  The **notification email** arrives with the enquiry details.
-4. Now send a **second** test email **without** the word "Enquiry" in the subject (e.g. subject `Hello`). Confirm the flow does **not** run — proving the subject filter works.
-
-> **Tip:** If the new Excel row shows `########` in the Date column, the column is just too narrow. Double-click the column border in Excel to auto-fit — the value is correct.
-
-**Step 6: Review and harden (~3 minutes)**
-
-1. In the left menu, open **My flows** → **Lab 12 - Email Enquiry to Excel and Notify** → the latest run to inspect inputs and outputs of each step.
-2. Discuss optional improvements:  —  Add a **Condition** to flag high-priority enquiries (e.g. subject contains "urgent").  —  Capture the sender's display name in a separate column.
-
----
-
-**Checkpoint**
-
-- ✅ Automated flow triggered by an **incoming email**
-- ✅ Each matching email → **new Excel row** with a clean timestamp
-- ✅ Each matching email → **team notification email**
-- ✅ Non-matching emails are correctly **ignored** by the subject filter
-
-**Troubleshooting**
-
-| Problem | Solution |
-| --- | --- |
-| Flow doesn't trigger | Confirm the email reached the **Inbox** and the subject contains `Enquiry`; triggers can take up to a minute. |
-| "Unauthorized" on Send an email | Reconnect the **Office 365 Outlook** connection with a mailbox-enabled account; every connection must be green ✓. |
-| Date shows raw text like `formatDateTime(...)` | You typed it as text. Re-enter it via the **fx** editor so it becomes a blue token. |
-| Date column shows `########` | The column is too narrow — double-click the column border in Excel to auto-fit. |
-| Empty Excel fields | Map to the **trigger's** dynamic content (From / Subject / Body preview), not static text. |
-| Too many rows logged | Add or tighten the **Subject Filter** on the trigger. |
-| No notification email | Check **Junk**; verify the **To** address; check run history for errors. |
-
-**Key Takeaways**
-
-- Automated triggers (an **email arrives**) make workflows run with zero clicks.
-- One trigger can fan out into multiple actions — **log** and **notify** in a single flow.
-- Use the **fx** editor for dates so Excel stores a real, readable timestamp.
-- Subject filters keep automation focused and your data clean.
-
-**Duration**
-
-~40 minutes
-
-**Next Steps**
-
-Proceed to Lab 13: Invoice Upload → Approval Workflow.
-
----
-
-### Lab 13: Invoice Upload → Approval Workflow
-
-**Lab Title**
-
-End-to-End Workflow: Trigger an Approval When an Invoice File Is Uploaded
-
-**Lab Objectives**
-
-By the end of this lab, you will be able to:
-
-1. Use a **file upload** trigger — *When a file is created* in OneDrive
-2. Pass file details into a **Start and wait for an approval** action
-3. Assign the approval to a **real tenant user** so the run succeeds
-4. **Branch** on the approval outcome with a Condition
-5. **Move the file** and **notify** by outcome, completing the **Upload → Approve → Act** pattern
-
-**Prerequisites**
-
-- Completed Day 1 Lab 3 (approvals + conditions)
-- Access to OneDrive (to create folders)
-
-**Scenario**
-
-At ACME Pte Ltd, staff drop supplier invoices into a shared OneDrive folder, but they sit unseen until someone remembers to check. In this lab you will build an automated flow in the **Course Sandbox** environment so that when an invoice lands in **Invoices/Incoming**, finance is asked to **approve or reject** it. Approved invoices move to an **Approved** folder and rejected ones to **Rejected**, with an email sent either way. This is the **Upload → Approve → Act** pattern.
-
----
-
-**Step-by-Step Guide**
-
-**Step 1: Prepare the OneDrive folders (~5 minutes)**
-
-1. Go to **https://www.office.com**, sign in, and open **OneDrive**.
-2. Select **+ Add new** → **Folder** and create a folder named `Invoices`.
-3. Open the `Invoices` folder and create **three** subfolders inside it:  —  `Incoming`  —  `Approved`  —  `Rejected`
-4. Leave `Incoming` empty for now — you will upload a test file later.
-
-> **Tip:** Create all four folders **before** building the flow. The flow's trigger and **Move or rename a file** actions let you browse to these folders, which is far safer than typing paths by hand.
-
-**Step 2: Create the automated flow with a file trigger (~8 minutes)**
-
-1. Go to **https://make.powerautomate.com** and confirm the environment selector reads **Course Sandbox**.
-2. In the left menu, select **Create** → **Automated cloud flow**.
-3. In the dialog:  —  **Flow name:** `Lab 13 - Invoice Upload Approval`  —  Search `when a file is created` and select **When a file is created** under **OneDrive for Business**.
-4. Select **Create**.
-5. Select the trigger card to open its panel, then set:  —  **Folder:** use the folder picker (the small folder icon) and browse to `Invoices/Incoming`. Do not type the path.
-
-> **Tip:** The trigger fires whenever a **new** file appears in that exact folder — that is your "upload" event. It does not fire for files already there before the flow was turned on.
-
-**Step 3: Start the approval (~10 minutes)**
-
-1. Under the trigger, select **+** → **Add an action**.
-2. Search `start and wait for an approval` and select **Start and wait for an approval** under **Approvals**.
-3. Configure:  —  **Approval type:** `Approve/Reject - First to respond`  —  **Title:** type `Invoice approval needed: ` then insert **Dynamic content → File name**  —  **Assigned to:** start typing your **own name or course email**, then **pick the matching person from the people-picker dropdown** so it resolves to a **person chip** (a rounded tag with the name).  —  **Details:** type `Please review the uploaded invoice: ` then insert **Dynamic content → File name**.
-
-> **⚠️ Warning:** The **Assigned to** approver MUST be a user that already exists in **this** tenant. Pick the person from the dropdown so it becomes a **person chip** — do **not** type a free-text external email. If you paste an outside address, the run fails with *"The approvers/assigned to must contain valid users in the organization."*
-
-**Step 4: Branch on the outcome (~12 minutes)**
-
-1. Under the approval action, select **+** → **Add an action**, search `condition`, and select **Condition** (Control).
-2. Configure the Condition:  —  Left value: insert **Dynamic content → Outcome**  —  Operator: `is equal to`  —  Right value: type `Approve` exactly (capital A, no quotes)
-
-**In the `True` branch (Approved):**
-
-1. Select **+** → **Add an action** → **Move or rename a file** (OneDrive for Business):  —  **File:** insert **Dynamic content → File identifier** (from the trigger)  —  **Destination File Path:** use the picker to select `Invoices/Approved`, then type `/` and insert **Dynamic content → File name** — the path must end with the file name  —  **Overwrite:** `Yes`
-2. Select **+** → **Add an action** → **Send an email (V2)** (Office 365 Outlook):  —  **To:** your own email (for testing)  —  **Subject:** type `Invoice APPROVED: ` then insert **Dynamic content → File name**  —  **Body:** `The invoice has been approved and moved to the Approved folder for payment processing.`
-
-**In the `False` branch (Rejected):**
-
-1. Select **+** → **Add an action** → **Move or rename a file**:  —  **File:** **Dynamic content → File identifier**  —  **Destination File Path:** pick `Invoices/Rejected`, then `/` + **File name** (as above)  —  **Overwrite:** `Yes`
-2. Select **+** → **Add an action** → **Send an email (V2)**:  —  **To:** your own email  —  **Subject:** type `Invoice REJECTED: ` then insert **Dynamic content → File name**  —  **Body:** `The invoice was rejected. Please review and resubmit if necessary.`
-3. Select **Save**.
-
-> **⚠️ Warning:** Insert **File name** and **File identifier** as **single-value** dynamic content. If the designer ever wraps an action in an automatic **"Apply to each"** loop, you accidentally selected an array/list output. Delete the For each, then re-add the plain **Move or rename a file** / **Send an email** action and pick the single-value tokens (File name, File identifier). The Outcome and trigger file fields are all single-value.
-
-> **⚠️ Warning:** If **Send an email** shows **"Unauthorized"**, reconnect the **Office 365 Outlook** connection with a **mailbox-enabled** account. All connections must be green ✓ before the flow can run.
-
-**Step 5: Test both paths (~10 minutes)**
-
-1. Top right, select **Test** → **Manually** → **Test**.
-2. In OneDrive, **upload a sample PDF** (any file) into `Invoices/Incoming`.
-3. The flow triggers and pauses at the approval. Respond in **one** of these ways:  —  Open the **Approvals** hub from the left menu of make.powerautomate.com (look under **More** if it is not pinned), open the request, and choose **Approve**.  —  Or respond from the approval email / Teams card.
-4. Confirm the **True** path:  —  The file **moved** from `Incoming` to `Invoices/Approved`.  —  You received the **APPROVED** email.
-5. Repeat: upload **another** file, let the flow pause, and this time choose **Reject**. Confirm it moves to `Invoices/Rejected` and you get the **REJECTED** email.
-
-> **Tip:** Approval emails can be slow or land in **Junk**. The most reliable place to respond is the **Approvals hub** in the left menu — it always shows pending requests assigned to you.
-
-**Step 6: Review (~5 minutes)**
-
-1. Open **My flows** → **Lab 13 - Invoice Upload Approval** → the latest runs and confirm the correct branch executed each time.
-2. Optional enhancement: at the start of the flow, add a row to an `Invoice Register` Excel table with Status `Pending`, then update it after the decision for a full audit trail.
-
----
-
-**Checkpoint**
-
-- ✅ Flow triggered by a **file upload** to `Invoices/Incoming`
-- ✅ Approval requested, **assigned to a real tenant user**, and awaited
-- ✅ Approved → file in **Approved** folder + approval email
-- ✅ Rejected → file in **Rejected** folder + rejection email
-
-**Troubleshooting**
-
-| Problem | Solution |
-| --- | --- |
-| Run fails: "valid users in the organization" | **Assigned to** must be a real tenant user picked from the people-picker dropdown (a person chip) — not a typed external email. |
-| Trigger doesn't fire | Confirm the file went into the exact `Invoices/Incoming` folder; allow up to a minute; the file must be **new**. |
-| An "Apply to each" wrapped my action | You selected an array output. Delete the For each and re-add the plain action using single-value tokens (**Id**, **File name**, **Outcome**). |
-| Move or rename a file fails | Use the trigger's **File identifier** as **File**; make sure the **Destination File Path** ends with the file name and the destination folders already exist. |
-| Wrong branch runs | The Condition right value must equal exactly `Approve`. |
-| "Unauthorized" on Send an email | Reconnect the **Office 365 Outlook** connection with a mailbox-enabled account; connections must be green ✓. |
-| No approval email | Respond in the **Approvals hub**; check **Junk**; emails can be slow. |
-
-**Key Takeaways**
-
-- A **file-created** trigger turns a simple upload into a full workflow.
-- Approvals only run when **Assigned to** is a real tenant user chosen from the dropdown.
-- Conditions route the file and notifications by the **Outcome**.
-- Moving files between status folders gives a visible, auditable process.
-
-**Duration**
-
-~45 minutes
-
-**Next Steps**
-
-Proceed to Lab 14: Purchase Request → Manager Approval → Notification.
-
----
-
-### Lab 14: Purchase Request → Manager Approval → Notification
-
-**Lab Title**
-
-End-to-End Workflow: Agent-Captured Purchase Request with Manager Approval and Notification
-
-**Lab Objectives**
-
-By the end of this lab, you will be able to:
-
-1. Combine an **agent** (capture) with an **agent flow** (log + approve + notify) in one process
-2. Log a request to Excel as **Pending** with a clean timestamp
-3. Use a **Condition** (cost threshold) to decide auto-approve vs manager approval
-4. Assign approvals to a **real tenant user** and notify the requester of every outcome
-5. Build a complete **Capture → Log → Approve → Notify** business workflow
-
-**Prerequisites**
-
-- Completed Day 2 Lab 8 (agent calling a flow) and Day 1 Lab 3 (approvals)
-- An Excel `Procurement Log` with table `ProcurementTable` (from Lab 10) — add a `Status` column if missing
-
-**Scenario**
-
-At ACME Pte Ltd, staff raise purchase requests through the **Procurement Assistant** agent built in Day 2 Lab 10. In this lab you will extend it so each request is **logged to Excel**, routed by **cost threshold** (small requests auto-approve; larger ones go to a manager), and the requester is **automatically notified** of the result. Everything runs in the **Course Sandbox** environment — the full procurement loop, end to end.
-
----
-
-**Step-by-Step Guide**
-
-**Step 1: Reuse the Procurement Assistant agent (~5 minutes)**
-
-1. Go to **https://copilotstudio.microsoft.com**, confirm the environment is **Course Sandbox**, and open your **Procurement Assistant** agent (from Day 2 Lab 10).
-2. Open its **New Procurement Request** topic and confirm it captures these variables: `requester`, `requesterEmail`, `item`, `quantity`, `reason`.  —  If `requesterEmail` is missing, add an **Ask a question** node: `What is your email?` → save the answer to a variable named `requesterEmail`.  —  Add an `estCost` variable: add an **Ask a question** node `What is the estimated total cost (SGD)?`, set the **Identify** type to **Number**, and save to `estCost`.  —  Confirm `quantity` is also a **Number** variable.
-
-> **Tip:** `quantity` and `estCost` must be **Number** variables, not Text. The Condition in Step 4 compares `estCost` to 500 numerically — a Text value can throw a comparison error.
-
-**Step 2: Build the agent flow (~8 minutes)**
-
-1. In the topic, after the questions, select **+** → **Add a tool** → **New agent flow**.
-2. The flow opens with a **When an agent calls the flow** trigger. Select it and add these inputs (matching name and type exactly):  —  **Text** `requester`  —  **Text** `requesterEmail`  —  **Text** `item`  —  **Number** `quantity`  —  **Text** `reason`  —  **Number** `estCost`
-
-**Step 3: Log the request as Pending (~7 minutes)**
-
-1. Under the trigger, select **+** → **Add an action** → **Add a row into a table** (Excel Online (Business)).
-2. Set **Location** `OneDrive for Business`, **Document Library** `OneDrive`, **File** `Procurement Log.xlsx`, **Table** `ProcurementTable`.
-3. Map the columns from the flow's inputs (under **Dynamic content**):  —  **Requester:** `requester`  —  **Item:** `item`  —  **Quantity:** `quantity`  —  **Reason:** `reason`  —  **Status:** type `Pending`  —  (If your table has a Cost column, map `estCost`.)
-4. For the **Date** column, click the field, open the **fx** (Expression) editor, type exactly `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')`, and select **Add**. The field shows a blue **fx token**.
-
-> **⚠️ Warning:** Enter the date via the **fx** editor so it becomes a token. Typing the expression as plain text stores literal characters in Excel instead of a real timestamp. If Excel later shows `########` in the Date column, the column is simply too narrow — auto-fit it.
-
-**Step 4: Decide the approval path with a Condition (~12 minutes)**
-
-A common rule: small requests auto-approve; larger ones need a manager.
-
-1. Under the Excel action, select **+** → **Add an action** → **Condition** (Control):  —  Left value: **Dynamic content → estCost**  —  Operator: `is greater than`  —  Right value: type `500`
-
-**In the `True` branch (needs manager approval):**
-
-1. Select **+** → **Add an action** → **Start and wait for an approval** (Approvals):  —  **Approval type:** `Approve/Reject - First to respond`  —  **Title:** type `Purchase approval: ` then insert **item**, type ` x`, then insert **quantity**  —  **Assigned to:** type your **own name or course email** and **pick the matching person from the people-picker dropdown** so it resolves to a **person chip**.  —  **Details:** `Requested by ` + **requester** + `. Reason: ` + **reason** + `. Est cost: SGD ` + **estCost** + `.`
-2. Under the approval, add a **nested Condition**:  —  Left value: **Dynamic content → Outcome**  —  Operator: `is equal to`  —  Right value: type `Approve`  —  **Nested `True`:** add **Send an email (V2)** → **To:** **requesterEmail**, **Subject:** `Purchase APPROVED: ` + **item**, **Body:** confirm the request is approved.  —  **Nested `False`:** add **Send an email (V2)** → **To:** **requesterEmail**, **Subject:** `Purchase REJECTED: ` + **item**, **Body:** explain the request was rejected.
-
-**In the `False` branch (auto-approved, ≤ 500):**
-
-1. Select **+** → **Add an action** → **Send an email (V2)** → **To:** **requesterEmail**, **Subject:** `Purchase AUTO-APPROVED: ` + **item**, **Body:** confirm the request is approved automatically.
-
-> **⚠️ Warning:** The **Assigned to** approver MUST be a real user in **this** tenant — pick from the people-picker dropdown so it becomes a **person chip**. A typed external email makes the run fail with *"valid users in the organization."*
-
-> **⚠️ Warning:** Insert **requesterEmail**, **item**, **Outcome** etc. as **single-value** dynamic content. If the designer wraps a Send an email in an **"Apply to each"** loop, you picked a list/array output — delete the For each and re-add the plain action using the single-value tokens (Outcome and the trigger inputs are all single-value).
-
-> **Tip on status updates:** to flip the row to Approved/Rejected later, use Excel **Update a row** with a **key column** (e.g. add an `ID` column set to a unique value when the row is created, then update by that key). Status updates are optional for this lab — focus on the approve + notify flow.
-
-**Step 5: Return a result and wire inputs (~10 minutes)**
-
-1. Under the branches, select **+** → **Add an action** → **Respond to the agent**. Add a **Text** output named `result` with value `Your request has been submitted for processing.`
-2. Select **Publish** — publishing saves and publishes the agent flow in one step — then **Go back to agent**.
-3. In the topic's tool node, map every flow input to the matching agent variable: `requester`, `requesterEmail`, `item`, `quantity`, `reason`, `estCost`.
-4. After the tool node, add a **Send a message** node showing `{result}` so the user sees the confirmation.
-5. Select **Save** on the topic, then **Publish** the agent.
-
-> **⚠️ Warning:** If **Send an email** returns **"Unauthorized"**, reconnect the **Office 365 Outlook** connection with a **mailbox-enabled** account. All connections must show a green ✓ before the flow can run.
-
-**Step 6: Test all paths (~8 minutes)**
-
-1. Open the **Test** pane in Copilot Studio. Run a request **under** the threshold:  —  item `Notebook`, quantity `5`, reason `Stationery`, estCost `120`  —  Expect: a `Pending` row logged, an **AUTO-APPROVED** email, and the confirmation message in chat.
-2. Run a request **over** the threshold and **approve** it:  —  item `Laptop`, quantity `2`, reason `New hires`, estCost `3000`  —  Respond in the **Approvals hub** (left menu of make.powerautomate.com — look under **More** if it is not pinned) → **Approve**. Expect an **APPROVED** email.
-3. Run another over-threshold request and **Reject** it → expect a **REJECTED** email.
-4. Open **My flows → run history** and the **Procurement Log** to confirm each path behaved correctly.
-
-> **Tip:** Approval emails can be slow or land in **Junk**. The **Approvals hub** in the left menu is the reliable place to approve or reject pending requests.
-
----
-
-**Checkpoint**
-
-- ✅ Agent captures the request and calls the flow with all inputs mapped
-- ✅ Request logged to Excel as **Pending** with a clean timestamp
-- ✅ Threshold Condition routes **auto-approve** vs **manager approval**
-- ✅ Approvals assigned to a **real tenant user**; requester notified of every outcome
-
-**Troubleshooting**
-
-| Problem | Solution |
-| --- | --- |
-| Run fails: "valid users in the organization" | **Assigned to** must be a real tenant user picked from the people-picker dropdown (a person chip) — not a typed external email. |
-| Condition errors on estCost | Ensure `estCost` (and `quantity`) are **Number** variables/inputs and you enter digits only. |
-| An "Apply to each" wrapped my email action | You picked a list/array output. Delete the For each and re-add the plain action using single-value tokens (**Outcome**, **requesterEmail**, etc.). |
-| "Unauthorized" on Send an email | Reconnect the **Office 365 Outlook** connection with a mailbox-enabled account; connections must be green ✓. |
-| Date shows raw text / `########` | Re-enter the date via the **fx** editor so it is a token; widen the Excel column to fix `########`. |
-| Approval never resumes | Respond in the **Approvals hub**; check **Junk**; emails can be slow. |
-| Inputs empty in the flow | Re-map each agent variable to the matching flow input in the tool node. |
-
-**Key Takeaways**
-
-- This is the full loop: **capture (agent) → log → approve → notify**.
-- Approvals only run when **Assigned to** is a real tenant user picked from the dropdown.
-- **Conditions** implement real business rules such as value thresholds.
-- Keep single-value tokens out of accidental For each loops, and use the **fx** editor for dates.
-
-**Duration**
-
-~50 minutes
-
-**Next Steps**
-
-Proceed to Lab 15: Order Processing Workflow.
-
----
-
-### Lab 15: Order Processing Workflow (Agent + Flow)
-
-**Lab Title**
-
-End-to-End Order Processing — Agent Captures the Order, Flow Logs It, Confirms It, and Alerts the Warehouse
-
-**Lab Objectives**
-
-By the end of this lab, you will be able to:
-
-1. Build a Copilot Studio **Order Assistant** agent that captures a customer order as structured data (name, email, product, quantity, address)
-2. Connect that agent to a Power Automate **agent flow** using **When an agent calls the flow** and **Respond to the agent**
-3. **Log** each order into an Excel table (**Order Log** workbook → **OrderTable**) with an automatic timestamp and a `Received` status
-4. Use an **AI prompt** to draft a friendly order-confirmation email, then **Send an email** to the customer
-5. Use a **Condition** so that large orders (quantity over 100) trigger a **restock alert** email to the warehouse — and small orders do not
-
-**Prerequisites**
-
-- Completed Day 2 Labs 6–11 (create an agent, capture variables, connect an agent to a flow, AI prompts)
-- Completed Day 1 Labs 1–2 (email + Excel actions)
-- Environment **Course Sandbox** with a working Outlook connection
-
-> **Tip:** This lab reuses the exact same skills as the Procurement workflow in **Lab 14** — you are simply applying the "capture → log → generate → notify → branch" pattern to a brand-new business domain: **Order Processing**.
-
-**Scenario**
-
-You work for **ACME Pte Ltd**. A customer places an order by chatting with an agent. The moment the order is captured, the workflow should do four things automatically:
-
-1. **Record** the order in a shared Excel order register.
-2. **Confirm** the order to the customer by email.
-3. **Check** the quantity — if it is a large order, **alert the warehouse** to restock.
-4. **Tell the agent** it is done, so the agent can thank the customer.
-
-You will build this as a Copilot Studio **agent** (the part the customer talks to) plus a Power Automate **agent flow** (the part that does the back-office work).
-
----
-
-**Step-by-Step Guide**
-
-**Step 1: Prepare the Order Log Excel table (~5 min)**
-
-The flow needs somewhere to write each order. We use an Excel **Table** (not just a sheet) because Power Automate can only add rows to a named table.
-
-1. Go to **OneDrive** (office.com → OneDrive) and create a new Excel workbook named exactly **Order Log**.
-2. In **row 1**, type these seven column headers, one per cell, starting in cell **A1**:
-
-`Date` | `Customer` | `Email` | `Product` | `Quantity` | `Address` | `Status`
-
-1. Select the header cells **A1:G1**, then go to the **Insert** ribbon → click **Table**. In the dialog, make sure **My table has headers** is ticked, then click **OK**.
-2. With the table selected, open the **Table Design** ribbon (top of the screen). In the **Table Name** box on the left, type **OrderTable** and press **Enter**.
-3. Close Excel. Your changes save automatically to OneDrive.
-
-> **Tip:** Later, if a date cell shows `########`, the column is just too narrow — widen it by double-clicking the border between the column letters. The data is fine.
-
-**Step 2: Create the Order Assistant agent (~10 min)**
-
-1. Open **Copilot Studio** (copilotstudio.microsoft.com) and confirm the environment picker (top-right) shows **Course Sandbox**. The agent and the flow must live in the **same environment**.
-2. Click **Create** (left menu) → **New agent** → at the top of the setup screen click **Skip to configure**.
-3. Fill in:  —  **Name:** `Order Assistant`  —  **Instructions:**
-
-```
-     You are an Order Assistant for ACME Pte Ltd.
-     Collect a customer's order: customer name, email, product, quantity, and delivery address.
-     Collect one item at a time, be friendly and concise, then confirm the order has been placed.
-```
-
-1. Click **Create**.
-2. In the left menu open **Topics** → **+ Add a topic** → **From blank**. On the toolbar select **Details** and set the **Name** to `New Order`.
-3. Set the topic **trigger** (latest Copilot Studio):  —  **Generative orchestration (default):** the **Trigger** node reads **The agent chooses**. In **Details**, set the **Description** to `Use this topic when a customer wants to place an order or buy a product. It collects the customer's name, email, product, quantity, and delivery address.` No phrases needed.  —  **(Optional) exact phrases:** hover the **Trigger** node → **Change trigger** → **User says a phrase**, then add `I want to place an order`, `new order`, `I'd like to buy`, `order products` (one per line).
-4. Below the trigger, select the **Add node** icon (**+**) → **Ask a question** five times to add five questions. For each one, type the message, set what to **Identify**, and save the answer to a **variable**:
-
-| Question message | Identify | Save answer as variable |
-| --- | --- | --- |
-| `What is your name?` | User's entire response | `customerName` |
-| `What is your email?` | User's entire response | `email` |
-| `Which product would you like to order?` | User's entire response | `product` |
-| `How many units?` | **Number** | `quantity` |
-| `What is the delivery address?` | User's entire response | `address` |
-
-> **⚠️ Warning:** For the quantity question you **must** change **Identify** to **Number**. If it stays as text, the "greater than 100" comparison in Step 6 will not work correctly.
-
-1. Click **Save** (top-right).
-
-**Step 3: Start the agent flow (~10 min)**
-
-1. Still inside the **New Order** topic, click the **+** below your last question → **Add a tool** → **New agent flow**. This opens the Power Automate flow designer in a new tab.
-2. The first (trigger) node is already **When an agent calls the flow**. Click it to open it.
-3. Click **+ Add an input** once for each field below. Choose the type, then type the exact name:  —  **Text** → `customerName`  —  **Text** → `email`  —  **Text** → `product`  —  **Number** → `quantity`  —  **Text** → `address`
-
-> **Tip:** These input names are how the agent will hand its variables to the flow. Spell them exactly as shown — you will match them up again in Step 7.
-
-**Step 4: Log the order to Excel (~5 min)**
-
-1. Click **+** → **Add an action** → search **Excel Online (Business)** → choose the action **Add a row into a table**.
-2. Fill in the action's first three boxes from the dropdowns:  —  **Location:** OneDrive for Business  —  **Document Library:** OneDrive  —  **File:** browse to **Order Log.xlsx**  —  **Table:** **OrderTable**
-3. The seven table columns now appear as fields. Map them:  —  **Date:** click inside the box → click the **fx** (function) icon to open the formula editor → type exactly:
-
-```
-     formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')
-```
-
-then click **Add** / **OK**. The formula collapses into a single token. **Never type this expression directly into the field** — always enter it through the **fx** editor, or it will be saved as plain text.
-
-- **Customer:** dynamic content `customerName`
-- **Email:** dynamic content `email`
-- **Product:** dynamic content `product`
-- **Quantity:** dynamic content `quantity`
-- **Address:** dynamic content `address`
-- **Status:** type the literal word `Received`
-
-**Step 5: Draft and send the order confirmation (~10 min)**
-
-1. *(Recommended)* Add an AI step: **+** → **Add an action** → search **Run a prompt** → choose **Run a prompt** (AI Builder — this action was formerly named *Create text with GPT using a prompt*). In the prompt box, type:
-
-```
-   Write a short, friendly order confirmation email (max 100 words).
-   Customer: {customerName}; Product: {product}; Quantity: {quantity}; Delivery to: {address}.
-   Confirm the order is received and will be processed. Sign off as "The ACME Order Team".
-   Output only the email body.
-```
-
-(Insert each `{...}` value by picking it from the **dynamic content** list rather than typing it.)
-
-1. **+** → **Add an action** → search **Office 365 Outlook** → choose **Send an email (V2)**. Fill in:  —  **To:** dynamic content `email`  —  **Subject:** type `Order confirmation: ` then add dynamic content `product`  —  **Body:** add the AI prompt's **Text** output (the generated text from step 1). If you skipped the AI step, type your own short message using the dynamic content tokens.
-
-> **⚠️ Warning:** If the Send an email action shows **Unauthorized** (a red error), the Outlook connection is signed in with the wrong account. Select the action and, at the bottom of its configuration pane (next to **Connected to …**), select **Change connection** → **+ Add new**, then sign in with a real **mailbox-enabled** tenant account. Every connection on the action should show a green check mark ✓ before you continue. (Same fix as Lab 1.)
-
-**Step 6: Add the restock-alert Condition (~10 min)**
-
-Large orders should warn the warehouse; small orders should not.
-
-1. **+** → **Add an action** → search **Condition** → choose **Condition** (under Control).
-2. Build the test:  —  Left box: dynamic content `quantity`  —  Operator: **is greater than**  —  Right box: type `100`
-3. In the **If yes** branch (this runs only for large orders):  —  Click **Add an action** → **Send an email (V2)**.  —  **To:** the warehouse address — for testing, use your own email so you can see it arrive.  —  **Subject:** type `RESTOCK ALERT: ` then add dynamic content `product`.  —  **Body:** type a message and drop in the tokens, e.g.  —  `Large order received: ` `quantity` ` units of ` `product` ` for ` `customerName` `. Please check stock and restock if needed.`
-4. Leave the **If no** branch **empty** — small orders need no alert.
-
-> **Tip:** If Power Automate ever wraps an action in an automatic **For each** loop, it means you selected a field that can return multiple values. Here every field (`quantity`, `product`, etc.) is a single value, so no loop should appear. If one does, delete the action and re-add the dynamic content carefully.
-
-**Step 7: Return a result and wire the inputs (~10 min)**
-
-1. **+** → **Add an action** → search **Respond to the agent** → add it. Add a **Text** output named `result` with the value:
-
-```
-   Your order has been placed and confirmed by email.
-```
-
-1. Click **Publish** — publishing saves and publishes the agent flow in one step — then close the flow tab and return to the agent (**Go back to agent** / the Copilot Studio tab).
-2. In the **New Order** topic, click your flow's tool node. You will see the five flow inputs. Map each one to the matching agent **variable** from the dropdown:  —  `customerName` → `customerName`  —  `email` → `email`  —  `product` → `product`  —  `quantity` → `quantity`  —  `address` → `address`
-3. Below the tool node, click **+** → **Send a message** and type:
-
-```
-   {result} Thank you for your order!
-```
-
-(Insert `result` from the flow's outputs.)
-
-1. Click **Save**.
-
-**Step 8: Test end-to-end (~10 min)**
-
-1. Open the **Test** pane (top-right). Click the **refresh** icon so it picks up your latest changes.
-2. Type `new order` and answer the questions for a **large** order:  —  Name: `Mei Ling`  —  Email: **your own email address**  —  Product: `Air Fryer Pro`  —  Quantity: `150`  —  Address: `123 Orchard Rd`
-3. Confirm all four results:  —  The agent shows your "Thank you for your order!" message.  —  A **new row** appears in **Order Log.xlsx** with **Status** = `Received` and a timestamp in the **Date** column.  —  The **order confirmation** email arrives in your inbox.  —  Because `150` is greater than `100`, a **RESTOCK ALERT** email **also** arrives.
-4. Run it once more with a **small** quantity (e.g. `5`) and confirm:  —  The order is still logged and confirmed.  —  **No** restock alert email is sent.
-
----
-
-**Checkpoint**
-
-You are done when:
-
-- ✅ The **Order Assistant** captures all five order fields (and quantity is a **Number**)
-- ✅ The agent flow **logs** the order, **confirms** by email, and **conditionally** alerts the warehouse
-- ✅ A **large** order (150) gets a restock alert; a **small** order (5) does not
-- ✅ A new row with **Status = Received** and a real timestamp appears in **OrderTable**
-
-**Troubleshooting**
-
-| Problem | Solution |
-| --- | --- |
-| Flow does not appear in the topic | Refresh the page; make sure the flow is **Published** and in the **same** environment (**Course Sandbox**). |
-| Flow inputs arrive empty | In the tool node, re-map each agent variable to the matching flow input (Step 7). |
-| Restock alert never fires (or always fires) | The Condition must compare `quantity` **is greater than** `100`, and `quantity` must be identified as a **Number** in Step 2. |
-| Send an email shows **Unauthorized** | Reconnect Outlook with a mailbox-enabled account; confirm every connection shows a green ✓. |
-| Date column shows the literal text `formatDateTime(...)` | You typed the expression instead of entering it through the **fx** editor. Re-enter it via **fx**. |
-| Date cell shows `########` | The column is too narrow. Widen it — the data is correct. |
-| An action got wrapped in **For each** | You selected a multi-value field. Remove the action and re-add single-value dynamic content. |
-
-**Key Takeaways**
-
-- Order Processing is a complete **capture (agent) → log → confirm → alert** loop, end to end.
-- A **Condition on quantity** turns a business rule (the restock threshold) into automatic behaviour.
-- The timestamp comes from an **fx expression** (`formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')`) entered through the formula editor, never typed as text.
-- This is the **same pattern as Procurement (Lab 14)** applied to a new domain — proof that one set of skills covers many business workflows.
-
-**Duration**
-
-~55 minutes
-
-**Next Steps**
-
-Proceed to the Lab 16: Capstone Workshop to design and build your own end-to-end workflow.
-
----
-
-### Lab 16: Capstone Workshop — Build Your Own End-to-End Workflow
-
-**Lab Title**
-
-Business Workflow Workshop: Design and Build a Complete Automation
-
-**Lab Objectives**
-
-By the end of this workshop, you will be able to:
-
-1. **Design** an end-to-end workflow for a real business scenario on paper before you build
-2. **Build** it by combining a Copilot Studio agent with one or more Power Automate flows
-3. **Orchestrate** triggers, actions, conditions, approvals, and notifications into one working process
-4. **Test** the happy path and every branch using a structured test log
-5. **Present** your workflow and explain its business value
-
-**Prerequisites**
-
-- Completed all Day 1–3 labs (you will reuse skills from across the whole course)
-- Your environment **Course Sandbox** set up, with working Outlook and Excel connections (all green ✓)
-
-> **Tip:** This is the last-afternoon capstone. You are not learning a new technique here — you are combining the pieces you already practised into one workflow that is **yours**. Pick a scenario you genuinely care about and the rest gets easier.
-
-**Scenario**
-
-You work for **ACME Pte Ltd**. Choose **one** real business process from your day-to-day work (or one of the four tracks below), then design and build a complete automation for it: something **triggers** it, data is **captured** and **logged**, a **business rule** decides what happens, the right people are **notified**, and the process ends in a clear **final state**.
-
-You will work **individually or in a small group** and finish with a **working, tested workflow** plus a short **demo**.
-
----
-
-**Step-by-Step Guide**
-
-**Step 1: Choose a track (~10 min)**
-
-Pick **one** scenario below (or adapt one to your own job). Each maps directly to skills you have already practised.
-
-**Track A — Sales**
-
-**Lead-to-CRM workflow.** A customer submits an enquiry (via the **Sales Enquiry Assistant** or an email). The workflow logs the lead, generates a personalised acknowledgement with an **AI prompt**, and notifies the assigned salesperson. High-value leads (quantity or deal size over a threshold) also raise a manager alert.
-
-**Track B — Finance**
-
-**Expense / invoice approval workflow.** An expense or invoice is submitted (agent form or file upload). It is logged, routed for **approval** based on amount, and the requester is notified. Approved items move to a "to-pay" status; rejected items are returned with a reason.
-
-**Track C — Procurement**
-
-**Purchase-request workflow.** Staff raise a purchase request via an agent. It is logged, routed for **manager approval** when it exceeds a cost threshold, and the requester is notified. The procurement team gets a consolidated notification for approved items.
-
-**Track D — Order Processing**
-
-**Order intake workflow.** A customer places an order (an agent captures product, quantity, address). The order is logged, an order-confirmation email is generated with an **AI prompt**, large orders trigger a **restock alert** to the warehouse, and the customer is notified of the order status.
-
-**Step 2: Design on paper first (~20 min)**
-
-Use the orchestration method from Module 4. Complete this **design sheet** *before* you build anything — a clear plan makes the build fast and the testing obvious.
-
-| Design item | Your answer |
-| --- | --- |
-| **One-sentence summary** ("When ___, do ___, then ___, finally ___") |  |
-| **Trigger** (email / form / file upload / agent call / schedule) |  |
-| **Data to capture** (the fields / variables, and their types) |  |
-| **Actions in order** (log, generate, approve, notify…) |  |
-| **Decision point(s)** (the condition and the two paths) |  |
-| **End states** (final status + who is notified for each outcome) |  |
-| **Tools used** (agent? which flows? Excel? Outlook? Approvals?) |  |
-
-> **⚠️ Warning:** Get this design sheet checked by a facilitator or peer **before** building. Fixing a plan on paper takes a minute; fixing a half-built flow takes much longer.
-
-**Step 3: Build it incrementally (~60–90 min)**
-
-Build **one piece at a time and test after each piece** — never build everything and test once at the end.
-
-**Suggested build order:**
-
-1. **Data store** — create the Excel log as a named **Table** (include any status / key columns your end states need).
-2. **Capture** — build the agent topic (**Ask a question** nodes → variables) *or* configure the automated trigger (email / file). Remember to set numeric fields to **Number**.
-3. **Log** — add **Add a row into a table**; test that one record is written correctly. Use the **fx** editor for any timestamp: `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')` (enter it via **fx**, never type the expression into the field).
-4. **Generate** (if used) — add an **AI prompt** action; test that the generated text reads well.
-5. **Decide** — add **Condition(s)** for your business rule; test **both** branches (just above and just below the threshold).
-6. **Approve** (if used) — add **Start and wait for an approval**; test **approve** and **reject**.
-7. **Notify** — add **Send an email** actions for each outcome; test that each one is delivered.
-8. **Connect** — if using an agent, add **When an agent calls the flow** as the trigger and **Respond to the agent** at the end, then wire the agent variables → flow inputs and show the returned confirmation message.
-
-> **⚠️ Warning — green connections:** Before testing any **Send an email** or Excel action, confirm every connection shows a green check mark ✓. An **Unauthorized** error on Send an email means the Outlook connection is the wrong account — reconnect with a real **mailbox-enabled** tenant account.
-
-> **⚠️ Warning — approvals:** In **Start and wait for an approval**, set **Assigned to** by **picking a real tenant user from the dropdown**. Do not type an external email address — external approvers will never receive the request and the flow will appear to hang.
-
-> **Tip:** If an action gets wrapped in an automatic **For each** loop, you picked a multi-value field. Most of your fields are single values — remove the action and re-add the dynamic content carefully.
-
-**Reuse your earlier labs as templates:**
-
-- Email sending → Lab 1
-- Excel logging → Lab 2
-- Approval + condition → Lab 3
-- Scheduled / recurring trigger → Lab 4
-- Form submission trigger → Lab 5
-- Agent fundamentals & instructions → Lab 6
-- Knowledge / RAG grounding → Lab 7
-- Tools & actions → Lab 8
-- Agent capture (structured data) → Lab 9
-- Agent → flow integration → Lab 10
-- AI-generated response → Lab 11
-- Email/file trigger end-to-end → Labs 12–13
-- Full approval loop → Lab 14
-- Agent-driven order processing → Lab 15
-
-**Step 4: Test thoroughly (~20 min)**
-
-Complete this **test log**. Your workflow is not done until every relevant row passes. (Skip the approval rows only if your track has no approval step.)
-
-| Test case | Expected result | Pass? |
-| --- | --- | --- |
-| Happy path (typical input) | Logged + notified + correct end state |  |
-| Approval → Approved | Approved branch runs + correct email sent |  |
-| Approval → Rejected | Rejected branch runs + correct email sent |  |
-| Threshold / edge case (just above & just below) | Correct branch chosen each time |  |
-| Bad / missing input | Agent re-asks; flow does not crash |  |
-| Run history | Every step green; logged data correct |  |
-
-> **Tip:** Open the flow's **Run history** (Power Automate → your flow → 28-day run history) to see exactly which step failed and read the error. Green = success, red = failure.
-
-**Step 5: Present your workflow (~5 min each)**
-
-Demo to the group. Cover:
-
-1. **The business problem** and who it helps.
-2. **The trigger and the steps** — walk through your one-sentence design summary.
-3. **A live run** of the happy path *and* at least one branch.
-4. **The business value** — time saved, errors avoided, consistency gained.
-5. **What you would add next** with more time.
-
----
-
-**Assessment checklist**
-
-Your capstone is complete when:
-
-- ✅ It has a clear **trigger** and runs end to end
-- ✅ It **captures or receives** data and **logs** it to an Excel **Table**
-- ✅ It includes at least one **Condition** (branching on a business rule)
-- ✅ It includes an **approval** *or* an **AI-generated** response
-- ✅ It **notifies** the right people for **every** outcome
-- ✅ Every relevant test case in Step 4 **passes**
-- ✅ All connections are green ✓ and any approver is a **real tenant user**
-- ✅ You can **explain** its business value in plain language
-
----
-
-**Stretch goals (optional)**
-
-- Add a **scheduled** flow that emails a daily summary of new records.
-- Use **Update a row** to keep the Excel **Status** column current at each stage (e.g. `Received` → `Approved` → `Completed`).
-- Deploy the agent to **Microsoft Teams** so colleagues can use it where they already work.
-- Add a **second approver** or an **escalation** if no response within a time limit.
-- Post outcomes to a **Teams channel** instead of (or as well as) email.
-
----
-
-**Duration**
-
-~2–3 hours
-
-**Congratulations 🎉**
-
-You have completed the **Business Process Automation with Power Automate and Copilot Studio Agents** course. You can now design and build end-to-end automations that capture requests, apply business rules, route approvals, and notify stakeholders — across **Sales, Finance, Procurement, and Order Processing**.
-
-**Where to go next:**
-
-- Explore the Power Automate Templates Gallery for ready-made patterns.
-- Review Copilot Studio documentation for advanced agent features.
-- Identify one manual process at your workplace and automate it this week.
+You've completed all the hands-on labs. Next: course wrap-up, briefing for assessment, then the WSQ assessment (Written Assessment 4:00–5:00 PM, Practical Performance 5:00–6:00 PM).
 
 ---
