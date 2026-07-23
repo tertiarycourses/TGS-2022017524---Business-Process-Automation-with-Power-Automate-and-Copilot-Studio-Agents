@@ -62,8 +62,8 @@ Create AI agents that understand requests and feed structured data into your flo
 | Lab | Title | Description |
 |-----|-------|-------------|
 | **Module 3** | [Business Agents Concepts](labs/Day%202/Module%203%20-%20Business%20Agents%20Concepts.md) | Prompt design for structured outputs; connecting agents to flows |
-| **Lab 6** | [Create Your First Copilot Studio Agent](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/index.md) | Build, configure, and test a business agent from scratch |
-| **Lab 7** | [Add Knowledge to Your Agent (RAG)](labs/Day%202/Lab%207%20-%20Add%20Knowledge%20to%20Your%20Agent/index.md) | Ground the agent in your own documents/websites, with citations |
+| **Lab 6** | [IT Support RAG Part A](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/index.md) | Build an IT support agent and ingest the supplied FAQ into Copilot Studio Knowledge |
+| **Lab 7** | [IT Support RAG Part B](labs/Day%202/Lab%207%20-%20Add%20Knowledge%20to%20Your%20Agent/index.md) | Retrieve grounded answers, verify citations, and refuse unsupported requests |
 | **Lab 8** | [Add Tools and Actions](labs/Day%202/Lab%208%20-%20Add%20Tools%20and%20Actions/index.md) | Give the agent tools — connectors, prebuilt actions, and flows |
 | **Lab 9** | [Sales Enquiry Assistant](labs/Day%202/Lab%209%20-%20Sales%20Enquiry%20Assistant/index.md) | An agent that captures sales enquiries as structured data |
 | **Lab 10** | [Procurement Request Workflow](labs/Day%202/Lab%2010%20-%20Procurement%20Request%20Workflow/index.md) | An agent that collects procurement requests and triggers a flow |

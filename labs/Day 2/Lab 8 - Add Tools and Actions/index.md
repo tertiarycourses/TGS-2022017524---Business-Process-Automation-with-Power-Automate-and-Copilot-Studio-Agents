@@ -17,7 +17,7 @@ By the end of this lab, you will be able to:
 - A working **Office 365 Outlook** connection (a mailbox-enabled account you can sign in with)
 
 ## Scenario
-So far your **Company Helpdesk** agent can *answer* questions (using Knowledge). But staff at **ACME Pte Ltd** also want it to *do* things — for example, email the support team when someone needs help escalated.
+So far your **MyCompany IT Support Assistant** can *answer* questions using the approved IT FAQ. Staff also need it to *do* something useful — email the Service Desk with a structured escalation summary when first-line troubleshooting does not resolve an issue.
 
 **Knowledge lets an agent answer; Tools let it act.** In this lab you will give your agent a tool so a chat conversation can trigger real work, such as sending an email. This is the bridge to the end-to-end agent-plus-flow workflow you will build in Lab 10.
 
@@ -32,7 +32,7 @@ So far your **Company Helpdesk** agent can *answer* questions (using Knowledge).
 ### Step 1: Open the Tools tab (~5 minutes)
 
 1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and confirm the **environment selector** (top-right) shows **Course Sandbox** — the same environment as your Power Automate flows.
-2. Open your **Company Helpdesk** agent from Lab 6.
+2. Open your **MyCompany IT Support Assistant** agent from Lab 6.
 3. Select the **Tools** tab (this was labelled **Actions** in older versions).
 4. Select **+ Add a tool**. Microsoft groups tools into several **core tool types**:
    - **Prebuilt / custom connector action** — a single ready-made operation from a connector like Office 365 Outlook, Excel, or Teams (you use this in Steps 2–4).

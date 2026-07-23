@@ -1351,7 +1351,7 @@ Each lab adds one capability on top of the last, so by Lab 11 you'll have an age
 
 **Lab Title**
 
-Create, Configure, and Test Your First Business Agent
+IT Support RAG Part A — Build the Agent and Ingest the FAQ
 
 **Lab Objectives**
 
@@ -1360,23 +1360,61 @@ By the end of this lab, you will be able to:
 1. Create a new **blank agent** in Microsoft Copilot Studio and configure it yourself
 2. Write clear **Instructions** that shape how your agent behaves
 3. Identify the main building blocks of an agent (Instructions, Knowledge, Topics, Tools)
-4. Add one **Knowledge** source so your agent can answer real questions
-5. Test and iterate on your agent in the built-in **Test** pane
-6. Publish your agent (optional) and understand what Channels are
+4. Upload a realistic internal **IT Service Desk FAQ** as a Knowledge source
+5. Map the n8n Activity 7 ingestion nodes to Copilot Studio's managed Knowledge pipeline
+6. Run a smoke test to confirm that retrieval works
+7. Publish your agent (optional) and understand what Channels are
 
 **Prerequisites**
 
 - Completed Lab 0 (Copilot Studio trial active)
 - Read Module 3
 - Signed in at <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> (same environment as Power Automate)
+- Downloaded the supplied [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf) knowledge file
 
 **Scenario**
 
-You work in IT at **ACME Pte Ltd**, a small company. Staff keep emailing IT the same basic questions: opening hours, who to contact, how to reset things. You will build a friendly **Company Helpdesk** agent that answers these questions automatically.
+You work on the **MyCompany Singapore IT Service Desk**. Staff repeatedly ask how to reset passwords, unlock accounts, enrol in MFA, connect to VPN, troubleshoot Outlook, report phishing, and raise support tickets. Answering the same questions manually delays urgent work.
 
-This lab is your guided tour of Copilot Studio. You will learn the interface and the core idea that **Instructions are the heart of the agent** before you build data-capturing, action-taking agents in the labs that follow.
+You will build a grounded **MyCompany IT Support Assistant** that gives concise first-line guidance from the supplied internal FAQ. This is the Copilot Studio equivalent of the **ingestion half** of n8n Activity 7 RAG: load a source document, process it for semantic retrieval, and connect it to an AI agent.
+
+The agent must never invent procedures, request passwords or MFA codes, or downplay security incidents. When the FAQ does not resolve an issue, it must explain how to escalate to the Service Desk.
 
 > **Tip:** An "agent" (sometimes still called a "copilot") is just an AI assistant you configure. You do not write code — you describe what you want in plain English, add some reference material, and test it in a chat window.
+
+**Activity 7 RAG Pattern in Copilot Studio**
+
+The n8n activity exposes each RAG component as a node. Copilot Studio performs the same ingestion work as a managed service:
+
+```text
+n8n Activity 7:
+it-faq.pdf → Upload/Webhook → Data Loader → Splitter → Embeddings → Vector Store
+
+Copilot Studio Lab 6:
+it-faq.pdf → Add Knowledge → Managed processing, chunking, embeddings, and search index
+```
+
+| n8n Activity 7 component | Copilot Studio equivalent |
+| --- | --- |
+| Upload Webhook or document input | **Add knowledge → Files / Upload** |
+| Default Data Loader | Managed Knowledge ingestion |
+| Text Splitter | Managed document chunking |
+| Embeddings model | Managed semantic indexing |
+| Simple/Pinecone/Qdrant/Supabase Vector Store | Copilot Studio Knowledge index |
+| Successful vector insertion | Knowledge source status is **Ready** |
+
+> **Important:** You do not create a separate Pinecone, Qdrant, or Supabase database in these labs. Copilot Studio manages the retrieval index. Lab 7 connects the answering behaviour to this ready source and tests the retrieval path.
+
+**Which interface are you using?**
+
+Microsoft currently provides two Copilot Studio authoring experiences. Use the path that matches your screen:
+
+| If your screen shows… | Follow… |
+| --- | --- |
+| **Overview**, **Knowledge**, **Topics**, **Tools/Actions**, and a **Test** pane | **Classic experience** |
+| **Build**, **Preview**, **Evaluate**, **Monitor**, with **Knowledge**, **Skills**, and **Tools** on the right | **New experience** |
+
+> **Important:** Both interfaces achieve the same Lab 6 outcome. Do not switch experiences or recreate your agent halfway through the lab. Agents created in the new experience cannot currently be converted to the classic experience.
 
 ---
 
@@ -1387,84 +1425,131 @@ This lab is your guided tour of Copilot Studio. You will learn the interface and
 Before you build anything, make sure you are in the correct environment. This is the single most common cause of problems later in the course.
 
 1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and sign in with your course account.
-2. Look at the **top-right corner** of the screen. You will see an **environment selector** (a small label showing the current environment name, often with a globe or building icon).
+2. Find the **environment selector**:  —  **Classic:** usually at the top-right.  —  **New:** use the globe/environment control in the Copilot Studio shell (commonly at the lower-left; its position can vary by rollout).
 3. Click it and select **Course Sandbox** (your course environment from Lab 0).
 
 > **⚠️ Warning:** Copilot Studio **must use the same environment as Power Automate**. If your agent is built in one environment and your flows live in another, they will not be able to connect to each other in Lab 10. Always confirm the environment name in the top-right before you start. The environment also needs **Dataverse** enabled, because agents are stored there.
 
 **Step 2: Create a blank agent and configure it (~10 minutes)**
 
-1. On the **Home** page you will see a large box inviting you to **describe** the agent you want in natural language. You could create the agent by chatting — but for this lab you will configure everything yourself so you understand every field.
-2. In the left navigation, select **Agents**, then select **Create blank agent**. *(On the **Home** page the same option appears as **Create an agent** under **Start building from scratch**.)*
-3. Wait a few seconds while the agent is provisioned. Its **Overview** page then opens.
-4. In the **Details** section of the Overview page, select **Edit** and fill in:  —  **Name:** `Company Helpdesk`  —  **Description:** `Answers general questions about ACME Pte Ltd for staff and customers.`
+Use the instructions below for your interface.
 
-Select **Save**.
+**Classic experience**
 
-1. In the **Instructions** section of the Overview page, select **Edit**, copy and paste the text below into the **Instructions** box, then select **Save**:
+1. Select **Agents**, then **Create blank agent**. On some classic Home pages, use **Create an agent** under **Start building from scratch**.
+2. Wait for the agent's **Overview** page to open.
+3. In **Details**, select **Edit** and enter:  —  **Name:** `MyCompany IT Support Assistant`  —  **Description:** `Provides first-line IT troubleshooting and escalation guidance for MyCompany Singapore staff.`
+4. Select **Save**.
+5. In **Instructions**, select **Edit**, paste the instruction block below, then select **Save**.
 
-```
-     You are the Company Helpdesk agent for ACME Pte Ltd.
-     Be friendly, concise, and professional.
-     Answer questions about our products, opening hours, and contact details.
-     If you do not know an answer, politely say so and suggest emailing help@acme.example.
-     Keep replies to 2-3 sentences.
+**New experience**
+
+1. Select **Agents**, then **New Agent**.
+2. The designer opens on **Build**, with the agent name field in focus.
+3. Enter **Name:** `MyCompany IT Support Assistant`.
+4. Paste the instruction block below into the main **Instructions** editor.
+5. Select the **Save** (disk) icon at the top.
+
+> **New-interface note:** The current Build page does not expose the classic editable **Description** field. Skip that field for Lab 6. If a description field appears during publishing, enter `Provides first-line IT troubleshooting and escalation guidance for MyCompany Singapore staff.` there. The **… > Settings > Agent details** page contains system identity values such as schema name, solution, and language; it is not the classic Description editor.
+
+**Instructions for both interfaces**
+
+```text
+You are the MyCompany Singapore IT Support Assistant for employees.
+Use the IT Service Desk FAQ as your source for troubleshooting and escalation guidance.
+Give concise, numbered steps in the order staff should perform them.
+Never ask for or repeat passwords, MFA codes, recovery codes, or other secrets.
+For phishing, lost devices, or suspected security incidents, clearly state the urgent action from the FAQ.
+If the FAQ does not cover the issue or its steps fail, say so and direct the user to the IT Portal or ithelpdesk@mycompany-sg.example.com.
+When escalating, remind the user to include their full name, asset tag, exact error message, when the issue started, and what they already tried.
+Do not invent policies, contact details, system names, or resolution times.
+Keep routine answers under 120 words unless the user asks for more detail.
 ```
 
 > **Tip:** Think of the three fields like this — **Name** is what people see, **Description** is a short note for *you* (and helps other agents/tools recognise it later), and **Instructions** are the actual rules the AI follows in every conversation. Instructions are where almost all of your effort goes.
 
 **Step 3: Tour the agent workspace (~5 minutes)**
 
-Now that the agent exists, get familiar with the layout. Near the top of the page you will see several tabs. The exact labels can shift slightly between versions, but you will find these building blocks:
+Use this map to locate the agent building blocks:
 
-1. **Overview** — a summary of your agent and quick links to its parts.
-2. **Knowledge** — the documents, websites, and data the agent can read to find facts (you will use this in Step 4 and much more in Lab 7).
-3. **Topics** — scripted, step-by-step conversation flows you design by hand for predictable questions.
-4. **Tools** (called **Actions** in older versions) — things the agent can *do*, such as send an email or run a Power Automate flow (covered in Lab 8).
-5. The **Test** pane — a chat panel, usually on the right. If you do not see it, select **Test** at the top-right.
+| Building block | Classic experience | New experience |
+| --- | --- | --- |
+| Agent configuration | **Overview** | **Build** |
+| Behaviour rules | **Instructions** on Overview | Main **Instructions** editor on Build |
+| Facts and grounding | **Knowledge** tab | **Knowledge +** on the right of Build |
+| Scripted behaviour | **Topics** tab | Primarily **Instructions** and reusable **Skills**; no direct Topics tab |
+| Actions and integrations | **Tools** or **Actions** tab | **Tools +** on the right of Build |
+| Interactive testing | **Test** pane | **Preview** tab |
+| Structured repeatable tests | Not normally used in this lab | **Evaluate** tab |
+| Usage and run information | Analytics/monitoring pages | **Monitor** tab |
 
-Click through each tab once so you know where things are. You do not need to change anything yet.
+Click through the relevant areas once. You do not need to add a Skill, Tool, or evaluation yet.
 
 > **Tip:** Remember the four building blocks: **Instructions** = behaviour and tone, **Knowledge** = facts the agent can look up, **Topics** = scripted conversations, **Tools** = things the agent can do. Almost everything in Copilot Studio is one of these four.
 
-**Step 4: Add one Knowledge source (~10 minutes)**
+> **New-interface note:** Enhanced orchestration uses Instructions, Knowledge, Skills, and Tools to decide what to do. The classic **Topics** tab does not have a one-to-one replacement in this experience.
 
-Right now your agent only knows what is in its Instructions. Give it something real to answer from.
+**Step 4: Ingest the IT FAQ into Knowledge (~10 minutes)**
 
-1. Open the **Knowledge** tab.
-2. Select **+ Add knowledge**.
-3. Choose **Public website** (the simplest option — no files needed).
-4. In the URL box, paste a relevant website. For practice, use the Microsoft Copilot Studio docs:  —  `https://learn.microsoft.com/microsoft-copilot-studio/`  —  *(Alternatively, if you have a short company FAQ as a PDF or Word file, choose the **Files** option and upload it instead.)*
-5. Give the source a short, clear **name** such as `Copilot Studio docs` and, if asked, a one-line **description** of what it contains.
-6. Select **Add to agent**.
-7. Watch the source's status. It will show **Processing** (or a spinner) and then change to **Ready**. Wait until it says **Ready** before testing — this can take a minute or two.
+Right now your agent has behaviour rules but no company-specific procedures. Ground it with the supplied [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf), adapted from the Activity 7 RAG mock data in the [Agentic AI Automation with n8n repository](https://github.com/tertiarycourses/TGS-2023035977-Agentic-AI-Automation-with-n8n/tree/main/labs/activity7-rag).
 
-> **Tip:** A website source lets the agent ground its answers in real content instead of guessing. You will go much deeper on Knowledge in Lab 7.
+**Classic experience**
 
-**Step 5: Test your agent (~7 minutes)**
+1. Open **Knowledge**.
+2. Select **+ Add knowledge**, then **Files** or **Upload file**.
+3. Upload [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf).
+4. Set the name to `MyCompany IT Service Desk FAQ`. If requested, enter this description: `Internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook, software, printers, hardware, access, phishing, and IT ticket escalation.`
+5. Select **Add to agent**.
+6. Wait until the source changes from **Processing** to **Ready**.
 
-1. Open the **Test** pane on the right. If it is hidden, select **Test** at the top-right.
-2. Type these questions one at a time and read the replies:  —  `What can you help me with?`  —  `What is Copilot Studio?`  —  `How do I contact support?`
-3. Notice two things working together:  —  Your **Instructions** control the *style* — friendly, short (2-3 sentences), professional.  —  Your **Knowledge** controls the *facts* — answers drawn from the website you added.
+**New experience**
 
-> **Tip:** The Test pane updates as you build. After most changes you make, come back here and re-test. This build-then-test loop is exactly how real agents are developed.
+1. On **Build**, select **+** beside **Knowledge** on the right.
+2. Choose **Files** or **Upload file**.
+3. Upload [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf).
+4. Set the source name to `MyCompany IT Service Desk FAQ`.
+5. If requested, enter this description: `Internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook, software, printers, hardware, access, phishing, and IT ticket escalation.`
+6. Select **Add to agent**, then select the **Save** (disk) icon.
+7. Wait for processing to finish. Depending on the rollout, the source may show **Ready**, a spinner, or simply appear as a `MyCompany IT Service Desk FAQ` chip.
+
+> **Tip:** This PDF is internal mock data. Its `.example.com` addresses and phone number are intentionally fictional; do not replace them with personal contact information.
+
+> **RAG checkpoint:** When the source becomes **Ready**, Copilot Studio has completed the equivalent of n8n's load → split → embed → upsert sequence. A visible source alone is not enough; wait for processing to finish.
+
+**Step 5: Smoke-test the retrieval path (~7 minutes)**
+
+1. Open the testing surface:  —  **Classic:** open the **Test** pane on the right; if hidden, select **Test** at the top-right.  —  **New:** select the **Preview** tab.
+2. Start with these three ingestion smoke tests:  —  `I entered the wrong password several times and my account is locked. What should I do?`  —  `How do I connect to the corporate VPN while working from home?`  —  `I clicked a link in a suspicious email and entered my password. What should I do now?`
+3. Compare the responses with the expected evidence:
+
+| Test | What a grounded answer should include |
+| --- | --- |
+| Locked account | Wait 15 minutes; use self-service password reset if needed; escalate if still locked |
+| VPN | Open GlobalConnect; use `vpn.mycompany-sg.example.com`; sign in and approve MFA |
+| Phishing compromise | Report phishing, change the password immediately, and call the Service Desk |
+
+4. Confirm that the agent never asks for the user's password or MFA code.
+5. Check for a citation or reference to `it-faq.pdf` where the interface provides citations.
+
+> **Tip:** This is only a smoke test that the ingestion path works. In Lab 7 you will perform a fuller RAG evaluation with citations, negative tests, source-only controls, and troubleshooting.
 
 **Step 6: Iterate on your Instructions (~5 minutes)**
 
 The first version of an agent is rarely perfect. Tuning the Instructions is normal and expected.
 
-1. Suppose replies are too long or too formal. Open the **Overview** tab and select **Edit** in the **Instructions** section.
+1. Review your test results. If answers are too vague, too long, or omit escalation details, return to the instruction editor:  —  **Classic:** open **Overview** and select **Edit** in **Instructions**.  —  **New:** return to **Build** and click in the main **Instructions** editor.
 2. Add a line to make the change you want, for example:
 
-```
-   Always greet the user by name if they give it.
-   Never give legal or financial advice; suggest contacting a manager instead.
+```text
+For every troubleshooting answer, separate "Try this first" from "Escalate when".
+Never ask the user to share a password, MFA code, recovery code, or authentication secret.
 ```
 
-1. Select **Save**.
-2. Go back to the **Test** pane. If your earlier conversation is still showing, select the **Start new test session** icon (the circular-arrow / refresh icon) at the top of the Test pane so it picks up the new Instructions, then ask again.
+3. Save the change:  —  **Classic:** select **Save**.  —  **New:** select the **Save** (disk) icon.
+4. Start a fresh test:  —  **Classic:** return to the **Test** pane and select **Start new test session** (circular-arrow/refresh).  —  **New:** return to **Preview** and select **New chat**.
+5. Ask the questions again and confirm the updated behaviour.
 
-> **⚠️ Warning:** The Test pane does **not** always pick up changes automatically. If your edit does not seem to take effect, select the **Start new test session** (refresh) icon at the top of the Test pane to restart the conversation.
+> **⚠️ Warning:** Existing test conversations do **not** always pick up changes. Start a new test session in Classic or a **New chat** in the new experience after editing Instructions.
 
 **Step 7: Publish the agent (optional) (~5 minutes)**
 
@@ -1472,9 +1557,9 @@ Publishing makes your latest version live so it can be shared. You do not have t
 
 > **Note:** A Copilot Studio **trial** license lets you create and test agents in the Test pane, but does **not** let you publish them. If Publish is blocked on your account, simply read through this step — everything else in the course works from the Test pane.
 
-1. Select **Publish** (top-right), then confirm by selecting **Publish** again in the dialog.
-2. Once publishing finishes, open the **Channels** tab. **Channels** are the places people can use your agent — for example Microsoft Teams, a demo website, or a custom app.
-3. Browse the list to see your options. You do not need to connect any channel now; publishing alone is enough to keep your latest version testable.
+1. Select **Publish** at the top-right, then confirm by selecting **Publish** again.
+2. After publishing:  —  **Classic:** open **Channels** to browse Microsoft Teams, demo website, and other deployment options.  —  **New:** use the confirmation options to **Share** the agent or add it to the organisation catalogue; channel availability may differ while the new experience is in preview.
+3. You do not need to connect a channel or share the agent for this lab.
 
 ---
 
@@ -1483,28 +1568,34 @@ Publishing makes your latest version live so it can be shared. You do not have t
 You have successfully completed this lab when:
 
 - ✅ You confirmed you are in the **Course Sandbox** environment (matching Power Automate)
-- ✅ An agent named **Company Helpdesk** exists with your custom **Instructions**
-- ✅ At least one **Knowledge** source shows the status **Ready**
-- ✅ The agent gives sensible, on-style answers in the **Test** pane
-- ✅ You edited the Instructions and saw the change after refreshing the Test pane
+- ✅ An agent named **MyCompany IT Support Assistant** exists with your custom **Instructions**
+- ✅ The supplied **MyCompany IT Service Desk FAQ** is ready or has finished processing
+- ✅ You can explain how **Add knowledge** replaces the n8n loader, splitter, embeddings, and vector-store nodes
+- ✅ The agent passes the account-lockout, VPN, and phishing smoke tests in **Test** (Classic) or **Preview** (New)
+- ✅ The agent never requests a password, MFA code, recovery code, or other authentication secret
+- ✅ You edited the Instructions and saw the change after starting a fresh test session or **New chat**
 
 **Troubleshooting**
 
 | Problem | Cause | Solution |
 | --- | --- | --- |
-| Agent ignores your new instructions | Test pane is showing the old conversation | Select **Save**, then select the **Start new test session** (refresh) icon at the top of the **Test** pane to restart the chat. |
-| Knowledge source stuck on "Processing" | Large website or busy service | Wait a minute or two. If it persists, remove it and add a smaller single page or a short PDF instead. |
+| Agent ignores your new instructions | The test is using an existing conversation | Save, then use **Start new test session** (Classic) or **New chat** in Preview (New). |
+| Knowledge source stuck on "Processing" | File processing or a busy service | Wait a minute or two and confirm the PDF opens locally. If it persists, remove the source and upload `it-faq.pdf` again. |
 | Replies are generic or unhelpful | No grounding, or vague instructions | Make sure a Knowledge source is **Ready** and tighten your Instructions (be specific about tone and scope). |
-| Can't see the Test pane | Pane is collapsed | Select **Test** at the top-right of the agent page. |
+| Can't see the Test pane | You are using the new experience, or the Classic pane is collapsed | Select **Test** in Classic or open **Preview** in the new experience. |
+| Can't find Description | The new Build page does not expose the classic Description field | Skip it for Lab 6; do not enter it under **Agent settings**. Add it during Publish only if a description field appears. |
+| Can't find Topics | The new experience uses enhanced orchestration | Use **Instructions**, **Skills**, and **Tools**; no Topic is required in Lab 6. |
 | Tools/flows won't connect later | Wrong environment | Use the **environment selector** (top-right) to switch to the same environment as Power Automate (**Course Sandbox**). |
-| Can't find **Create blank agent** | UI variation / older environment | On the **Home** page use **Create an agent** under **Start building from scratch**. If your tenant still shows the older "Describe your agent" screen, select **Skip to configure** (top-right of that screen) instead, then edit the fields on the Overview tab. |
+| Can't find **Create blank agent** | Interface variation | In Classic use **Create blank agent** or **Create an agent**. In the new experience use **Agents > New Agent**. |
 
 **Key Takeaways**
 
 - An agent's behaviour is shaped mainly by its **Instructions** — clear instructions give predictable answers.
-- The four building blocks are **Instructions** (behaviour/tone), **Knowledge** (facts), **Topics** (scripted chats), and **Tools** (doing things).
+- The classic building blocks are **Instructions**, **Knowledge**, **Topics**, and **Tools**; the new experience emphasises **Instructions**, **Knowledge**, **Skills**, and **Tools**.
 - **Knowledge** grounds answers in real content so the agent stops guessing.
-- The **Test** pane is your build-and-iterate loop — refresh it after each change.
+- A **Ready** source is the Copilot Studio equivalent of a successfully populated vector store.
+- Real IT support agents need explicit security boundaries: never request secrets and escalate suspected compromise immediately.
+- The **Test** pane (Classic) or **Preview** tab (New) is your build-and-iterate loop.
 - Always work in the **same environment** as your Power Automate flows, and that environment needs **Dataverse**.
 
 **Duration**
@@ -1521,7 +1612,7 @@ Proceed to Lab 7: Add Knowledge to Your Agent.
 
 **Lab Title**
 
-Ground Your Agent in Your Own Documents with Knowledge (RAG)
+IT Support RAG Part B — Retrieve, Cite, and Refuse Unsupported Answers
 
 **Lab Objectives**
 
@@ -1533,17 +1624,18 @@ By the end of this lab, you will be able to:
 4. Test that the agent answers **from your documents** and shows **citations**
 5. Confirm the agent declines to answer when the information is not in your sources (no made-up answers)
 6. Tell the difference between **Instructions** (behaviour) and **Knowledge** (facts)
+7. Map the n8n Activity 7 retriever-and-chat workflow to Copilot Studio
 
 **Prerequisites**
 
 - Completed Lab 6 (you have an agent)
-- A short document to use as knowledge (a PDF/Word FAQ, or a public website URL)
+- The supplied [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf) from Lab 6
 
 **Scenario**
 
-Your **Company Helpdesk** agent from Lab 6 can chat, but it does not actually know **ACME Pte Ltd's** real facts — its return policy, its opening hours, its product list. An agent that only knows general internet information is not very useful for *your* business.
+Your **MyCompany IT Support Assistant** from Lab 6 already has an indexed IT FAQ. You will now complete the **answering half** of the Activity 7 RAG pattern: connect the agent's behaviour to the ready knowledge source, retrieve relevant passages, generate a grounded response, expose the result in chat, and reject unsupported questions.
 
-In this lab you will give the agent a **Knowledge** source containing ACME's own information, then prove that the agent answers from that source and nothing else. This is the technique that makes business agents trustworthy.
+In this lab you will inspect and harden the **MyCompany IT Service Desk FAQ** knowledge source, then prove that the agent answers from that source and nothing else. This is the technique that makes business agents trustworthy.
 
 > **Tip:** **Grounding** means tying the agent's answers to specific source material you provide, so it cannot just invent things. **RAG** (Retrieval-Augmented Generation) is the technology that does this.
 
@@ -1556,65 +1648,80 @@ In this lab you will give the agent a **Knowledge** source containing ACME's own
 
 > **RAG in one line:** *Find the relevant text in your documents → hand it to the AI → it answers from that text, with citations.* This keeps answers accurate and up to date without retraining any model.
 
+**Activity 7 answering workflow translated**
+
+```text
+n8n Activity 7:
+Chat/Telegram/Webhook → AI Agent → Vector Store Retriever → Chat Model → Response
+
+Copilot Studio Lab 7:
+Test or Preview chat → Generative orchestration → Ready Knowledge source → Grounded answer + citation
+```
+
+| n8n Activity 7 component | Copilot Studio equivalent |
+| --- | --- |
+| Telegram Trigger, Chat Trigger, or Webhook | **Test** pane (Classic) or **Preview** (New) |
+| AI Agent node | Copilot Studio agent with **Instructions** |
+| Vector Store Retriever tool | Ready **Knowledge** source |
+| Chat model | Agent model selected by the environment |
+| Respond to Webhook / Telegram message | Agent chat response with citation |
+| Retriever returns no matching content | Agent declines and offers escalation |
+
+> **Why there is no webhook in this lab:** Copilot Studio supplies its own test chat and publishable channels. A Power Automate HTTP webhook is useful when an external application must call a flow, but it is not required to prove that this agent retrieves from its Knowledge source.
+
 ---
 
 **Step-by-Step Guide**
 
 **Step 1: Prepare a knowledge source (~5 minutes)**
 
-Pick **one** source to start (you can add more later). Choose whichever is easiest for you:
-
-1. **A file (recommended for this lab):** Create a one-page document called `ACME Company FAQ`. Save it as a **PDF** or **Word** file. Include a few clear facts the agent will answer from, for example:
-
-```
-   ACME Pte Ltd - Company FAQ
-
-   Opening hours: Monday to Friday, 9am to 6pm. Closed on public holidays.
-   Return policy: Items may be returned within 30 days with a receipt.
-   Contact: Email help@acme.example or call +65 6123 4567.
-   Top products: ACME Widget Pro, ACME Gadget Lite, ACME Toolkit.
-```
-
-1. **A public website:** any URL whose content you want the agent to use (e.g. a real product page).
-2. **A SharePoint** site or document library, if your tenant has one with relevant files.
+1. Download or locate the supplied [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf).
+2. Open it and identify at least four topics, such as password reset, VPN, phishing, and laptop troubleshooting.
+3. If you already uploaded this file in Lab 6, reuse that ready source. If it is missing, you will upload it in Step 3.
 
 > **Tip:** Keep the document focused and tidy — use clear headings and short paragraphs. Clean, well-structured content leads to much better retrieval and more accurate answers.
 
-**Step 2: Open your agent's Knowledge tab (~3 minutes)**
+**Step 2: Open the agent and verify its Knowledge source (~3 minutes)**
 
 1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and confirm the **environment selector** (top-right) shows **Course Sandbox**.
-2. Open your **Company Helpdesk** agent from Lab 6.
-3. Select the **Knowledge** tab.
-4. Select **+ Add knowledge**.
+2. Open your **MyCompany IT Support Assistant** agent from Lab 6.
+3. Locate Knowledge using the path for your interface:  —  **Classic:** select the **Knowledge** tab.  —  **New:** on **Build**, locate **Knowledge** on the right.
+4. Confirm **MyCompany IT Service Desk FAQ** appears. Do not add a duplicate source.
 
 > **⚠️ Warning:** Make sure you are in the **same environment** as your Lab 6 agent and your Power Automate flows. If the environment is wrong, you may be editing a different (or empty) agent.
 
-**Step 3: Add the knowledge source (~10 minutes)**
+**Step 3: Repair the ingestion only if the source is missing (~10 minutes)**
 
-1. On the **Add knowledge** screen, choose the type that matches your source:  —  **Files** / **Upload** — then select and upload your `ACME Company FAQ` PDF or Word file.  —  **Public website** — then paste the URL.  —  **SharePoint** — then paste the site or library URL.
-2. Give the source a clear **name**, for example `ACME Company FAQ`.
-3. If you are prompted for a **description**, write a short sentence describing what it contains, e.g. `ACME opening hours, return policy, contact details, and top products.` The agent uses this description to decide when this source is relevant.
-4. Select **Add to agent**.
-5. Watch the source's **status**. It will show **Processing** and then change to **Ready**. Larger files and websites take a little longer. (A single uploaded file can be up to **512 MB**, and an agent can hold up to **500 files** — your one-page FAQ is nowhere near the limits.)
+1. Look for **MyCompany IT Service Desk FAQ** in the Knowledge list.
+2. If it is already present, confirm its status is **Ready** and continue to Step 4.
+3. If it is missing, select **+ Add knowledge**, choose **Files** / **Upload**, and upload `it-faq.pdf`.
+4. Give the source the name `MyCompany IT Service Desk FAQ`.
+5. If prompted for a description, enter `Approved first-line IT support, troubleshooting, security incident, and Service Desk escalation procedures for MyCompany Singapore staff.`
+6. Select **Add to agent** and wait until its status changes from **Processing** to **Ready**.
 
 > **⚠️ Warning:** Do **not** test until the status reads **Ready**. While a source is still **Processing**, the agent cannot use it and may reply that it has no information.
 
-**Step 4: Turn off general knowledge (optional but recommended) (~4 minutes)**
+**Step 4: Restrict answers to approved sources (~4 minutes)**
 
-By default the agent may blend in general AI/web knowledge. For a business helpdesk you usually want answers **only** from ACME's documents.
+By default the agent may blend in general AI/web knowledge. For an internal IT helpdesk you usually want procedural answers **only** from approved MyCompany documents.
 
-1. Open the agent's **Settings** (top-right) and select the **Generative AI** page.
-2. In the **Knowledge** section, find **Allow ungrounded responses** (this is the current name of the old *"Use general knowledge"* toggle — it controls whether the agent may answer from the AI model's own general knowledge without using your sources).
-3. Turn it **Off** so the agent relies only on your knowledge sources and tools.
-4. Also check the **Use information from the web** setting is **Off** (it also appears as the **Web Search** toggle in the **Knowledge** section of the agent's **Overview** page), so answers don't come from a live Bing web search either.
-5. Select **Save**.
+1. Apply the controls available in your interface:  —  **Classic:** open **Settings → Generative AI**. In **Knowledge**, turn **Allow ungrounded responses** **Off**. Also turn **Use information from the web** or **Web Search** **Off**.  —  **New:** on **Build**, remove the **Search all websites** source if it is present. Open **… → Settings → AI & behavior** and turn off a general-knowledge or ungrounded-response option if your tenant exposes one.
+2. Add or confirm these lines in **Instructions**:
+
+```text
+Answer IT procedure questions only from the approved Knowledge sources and cite the source.
+If the source does not contain the answer, say that clearly and offer the Service Desk escalation route.
+```
+
+3. Save the agent.
+4. Start a new test conversation so the controls take effect.
 
 > **Tip:** Turn **Allow ungrounded responses** (and **Web Search**) **on** when you want the agent to also answer broad, everyday questions. Turn them **off** when you need tight control and want to prevent answers that did not come from your documents.
 
 **Step 5: Test that answers come from your document (~10 minutes)**
 
-1. Open the **Test** pane and select the **Start new test session** (refresh) icon at the top so it picks up your new Knowledge.
-2. Ask questions that can **only** be answered from your `ACME Company FAQ`, for example:  —  `What is your return policy?`  —  `What are your opening hours?`  —  `Which products do you offer?`
+1. Open the testing surface and start a fresh conversation:  —  **Classic:** open **Test** and select **Start new test session**.  —  **New:** open **Preview** and select **New chat**.
+2. Ask questions that can **only** be answered from `it-faq.pdf`, for example:  —  `My account is locked. What should I do?`  —  `How do I connect to GlobalConnect VPN?`  —  `Where should I report a suspicious email?`
 3. Confirm each answer matches the facts in your document.
 4. Look **underneath each answer** for **citations** or **references** (often numbered, like `[1]`, or a "1 reference" link). Click a citation to confirm it points back to your source.
 
@@ -1624,8 +1731,8 @@ By default the agent may blend in general AI/web knowledge. For a business helpd
 
 This is the most important test — it proves the agent will not make things up.
 
-1. In the **Test** pane, ask something that is **not** in your document, for example:  —  `What is your CEO's home address?`  —  `Do you sell aeroplanes?`
-2. The agent should say it does not have that information (and, following your Lab 6 Instructions, suggest emailing `help@acme.example`).
+1. In **Test** (Classic) or **Preview** (New), ask something that is **not** in your document, for example:  —  `How many days of annual leave do I have?`  —  `Can you give me the finance team's payroll schedule?`
+2. The agent should say the FAQ does not contain that information and direct the user to the appropriate department or Service Desk instead of inventing an answer.
 3. If instead it confidently invents an answer, that is a **hallucination**. Re-check that **Allow ungrounded responses is Off** (Step 4) and that your Instructions tell it to answer only from provided sources.
 
 > **Tip:** A trustworthy business agent saying *"I don't have that information"* is a success, not a failure. Declining gracefully is exactly the behaviour you want.
@@ -1650,9 +1757,10 @@ This is the most important test — it proves the agent will not make things up.
 You have successfully completed this lab when:
 
 - ✅ At least one **Knowledge** source shows the status **Ready**
-- ✅ The agent answers business questions **from your document**, with visible **citations**
+- ✅ The agent answers IT support questions **from `it-faq.pdf`**, with visible **citations**
 - ✅ **Allow ungrounded responses** is turned **Off** (if you chose the recommended setup)
 - ✅ The agent **declines** to answer (no hallucination) when the information is not in your sources
+- ✅ You can map the n8n **AI Agent + Vector Store Retriever + response** chain to Copilot Studio
 - ✅ You can explain the difference between **Instructions** and **Knowledge**
 
 **Troubleshooting**
@@ -1708,7 +1816,7 @@ By the end of this lab, you will be able to:
 
 **Scenario**
 
-So far your **Company Helpdesk** agent can *answer* questions (using Knowledge). But staff at **ACME Pte Ltd** also want it to *do* things — for example, email the support team when someone needs help escalated.
+So far your **MyCompany IT Support Assistant** can *answer* questions using the approved IT FAQ. Staff also need it to *do* something useful — email the Service Desk with a structured escalation summary when first-line troubleshooting does not resolve an issue.
 
 **Knowledge lets an agent answer; Tools let it act.** In this lab you will give your agent a tool so a chat conversation can trigger real work, such as sending an email. This is the bridge to the end-to-end agent-plus-flow workflow you will build in Lab 10.
 
@@ -1721,7 +1829,7 @@ So far your **Company Helpdesk** agent can *answer* questions (using Knowledge).
 **Step 1: Open the Tools tab (~5 minutes)**
 
 1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and confirm the **environment selector** (top-right) shows **Course Sandbox** — the same environment as your Power Automate flows.
-2. Open your **Company Helpdesk** agent from Lab 6.
+2. Open your **MyCompany IT Support Assistant** agent from Lab 6.
 3. Select the **Tools** tab (this was labelled **Actions** in older versions).
 4. Select **+ Add a tool**. Microsoft groups tools into several **core tool types**:  —  **Prebuilt / custom connector action** — a single ready-made operation from a connector like Office 365 Outlook, Excel, or Teams (you use this in Steps 2–4).  —  **Agent flow** — a multi-step Power Automate flow with conditions and logic, used as one tool (you use this in Step 5).  —  **Prompt** — a single-turn AI prompt that returns text.  —  **REST API / MCP tool / Computer use** — connect to web services, a Model Context Protocol server, or GUI automation (advanced; out of scope here).
 
