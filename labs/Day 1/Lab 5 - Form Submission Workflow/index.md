@@ -136,4 +136,4 @@ The trigger only gives you a response **Id** — you need another action to read
 ~50 minutes
 
 ## Next Steps
-You've completed Day 1 and all the core Power Automate trigger types (manual, scheduled, form, email). Proceed to [Day 2 — Module 3: Business Agents Concepts](../../Day%202/Module%203%20-%20Business%20Agents%20Concepts.md).
+You have completed the Microsoft Forms workflow. Proceed to [Lab 6A: External Enquiry Webhook](../Lab%206A%20-%20External%20Enquiry%20Webhook/index.md) to trigger Power Automate from a custom online form.

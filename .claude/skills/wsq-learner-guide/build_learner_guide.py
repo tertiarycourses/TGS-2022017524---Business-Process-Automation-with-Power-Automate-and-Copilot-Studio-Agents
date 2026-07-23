@@ -23,7 +23,7 @@ from docx.oxml import OxmlElement
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "3.0"
+VERSION = "3.2"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -36,6 +36,13 @@ VERSIONS = [
     ["3.0", "3 Jul 2026", "Course restructured from 3 days to 2 days — Day 1: Power Automate "
      "(Labs 0-5), Day 2: Copilot Studio agents (Labs 6-11) ending with the WSQ assessment. "
      "Modules 4-5 and Labs 12-16 retired.",
+     "Course Development Team"],
+    ["3.1", "24 Jul 2026", "Added Day 1 Labs 6A-6B: external online-form and browser-chatbot "
+     "webhooks using the Power Automate HTTP Request trigger, with both new and classic "
+     "designer guidance.",
+     "Course Development Team"],
+    ["3.2", "24 Jul 2026", "Reframed Lab 7 as the complete Copilot Studio IT Support RAG "
+     "Chatbot outcome: approved FAQ retrieval, citations, negative testing, and grounded refusal.",
      "Course Development Team"],
 ]
 
@@ -81,11 +88,13 @@ DAYS = [
         "labs/Day 1/Lab 3 - Simple Approval Workflow/index.md",
         "labs/Day 1/Lab 4 - Scheduled Trigger Workflow/index.md",
         "labs/Day 1/Lab 5 - Form Submission Workflow/index.md",
+        "labs/Day 1/Lab 6A - External Enquiry Webhook/index.md",
+        "labs/Day 1/Lab 6B - Webhook Chatbot/index.md",
     ]),
     ("Day 2 — Building Business Agents with Copilot Studio", [
         "labs/Day 2/Module 3 - Business Agents Concepts.md",
         "labs/Day 2/Lab 6 - Create Your First Agent/index.md",
-        "labs/Day 2/Lab 7 - Add Knowledge to Your Agent/index.md",
+        "labs/Day 2/Lab 7 - IT Support RAG Chatbot/index.md",
         "labs/Day 2/Lab 8 - Add Tools and Actions/index.md",
         "labs/Day 2/Lab 9 - Sales Enquiry Assistant/index.md",
         "labs/Day 2/Lab 10 - Procurement Request Workflow/index.md",
@@ -194,7 +203,7 @@ p(f"Welcome! This Learner Guide takes you **click-by-click** through every hands
 p("Work through the labs **in order**: each one builds on the skills of the lab before it. Whenever you see a "
   "**Checkpoint**, stop and confirm your flow or agent behaves as described before moving on. The "
   "**Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.")
-note("Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5). "
+note("Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5 and webhook Labs 6A-6B). "
      "Day 2: Business agents in Copilot Studio + agent-and-flow end-to-end workflows (Labs 6-11), "
      "then the WSQ assessment (4:00-6:00 PM).")
 rule()

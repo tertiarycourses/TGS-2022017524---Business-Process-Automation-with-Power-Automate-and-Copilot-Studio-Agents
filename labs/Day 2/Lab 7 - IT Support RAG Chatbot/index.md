@@ -1,16 +1,16 @@
-# Lab 7: Add Knowledge to Your Agent (Grounding / RAG)
+# Lab 7: Create an IT Support RAG Chatbot with Copilot Studio
 
 ## Lab Title
-IT Support RAG Part B — Retrieve, Cite, and Refuse Unsupported Answers
+Build and Validate a Grounded IT Support RAG Chatbot
 
 ## Lab Objectives
 By the end of this lab, you will be able to:
-1. Explain **grounding** and **RAG** (Retrieval-Augmented Generation) in plain, everyday terms
-2. Add one or more **Knowledge** sources to a Copilot Studio agent (files, public website, or SharePoint)
-3. Turn off **Allow ungrounded responses** (general knowledge) so the agent answers only from your content
-4. Test that the agent answers **from your documents** and shows **citations**
-5. Confirm the agent declines to answer when the information is not in your sources (no made-up answers)
-6. Tell the difference between **Instructions** (behaviour) and **Knowledge** (facts)
+1. Turn the IT Support agent from Lab 6 into a working **RAG chatbot**
+2. Explain **grounding** and **RAG** (Retrieval-Augmented Generation) in plain, everyday terms
+3. Add and verify an approved IT support **Knowledge** source in Copilot Studio
+4. Turn off **Allow ungrounded responses** so the chatbot answers only from approved content
+5. Test grounded answers and verify their visible **citations**
+6. Confirm the chatbot refuses unsupported questions instead of making up answers
 7. Map the n8n Activity 7 retriever-and-chat workflow to Copilot Studio
 
 ## Prerequisites
@@ -18,7 +18,7 @@ By the end of this lab, you will be able to:
 - The supplied [`it-faq.pdf`](../Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf) from Lab 6
 
 ## Scenario
-Your **MyCompany IT Support Assistant** from Lab 6 already has an indexed IT FAQ. You will now complete the **answering half** of the Activity 7 RAG pattern: connect the agent's behaviour to the ready knowledge source, retrieve relevant passages, generate a grounded response, expose the result in chat, and reject unsupported questions.
+Your **MyCompany IT Support Assistant** from Lab 6 already has an indexed IT FAQ. You will now complete it as a usable **IT Support RAG Chatbot**: connect the agent's behaviour to the approved knowledge source, retrieve relevant passages, generate grounded answers, expose the result in chat, show citations, and reject unsupported questions.
 
 In this lab you will inspect and harden the **MyCompany IT Service Desk FAQ** knowledge source, then prove that the agent answers from that source and nothing else. This is the technique that makes business agents trustworthy.
 
@@ -144,7 +144,7 @@ This is the most important test — it proves the agent will not make things up.
 ---
 
 ## Checkpoint
-You have successfully completed this lab when:
+You have successfully created the IT Support RAG Chatbot when:
 - ✅ At least one **Knowledge** source shows the status **Ready**
 - ✅ The agent answers IT support questions **from `it-faq.pdf`**, with visible **citations**
 - ✅ **Allow ungrounded responses** is turned **Off** (if you chose the recommended setup)

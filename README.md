@@ -3,7 +3,7 @@
 [![Course](https://img.shields.io/badge/Course-Tertiary%20Courses-blue)](https://www.tertiarycourses.com.sg/)
 [![SkillsFuture](https://img.shields.io/badge/SkillsFuture-Funded-green)](https://www.skillsfuture.gov.sg/)
 [![Duration](https://img.shields.io/badge/Duration-2%20Days-orange)]()
-[![Labs](https://img.shields.io/badge/Labs-12%20Hands--On-purple)]()
+[![Labs](https://img.shields.io/badge/Labs-14%20Hands--On-purple)]()
 
 This repository contains hands-on lab materials for the **Business Process Automation with Power Automate and Copilot Studio Agents** course. Learn to automate real business processes — sales, finance, procurement, and order processing — by combining **Power Automate** flows with AI **agents** built in **Microsoft Copilot Studio**.
 
@@ -54,6 +54,8 @@ Understand workflow automation concepts and build your first automated flows.
 | **Lab 3** | [Simple Approval Workflow](labs/Day%201/Lab%203%20-%20Simple%20Approval%20Workflow/index.md) | Route a request for manager approval and act on the decision |
 | **Lab 4** | [Scheduled Trigger Workflow](labs/Day%201/Lab%204%20-%20Scheduled%20Trigger%20Workflow/index.md) | Run a flow automatically on a schedule (daily reminder/digest email) |
 | **Lab 5** | [Form Submission Workflow](labs/Day%201/Lab%205%20-%20Form%20Submission%20Workflow/index.md) | A Microsoft Form (shareable URL) that emails the team and logs to Excel on submit |
+| **Lab 6A** | [External Enquiry Webhook](labs/Day%201/Lab%206A%20-%20External%20Enquiry%20Webhook/index.md) | Use a Power Automate production URL to trigger a flow from the supplied external enquiry page |
+| **Lab 6B** | [Webhook Chatbot](labs/Day%201/Lab%206B%20-%20Webhook%20Chatbot/index.md) | Send browser chat messages to a Power Automate webhook and display its JSON replies |
 
 ### Day 2 — Building Business Agents with Copilot Studio & Assessment
 
@@ -63,7 +65,7 @@ Create AI agents that understand requests and feed structured data into your flo
 |-----|-------|-------------|
 | **Module 3** | [Business Agents Concepts](labs/Day%202/Module%203%20-%20Business%20Agents%20Concepts.md) | Prompt design for structured outputs; connecting agents to flows |
 | **Lab 6** | [IT Support RAG Part A](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/index.md) | Build an IT support agent and ingest the supplied FAQ into Copilot Studio Knowledge |
-| **Lab 7** | [IT Support RAG Part B](labs/Day%202/Lab%207%20-%20Add%20Knowledge%20to%20Your%20Agent/index.md) | Retrieve grounded answers, verify citations, and refuse unsupported requests |
+| **Lab 7** | [IT Support RAG Chatbot](labs/Day%202/Lab%207%20-%20IT%20Support%20RAG%20Chatbot/index.md) | Create a Copilot Studio IT chatbot that retrieves approved FAQ answers, shows citations, and refuses unsupported requests |
 | **Lab 8** | [Add Tools and Actions](labs/Day%202/Lab%208%20-%20Add%20Tools%20and%20Actions/index.md) | Give the agent tools — connectors, prebuilt actions, and flows |
 | **Lab 9** | [Sales Enquiry Assistant](labs/Day%202/Lab%209%20-%20Sales%20Enquiry%20Assistant/index.md) | An agent that captures sales enquiries as structured data |
 | **Lab 10** | [Procurement Request Workflow](labs/Day%202/Lab%2010%20-%20Procurement%20Request%20Workflow/index.md) | An agent that collects procurement requests and triggers a flow |
@@ -86,11 +88,13 @@ TGS-2022017524/
 │   │   ├── Lab 2 - Excel Data Logging Workflow/
 │   │   ├── Lab 3 - Simple Approval Workflow/
 │   │   ├── Lab 4 - Scheduled Trigger Workflow/
-│   │   └── Lab 5 - Form Submission Workflow/
+│   │   ├── Lab 5 - Form Submission Workflow/
+│   │   ├── Lab 6A - External Enquiry Webhook/
+│   │   └── Lab 6B - Webhook Chatbot/
 │   └── Day 2/                              # Business Agents with Copilot Studio
 │   │   ├── Module 3 - Business Agents Concepts.md
 │   │   ├── Lab 6 - Create Your First Agent/
-│   │   ├── Lab 7 - Add Knowledge to Your Agent/
+│   │   ├── Lab 7 - IT Support RAG Chatbot/
 │   │   ├── Lab 8 - Add Tools and Actions/
 │   │   ├── Lab 9 - Sales Enquiry Assistant/
 │   │   ├── Lab 10 - Procurement Request Workflow/

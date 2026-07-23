@@ -13,7 +13,7 @@ By the end of this lab, you will be able to:
 6. Test the agent actually **performing an action**, and read the **Activity map**
 
 ## Prerequisites
-- Completed [Lab 6](../Lab%206%20-%20Create%20Your%20First%20Agent/index.md) and [Lab 7](../Lab%207%20-%20Add%20Knowledge%20to%20Your%20Agent/index.md)
+- Completed [Lab 6](../Lab%206%20-%20Create%20Your%20First%20Agent/index.md) and [Lab 7](../Lab%207%20-%20IT%20Support%20RAG%20Chatbot/index.md)
 - A working **Office 365 Outlook** connection (a mailbox-enabled account you can sign in with)
 
 ## Scenario

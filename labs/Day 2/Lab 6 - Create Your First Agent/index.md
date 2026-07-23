@@ -260,4 +260,4 @@ You have successfully completed this lab when:
 ~45 minutes
 
 ## Next Steps
-Proceed to [Lab 7: Add Knowledge to Your Agent](../Lab%207%20-%20Add%20Knowledge%20to%20Your%20Agent/index.md).
+Proceed to [Lab 7: Create an IT Support RAG Chatbot](../Lab%207%20-%20IT%20Support%20RAG%20Chatbot/index.md).

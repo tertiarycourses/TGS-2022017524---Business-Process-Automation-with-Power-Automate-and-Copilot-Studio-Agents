@@ -109,7 +109,7 @@ The key points:
 ## 5. What you'll build on Day 2
 
 - **Lab 6:** Your first agent — learn the interface, instructions, and testing.
-- **Lab 7:** Add **Knowledge (RAG)** so the agent answers from your own documents.
+- **Lab 7:** Complete an **IT Support RAG Chatbot** that retrieves from approved documents, cites its source, and refuses unsupported questions.
 - **Lab 8:** Add **Tools & Actions** so the agent can *do* things, not just answer.
 - **Lab 9:** A **Sales Enquiry Assistant** that captures enquiries as structured data.
 - **Lab 10:** A **Procurement Request** agent that triggers a Power Automate flow.

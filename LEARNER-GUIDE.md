@@ -1,6 +1,6 @@
 # Learner Guide
 
-**Course Code:** TGS-2022017524  ·  **Version 3.0**
+**Course Code:** TGS-2022017524  ·  **Version 3.2**
 
 ### Document Version Control Record
 
@@ -9,6 +9,8 @@
 | 1.0 | 24 Jun 2026 | Initial release — full 3-day, 17-lab learner guide. | Course Development Team |
 | 2.0 | 2 Jul 2026 | WSQ revision — new course title, labs updated to the current Copilot Studio / Power Automate UI, Course Sandbox environment, WSQ cover page. | Course Development Team |
 | 3.0 | 3 Jul 2026 | Course restructured from 3 days to 2 days — Day 1: Power Automate (Labs 0-5), Day 2: Copilot Studio agents (Labs 6-11) ending with the WSQ assessment. Modules 4-5 and Labs 12-16 retired. | Course Development Team |
+| 3.1 | 24 Jul 2026 | Added Day 1 Labs 6A-6B: external online-form and browser-chatbot webhooks using the Power Automate HTTP Request trigger, with both new and classic designer guidance. | Course Development Team |
+| 3.2 | 24 Jul 2026 | Reframed Lab 7 as the complete Copilot Studio IT Support RAG Chatbot outcome: approved FAQ retrieval, citations, negative testing, and grounded refusal. | Course Development Team |
 
 ## Table of Contents
 
@@ -22,10 +24,12 @@
   - [Lab 3: Simple Approval Workflow](#lab-3-simple-approval-workflow)
   - [Lab 4: Scheduled Trigger Workflow](#lab-4-scheduled-trigger-workflow)
   - [Lab 5: Form Submission Workflow](#lab-5-form-submission-workflow)
+  - [Lab 6A: External Enquiry Webhook](#lab-6a-external-enquiry-webhook)
+  - [Lab 6B: Webhook Chatbot](#lab-6b-webhook-chatbot)
 - [Day 2 — Building Business Agents with Copilot Studio](#day-2--building-business-agents-with-copilot-studio)
   - [Module 3: Building Business Agents with Copilot Studio](#module-3-building-business-agents-with-copilot-studio)
   - [Lab 6: Create Your First Copilot Studio Agent](#lab-6-create-your-first-copilot-studio-agent)
-  - [Lab 7: Add Knowledge to Your Agent (Grounding / RAG)](#lab-7-add-knowledge-to-your-agent-grounding--rag)
+  - [Lab 7: Create an IT Support RAG Chatbot with Copilot Studio](#lab-7-create-an-it-support-rag-chatbot-with-copilot-studio)
   - [Lab 8: Add Tools and Actions to Your Agent](#lab-8-add-tools-and-actions-to-your-agent)
   - [Lab 9: Sales Enquiry Assistant](#lab-9-sales-enquiry-assistant)
   - [Lab 10: Procurement Request Workflow](#lab-10-procurement-request-workflow)
@@ -35,7 +39,7 @@ Welcome! This Learner Guide takes you **click-by-click** through every hands-on 
 
 Work through the labs **in order**: each one builds on the skills of the lab before it. Whenever you see a **Checkpoint**, stop and confirm your flow or agent behaves as described before moving on. The **Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.
 
-> Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5). Day 2: Business agents in Copilot Studio + agent-and-flow end-to-end workflows (Labs 6-11), then the WSQ assessment (4:00-6:00 PM).
+> Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5 and webhook Labs 6A-6B). Day 2: Business agents in Copilot Studio + agent-and-flow end-to-end workflows (Labs 6-11), then the WSQ assessment (4:00-6:00 PM).
 
 ---
 
@@ -562,34 +566,36 @@ We'll let whoever runs the flow type a customer name, so the email can be person
 > **⚠️ Warning:** Pick **Office 365 Outlook**, not Gmail, Outlook.com, or SMTP. Only Office 365 Outlook uses your course work account.
 
 1. If this is your first use of the connector, Power Automate creates a **connection**: select **Sign in**, choose your course account, and approve. A green ✓ next to the connection means it's ready.
-2. Configure the email fields in the action panel. The exact text is given in the copy boxes below — copy **only the text inside each box**.
-3. **To:** type your own email address, then press **Enter** so it resolves into a **chip** (a pill with an ×). If it stays as plain text, retype it.
-4. **Subject:** copy-paste this line:
+2. Configure the email fields in the action panel. The exact text to use is given in the copy-paste blocks below — copy **only the text inside the box** (use the copy button if your viewer shows one), nothing else.
 
-```text
-Thank you for your enquiry
+- **To:** type your own email address, then press **Enter** so it resolves into a **chip** (a small pill with an × next to it). If it stays as plain text, the address wasn't accepted — retype it.
+- **Subject:** copy-paste this line:
+
+```
+     Thank you for your enquiry
 ```
 
-5. **Body:** build the message in three parts — paste, insert token, paste:
-6. Click inside the **Body** field, paste this text, and then type one **space**:
+- **Body:** build the message in three parts — paste, insert token, paste:
 
-```text
-Hi
+1. Click inside the **Body** field, paste this text, and then type one **space**:
+
+```
+        Hi
 ```
 
-7. Select the **dynamic content** icon (the small lightning bolt) that appears in/next to the field.
-8. From the list, under **Manually trigger a flow**, choose **CustomerName**. It appears as a coloured **token** (chip) in the field.
-9. Click just after the token and paste the rest:
+1. Select the **dynamic content** icon (the small lightning bolt) that appears in/next to the field.
+2. From the list, under **Manually trigger a flow**, choose **CustomerName**. It appears as a coloured **token** (chip) in the field.
+3. Click just after the token and paste the rest:
 
-```text
-, thank you for reaching out to ACME Pte Ltd. We have received your enquiry and a team member will respond within 1 business day.
+```
+        , thank you for reaching out to ACME Pte Ltd. We have received your enquiry and a team member will respond within 1 business day.
 ```
 
 > **Tip:** **Dynamic content** is how outputs from earlier steps get reused. The coloured `CustomerName` token is a placeholder — it's replaced with the real value when the flow runs.
 
-> **⚠️ Warning — paste as plain text.** If you copy from a PDF or Word copy of this guide, formatting (smart quotes, curly apostrophes, hidden line breaks) can come along. Paste with **Ctrl+Shift+V** (Mac: **Cmd+Shift+V**) to strip formatting, or copy from the plain-text boxes above. Never copy backticks (`` ` ``) into a field.
+> **⚠️ Warning — paste as plain text.** If you copy from a PDF or Word version of this guide, formatting (smart quotes “ ”, curly apostrophes, hidden line breaks) can come along and appear literally in the email. Paste with **Ctrl+Shift+V** (Mac: **Cmd+Shift+V**) to strip formatting, or copy from the Markdown code boxes above, which contain plain text only. Never copy backticks (`` ` ``) into a field.
 
-> **✅ Check before saving:** To shows a **chip**, Subject is plain text, and the Body reads `Hi [CustomerName-token], thank you for reaching out…` with exactly one coloured token. If `CustomerName` appears as plain black text, delete it and re-insert it from the dynamic content list.
+> **✅ Check before saving:** To shows a **chip**, Subject is plain text, Body reads `Hi [CustomerName-token], thank you for reaching out…` with exactly one coloured token. If `CustomerName` appears as plain black text instead of a token, delete it and re-insert from the dynamic content list.
 
 **Step 4: Save and test (~5 minutes)**
 
@@ -611,6 +617,23 @@ Hi
 
 ---
 
+**Optional: Import the ready-made flow**
+
+If you get stuck, a completed version of this flow is provided as a **solution package**: Lab1-Send-Confirmation-Email-Solution.zip.
+
+1. Confirm the **Environment selector** (top-right) shows **NUS Copilot Sandbox**.
+2. In the left menu, select **Solutions** → **Import solution** (toolbar).
+3. **Browse** → choose the ZIP → **Next**.
+4. On the **Connections** page, the **Office 365 Outlook** connection reference asks for a connection — pick an existing one or **+ New connection** (sign in with your course account), then **Import**.
+5. When the import completes, open the solution **Lab 1 - Send Confirmation Email** → open the flow → **Edit**, change the **To** address to your own email, and **Save**. Turn the flow **On** if it shows as Off.
+6. Continue from Step 4: Save and test.
+
+> **Tip:** Importing gives you a known-good flow definition — if the imported flow *still* fails, the problem is your **connection/account** (see Troubleshooting), not the flow.
+
+> **Note:** A legacy package (Lab1-Send-Confirmation-Email.zip) is also provided for tenants where **My flows → Import → Import Package (Legacy)** is allowed. In the NUS sandbox, legacy import is disabled ("Create in Dataverse solutions" policy), so use the solution package above.
+
+---
+
 **Checkpoint**
 
 You should now have:
@@ -626,6 +649,7 @@ You should now have:
 | --- | --- |
 | No "Send an email (V2)" action listed | Make sure you selected the **Office 365 Outlook** connector (not Gmail / Outlook.com / SMTP). |
 | Action fails with **"Unauthorized"** | The Office 365 Outlook connection is broken/expired, **or** the signed-in account has **no mailbox**. Open the action's connection, **reconnect** with a mailbox-enabled account (green ✓). |
+| **BadRequest — "content was not a valid JSON … parsing value: R"** | The connection account has **no Exchange Online mailbox** (Exchange replies with plain text like "REST API is not yet supported for this mailbox", which starts with "R"). Verify by signing in at outlook.office.com with that account. Fix: use a connection with a **mailbox-enabled account**, or ask the admin to assign an Exchange Online license. Re-editing the flow will not fix this. |
 | Connection shows a red ⚠️ | The connection needs to be re-authorized — select it and **reconnect** / sign in again. |
 | Email not received | Check Junk/Spam; confirm the **To** address; re-run the test. |
 | Can't find dynamic content | Click directly **inside** the Body field first, then open the lightning-bolt menu. |
@@ -863,37 +887,33 @@ At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager 
 
 1. Click **Add an action** *inside the If yes branch*.
 2. Search `send an email` and select **Send an email (V2)** (from **Office 365 Outlook**). Complete the connection if prompted (it must show a green check).
-3. Configure:
-   - **To:** insert the dynamic token **RequesterEmail** (a trigger input).
-   - **Subject** — copy and paste:
+3. Configure:  —  **To:** insert the dynamic token **RequesterEmail** (a trigger input).  —  **Subject** — copy and paste:
 
-     ```
+```
      Your request has been APPROVED
-     ```
+```
 
-   - **Body** — copy and paste the template below, then **replace each `[...]` placeholder** with the matching dynamic token (delete the placeholder, leave the cursor there, and insert the token from the lightning-bolt panel):
+- **Body** — copy and paste the template below, then **replace each `[...]` placeholder** with the matching dynamic token (delete the placeholder, leave the cursor there, and insert the token from the lightning-bolt panel):
 
-     ```
+```
      Hi [RequesterName], your request "[RequestDetails]" has been approved. You may proceed.
-     ```
+```
 
 **In the "If no" branch:**
 
 1. Click **Add an action** *inside the If no branch*.
 2. Select **Send an email (V2)** again.
-3. Configure:
-   - **To:** insert **RequesterEmail**
-   - **Subject** — copy and paste:
+3. Configure:  —  **To:** insert **RequesterEmail**  —  **Subject** — copy and paste:
 
-     ```
+```
      Your request has been REJECTED
-     ```
+```
 
-   - **Body** — copy and paste, then replace the `[...]` placeholders with the matching dynamic tokens as before:
+- **Body** — copy and paste, then replace the `[...]` placeholders with the matching dynamic tokens as before:
 
-     ```
+```
      Hi [RequesterName], unfortunately your request "[RequestDetails]" was not approved. Please contact your manager for details.
-     ```
+```
 
 > **⚠️ Warning:** Only use **single-value** dynamic fields here — the trigger inputs (**RequesterName**, **RequesterEmail**, **RequestDetails**) and, if you want it, the approval **Outcome**. Do **not** insert any approval **Responses** field. Power Automate auto-wraps an action in a **For each** loop the moment you insert a list/array value, which breaks this simple flow. If a **For each** appears around your email, delete it and re-add a plain **Send an email (V2)** using only single-value fields.
 
@@ -1220,7 +1240,454 @@ The trigger only gives you a response **Id** — you need another action to read
 
 **Next Steps**
 
-You've completed Day 1 and all the core Power Automate trigger types (manual, scheduled, form, email). Proceed to Day 2 — Module 3: Business Agents Concepts.
+You have completed the Microsoft Forms workflow. Proceed to Lab 6A: External Enquiry Webhook to trigger Power Automate from a custom online form.
+
+---
+
+### Lab 6A: External Enquiry Webhook
+
+**Lab Title**
+
+Trigger Power Automate from an External Online Form
+
+**Lab Objectives**
+
+By the end of this lab, you will be able to:
+
+1. Create an inbound webhook with **When an HTTP request is received**
+2. Define and validate a JSON request schema
+3. Send an email using values submitted by an external webpage
+4. Return a JSON response to the webpage
+5. Test the saved production URL and apply basic webhook security
+
+**Prerequisites**
+
+- Completed Lab 5
+- Access to Power Automate in the **Course Sandbox** environment
+- A Power Automate plan that permits the premium **Request** connector
+- A mailbox-enabled Microsoft 365 account
+- The supplied `enquiry-form.html`
+
+> **Licensing note:** The **Request** connector is marked with a diamond icon in Power Automate and normally requires a premium entitlement. If your tenant blocks it, follow the demonstration with the trainer rather than selecting the similarly named **HTTP**, **HTTP Webhook**, or **HTTP + Swagger** actions.
+
+**Scenario**
+
+ACME Pte Ltd wants its own branded enquiry page rather than a Microsoft Forms page. When a visitor submits the page, JavaScript sends JSON to a Power Automate production URL. The flow emails the service team and returns a confirmation to the same page.
+
+This adapts the external web-interface pattern from the n8n Activity 6 finance-advisor example: a browser interface calls an automation endpoint, receives a result, and presents it to the user.
+
+```
+External enquiry page
+        |
+        | POST JSON
+        v
+When an HTTP request is received
+        |
+        +--> Parse JSON
+        |
+        +--> Send an email (V2)
+        |
+        +--> Response (JSON)
+```
+
+> **Security warning:** The generated URL contains access information. Treat it like a secret. Never commit it to GitHub or hard-code it in a public webpage. The supplied page asks for the URL at run time and does not save it.
+
+---
+
+**Step-by-Step Guide**
+
+**Step 1: Create the webhook flow (~5 minutes)**
+
+1. Open Power Automate and confirm the environment is **Course Sandbox**.
+2. Create an **Automated cloud flow**.
+3. Name it `Lab 6A - External Enquiry Webhook`.
+4. Search for `HTTP request`.
+5. Under **Request**, select **When an HTTP request is received**.
+
+> **Choose the trigger shown under Request.** Do not choose **HTTP Webhook** under HTTP. HTTP Webhook is an action used to subscribe to another service; it does not create the incoming production URL required in this lab.
+
+**New designer**
+
+- Select **Add a trigger**, search `HTTP`, then select **When an HTTP request is received** under **Request**.
+
+**Classic designer**
+
+- Choose **Skip**, search triggers for `Request`, then select **When an HTTP request is received**.
+
+**Step 2: Parse the browser's JSON request (~10 minutes)**
+
+1. Open the trigger.
+2. For **Who can trigger the flow?**, choose **Anyone** for this controlled classroom exercise.
+3. Leave **Request Body JSON Schema** blank.
+4. Add the **Parse JSON** action below the trigger.
+5. In **Content**, open the **fx** expression editor and enter:
+
+```
+json(triggerBody())
+```
+
+1. Under **Schema**, select **Use sample payload to generate schema** and paste:
+
+```
+{
+  "name": "Jane Tan",
+  "email": "jane@example.com",
+  "subject": "Course enquiry",
+  "message": "I would like to know the next available course date."
+}
+```
+
+1. Select **Done**. Confirm the schema contains the four string properties.
+
+The supplied page sends its JSON as `text/plain` so the browser can make a simple cross-origin request without an OPTIONS preflight. **Parse JSON** converts that text into properties Power Automate can use safely.
+
+> **New/classic difference:** In the new designer, authentication may appear directly on the trigger card. In the classic designer, open the trigger's **…** menu and check **Settings**. If your administrator has removed the **Anyone** option, use the authentication method required by your tenant and test with an authenticated client.
+
+**Step 3: Add the email action (~10 minutes)**
+
+1. Below the trigger, select **+** → **Add an action**.
+2. Add **Send an email (V2)** from Office 365 Outlook.
+3. Configure:  —  **To:** your working training mailbox  —  **Subject:** type `Website enquiry from `, then insert the dynamic value **name**  —  **Body:**
+
+```
+A new enquiry was submitted through the external website.
+
+Name: [name]
+Email: [email]
+Subject: [subject]
+Message: [message]
+```
+
+1. Replace each bracketed item with its matching dynamic value from **Parse JSON**.
+
+**Step 4: Return a response to the webpage (~10 minutes)**
+
+1. Add another action after the email.
+2. Search for `Response` and select **Response** under **Request**.
+3. Configure:  —  **Status Code:** `200`  —  **Headers:**
+
+| Key | Value |
+| --- | --- |
+| `Content-Type` | `application/json` |
+| `Access-Control-Allow-Origin` | `*` |
+
+- **Body:**
+
+```
+{
+  "success": true,
+  "message": "Your enquiry has been received. Our team will reply within one business day."
+}
+```
+
+> `Access-Control-Allow-Origin: *` is included only so the classroom HTML page can read the response. For a real deployment, replace `*` with the exact approved website origin and put the webhook behind an authenticated server-side API or proxy.
+
+**Step 5: Save and copy the production URL (~5 minutes)**
+
+1. Select **Save**.
+2. Reopen the trigger if necessary.
+3. Copy the **HTTP POST URL**.
+4. Paste it temporarily into a private note. Do **not** paste it into this repository or a screenshot shared publicly.
+
+> The URL is generated only after the flow has been saved. It is the Power Automate equivalent of an n8n **Production URL**: every valid POST request can start a real run while the flow is turned on.
+
+**Step 6: Run the supplied enquiry page (~10 minutes)**
+
+1. Download or open `assets/enquiry-form.html`.
+2. Open the file in Chrome or Edge.
+3. Paste the production URL into **Power Automate webhook URL**.
+4. Enter:  —  **Full name:** `Jane Tan`  —  **Email:** `jane@example.com`  —  **Subject:** `Course enquiry`  —  **Message:** `I would like to know the next available course date.`
+5. Select **Submit enquiry**.
+6. Confirm the page displays the success message returned by Power Automate.
+7. Confirm the email arrives with all four values.
+
+**Step 7: Verify the run (~5 minutes)**
+
+1. Return to Power Automate.
+2. Open **My flows** → `Lab 6A - External Enquiry Webhook`.
+3. Open the latest run.
+4. Confirm the trigger, email, and Response actions all have green checks.
+5. Expand the trigger **Inputs** and verify the submitted JSON.
+
+**Optional command-line test**
+
+If the browser reports a CORS or network error, test the flow independently with `curl`. Replace the placeholder with your private URL:
+
+```
+curl -X POST 'PASTE_YOUR_PRIVATE_URL_HERE' \
+  -H 'Content-Type: text/plain;charset=UTF-8' \
+  -d '{"name":"Jane Tan","email":"jane@example.com","subject":"Course enquiry","message":"Please contact me."}'
+```
+
+If `curl` succeeds but the webpage fails, the flow is working and the remaining issue is browser-origin policy. In production, send the request through a same-origin backend rather than exposing the Power Automate URL in browser code.
+
+---
+
+**Checkpoint**
+
+- ✅ The trigger is **When an HTTP request is received** under **Request**
+- ✅ The schema contains `name`, `email`, `subject`, and `message`
+- ✅ The flow sends an email containing the submitted values
+- ✅ The flow returns a `200` JSON response
+- ✅ The external page can submit a test enquiry
+- ✅ The production URL is kept private
+
+**Troubleshooting**
+
+| Problem | Solution |
+| --- | --- |
+| Only HTTP, HTTP Webhook, or HTTP + Swagger appears | Select **When an HTTP request is received** under **Request**. The diamond indicates a premium connector. |
+| HTTP POST URL is blank | Save the flow once, then reopen the trigger. |
+| `401` or `403` | The trigger authentication does not permit the caller, or a tenant policy blocks anonymous requests. Check **Who can trigger the flow?** |
+| Browser says `Failed to fetch` | Test with `curl`. If that works, use the Response CORS header for the lab or a server-side proxy for production. |
+| Parse JSON fails | Confirm **Content** is the expression token `json(triggerBody())` and the webpage is sending the supplied JSON structure. |
+| Email fields are blank | Insert values from **Parse JSON** rather than typing `[name]`, `[email]`, and the other labels as plain text. |
+| Flow times out | Power Automate request/response flows must respond within the platform time limit. Keep synchronous work short. |
+
+**Key Takeaways**
+
+- **When an HTTP request is received** creates an inbound webhook; **HTTP Webhook** is a different outbound subscription action.
+- Saving the flow generates a stable production POST URL.
+- **Parse JSON** turns the browser's JSON text into trusted dynamic values.
+- The **Response** action lets an external page receive a structured result.
+- An anonymous production URL is convenient but sensitive; protect or proxy it for real systems.
+
+**Duration**
+
+~55 minutes
+
+**Next Steps**
+
+Proceed to Lab 6B: Webhook Chatbot and reuse the same request/response pattern for a chat interface.
+
+---
+
+### Lab 6B: Webhook Chatbot
+
+**Lab Title**
+
+Trigger a Browser Chatbot with a Power Automate Webhook
+
+**Lab Objectives**
+
+By the end of this lab, you will be able to:
+
+1. Receive chat messages through a Power Automate production URL
+2. Maintain a simple session identifier in the browser request
+3. Route messages with a **Switch** control
+4. Return a bot reply as JSON
+5. Connect and test the supplied browser chat interface
+
+**Prerequisites**
+
+- Completed Lab 6A
+- Access to the premium **Request** connector
+- The supplied `webhook-chatbot.html`
+
+**Scenario**
+
+ACME Pte Ltd wants a small help widget on its website. A visitor sends a message, the page posts it to Power Automate, and the flow returns an immediate reply. This mirrors the interaction pattern in n8n Activity 6, where a chat interface triggers an automation and receives its response, but uses a browser chat widget and Power Automate instead of Telegram and n8n.
+
+This Day 1 version uses deterministic replies so you can see the webhook mechanics clearly. On Day 2, Copilot Studio provides the AI reasoning, knowledge grounding, and richer conversation management.
+
+```
+Browser chatbot
+      |
+      | POST { sessionId, message }
+      v
+When an HTTP request is received
+      |
+      +--> Parse JSON
+      +--> Normalise message
+      +--> Switch
+      +--> Set botReply
+      |
+      v
+Response { reply }
+```
+
+> **Security warning:** This lab uses an anonymously callable production URL for a controlled exercise. Do not embed that URL in a public production site. Use authentication, rate limiting, validation, and a server-side proxy for a real chatbot.
+
+---
+
+**Step-by-Step Guide**
+
+**Step 1: Create the chatbot webhook (~5 minutes)**
+
+1. In Power Automate, create an **Automated cloud flow**.
+2. Name it `Lab 6B - Webhook Chatbot`.
+3. Add **When an HTTP request is received** under **Request**.
+4. For this controlled lab, set **Who can trigger the flow?** to **Anyone** if your tenant permits it.
+
+**New designer**
+
+- Select **Add a trigger** → search `HTTP` → choose **When an HTTP request is received** under **Request**.
+
+**Classic designer**
+
+- Search the trigger list for `Request` → choose **When an HTTP request is received**.
+
+> Do not select **HTTP Webhook** under HTTP. It subscribes to an external service; it is not the incoming browser endpoint used here.
+
+**Step 2: Parse the chat request (~10 minutes)**
+
+1. Leave the trigger's **Request Body JSON Schema** blank.
+2. Add **Parse JSON** below the trigger.
+3. In **Content**, use the **fx** expression editor:
+
+```
+json(triggerBody())
+```
+
+1. Under **Schema**, choose **Use sample payload to generate schema** and paste:
+
+```
+{
+  "sessionId": "web-001",
+  "message": "opening hours"
+}
+```
+
+1. Select **Done**.
+
+The `sessionId` lets a caller identify a conversation. This simple flow does not store chat history, but a production system could use it as a key in Dataverse, SharePoint, or another database.
+
+The browser sends the payload as `text/plain` to avoid a cross-origin OPTIONS preflight. **Parse JSON** converts the JSON text into usable dynamic values.
+
+**Step 3: Initialise the reply (~5 minutes)**
+
+1. Add **Initialize variable**.
+2. Configure:  —  **Name:** `botReply`  —  **Type:** `String`  —  **Value:** `I can help with opening hours, contact details, or courses. Please choose one of those topics.`
+
+This is the fallback response for any message that does not match a known route.
+
+**Step 4: Normalise the message (~5 minutes)**
+
+1. Add a **Compose** action.
+2. Rename it `Normalise message`.
+3. In **Inputs**, use the **fx** expression editor and enter:
+
+```
+toLower(trim(body('Parse_JSON')?['message']))
+```
+
+1. Confirm it becomes an expression token.
+
+Normalising removes extra spaces and makes `Opening Hours` match `opening hours`.
+
+**Step 5: Route the conversation (~15 minutes)**
+
+1. Add a **Switch** control.
+2. In **On**, insert **Outputs** from `Normalise message`.
+3. Add these cases:
+
+| Case value | Action inside the case | `botReply` value |
+| --- | --- | --- |
+| `opening hours` | **Set variable** | `Our support desk is open Monday to Friday, 9:00 AM to 6:00 PM Singapore time.` |
+| `contact details` | **Set variable** | `Email help@acme.example or call +65 6000 1234 during business hours.` |
+| `courses` | **Set variable** | `We offer instructor-led automation and AI courses. Please submit an enquiry for the latest schedule.` |
+
+1. Leave the **Default** branch empty. The initial fallback remains unchanged.
+
+**New designer**
+
+- Select **+** → **Add an action** → **Control** → **Switch**.
+- Within each case, select **+** and add **Set variable**.
+
+**Classic designer**
+
+- Select **New step** → **Built-in** → **Control** → **Switch**.
+- Choose **Add a case**, then add **Set variable** inside it.
+
+**Step 6: Return the bot reply (~10 minutes)**
+
+1. Add **Response** after the entire Switch control, not inside an individual case.
+2. Configure:  —  **Status Code:** `200`  —  **Headers:**
+
+| Key | Value |
+| --- | --- |
+| `Content-Type` | `application/json` |
+| `Access-Control-Allow-Origin` | `*` |
+
+- **Body:**
+
+```
+{
+  "reply": "INSERT_BOT_REPLY_HERE"
+}
+```
+
+1. Delete `INSERT_BOT_REPLY_HERE` and insert the dynamic value **botReply**.
+2. Save the flow.
+3. Reopen the trigger and copy its **HTTP POST URL** to a private note.
+
+> Keep the quotation marks around the dynamic token in the JSON editor if Power Automate treats the body as raw JSON. The final response must look like `{"reply":"some text"}` in the run history.
+
+**Step 7: Test with the supplied chat page (~10 minutes)**
+
+1. Open `assets/webhook-chatbot.html` in Chrome or Edge.
+2. Paste the production URL into **Power Automate webhook URL**.
+3. Select **Connect**.
+4. Send each supported message:  —  `opening hours`  —  `contact details`  —  `courses`
+5. Send `refund policy` and confirm the fallback reply appears.
+6. In Power Automate, open the run history and inspect the Switch case taken for each message.
+
+**Step 8: Compare with a production chatbot (~5 minutes)**
+
+Record two limitations of this lab bot:
+
+1. It matches only predefined phrases.
+2. It does not remember earlier turns on the server.
+
+Record two production improvements:
+
+1. Put an authenticated, rate-limited API or proxy in front of the flow.
+2. Replace the Switch with Copilot Studio or an approved AI action and persist state using `sessionId`.
+
+---
+
+**Checkpoint**
+
+- ✅ Parse JSON produces `sessionId` and `message`
+- ✅ The input is normalised before routing
+- ✅ A Switch supplies three supported replies and one fallback
+- ✅ The Response action is after the Switch and returns `botReply`
+- ✅ The browser page shows each reply
+- ✅ The webhook URL is not saved in the HTML or repository
+
+**Troubleshooting**
+
+| Problem | Solution |
+| --- | --- |
+| Every message gets the fallback | Confirm the Switch uses **Outputs** from `Normalise message` and the case values are lowercase exact matches. |
+| Response action runs before a branch finishes | Move **Response** below and outside the whole Switch control. |
+| Page displays `undefined` | Confirm the response property is named exactly `reply`. |
+| Parse JSON fails | Confirm its Content is the expression `json(triggerBody())` and the supplied page has not been modified to send a different structure. |
+| Browser says `Failed to fetch` | Check the URL, trigger authentication, flow run history, and the lab CORS response header. Test with `curl` as shown in Lab 6A. |
+| Flow says invalid JSON | Recreate the Response body and insert the `botReply` token in place of the placeholder text. |
+| HTTP trigger unavailable | The Request connector is premium or disabled by tenant policy. Ask the trainer for the demonstration environment. |
+
+**Optional AI Upgrade**
+
+If your tenant includes an approved generative AI action, you may replace the Switch with that action and instruct it to answer only from approved ACME support content. Keep the same HTTP request and Response contract so the browser page does not need to change.
+
+Do not send confidential or personal information to an AI service unless your organisation has approved the data handling.
+
+**Key Takeaways**
+
+- A browser chatbot is a user interface around a request/response API.
+- Power Automate can expose that API through a saved HTTP Request trigger.
+- `sessionId` prepares the design for future conversation state.
+- Deterministic routing is easy to test; AI adds flexibility but also needs grounding and safety controls.
+- The webhook contract can remain stable even when the internal bot logic changes.
+
+**Duration**
+
+~60 minutes
+
+**Next Steps**
+
+You have completed Day 1. Proceed to Day 2 — Module 3: Business Agents Concepts.
 
 ---
 
@@ -1333,7 +1800,7 @@ The key points:
 **5. What you'll build on Day 2**
 
 - **Lab 6:** Your first agent — learn the interface, instructions, and testing.
-- **Lab 7:** Add **Knowledge (RAG)** so the agent answers from your own documents.
+- **Lab 7:** Complete an **IT Support RAG Chatbot** that retrieves from approved documents, cites its source, and refuses unsupported questions.
 - **Lab 8:** Add **Tools & Actions** so the agent can *do* things, not just answer.
 - **Lab 9:** A **Sales Enquiry Assistant** that captures enquiries as structured data.
 - **Lab 10:** A **Procurement Request** agent that triggers a Power Automate flow.
@@ -1370,7 +1837,7 @@ By the end of this lab, you will be able to:
 - Completed Lab 0 (Copilot Studio trial active)
 - Read Module 3
 - Signed in at <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> (same environment as Power Automate)
-- Downloaded the supplied [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf) knowledge file
+- Downloaded the supplied `it-faq.pdf` knowledge file
 
 **Scenario**
 
@@ -1386,7 +1853,7 @@ The agent must never invent procedures, request passwords or MFA codes, or downp
 
 The n8n activity exposes each RAG component as a node. Copilot Studio performs the same ingestion work as a managed service:
 
-```text
+```
 n8n Activity 7:
 it-faq.pdf → Upload/Webhook → Data Loader → Splitter → Embeddings → Vector Store
 
@@ -1414,7 +1881,7 @@ Microsoft currently provides two Copilot Studio authoring experiences. Use the p
 | **Overview**, **Knowledge**, **Topics**, **Tools/Actions**, and a **Test** pane | **Classic experience** |
 | **Build**, **Preview**, **Evaluate**, **Monitor**, with **Knowledge**, **Skills**, and **Tools** on the right | **New experience** |
 
-> **Important:** Both interfaces achieve the same Lab 6 outcome. Do not switch experiences or recreate your agent halfway through the lab. Agents created in the new experience cannot currently be converted to the classic experience.
+> **Important:** The two interfaces achieve the same Lab 6 outcome. Do not switch experiences or recreate your agent halfway through the lab. Agents created in the new experience cannot currently be converted to the classic experience.
 
 ---
 
@@ -1425,7 +1892,7 @@ Microsoft currently provides two Copilot Studio authoring experiences. Use the p
 Before you build anything, make sure you are in the correct environment. This is the single most common cause of problems later in the course.
 
 1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and sign in with your course account.
-2. Find the **environment selector**:  —  **Classic:** usually at the top-right.  —  **New:** use the globe/environment control in the Copilot Studio shell (commonly at the lower-left; its position can vary by rollout).
+2. Find the **environment selector**:  —  **Classic:** usually at the top-right of the screen.  —  **New:** use the globe/environment control in the Copilot Studio shell (commonly at the lower-left; its position can vary by rollout).
 3. Click it and select **Course Sandbox** (your course environment from Lab 0).
 
 > **⚠️ Warning:** Copilot Studio **must use the same environment as Power Automate**. If your agent is built in one environment and your flows live in another, they will not be able to connect to each other in Lab 10. Always confirm the environment name in the top-right before you start. The environment also needs **Dataverse** enabled, because agents are stored there.
@@ -1436,7 +1903,7 @@ Use the instructions below for your interface.
 
 **Classic experience**
 
-1. Select **Agents**, then **Create blank agent**. On some classic Home pages, use **Create an agent** under **Start building from scratch**.
+1. Select **Agents** in the left navigation, then select **Create blank agent**. On some classic Home pages, use **Create an agent** under **Start building from scratch**.
 2. Wait for the agent's **Overview** page to open.
 3. In **Details**, select **Edit** and enter:  —  **Name:** `MyCompany IT Support Assistant`  —  **Description:** `Provides first-line IT troubleshooting and escalation guidance for MyCompany Singapore staff.`
 4. Select **Save**.
@@ -1444,7 +1911,7 @@ Use the instructions below for your interface.
 
 **New experience**
 
-1. Select **Agents**, then **New Agent**.
+1. Select **Agents** in the left navigation, then select **New Agent**.
 2. The designer opens on **Build**, with the agent name field in focus.
 3. Enter **Name:** `MyCompany IT Support Assistant`.
 4. Paste the instruction block below into the main **Instructions** editor.
@@ -1454,7 +1921,7 @@ Use the instructions below for your interface.
 
 **Instructions for both interfaces**
 
-```text
+```
 You are the MyCompany Singapore IT Support Assistant for employees.
 Use the IT Service Desk FAQ as your source for troubleshooting and escalation guidance.
 Give concise, numbered steps in the order staff should perform them.
@@ -1470,7 +1937,7 @@ Keep routine answers under 120 words unless the user asks for more detail.
 
 **Step 3: Tour the agent workspace (~5 minutes)**
 
-Use this map to locate the agent building blocks:
+Now that the agent exists, use this interface map to locate its building blocks:
 
 | Building block | Classic experience | New experience |
 | --- | --- | --- |
@@ -1483,7 +1950,7 @@ Use this map to locate the agent building blocks:
 | Structured repeatable tests | Not normally used in this lab | **Evaluate** tab |
 | Usage and run information | Analytics/monitoring pages | **Monitor** tab |
 
-Click through the relevant areas once. You do not need to add a Skill, Tool, or evaluation yet.
+Click through the relevant areas once so you know where they are. You do not need to add a Skill, Tool, or evaluation yet.
 
 > **Tip:** Remember the four building blocks: **Instructions** = behaviour and tone, **Knowledge** = facts the agent can look up, **Topics** = scripted conversations, **Tools** = things the agent can do. Almost everything in Copilot Studio is one of these four.
 
@@ -1491,24 +1958,25 @@ Click through the relevant areas once. You do not need to add a Skill, Tool, or 
 
 **Step 4: Ingest the IT FAQ into Knowledge (~10 minutes)**
 
-Right now your agent has behaviour rules but no company-specific procedures. Ground it with the supplied [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf), adapted from the Activity 7 RAG mock data in the [Agentic AI Automation with n8n repository](https://github.com/tertiarycourses/TGS-2023035977-Agentic-AI-Automation-with-n8n/tree/main/labs/activity7-rag).
+Right now your agent has behaviour rules but no company-specific procedures. Ground it with the supplied `it-faq.pdf`, adapted from the Activity 7 RAG mock data in the Agentic AI Automation with n8n repository.
 
 **Classic experience**
 
-1. Open **Knowledge**.
-2. Select **+ Add knowledge**, then **Files** or **Upload file**.
-3. Upload [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf).
-4. Set the name to `MyCompany IT Service Desk FAQ`. If requested, enter this description: `Internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook, software, printers, hardware, access, phishing, and IT ticket escalation.`
-5. Select **Add to agent**.
-6. Wait until the source changes from **Processing** to **Ready**.
+1. Open the **Knowledge** tab.
+2. Select **+ Add knowledge**.
+3. Choose **Files** or **Upload file**.
+4. Upload `it-faq.pdf`.
+5. Set the name to `MyCompany IT Service Desk FAQ` and, if requested, enter: `Internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook, software, printers, hardware, access, phishing, and IT ticket escalation.`
+6. Select **Add to agent**.
+7. Wait until the source status changes from **Processing** to **Ready**.
 
 **New experience**
 
 1. On **Build**, select **+** beside **Knowledge** on the right.
 2. Choose **Files** or **Upload file**.
-3. Upload [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf).
+3. Upload `it-faq.pdf`.
 4. Set the source name to `MyCompany IT Service Desk FAQ`.
-5. If requested, enter this description: `Internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook, software, printers, hardware, access, phishing, and IT ticket escalation.`
+5. If a description is requested, enter: `Internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook, software, printers, hardware, access, phishing, and IT ticket escalation.`
 6. Select **Add to agent**, then select the **Save** (disk) icon.
 7. Wait for processing to finish. Depending on the rollout, the source may show **Ready**, a spinner, or simply appear as a `MyCompany IT Service Desk FAQ` chip.
 
@@ -1518,7 +1986,7 @@ Right now your agent has behaviour rules but no company-specific procedures. Gro
 
 **Step 5: Smoke-test the retrieval path (~7 minutes)**
 
-1. Open the testing surface:  —  **Classic:** open the **Test** pane on the right; if hidden, select **Test** at the top-right.  —  **New:** select the **Preview** tab.
+1. Open the testing surface:  —  **Classic:** open the **Test** pane on the right. If hidden, select **Test** at the top-right.  —  **New:** select the **Preview** tab.
 2. Start with these three ingestion smoke tests:  —  `I entered the wrong password several times and my account is locked. What should I do?`  —  `How do I connect to the corporate VPN while working from home?`  —  `I clicked a link in a suspicious email and entered my password. What should I do now?`
 3. Compare the responses with the expected evidence:
 
@@ -1528,8 +1996,8 @@ Right now your agent has behaviour rules but no company-specific procedures. Gro
 | VPN | Open GlobalConnect; use `vpn.mycompany-sg.example.com`; sign in and approve MFA |
 | Phishing compromise | Report phishing, change the password immediately, and call the Service Desk |
 
-4. Confirm that the agent never asks for the user's password or MFA code.
-5. Check for a citation or reference to `it-faq.pdf` where the interface provides citations.
+1. Confirm that the agent never asks for the user's password or MFA code.
+2. Check for a citation or reference to `it-faq.pdf` where the interface provides citations.
 
 > **Tip:** This is only a smoke test that the ingestion path works. In Lab 7 you will perform a fuller RAG evaluation with citations, negative tests, source-only controls, and troubleshooting.
 
@@ -1537,17 +2005,17 @@ Right now your agent has behaviour rules but no company-specific procedures. Gro
 
 The first version of an agent is rarely perfect. Tuning the Instructions is normal and expected.
 
-1. Review your test results. If answers are too vague, too long, or omit escalation details, return to the instruction editor:  —  **Classic:** open **Overview** and select **Edit** in **Instructions**.  —  **New:** return to **Build** and click in the main **Instructions** editor.
+1. Review your test results. If answers are too vague, too long, or omit escalation details, return to your instruction editor:  —  **Classic:** open **Overview** and select **Edit** in **Instructions**.  —  **New:** return to **Build** and click in the main **Instructions** editor.
 2. Add a line to make the change you want, for example:
 
-```text
-For every troubleshooting answer, separate "Try this first" from "Escalate when".
-Never ask the user to share a password, MFA code, recovery code, or authentication secret.
+```
+   For every troubleshooting answer, separate "Try this first" from "Escalate when".
+   Never ask the user to share a password, MFA code, recovery code, or authentication secret.
 ```
 
-3. Save the change:  —  **Classic:** select **Save**.  —  **New:** select the **Save** (disk) icon.
-4. Start a fresh test:  —  **Classic:** return to the **Test** pane and select **Start new test session** (circular-arrow/refresh).  —  **New:** return to **Preview** and select **New chat**.
-5. Ask the questions again and confirm the updated behaviour.
+1. Save the change:  —  **Classic:** select **Save**.  —  **New:** select the **Save** (disk) icon.
+2. Start a fresh test:  —  **Classic:** return to the **Test** pane and select **Start new test session** (circular-arrow/refresh).  —  **New:** return to **Preview** and select **New chat**.
+3. Ask the questions again and confirm the updated behaviour.
 
 > **⚠️ Warning:** Existing test conversations do **not** always pick up changes. Start a new test session in Classic or a **New chat** in the new experience after editing Instructions.
 
@@ -1558,7 +2026,7 @@ Publishing makes your latest version live so it can be shared. You do not have t
 > **Note:** A Copilot Studio **trial** license lets you create and test agents in the Test pane, but does **not** let you publish them. If Publish is blocked on your account, simply read through this step — everything else in the course works from the Test pane.
 
 1. Select **Publish** at the top-right, then confirm by selecting **Publish** again.
-2. After publishing:  —  **Classic:** open **Channels** to browse Microsoft Teams, demo website, and other deployment options.  —  **New:** use the confirmation options to **Share** the agent or add it to the organisation catalogue; channel availability may differ while the new experience is in preview.
+2. After publishing:  —  **Classic:** open **Channels** to browse Microsoft Teams, demo website, and other deployment options.  —  **New:** use the publish confirmation options to **Share** the agent or add it to the organisation catalogue. Channel availability may differ while the new experience is in preview.
 3. You do not need to connect a channel or share the agent for this lab.
 
 ---
@@ -1572,7 +2040,7 @@ You have successfully completed this lab when:
 - ✅ The supplied **MyCompany IT Service Desk FAQ** is ready or has finished processing
 - ✅ You can explain how **Add knowledge** replaces the n8n loader, splitter, embeddings, and vector-store nodes
 - ✅ The agent passes the account-lockout, VPN, and phishing smoke tests in **Test** (Classic) or **Preview** (New)
-- ✅ The agent never requests a password, MFA code, recovery code, or other authentication secret
+- ✅ The agent never requests passwords, MFA codes, or other secrets
 - ✅ You edited the Instructions and saw the change after starting a fresh test session or **New chat**
 
 **Troubleshooting**
@@ -1582,7 +2050,7 @@ You have successfully completed this lab when:
 | Agent ignores your new instructions | The test is using an existing conversation | Save, then use **Start new test session** (Classic) or **New chat** in Preview (New). |
 | Knowledge source stuck on "Processing" | File processing or a busy service | Wait a minute or two and confirm the PDF opens locally. If it persists, remove the source and upload `it-faq.pdf` again. |
 | Replies are generic or unhelpful | No grounding, or vague instructions | Make sure a Knowledge source is **Ready** and tighten your Instructions (be specific about tone and scope). |
-| Can't see the Test pane | You are using the new experience, or the Classic pane is collapsed | Select **Test** in Classic or open **Preview** in the new experience. |
+| Can't see the Test pane | You are using the new experience, or the Classic pane is collapsed | Select **Test** in Classic or open the **Preview** tab in the new experience. |
 | Can't find Description | The new Build page does not expose the classic Description field | Skip it for Lab 6; do not enter it under **Agent settings**. Add it during Publish only if a description field appears. |
 | Can't find Topics | The new experience uses enhanced orchestration | Use **Instructions**, **Skills**, and **Tools**; no Topic is required in Lab 6. |
 | Tools/flows won't connect later | Wrong environment | Use the **environment selector** (top-right) to switch to the same environment as Power Automate (**Course Sandbox**). |
@@ -1591,7 +2059,7 @@ You have successfully completed this lab when:
 **Key Takeaways**
 
 - An agent's behaviour is shaped mainly by its **Instructions** — clear instructions give predictable answers.
-- The classic building blocks are **Instructions**, **Knowledge**, **Topics**, and **Tools**; the new experience emphasises **Instructions**, **Knowledge**, **Skills**, and **Tools**.
+- The classic building blocks are **Instructions**, **Knowledge**, **Topics**, and **Tools/Actions**; the new experience emphasises **Instructions**, **Knowledge**, **Skills**, and **Tools**.
 - **Knowledge** grounds answers in real content so the agent stops guessing.
 - A **Ready** source is the Copilot Studio equivalent of a successfully populated vector store.
 - Real IT support agents need explicit security boundaries: never request secrets and escalate suspected compromise immediately.
@@ -1604,36 +2072,36 @@ You have successfully completed this lab when:
 
 **Next Steps**
 
-Proceed to Lab 7: Add Knowledge to Your Agent.
+Proceed to Lab 7: Create an IT Support RAG Chatbot.
 
 ---
 
-### Lab 7: Add Knowledge to Your Agent (Grounding / RAG)
+### Lab 7: Create an IT Support RAG Chatbot with Copilot Studio
 
 **Lab Title**
 
-IT Support RAG Part B — Retrieve, Cite, and Refuse Unsupported Answers
+Build and Validate a Grounded IT Support RAG Chatbot
 
 **Lab Objectives**
 
 By the end of this lab, you will be able to:
 
-1. Explain **grounding** and **RAG** (Retrieval-Augmented Generation) in plain, everyday terms
-2. Add one or more **Knowledge** sources to a Copilot Studio agent (files, public website, or SharePoint)
-3. Turn off **Allow ungrounded responses** (general knowledge) so the agent answers only from your content
-4. Test that the agent answers **from your documents** and shows **citations**
-5. Confirm the agent declines to answer when the information is not in your sources (no made-up answers)
-6. Tell the difference between **Instructions** (behaviour) and **Knowledge** (facts)
+1. Turn the IT Support agent from Lab 6 into a working **RAG chatbot**
+2. Explain **grounding** and **RAG** (Retrieval-Augmented Generation) in plain, everyday terms
+3. Add and verify an approved IT support **Knowledge** source in Copilot Studio
+4. Turn off **Allow ungrounded responses** so the chatbot answers only from approved content
+5. Test grounded answers and verify their visible **citations**
+6. Confirm the chatbot refuses unsupported questions instead of making up answers
 7. Map the n8n Activity 7 retriever-and-chat workflow to Copilot Studio
 
 **Prerequisites**
 
 - Completed Lab 6 (you have an agent)
-- The supplied [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf) from Lab 6
+- The supplied `it-faq.pdf` from Lab 6
 
 **Scenario**
 
-Your **MyCompany IT Support Assistant** from Lab 6 already has an indexed IT FAQ. You will now complete the **answering half** of the Activity 7 RAG pattern: connect the agent's behaviour to the ready knowledge source, retrieve relevant passages, generate a grounded response, expose the result in chat, and reject unsupported questions.
+Your **MyCompany IT Support Assistant** from Lab 6 already has an indexed IT FAQ. You will now complete it as a usable **IT Support RAG Chatbot**: connect the agent's behaviour to the approved knowledge source, retrieve relevant passages, generate grounded answers, expose the result in chat, show citations, and reject unsupported questions.
 
 In this lab you will inspect and harden the **MyCompany IT Service Desk FAQ** knowledge source, then prove that the agent answers from that source and nothing else. This is the technique that makes business agents trustworthy.
 
@@ -1650,7 +2118,7 @@ In this lab you will inspect and harden the **MyCompany IT Service Desk FAQ** kn
 
 **Activity 7 answering workflow translated**
 
-```text
+```
 n8n Activity 7:
 Chat/Telegram/Webhook → AI Agent → Vector Store Retriever → Chat Model → Response
 
@@ -1675,7 +2143,7 @@ Test or Preview chat → Generative orchestration → Ready Knowledge source →
 
 **Step 1: Prepare a knowledge source (~5 minutes)**
 
-1. Download or locate the supplied [`it-faq.pdf`](labs/Day%202/Lab%206%20-%20Create%20Your%20First%20Agent/assets/it-faq.pdf).
+1. Download or locate the supplied `it-faq.pdf`.
 2. Open it and identify at least four topics, such as password reset, VPN, phishing, and laptop troubleshooting.
 3. If you already uploaded this file in Lab 6, reuse that ready source. If it is missing, you will upload it in Step 3.
 
@@ -1708,13 +2176,13 @@ By default the agent may blend in general AI/web knowledge. For an internal IT h
 1. Apply the controls available in your interface:  —  **Classic:** open **Settings → Generative AI**. In **Knowledge**, turn **Allow ungrounded responses** **Off**. Also turn **Use information from the web** or **Web Search** **Off**.  —  **New:** on **Build**, remove the **Search all websites** source if it is present. Open **… → Settings → AI & behavior** and turn off a general-knowledge or ungrounded-response option if your tenant exposes one.
 2. Add or confirm these lines in **Instructions**:
 
-```text
-Answer IT procedure questions only from the approved Knowledge sources and cite the source.
-If the source does not contain the answer, say that clearly and offer the Service Desk escalation route.
+```
+   Answer IT procedure questions only from the approved Knowledge sources and cite the source.
+   If the source does not contain the answer, say that clearly and offer the Service Desk escalation route.
 ```
 
-3. Save the agent.
-4. Start a new test conversation so the controls take effect.
+1. Save the agent.
+2. Start a new test conversation so the controls take effect.
 
 > **Tip:** Turn **Allow ungrounded responses** (and **Web Search**) **on** when you want the agent to also answer broad, everyday questions. Turn them **off** when you need tight control and want to prevent answers that did not come from your documents.
 
@@ -1754,7 +2222,7 @@ This is the most important test — it proves the agent will not make things up.
 
 **Checkpoint**
 
-You have successfully completed this lab when:
+You have successfully created the IT Support RAG Chatbot when:
 
 - ✅ At least one **Knowledge** source shows the status **Ready**
 - ✅ The agent answers IT support questions **from `it-faq.pdf`**, with visible **citations**
@@ -2164,7 +2632,7 @@ By the end of this lab, you will be able to:
 - Completed Lab 9 (capturing variables)
 - Completed Day 1 Labs 1–2 (email + Excel actions)
 
-> **⚠️ Warning:** Your agent (Copilot Studio) and your flow (Power Automate) must live in the **same environment — Course Sandbox**. If they are in different environments, the agent will not be able to find or call its flow. Before you begin, open both Copilot Studio and Power Automate and confirm the **top-right environment picker** shows **Course Sandbox** in each.
+> **⚠️ Warning:** Your agent (Copilot Studio) and your flow (Power Automate) must live in the **same environment — Course Sandbox**. If they are in different environments, the agent will not be able to find or call its flow. Before you begin, open both <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Copilot Studio</a> and <a href="https://make.powerautomate.com" target="_blank" rel="noopener">Power Automate</a> and confirm the **top-right environment picker** shows **Course Sandbox** in each.
 
 **Scenario**
 
@@ -2336,7 +2804,7 @@ By the end of this lab, you will be able to:
 - Completed Lab 10
 - A **Sales Enquiry Assistant** agent (from Lab 9) you can reuse
 
-> **⚠️ Warning:** As in Lab 10, the agent and the flow must both be in the **Course Sandbox** environment, or the agent cannot call its flow. Confirm the environment picker (top-right) in both Copilot Studio and Power Automate.
+> **⚠️ Warning:** As in Lab 10, the agent and the flow must both be in the **Course Sandbox** environment, or the agent cannot call its flow. Confirm the environment picker (top-right) in both <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Copilot Studio</a> and <a href="https://make.powerautomate.com" target="_blank" rel="noopener">Power Automate</a>.
 
 **Scenario**
 
