@@ -24,8 +24,36 @@ By the end of this lab, you will be able to:
 
 > **⚠️ Warning — Why not the Microsoft 365 Developer Program?** As of 2024, Microsoft restricted the free Developer Program E5 sandbox to people with an active **Visual Studio Enterprise or Professional subscription**. If you sign up without one you'll see *"You don't currently qualify for a Microsoft 365 Developer Program sandbox subscription."* — so we **do not** use that path in this course. Use **Option B** instead.
 
+## Workflow Visual
+
+![Lab 0 shared course environment flowchart](assets/flowchart.png)
+
+The same work or school account and Course Sandbox environment connect every
+Power Automate flow and Copilot Studio agent used later.
+
+## Packaged Flow
+
+No flow package applies to Lab 0 because this lab creates and verifies the
+environment before any flow exists. The first importable flow is supplied in
+Lab 1.
+
 ## Scenario
-You work for **ACME Pte Ltd** and will spend the next two days automating ACME's business workflows. Before you can build anything, you need a clean place to work: a Microsoft 365 account, the Power Automate and Copilot Studio apps, and — importantly — **one shared environment** called **Course Sandbox** that both apps point to. Getting this right now means every later lab "just works."
+You have joined **ACME Pte Ltd's Digital Operations project team** as a junior
+automation specialist. The production tenant contains customer and employee
+data, so the project manager will not allow experiments there. Your first task
+is to prepare a controlled **Course Sandbox** where flows, connectors, agent
+knowledge and test records can be built safely.
+
+| Workplace detail | Lab interpretation |
+|---|---|
+| Your role | Junior automation specialist |
+| Stakeholders | Power Platform administrator, customer-operations manager and IT security |
+| Operational risk | A learner accidentally sends test emails or writes data into a production system |
+| Success measure | Power Automate and Copilot Studio use the same sandbox environment and all required connections can be verified |
+
+**Real-world extension:** An organisation would also apply environment roles,
+Data Loss Prevention policies, service accounts, naming standards and a
+development → test → production deployment process.
 
 ---
 
@@ -134,6 +162,8 @@ If all seven are checked, your environment is ready.
 ---
 
 ## Checkpoint
+> **Workplace evidence:** Capture the environment selectors in Power Automate and Copilot Studio plus the green connection status. In a real project, these screenshots form part of the deployment-readiness record.
+
 You should now have:
 - ✅ A working Microsoft 365 **work/school** account (Option A or B)
 - ✅ A Power Platform **Sandbox** environment named **Course Sandbox** with **Dataverse = Yes**, status **Ready**
@@ -164,4 +194,4 @@ You should now have:
 ~30–40 minutes
 
 ## Next Steps
-Read [Module 1: Workflow Automation Concepts](../Module%201%20-%20Workflow%20Automation%20Concepts.md) and [Module 2: Introduction to Power Automate](../Module%202%20-%20Introduction%20to%20Power%20Automate.md), then proceed to [Lab 1: Automated Email Workflow](../Lab%201%20-%20Automated%20Email%20Workflow/index.md).
+Read [Module 1: Workflow Automation Concepts](../Module%201%20-%20Workflow%20Automation%20Concepts.md) and [Module 2: Introduction to Power Automate](../Module%202%20-%20Introduction%20to%20Power%20Automate.md), then proceed to [Lab 1: Instant Email Flow](../Lab%201%20-%20Instant%20Email%20Flow/index.md).

@@ -21,16 +21,31 @@ You build flows at **<a href="https://make.powerautomate.com" target="_blank" re
 
 > **Low-code, not no-thought.** You don't write code, but you do think like a designer: what starts the flow, what it does, and what data moves between steps.
 
+### Two ways to create a flow
+
+Power Automate can create a first draft from a natural-language prompt, or you can assemble the cards manually:
+
+| Approach | Best use | Maker responsibility |
+|---|---|---|
+| **Create your automation with Copilot / Describe it to design it** | Quickly turn a clear requirement into a suggested trigger and actions | Inspect every generated card, connection, field and expression |
+| **Start from blank** | Learn exact configuration or build when Copilot is unavailable | Select and configure every trigger and action |
+
+In Lab 1 you start with a prompt, then open the designer and correct the generated draft. This is the working habit used throughout the course:
+
+**Describe → Generate → Review → Test → Improve**
+
 ### Types of flow you'll build in this course
 
 There are four flavours of flow. They differ only in *how they start* — once running, they all do the same kind of work.
 
 | Flow type | Started by | Example | Lab |
 |-----------|-----------|---------|-----|
-| **Instant** | A person clicking Run / a button | Send a confirmation email on demand | Lab 1–3 |
-| **Scheduled** | A clock/timetable (Recurrence) | Daily reminder at 9 AM | Lab 4 |
-| **Automated** | An event | New form response, new email, new file | Lab 5 |
-| **Agent flow** | A Copilot Studio agent | Agent logs a request and notifies the team | Day 2 |
+| **Instant** | A person clicking Run / a button | Send email and log test data on demand | Labs 1–2 |
+| **Scheduled** | A clock/timetable (Recurrence) | Daily reminder at 9 AM | Lab 3 |
+| **Automated** | An event | New form response, new email, new file | Lab 4 |
+| **Human approval** | A flow pauses for a decision | Approve or reject a request, then branch | Lab 5 |
+| **HTTP request** | An external system posts JSON | Website enquiry or deterministic browser chatbot | Labs 6A–6B |
+| **Agent flow** | A Copilot Studio agent | Agent logs a request and returns a result | Lab 9 |
 
 ---
 
@@ -42,10 +57,11 @@ Every flow starts with **exactly one trigger** — the event that kicks it off. 
 |---------|------------------|-------------|---------|
 | **Email received** | Office 365 Outlook — *"When a new email arrives (V3)"* | Mail lands in a folder | Further practice |
 | **File upload** | OneDrive / SharePoint — *"When a file is created"* | A document is dropped into a folder | Further practice |
-| **Form submission** | Microsoft Forms — *"When a new response is submitted"* | Someone submits your form | Lab 5 |
-| **Schedule** | *"Recurrence"* | A timetable you define is reached | Lab 4 |
-| **Manual** | *"Manually trigger a flow"* | You press **Run** | Labs 1–3 |
-| **Agent call** | *"When an agent calls the flow"* | A Copilot Studio agent runs the flow as a tool | Day 2–3 |
+| **Form submission** | Microsoft Forms — *"When a new response is submitted"* | Someone submits your form | Lab 4 |
+| **Schedule** | *"Recurrence"* | A timetable you define is reached | Lab 3 |
+| **Manual** | *"Manually trigger a flow"* | You press **Run** | Labs 1–2 and Lab 5 |
+| **HTTP request** | Request — *"When an HTTP request is received"* | An external website posts JSON | Labs 6A–6B |
+| **Agent call** | *"When an agent calls the flow"* | A Copilot Studio agent runs the flow as a tool | Labs 9–10 |
 
 > **Tip — build with a manual trigger first.** When learning a new flow, start with a **manual** trigger so you can press Run and perfect the actions. Once they work, swap in the real trigger (form, email, schedule). The actions stay exactly the same — only the start event changes.
 
@@ -64,7 +80,7 @@ After the trigger, you add **actions** — the work the flow performs. These are
 > Excel actions only see data that lives inside a proper **Table** (Insert → Table), not loose cells. This is a classic first-time gotcha.
 
 ### Notifications & approvals
-- *Approvals → Start and wait for an approval.* Pause the flow until a person approves or rejects, then branch on the **Outcome**. *(Lab 3)*
+- *Approvals → Start and wait for an approval.* Pause the flow until a person approves or rejects, then branch on the **Outcome**. *(Lab 5)*
 - Notifications to **Teams** or email keep the right people informed at each step.
 
 Actions are wired together with:
@@ -95,7 +111,29 @@ This is the **number one source of "why won't my flow run?"** for beginners, so 
 
 ---
 
-## 5. Anatomy of a flow (what you'll see in the designer)
+## 5. Importing a packaged Power Automate flow
+
+Every flow-based lab includes its own ZIP beside the lab's `index.md`.
+
+1. Download the individual lab ZIP. Do not extract it.
+2. In Power Automate, select the correct **Course Sandbox** environment.
+3. Open **My flows → Import → Import Package (Legacy)**.
+4. Upload the ZIP.
+5. For the flow, choose **Create as new**.
+6. For every connector, choose an existing connection or create one and sign
+   in.
+7. Select **Import**, open the imported flow and complete the lab's
+   **After import** checklist.
+8. Select tenant-owned resources such as the Microsoft Form, Excel workbook,
+   table, recipient or approver.
+9. **Save → Test**, then inspect the run history.
+
+> **Why connection selection remains:** reusable packages must not contain
+> passwords, access tokens, personal email addresses, tenant IDs, Form IDs or
+> OneDrive file IDs. The flow logic is packaged; Microsoft still requires the
+> learner to authorise resources in their own environment.
+
+## 6. Anatomy of a flow (what you'll see in the designer)
 
 ```
 [ TRIGGER ]        ← one event that starts the flow
@@ -119,4 +157,4 @@ Get comfortable with this loop today; you'll repeat it dozens of times across th
 
 ---
 
-**Next:** [Lab 1: Automated Email Workflow](Lab%201%20-%20Automated%20Email%20Workflow/index.md)
+**Next:** [Lab 1: Instant Email Flow](Lab%201%20-%20Instant%20Email%20Flow/index.md)

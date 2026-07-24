@@ -12,7 +12,7 @@ By the end of this lab, you will be able to:
 5. Test the saved production URL and apply basic webhook security
 
 ## Prerequisites
-- Completed [Lab 5](../Lab%205%20-%20Form%20Submission%20Workflow/index.md)
+- Completed [Lab 5](../Lab%205%20-%20Human%20Approval%20Flow/index.md)
 - Access to Power Automate in the **Course Sandbox** environment
 - A Power Automate plan that permits the premium **Request** connector
 - A mailbox-enabled Microsoft 365 account
@@ -20,8 +20,40 @@ By the end of this lab, you will be able to:
 
 > **Licensing note:** The **Request** connector is marked with a diamond icon in Power Automate and normally requires a premium entitlement. If your tenant blocks it, follow the demonstration with the trainer rather than selecting the similarly named **HTTP**, **HTTP Webhook**, or **HTTP + Swagger** actions.
 
+## Workflow Visual
+
+![Lab 6A external enquiry webhook flowchart](assets/flowchart.png)
+
+The webpage posts JSON to the saved production URL and waits for a JSON
+response from Power Automate.
+
+## Choose Your Route
+
+- **Part 1 — Build step by step:** recommended for understanding incoming HTTP
+  requests and JSON responses.
+- **Part 2 — Import the packaged flow:** use the ZIP in this lab folder, bind
+  Outlook and save once to generate the production URL.
+
+Download
+[Lab6A-External-Enquiry-Webhook.zip](Lab6A-External-Enquiry-Webhook.zip), then
+use **My flows → Import → Import Package (Legacy)**. Map the Outlook
+connection and follow the
+[import details](#part-2--import-the-packaged-flow). Save the
+imported flow once to generate its production HTTP POST URL.
+
 ## Scenario
-ACME Pte Ltd wants its own branded enquiry page rather than a Microsoft Forms page. When a visitor submits the page, JavaScript sends JSON to a Power Automate production URL. The flow emails the service team and returns a confirmation to the same page.
+You are an **ACME Web Integration Specialist**. Marketing wants a branded
+website journey instead of sending prospects to a Microsoft Forms page. The
+website must submit a structured enquiry to Power Automate, notify Customer
+Operations and show a confirmation without reloading the page.
+
+| Workplace detail | Requirement |
+|---|---|
+| External caller | ACME public website |
+| API contract | POST JSON containing name, email, subject and message |
+| Back-office outcome | Service mailbox receives the complete enquiry |
+| Customer outcome | Browser receives a success response and displays it |
+| Acceptance evidence | Browser confirmation, received email and successful run history contain the same test values |
 
 This adapts the external web-interface pattern from the [n8n Activity 6 finance-advisor example](https://github.com/tertiarycourses/TGS-2023035977-Agentic-AI-Automation-with-n8n/tree/main/labs/activity6-finance-advisor): a browser interface calls an automation endpoint, receives a result, and presents it to the user.
 
@@ -43,7 +75,7 @@ When an HTTP request is received
 
 ---
 
-## Step-by-Step Guide
+## Part 1 — Build the Flow Step by Step
 
 ### Step 1: Create the webhook flow (~5 minutes)
 
@@ -81,8 +113,8 @@ json(triggerBody())
 {
   "name": "Jane Tan",
   "email": "jane@example.com",
-  "subject": "Course enquiry",
-  "message": "I would like to know the next available course date."
+  "subject": "SME current account documents",
+  "message": "Please send me the onboarding document checklist and expected processing time."
 }
 ```
 
@@ -154,7 +186,7 @@ Message: [message]
    - **Full name:** `Jane Tan`
    - **Email:** `jane@example.com`
    - **Subject:** `Course enquiry`
-   - **Message:** `I would like to know the next available course date.`
+   - **Message:** `Please send me the SME current-account document checklist and expected processing time.`
 5. Select **Submit enquiry**.
 6. Confirm the page displays the success message returned by Power Automate.
 7. Confirm the email arrives with all four values.
@@ -181,7 +213,18 @@ If `curl` succeeds but the webpage fails, the flow is working and the remaining 
 
 ---
 
+## Part 2 — Import the Packaged Flow
+
+Download [Lab6A-External-Enquiry-Webhook.zip](Lab6A-External-Enquiry-Webhook.zip),
+then use **My flows → Import → Import Package (Legacy)**. Reconnect Outlook,
+replace `YOUR_EMAIL@YOUR_TENANT`, and save the flow. The production HTTP POST
+URL appears on the request trigger only after the imported flow has been saved.
+
+---
+
 ## Checkpoint
+> **Workplace evidence:** Save the redacted HTTP request/response, successful run and notification email. Never include the production URL or its signature when submitting evidence.
+
 - ✅ The trigger is **When an HTTP request is received** under **Request**
 - ✅ The schema contains `name`, `email`, `subject`, and `message`
 - ✅ The flow sends an email containing the submitted values

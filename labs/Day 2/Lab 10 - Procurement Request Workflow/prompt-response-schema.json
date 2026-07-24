@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "HIGH"
+      ]
+    },
+    "escalationRequired": {
+      "type": "boolean"
+    },
+    "draftResponse": {
+      "type": "string"
+    },
+    "internalSummary": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "category",
+    "priority",
+    "escalationRequired",
+    "draftResponse",
+    "internalSummary"
+  ],
+  "additionalProperties": false
+}

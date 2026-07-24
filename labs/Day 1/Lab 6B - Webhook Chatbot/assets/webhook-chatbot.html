@@ -7,7 +7,7 @@
   <style>
     :root { color-scheme: light; font-family: Inter, system-ui, sans-serif; }
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #eef3f9; color: #172033; }
+    body { margin: 0; min-height: 100vh; display: grid; grid-template-rows: 1fr auto; place-items: center; background: #eef3f9; color: #172033; }
     main { width: min(700px, calc(100% - 24px)); margin: 24px auto; }
     .chat { overflow: hidden; background: #fff; border: 1px solid #d8e0ec; border-radius: 20px; box-shadow: 0 20px 60px rgba(26, 44, 75, .14); }
     header { padding: 20px 24px; background: #173f73; color: #fff; }
@@ -27,6 +27,9 @@
     .quick button { padding: 8px 10px; background: #e8f1ff; color: #174e91; font-size: .9rem; }
     form { display: flex; gap: 10px; padding: 16px; border-top: 1px solid #e2e8f0; }
     .hint { margin: 10px 16px 16px; color: #68758a; font-size: .82rem; }
+    .powered-footer { width: 100%; padding: 18px; text-align: center; color: #5c667a; font-size: .8rem; }
+    .powered-footer a { color: #075985; text-decoration: none; }
+    .powered-footer a:hover { text-decoration: underline; }
     @media (max-width: 560px) { .setup, form { flex-direction: column; } #messages { height: 55vh; } }
   </style>
 </head>
@@ -42,12 +45,12 @@
         <button id="connect" type="button">Connect</button>
       </div>
       <div id="messages" role="log" aria-live="polite">
-        <div class="message bot">Hello! Connect your lab webhook, then ask about opening hours, contact details, or courses.</div>
+        <div class="message bot">Hello! Connect your lab webhook, then ask about opening hours, contact details, or account-opening documents.</div>
       </div>
       <div class="quick">
         <button type="button" data-message="opening hours">Opening hours</button>
         <button type="button" data-message="contact details">Contact details</button>
-        <button type="button" data-message="courses">Courses</button>
+        <button type="button" data-message="documents">Account documents</button>
       </div>
       <form id="chat-form">
         <input id="message" autocomplete="off" aria-label="Chat message" placeholder="Type a message" disabled>
@@ -56,6 +59,9 @@
       <p class="hint">Lab use only. The URL remains in memory for this page session and is not saved.</p>
     </section>
   </main>
+  <footer class="powered-footer">
+    Powered by <a href="https://www.tertiaryinfotech.com/" target="_blank" rel="noopener">Tertiary Infotech Academy Pte Ltd</a>
+  </footer>
   <script>
     const endpointInput = document.querySelector("#endpoint");
     const connectButton = document.querySelector("#connect");

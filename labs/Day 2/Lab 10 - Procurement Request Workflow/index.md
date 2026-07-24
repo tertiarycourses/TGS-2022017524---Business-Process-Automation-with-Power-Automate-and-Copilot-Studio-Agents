@@ -1,181 +1,418 @@
-# Lab 10: Procurement Request Workflow
+# Lab 10: Teams and Website Enquiry Prompt Flow
 
 ## Lab Title
-Connect a Procurement Agent to a Power Automate Flow
+
+Marina Trust Enquiry Agent → AI Prompt Flow → Controlled Response to Teams or Website Chat
 
 ## Lab Objectives
+
 By the end of this lab, you will be able to:
-1. Prepare an Excel **table** so a flow can log structured rows into it
-2. Build an agent topic that captures a procurement request as named **variables**
-3. Create an **agent flow** in Power Automate triggered **when an agent calls the flow**
-4. Define flow **inputs** and map agent variables into them
-5. Have the flow **log the request to Excel** and **email the procurement team** in one run
-6. Return a confirmation from the flow back to the agent with **Respond to the agent**
+
+1. Collect a free-text customer enquiry through a Copilot Studio agent
+2. Build a prompt-based agent flow using **AI Builder → Run a prompt**
+3. Parse a structured prompt result
+4. Return a controlled response to the agent
+5. Test the prompt flow through Microsoft Teams
+6. Trigger the same prompt flow through the website chatbot
+7. Apply escalation and safe-response rules
 
 ## Prerequisites
-- Completed [Lab 9](../Lab%209%20-%20Sales%20Enquiry%20Assistant/index.md) (capturing variables)
-- Completed Day 1 Labs 1–2 (email + Excel actions)
 
-> **⚠️ Warning:** Your agent (Copilot Studio) and your flow (Power Automate) must live in the **same environment — Course Sandbox**. If they are in different environments, the agent will not be able to find or call its flow. Before you begin, open both <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Copilot Studio</a> and <a href="https://make.powerautomate.com" target="_blank" rel="noopener">Power Automate</a> and confirm the **top-right environment picker** shows **Course Sandbox** in each.
+- Completed [Lab 9](../Lab%209%20-%20Banking%20Onboarding%20Agent%20Flow/index.md)
+- Copilot Studio and Microsoft Teams access
+- AI Builder prompt access
+- Excel Online (Business) and Office 365 Outlook connections
 
-## Scenario
-At **ACME Pte Ltd**, staff currently email the procurement team to request supplies, and someone manually copies each request into a spreadsheet. You'll replace that with an agent. When a staff member finishes their request, the agent **automatically logs** it to a shared spreadsheet **and emails** the procurement team — no manual copying, no missed requests. This is your first true **agent + flow** integration: the agent gathers the data, and a Power Automate flow does the real work.
+> **Terminology:** This lab uses “prompt flow” for an agent flow whose principal
+> processing step is **AI Builder → Run a prompt**. Its trigger is still
+> **When an agent calls the flow**, so Teams and website chat can wait for the
+> structured response.
+
+## Workflow Visual
+
+![Lab 10 Copilot agent calling a prompt flowchart](assets/flowchart.png)
+
+The agent collects and confirms the enquiry, while the prompt flow performs
+guarded AI drafting and returns structured outputs to the conversation.
+
+## Choose Your Route
+
+1. **Part 1 — Build step by step:** follow Scenario A and Scenario B below to
+   create the AI Builder prompt flow and attach it to the shared agent.
+2. **Part 2 — Import the packaged flow:** import
+   [Lab10-Customer-Enquiry-Prompt-Flow-Solution.zip](Lab10-Customer-Enquiry-Prompt-Flow-Solution.zip)
+   through **Solutions → Import solution**. It runs immediately with a safe,
+   deterministic fallback; Part 1 then shows how to replace that fallback with
+   AI Builder.
+
+## Workplace Brief
+
+Marina Trust now wants the assistant to handle **unstructured general
+enquiries** about accounts, cards, fees and digital banking. Fixed conditions
+are insufficient for drafting natural-language replies, so you will add a
+guarded AI Builder prompt while keeping deterministic validation, escalation
+and logging around it.
+
+You are the **Customer Experience Automation Lead**. Your design must ensure
+that the model drafts language but cannot execute transactions, approve
+applications or suppress high-risk escalation.
+
+| Test message | Expected behaviour |
+|---|---|
+| `What documents are normally needed for a savings account?` | Normal priority; concise informational draft |
+| `My card is lost and I see an unauthorised transaction.` | High priority; escalation required; no claim that the card was blocked |
+| `Please transfer SGD 500 to another account.` | Refuse the transaction and direct the user to an authenticated banking channel |
+| Empty or malformed model output | Deterministic fallback response |
+
+## Two-Scenario Project
+
+| Part | User experience | Automation |
+|---|---|---|
+| **Scenario A** | A customer-service user tests the Marina Trust agent in Microsoft Teams | The agent calls the prompt flow and displays its drafted response |
+| **Scenario B** | A visitor submits the same enquiry through the website chatbot | The website chatbot calls the same prompt flow and displays the result |
+
+```text
+PART A: Teams user ─┐
+                    ├─→ Copilot Studio agent → Prompt flow
+PART B: Website chat┘                         ├─ AI Builder prompt
+                                             ├─ Parse JSON
+                                             ├─ Excel + optional email
+                                             └─ Respond to the agent
+                                                      ↓
+                                    Draft shown in Teams or website chat
+```
+
+## Progression Across Labs 8–10
+
+| Lab | Entry point | Trigger | Processing | Return path |
+|---|---|---|---|---|
+| 8 | Standalone website form | HTTP Request | Fixed Power Automate conditions | HTTP Response |
+| 9 | Teams or website chatbot | Agent flow | Fixed Power Automate conditions | Respond to the agent |
+| 10 | Teams or website chatbot | Prompt flow | AI Builder prompt with guardrails | Respond to the agent |
+
+## Supplied Files
+
+| File | Purpose |
+|---|---|
+| [`customer-enquiry-card.json`](customer-enquiry-card.json) | Adaptive Card for name, email, category and message |
+| [`prompt-response-schema.json`](prompt-response-schema.json) | Schema for the prompt's structured JSON output |
+
+# Part 1 — Build Step by Step
+
+## Scenario A — Prompt Flow in Microsoft Teams
+
+## Step 1: Extend the Marina Trust agent (~5 minutes)
+
+Open `Marina Trust Enquiry Agent` and add:
+
+```text
+For general customer enquiries, collect the customer's name, email, category
+and message through the approved form. Ask for confirmation. After
+confirmation, call Draft customer enquiry response exactly once. Present the
+returned draft as guidance, not as a final regulated decision. If escalation
+is required, clearly say that a human specialist will follow up.
+```
+
+Follow the path for your authoring experience:
+
+- **New experience:** do not create a Topic. Enhanced orchestration uses these
+  Instructions plus the prompt tool's name, description and input schema.
+- **Classic experience:** create a topic named `General customer enquiry` with
+  these trigger phrases:
+
+```text
+ask a banking question
+submit a general enquiry
+contact customer service
+I need help with my account
+```
+
+## Step 2: Configure enquiry capture (~6 minutes)
+
+**New experience**
+
+1. Add this requirement to the agent Instructions:
+
+   ```text
+   Before calling Draft customer enquiry response, collect and confirm the
+   customer's name, email, category and message. Ask only for missing values.
+   Allow the tool to fill its inputs from the confirmed conversation context.
+   ```
+
+2. Save the agent.
+3. When the prompt flow is added as a tool, configure its inputs to be filled
+   from conversation context.
+
+**Classic experience**
+
+Paste [`customer-enquiry-card.json`](customer-enquiry-card.json) into **Ask with
+Adaptive Card**, or ask separately for:
+
+| Variable | Question |
+|---|---|
+| `fullName` | What name should we use for this enquiry? |
+| `email` | Which email address should receive the acknowledgement? |
+| `category` | Is this about accounts, cards, digital banking, fees or something else? |
+| `message` | Please describe the enquiry without passwords, PINs or full identity numbers. |
+
+Summarise the values and ask the user to confirm.
+
+## Step 3: Create the prompt flow (~7 minutes)
+
+**New experience**
+
+1. Open **Tools → + Add a tool → New tool → Agent flow**.
+2. Name it `Draft customer enquiry response`.
+
+**Classic experience**
+
+1. Create an Instant cloud flow in Power Automate.
+2. Select **When an agent calls the flow**.
+3. Name it `Draft customer enquiry response`.
+
+Add four Text inputs:
+
+`fullName`, `email`, `category`, `message`
+
+Use this tool description:
+
+```text
+Use once after a customer confirms a complete general enquiry. Classifies the
+message, drafts a safe response, records it and returns the result to the agent.
+Do not use for transactions, approvals or authentication.
+```
+
+## Step 4: Configure the AI prompt (~10 minutes)
+
+Add **AI Builder → Run a prompt** and create:
+
+```text
+You draft responses for a controlled Marina Trust Bank customer-service pilot using fictitious data.
+
+Customer name: {fullName}
+Category selected: {category}
+Customer message: {message}
+
+Rules:
+1. Never request or repeat passwords, PINs, OTPs, card numbers or full identity
+   numbers.
+2. Never claim that a transaction, refund, account change, approval or
+   investigation has been completed.
+3. If the message mentions fraud, a lost card, unauthorised activity, legal
+   action, a complaint, financial hardship or vulnerable circumstances, set
+   escalationRequired to true and priority to HIGH.
+4. Otherwise use NORMAL priority unless the message is time-sensitive.
+5. Draft two or three concise, professional sentences.
+6. Do not imply that this pilot can complete transactions or account changes.
+
+Return JSON only, without Markdown fences:
+{
+  "category": "normalised short category",
+  "priority": "NORMAL|HIGH",
+  "escalationRequired": true,
+  "draftResponse": "customer-safe response",
+  "internalSummary": "one-sentence staff summary"
+}
+```
+
+Map the three placeholders to the matching flow inputs. The email is used for
+logging and acknowledgement, not sent to the model.
+
+## Step 5: Parse and validate the prompt output (~6 minutes)
+
+Add **Parse JSON**:
+
+- **Content:** generated text from **Run a prompt**
+- **Schema:** paste
+  [`prompt-response-schema.json`](prompt-response-schema.json)
+
+Add **Compose** named `Enquiry Reference`:
+
+```text
+concat('ENQ-', formatDateTime(utcNow(),'yyyyMMdd-HHmmss'))
+```
+
+Add a Condition:
+
+- if `draftResponse` is empty, set a fallback response:
+
+```text
+Thank you for your enquiry. A Marina Trust service specialist will review it.
+No transaction or account change has occurred.
+```
+
+## Step 6: Log and acknowledge (~8 minutes)
+
+Create `Customer Enquiry Log.xlsx`, table `CustomerEnquiryTable`, with:
+
+`Reference`, `SubmittedAt`, `FullName`, `Email`, `Category`, `Message`,
+`Priority`, `EscalationRequired`, `DraftResponse`, `Status`
+
+Add **Excel Online (Business) → Add a row into a table** and map:
+
+- `Reference`: output of `Enquiry Reference`
+- `SubmittedAt`: `utcNow()`
+- inputs: `fullName`, `email`, `category`, `message`
+- parsed prompt outputs: `priority`, `escalationRequired`, `draftResponse`
+- `Status`: `Escalated` when escalation is true; otherwise `Drafted`
+
+Add **Send an email (V2)** to the supplied test `email`:
+
+```text
+Subject: Marina Trust customer enquiry [Reference]
+
+Hello [fullName],
+
+We received your enquiry. Reference: [Reference].
+
+[draftResponse]
+```
+
+## Step 7: Respond to the agent (~5 minutes)
+
+Add **Respond to the agent**:
+
+| Type | Output | Value |
+|---|---|---|
+| Text | `reference` | Output of `Enquiry Reference` |
+| Text | `category` | Parsed `category` |
+| Text | `priority` | Parsed `priority` |
+| Boolean | `escalationRequired` | Parsed `escalationRequired` |
+| Text | `draftResponse` | Parsed or fallback response |
+| Boolean | `emailSent` | `true` |
+
+Keep asynchronous response off. Save and publish the prompt flow.
+
+## Step 8: Attach the prompt-flow tool and test in Teams (~8 minutes)
+
+**New experience**
+
+1. Confirm the workflow is published.
+2. On **Build → Tools**, select **+ → Workflows** and add
+   `Draft customer enquiry response`.
+3. Use the tool description from Step 3.
+4. Configure its four inputs to be filled from confirmed conversation context.
+5. Configure Completion to present the returned values using the response
+   format below.
+
+**Classic experience**
+
+1. After form confirmation in the Topic, add the prompt-flow action.
+2. Map the four form variables to the matching inputs.
+3. Add a Message node using:
+
+```text
+Reference: {reference}
+Category: {category}
+Priority: {priority}
+
+{draftResponse}
+
+Escalated to a human: {escalationRequired}
+Acknowledgement email sent: {emailSent}
+```
+
+Publish the agent and update its Microsoft Teams channel. Start a new Teams
+conversation:
+
+```text
+I want to submit a general enquiry.
+```
+
+Use your own email and a fictional message.
 
 ---
 
-## Step-by-Step Guide
+## Scenario B — Trigger the Prompt Flow from the Website
 
-### Step 1: Prepare the procurement log in Excel (~5 minutes)
-1. In Excel (saved to **OneDrive for Business**, not your local PC), create a new workbook and name it `Procurement Log`.
-2. In **row 1**, type these six headers, one per cell from A1 to F1: `Date`, `Requester`, `Item`, `Quantity`, `Reason`, `Status`.
-3. Select the range **A1:F1**, then go to the **Insert** tab and select **Table**. In the dialog, tick **My table has headers** and select **OK**.
-4. With the table selected, open the **Table Design** tab. In the **Table Name** box (far left), replace the default name with `ProcurementTable`. Press **Enter**.
-5. Save and close the workbook.
+## Step 9: Publish the updated website chatbot (~5 minutes)
 
-> **⚠️ Warning:** The file must be in **OneDrive for Business** (or SharePoint), not on your local hard drive. A flow's Excel actions can only see files stored in the cloud. The exact table name `ProcurementTable` matters — the flow will look for it by name.
+1. Republish the agent.
+2. Open **Channels/Availability → Demo website** or **Custom website**.
+3. Open the demo website or update the
+   [Marina Trust website](../Lab%208%20-%20Deploy%20Agent%20to%20Teams%20and%20Website/website-version/index.html)
+   with the latest embed code.
+4. Start a new website-chat conversation.
 
-### Step 2: Create the agent and capture the request (~10 minutes)
-1. In Copilot Studio, select **Agents** in the left navigation, then **Create blank agent** (as in Lab 9). When the new agent's **Overview** page opens, select **Edit** in the **Details** section, fill in the fields below, and **Save**; then select **Edit** in the **Instructions** section, paste the instructions, and **Save**:
-   - **Name:** `Procurement Assistant`
-   - **Description:** `Captures staff purchase requests for ACME Pte Ltd and submits them for processing.`
-   - **Instructions:**
-     ```
-     You are a Procurement Assistant for ACME Pte Ltd.
-     Collect a staff member's purchase request: requester name, item, quantity,
-     and reason. Collect one item at a time, be concise, then confirm the request
-     has been submitted.
-     ```
-2. Open the **Topics** tab, select **+ Add a topic**, then **From blank**. On the toolbar select **Details** and set the **Name** to `New Procurement Request`.
-3. Give the topic a clear **trigger** so the agent knows when to run it:
-   - **Latest Copilot Studio (generative orchestration — default):** the **Trigger** node reads **The agent chooses**. In the **Details** panel, set the **Description** to `Use this topic when a staff member wants to raise a procurement or purchase request to buy supplies. It collects their name, item, quantity, and reason.` No phrases are needed.
-   - **(Optional) Classic orchestration / exact phrases:** hover the **Trigger** node → **Change trigger** → **User says a phrase**, then add phrases such as `procurement request`, `I need to buy something`, `I want to order supplies`, `raise a purchase request`.
-4. Add four **Ask a question** nodes in order, using the **Add node** icon (**+**) each time. For each, set the **Identify** type and rename the **Save user response as** variable exactly as shown:
-   - Question `What is your name?` → Identify **User's entire response** → save as `requester`
-   - Question `What item do you need?` → Identify **User's entire response** → save as `item`
-   - Question `How many do you need?` → Identify **Number** → save as `quantity`
-   - Question `What is the reason for this request?` → Identify **User's entire response** → save as `reason`
-5. Select **Save**.
+The website chatbot and Teams agent are two channels for the same Copilot
+Studio agent. Both invoke `Draft customer enquiry response`.
 
-> **⚠️ Warning:** Set the quantity question's **Identify** to **Number**. If it stays as text, the Excel **Quantity** column will store words instead of numbers.
+## Step 10: Test safe and escalated enquiries (~8 minutes)
 
-### Step 3: Create the agent flow (~15 minutes)
-1. Still in the **New Procurement Request** topic, select the **+** node after the last question, choose **Add a tool**, then **New Agent flow**.
-   - *(Alternatively, from the agent's **Tools** tab, select **Add a tool**, then **New agent flow**.)*
-2. The **agent flow designer** opens (the same designer Power Automate uses) with the trigger **When an agent calls the flow** and a **Respond to the agent** action already in place.
-3. Confirm you are still working in the **Course Sandbox** environment (top-right).
-4. On the **When an agent calls the flow** trigger, select **+ Add an input** and create four inputs. Choose the matching type and name each one exactly:
-   - Type **Text**, name `requester`
-   - Type **Text**, name `item`
-   - Type **Number**, name `quantity`
-   - Type **Text**, name `reason`
+| Test | Example message | Expected |
+|---|---|---|
+| Normal | `What documents are normally needed to open a savings account?` | `NORMAL`; concise general guidance |
+| Escalation | `My card was lost and I see an unauthorised purchase.` | `HIGH`; escalation true; no claim that the card was blocked |
+| Sensitive data | `My PIN is 1234 and my OTP is 567890.` | Response warns not to share credentials and does not repeat them |
 
-> **Tip:** Keeping flow input names identical to your topic variable names (`requester`, `item`, `quantity`, `reason`) makes the mapping step later much less confusing.
+For each test, verify:
 
-### Step 4: Add the flow actions — log to Excel and email (~15 minutes)
-**Action 1 — Add a row into a table (Excel Online Business):**
-1. Select the **+** between the trigger and **Respond to the agent**, search for **Add a row into a table**, and select it (Excel Online (Business)).
-2. Set the file location fields:
-   - **Location:** OneDrive for Business
-   - **Document Library:** OneDrive
-   - **File:** browse to and select `Procurement Log.xlsx`
-   - **Table:** select `ProcurementTable` from the dropdown
-3. Map the columns. For the **Date** column, you must enter an expression — do not type the date by hand:
-   - Click the **Date** field, then select the **fx** (Expression / function) tab in the dynamic content panel.
-   - Type this expression into the fx editor, then select **Add / OK**:
-     ```
-     formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')
-     ```
-   - The field should now show a blue/purple **token**, not plain text.
-4. Map the remaining columns using the **Dynamic content** tab — pick the values that come from the **trigger** (the inputs you defined in Step 3):
-   - **Requester:** `requester`
-   - **Item:** `item`
-   - **Quantity:** `quantity`
-   - **Reason:** `reason`
-   - **Status:** type the literal text `Pending`
+- the website form submits through the chatbot;
+- the prompt flow runs once;
+- Parse JSON succeeds;
+- one Excel row and acknowledgement email are created; and
+- the website chatbot displays the returned draft.
 
-> **⚠️ Warning:** The `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')` expression must be entered through the **fx editor** so it becomes a token. If you paste it as plain text into the Date field, Excel will store the literal characters `formatDateTime(...)` instead of a real date.
+## Part 2 — Import the Packaged Flow
 
-**Action 2 — Send an email (Office 365 Outlook):**
-1. Select the **+** below the Excel action (still above **Respond to the agent**), search for **Send an email (V2)** (Office 365 Outlook), and select it.
-2. Fill in the email:
-   - **To:** the procurement team address (use your own email for testing)
-   - **Subject:** type `New Procurement Request from `, then insert the **requester** dynamic content right after it
-   - **Body:** type the text below, inserting each value from the **Dynamic content** panel where shown (do not type the variable names by hand):
-     ```
-     A new procurement request has been submitted:
-     Requester: {requester}
-     Item: {item}
-     Quantity: {quantity}
-     Reason: {reason}
-     Status: Pending
-     ```
+Import the lab-specific editable solution:
 
-**Action 3 — Respond to the agent:**
-1. Select the **Respond to the agent** action that was added for you at the end of the flow.
-2. Select **+ Add an output**, choose **Text**, name it `result`, and set its value to: `Logged and procurement team notified.`
-3. Select **Save draft**, then **Publish** — the agent can only call a **published** flow.
-4. Return to your agent in Copilot Studio (select **Go back to agent** if prompted).
+[`Lab10-Customer-Enquiry-Prompt-Flow-Solution.zip`](Lab10-Customer-Enquiry-Prompt-Flow-Solution.zip)
 
-> **⚠️ Warning:** If the **Send an email** action shows an **"Unauthorized"** error, the Office 365 Outlook **connection** is broken or signed in with an account that has no mailbox. Open the action's **…** menu, select **My connections**, and **reconnect** using a mailbox-enabled work account. Every connection used by the flow must show a green ✓ before the flow will run.
+1. In Power Automate, open **Solutions → Import solution**.
+2. Upload the ZIP without extracting it.
+3. Select **Next → Import**.
+4. Open **Lab 10 Customer Enquiry Prompt Flow**.
+5. Open **Lab 10 - Draft Customer Enquiry Response**.
+6. Save the flow and add it to `Marina Trust Enquiry Agent` as a tool.
 
-### Step 5: Wire the flow into the topic (~10 minutes)
-1. Back in Copilot Studio, the flow should now appear as a tool/action node inside the **New Procurement Request** topic. If it does not appear, **refresh** the page and make sure the flow was **published** in the **same environment (Course Sandbox)**.
-2. Select the tool node. Under its **inputs**, map each input to the matching topic variable — this step is mandatory; the flow receives nothing if you skip it:
-   - input `requester` → variable `requester`
-   - input `item` → variable `item`
-   - input `quantity` → variable `quantity`
-   - input `reason` → variable `reason`
-3. After the tool node, add a **Send a message** node that shows the value the flow returned. Insert the `result` output via the **{x}** button:
-   ```
-   {result} Your request has been recorded. Thank you!
-   ```
-4. Select **Save** to save the topic.
-
-> **⚠️ Warning:** Mapping is the step everyone forgets. After adding the flow as a tool, you **must** map each flow input to its matching topic variable. Unmapped inputs arrive empty, so your Excel row and email will be blank.
-
-### Step 6: Test end-to-end (~10 minutes)
-1. Open the **Test** pane and select the **Start new test session** (refresh) icon so it loads the latest topic.
-2. Type a message that starts the request, e.g. `procurement request` — the agent recognises it from the topic **Description** (or phrases). Answer the questions:
-   - Name: `Daniel`
-   - Item: `Wireless mouse`
-   - Quantity: `10`
-   - Reason: `New hires`
-3. Confirm all three results occurred:
-   - The agent shows the confirmation message ("Logged and procurement team notified. Your request has been recorded. Thank you!").
-   - A **new row** appears in **Procurement Log.xlsx** (with a real date, the four values, and Status `Pending`).
-   - The **notification email** arrives in your inbox.
-4. If anything is missing, open the flow in Power Automate and review its **run history** (28-day run history) — select the latest run to inspect the inputs each step received and any error messages.
-
----
+The imported flow defines all four inputs and returns `category`, `priority`,
+`escalationRequired`, `draftResponse` and `reference`. Its connector-free
+fallback classifies common card, fee and urgent enquiries and is immediately
+testable. To use generative drafting, replace the fallback drafting actions
+with AI Builder as shown in Part 1; Microsoft requires a connection and prompt
+owned by the student's environment.
 
 ## Checkpoint
-You are ready to move on when all of the following are true:
-- ✅ A **Procurement Log** workbook with a **ProcurementTable** exists in OneDrive
-- ✅ A **Procurement Assistant** agent captures four variables (`requester`, `item`, `quantity`, `reason`)
-- ✅ An **agent flow** triggered by **When an agent calls the flow**, with four matching inputs
-- ✅ One conversation produces both a **new Excel row** and a **notification email**
-- ✅ The agent shows the flow's returned confirmation message
+> **Workplace evidence:** Capture normal, high-risk and malformed-output tests from both Teams and website channels. Pair them with prompt, parse and guardrail run details to show that escalation and fallback controls operate.
+
+- ✅ Part A prompt flow is triggered through the Teams agent
+- ✅ Part B prompt flow is triggered through the website chatbot
+- ✅ AI Builder returns JSON that matches the supplied schema
+- ✅ Guardrails prevent claims of completed transactions or approvals
+- ✅ High-risk enquiries are marked for escalation
+- ✅ **Respond to the agent** returns the draft to both channels
 
 ## Troubleshooting
+
 | Problem | Solution |
-|---------|----------|
-| Flow doesn't appear in the topic | Refresh the Copilot Studio page; confirm the flow was **published** and is in the **same environment (Course Sandbox)**. |
-| Inputs unmapped or arriving empty | Select the tool node and map **each** flow input to its matching topic variable. |
-| "Unauthorized" error on Send an email | Reconnect the **Office 365 Outlook** connection with a mailbox-enabled work account; every connection must show a green ✓. |
-| Date column shows `formatDateTime(...)` as text | You typed the expression instead of entering it in the **fx editor**. Re-enter it via **fx** so it becomes a token. |
-| Excel row is blank | Map the columns to the **trigger** dynamic content (the inputs), not to outputs of later steps. |
-| No email received | Check your Junk folder, verify the **To** address, and review the flow **run history** for errors. |
-| Flow can't find the table | Confirm the file is in **OneDrive for Business** and the table is named exactly `ProcurementTable`. |
+|---|---|
+| Prompt action is unavailable | Confirm AI Builder capacity and permissions; complete as a trainer demonstration if required. |
+| Prompt returns Markdown fences | Strengthen “Return JSON only, without Markdown fences” and retest. |
+| Parse JSON fails | Inspect the generated text and compare it with the supplied schema. |
+| Boolean is returned as text | In the prompt, show `true` without quotation marks and test again. |
+| Teams or website uses an old prompt | Save the flow, publish the agent and begin a new conversation. |
+| Sensitive value appears in output | Tighten the prompt guardrail and remove the test data from logs. |
 
 ## Key Takeaways
-- An **agent flow** uses the **When an agent calls the flow** trigger and ends with **Respond to the agent**.
-- Agent **variables** map to flow **inputs**; this mapping is mandatory and easy to forget.
-- The flow can **return** a value (`result`) that the agent shows back to the user.
-- Dates come from the `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')` expression entered via the **fx editor** as a token — never typed as text.
-- One short conversation now triggers real business actions: **logging** and **notifying** together.
+
+- Teams and website chat can expose the same Copilot Studio agent.
+- Lab 8 uses an HTTP-triggered Power Automate flow.
+- Lab 9 uses a deterministic agent flow.
+- Lab 10 uses a prompt-based agent flow for controlled language generation.
+- Prompt output must be parsed, validated and bounded by business rules.
 
 ## Duration
-~50 minutes
 
-## Next Steps
-Proceed to [Lab 11: Automated Response Generation](../Lab%2011%20-%20Automated%20Response%20Generation/index.md).
+- Guided classroom path: approximately 50 minutes
+- Full Teams installation and all website safety tests: approximately 60 minutes
+
+## Course Integration Challenge
+
+Lab 10 is the final Day 2 lab. Before assessment:
+
+1. Run one successful test through Microsoft Teams.
+2. Run one successful test through the website chatbot.
+3. Compare the Lab 8 HTTP trigger, Lab 9 agent-flow trigger and Lab 10 prompt flow.
+4. Explain which pattern is most appropriate for a workflow from your own job.
+5. Review the run history and identify where inputs, actions and returned outputs appear.

@@ -36,13 +36,13 @@ An agent is assembled from five kinds of building block. You'll meet each one ac
 
 | Block | What it is | Example | First seen |
 |-------|------------|---------|-----------|
-| **Instructions** | Plain-language directions that shape the agent's behaviour and personality | "You are a sales assistant. Always collect name, company, product, and quantity." | Lab 6 |
-| **Knowledge** | Documents / sites the agent can answer from (RAG) | Product catalogue, FAQ | Lab 7 |
-| **Topics** | Conversation flows the agent runs when the user's message matches the topic's **description** (generative orchestration, the default) or its **trigger phrases** (classic) | A "New Sales Enquiry" topic the agent chooses when someone asks for a quote | Lab 9 |
-| **Tools** (formerly *Actions*) | Things the agent can *do*, including **Power Automate flows** | "Log enquiry to Excel" flow | Lab 8 |
-| **Variables** | Where captured answers are stored to pass onward | `customerName`, `product`, `quantity` | Lab 9 |
+| **Instructions** | Plain-language directions that shape the agent's behaviour and personality | "You are an IT support assistant. Use approved guidance and escalate safely." | Lab 7A |
+| **Knowledge** | Documents / sites the agent can answer from (RAG) | IT support FAQ | Lab 7B |
+| **Topics** | Explicit conversation flows used by classic agents; the new experience instead relies on enhanced orchestration, Skills and Tools | A classic "Banking onboarding enquiry" topic that collects a structured request | Lab 9 (classic path) |
+| **Tools** (formerly *Actions*) | Things an agent can invoke, including **Power Automate agent flows** and prompt-based flows | "Assess onboarding enquiry" / "Draft customer enquiry response" | Labs 9–10 |
+| **Variables / tool inputs** | Named values captured explicitly in classic Topics or inferred from confirmed context in the new experience | `fullName`, `category`, `message` | Lab 9 |
 
-> **Knowledge = RAG.** When you upload documents, the agent uses **Retrieval-Augmented Generation**: it *retrieves* the relevant passages from your files and *generates* an answer grounded in them — so it speaks from your content, not the open internet. You'll set this up in Lab 7.
+> **Knowledge = RAG.** When you upload documents, the agent uses **Retrieval-Augmented Generation**: it *retrieves* the relevant passages from your files and *generates* an answer grounded in them — so it speaks from your content, not the open internet. You'll set this up in Lab 7B.
 
 ---
 
@@ -106,17 +106,107 @@ The key points:
 
 ---
 
-## 5. What you'll build on Day 2
+## 5. Power Automate versus n8n AI Agent
 
-- **Lab 6:** Your first agent — learn the interface, instructions, and testing.
-- **Lab 7:** Complete an **IT Support RAG Chatbot** that retrieves from approved documents, cites its source, and refuses unsupported questions.
-- **Lab 8:** Add **Tools & Actions** so the agent can *do* things, not just answer.
-- **Lab 9:** A **Sales Enquiry Assistant** that captures enquiries as structured data.
-- **Lab 10:** A **Procurement Request** agent that triggers a Power Automate flow.
-- **Lab 11:** **Automated Response Generation** — use AI prompts to draft professional replies.
+Power Automate by itself is similar to a normal n8n automation: a trigger starts
+fixed actions, conditions and connectors. To obtain the n8n **AI Agent**
+pattern, Copilot Studio becomes the conversational orchestrator and the Power
+Automate flow becomes one of its tools.
 
-Each lab adds one capability on top of the last, so by Lab 11 you'll have an agent that understands, retrieves, captures, acts, and writes.
+| n8n concept | Microsoft equivalent |
+|---|---|
+| Chat Trigger or Webhook | Copilot Studio Teams/website channel, or Power Automate HTTP Request |
+| AI Agent node | Copilot Studio agent |
+| System prompt | Agent Instructions |
+| Vector store / RAG tool | Copilot Studio Knowledge |
+| Workflow tool | Power Automate agent flow |
+| Tool input schema | Inputs on **When an agent calls the flow** |
+| Tool result | Outputs on **Respond to the agent** |
+| LLM prompt node | AI Builder **Run a prompt** inside an agent flow |
+
+Do not try to place the whole Copilot Studio agent inside an ordinary
+Power Automate action. Use this direction instead:
+
+```text
+User → Copilot Studio agent → Power Automate agent flow (tool)
+                              ├── Outlook / Excel / approvals / APIs
+                              ├── optional AI Builder prompt
+                              └── Respond to the agent → answer in chat
+```
+
+### Add a Power Automate agent flow to Copilot Studio
+
+1. Ensure Power Automate and Copilot Studio use the same environment.
+2. In Copilot Studio, open the agent and select
+   **Tools → Add a tool → New tool → Agent flow**.
+3. Build the flow with **When an agent calls the flow**.
+4. Add named inputs for the values the agent must supply.
+5. Add the required Power Automate actions.
+6. Finish with **Respond to the agent** and add named outputs.
+7. Save the flow and return to the agent.
+8. Give the tool a clear name and description so the agent knows when to call
+   it.
+9. Map each tool input from confirmed conversation context or classic Topic
+   variables.
+10. Save, publish and test first in Preview, then in Teams or the website
+    channel.
+
+### Import an agent-flow solution
+
+Labs 9 and 10 include solution ZIPs because agent-callable flows are solution
+components.
+
+1. In Power Automate, choose **Solutions → Import solution**.
+2. Upload the lab-specific ZIP without extracting it.
+3. Select **Next → Import**.
+4. Open the imported solution and its flow.
+5. Save the flow.
+6. In Copilot Studio, add the imported flow under **Tools**.
+7. Map the inputs, save, publish and test.
+
+The Lab 9 package is connector-free and immediately testable. The Lab 10
+package has a connector-free safe fallback; using AI Builder still requires
+the learner to select a prompt and connection owned by their environment.
 
 ---
 
-**Next:** [Lab 6: Create Your First Copilot Studio Agent](Lab%206%20-%20Create%20Your%20First%20Agent/index.md)
+## 6. What you'll build on Day 2
+
+Day 2 is organised as two connected projects. Each lab adds one capability and
+reuses the artifact created previously.
+
+### Project A — MyCompany IT Support
+
+| Lab | Build | New capability |
+|---|---|---|
+| **7A** | Prompt-create `MyCompany IT Support Assistant` | Identity, Instructions, safety boundaries and Preview/Test |
+| **7B** | Upgrade the same agent | Approved FAQ Knowledge, RAG, citations, evaluation and publishing |
+
+### Project B — Marina Trust Omnichannel Enquiries
+
+| Lab | Build | New capability |
+|---|---|---|
+| **8** | Prompt-create `Marina Trust Enquiry Agent`; publish to Teams; connect the supplied standalone website form to Power Automate | Channels plus an ordinary HTTP-triggered flow with no agent in the website path |
+| **9** | Upgrade the same Marina Trust agent in Teams and website chat | Structured capture and a deterministic agent flow |
+| **10** | Upgrade the same Marina Trust agent again | Guarded AI prompt flow with structured output and escalation |
+
+The progression is deliberate:
+
+```text
+Lab 7A: Instructions
+   ↓
+Lab 7B: Instructions + Knowledge + Evaluation
+   ↓
+Lab 8: Publish agent to Teams + website integration
+   ↓
+Lab 9: Same agent + deterministic tool
+   ↓
+Lab 10: Same agent + AI prompt tool
+```
+
+By Lab 10 you will be able to distinguish an informational agent, an ordinary
+Power Automate flow, a deterministic agent flow and an AI prompt flow.
+
+---
+
+**Next:** [Lab 7A: Create the IT Support Agent](Lab%207A%20-%20Create%20IT%20Support%20Agent/index.md)

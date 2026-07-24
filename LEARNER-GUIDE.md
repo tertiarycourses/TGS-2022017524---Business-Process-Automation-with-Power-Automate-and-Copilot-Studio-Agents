@@ -1,6 +1,6 @@
 # Learner Guide
 
-**Course Code:** TGS-2022017524  ·  **Version 3.2**
+**Course Code:** TGS-2022017524  ·  **Version 3.8**
 
 ### Document Version Control Record
 
@@ -11,6 +11,13 @@
 | 3.0 | 3 Jul 2026 | Course restructured from 3 days to 2 days — Day 1: Power Automate (Labs 0-5), Day 2: Copilot Studio agents (Labs 6-11) ending with the WSQ assessment. Modules 4-5 and Labs 12-16 retired. | Course Development Team |
 | 3.1 | 24 Jul 2026 | Added Day 1 Labs 6A-6B: external online-form and browser-chatbot webhooks using the Power Automate HTTP Request trigger, with both new and classic designer guidance. | Course Development Team |
 | 3.2 | 24 Jul 2026 | Reframed Lab 7 as the complete Copilot Studio IT Support RAG Chatbot outcome: approved FAQ retrieval, citations, negative testing, and grounded refusal. | Course Development Team |
+| 3.3 | 24 Jul 2026 | Restructured Labs 8-10 into two-part Teams and website experiences: ordinary HTTP Power Automate flow, deterministic agent flow, and guarded AI prompt flow. | Course Development Team |
+| 3.4 | 24 Jul 2026 | Day 2 now concludes at Lab 10. Retired Lab 11 and allocated the remaining guided time to integrated testing, troubleshooting and recap. | Course Development Team |
+| 3.5 | 24 Jul 2026 | Made importable Power Automate packages the recommended classroom path and added a ready-made Lab 8 website enquiry flow package. | Course Development Team |
+| 3.6 | 24 Jul 2026 | Made natural-language flow creation the primary Lab 1 route: prompt Copilot, inspect and correct the generated draft, then test; retained manual and import recovery routes. | Course Development Team |
+| 3.7 | 24 Jul 2026 | Reorganised Copilot Studio Labs 6-10 into two coherent projects: prompt-created IT Support agent upgraded with RAG, then one Marina Trust agent progressively upgraded with HTTP, deterministic and AI prompt flows. | Course Development Team |
+| 3.8 | 24 Jul 2026 | Added a visual architecture flowchart to every lab, standardised manual-build and packaged-import routes, and clarified how a Copilot Studio agent calls Power Automate agent flows as tools. | Course Development Team |
+| 3.9 | 24 Jul 2026 | Reordered the labs from simple to complex: instant, scheduled, automated, human approval, HTTP, agent creation, RAG, channel deployment, deterministic agent flow and controlled prompt flow. | Course Development Team |
 
 ## Table of Contents
 
@@ -19,27 +26,26 @@
   - [Module 1: Introduction to Workflow Automation](#module-1-introduction-to-workflow-automation)
   - [Module 2: Introduction to Power Automate](#module-2-introduction-to-power-automate)
   - [Lab 0: Environment Setup — Create Your Copilot Studio & Power Automate Accounts](#lab-0-environment-setup--create-your-copilot-studio--power-automate-accounts)
-  - [Lab 1: Automated Email Workflow](#lab-1-automated-email-workflow)
-  - [Lab 2: Excel Data Logging Workflow](#lab-2-excel-data-logging-workflow)
-  - [Lab 3: Simple Approval Workflow](#lab-3-simple-approval-workflow)
-  - [Lab 4: Scheduled Trigger Workflow](#lab-4-scheduled-trigger-workflow)
-  - [Lab 5: Form Submission Workflow](#lab-5-form-submission-workflow)
+  - [Lab 1: Create Your First Flow with a Prompt](#lab-1-create-your-first-flow-with-a-prompt)
+  - [Lab 2: Instant Excel Logging Flow](#lab-2-instant-excel-logging-flow)
+  - [Lab 3: Scheduled Flow](#lab-3-scheduled-flow)
+  - [Lab 4: Automated Form Flow](#lab-4-automated-form-flow)
+  - [Lab 5: Human-in-the-Loop Approval Flow](#lab-5-human-in-the-loop-approval-flow)
   - [Lab 6A: External Enquiry Webhook](#lab-6a-external-enquiry-webhook)
   - [Lab 6B: Webhook Chatbot](#lab-6b-webhook-chatbot)
 - [Day 2 — Building Business Agents with Copilot Studio](#day-2--building-business-agents-with-copilot-studio)
   - [Module 3: Building Business Agents with Copilot Studio](#module-3-building-business-agents-with-copilot-studio)
-  - [Lab 6: Create Your First Copilot Studio Agent](#lab-6-create-your-first-copilot-studio-agent)
-  - [Lab 7: Create an IT Support RAG Chatbot with Copilot Studio](#lab-7-create-an-it-support-rag-chatbot-with-copilot-studio)
-  - [Lab 8: Add Tools and Actions to Your Agent](#lab-8-add-tools-and-actions-to-your-agent)
-  - [Lab 9: Sales Enquiry Assistant](#lab-9-sales-enquiry-assistant)
-  - [Lab 10: Procurement Request Workflow](#lab-10-procurement-request-workflow)
-  - [Lab 11: Automated Response Generation](#lab-11-automated-response-generation)
+  - [Lab 7A: Create the IT Support Agent](#lab-7a-create-the-it-support-agent)
+  - [Lab 7B: Ground and Evaluate the IT Support RAG Agent](#lab-7b-ground-and-evaluate-the-it-support-rag-agent)
+  - [Lab 8: Deploy the Agent to Teams and a Website](#lab-8-deploy-the-agent-to-teams-and-a-website)
+  - [Lab 9: Teams and Website Enquiry Agent Flow](#lab-9-teams-and-website-enquiry-agent-flow)
+  - [Lab 10: Teams and Website Enquiry Prompt Flow](#lab-10-teams-and-website-enquiry-prompt-flow)
 
 Welcome! This Learner Guide takes you **click-by-click** through every hands-on lab in the WSQ course **Business Process Automation with Power Automate and Copilot Studio Agents** (Course Code: TGS-2022017524). Over two days you go from your first Power Automate flow to AI business agents in Microsoft Copilot Studio — and finish by connecting an agent to your flows in a complete end-to-end automated workflow.
 
 Work through the labs **in order**: each one builds on the skills of the lab before it. Whenever you see a **Checkpoint**, stop and confirm your flow or agent behaves as described before moving on. The **Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.
 
-> Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5 and webhook Labs 6A-6B). Day 2: Business agents in Copilot Studio + agent-and-flow end-to-end workflows (Labs 6-11), then the WSQ assessment (4:00-6:00 PM).
+> Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5 and webhook Labs 6A-6B). Day 2: Business agents in Copilot Studio + agent-and-flow end-to-end workflows (Labs 6-10), then the WSQ assessment (4:00-6:00 PM).
 
 ---
 
@@ -223,16 +229,31 @@ You build flows at **<a href="https://make.powerautomate.com" target="_blank" re
 
 > **Low-code, not no-thought.** You don't write code, but you do think like a designer: what starts the flow, what it does, and what data moves between steps.
 
+**Two ways to create a flow**
+
+Power Automate can create a first draft from a natural-language prompt, or you can assemble the cards manually:
+
+| Approach | Best use | Maker responsibility |
+| --- | --- | --- |
+| **Create your automation with Copilot / Describe it to design it** | Quickly turn a clear requirement into a suggested trigger and actions | Inspect every generated card, connection, field and expression |
+| **Start from blank** | Learn exact configuration or build when Copilot is unavailable | Select and configure every trigger and action |
+
+In Lab 1 you start with a prompt, then open the designer and correct the generated draft. This is the working habit used throughout the course:
+
+**Describe → Generate → Review → Test → Improve**
+
 **Types of flow you'll build in this course**
 
 There are four flavours of flow. They differ only in *how they start* — once running, they all do the same kind of work.
 
 | Flow type | Started by | Example | Lab |
 | --- | --- | --- | --- |
-| **Instant** | A person clicking Run / a button | Send a confirmation email on demand | Lab 1–3 |
-| **Scheduled** | A clock/timetable (Recurrence) | Daily reminder at 9 AM | Lab 4 |
-| **Automated** | An event | New form response, new email, new file | Lab 5 |
-| **Agent flow** | A Copilot Studio agent | Agent logs a request and notifies the team | Day 2 |
+| **Instant** | A person clicking Run / a button | Send email and log test data on demand | Labs 1–2 |
+| **Scheduled** | A clock/timetable (Recurrence) | Daily reminder at 9 AM | Lab 3 |
+| **Automated** | An event | New form response, new email, new file | Lab 4 |
+| **Human approval** | A flow pauses for a decision | Approve or reject a request, then branch | Lab 5 |
+| **HTTP request** | An external system posts JSON | Website enquiry or deterministic browser chatbot | Labs 6A–6B |
+| **Agent flow** | A Copilot Studio agent | Agent logs a request and returns a result | Lab 9 |
 
 ---
 
@@ -244,10 +265,11 @@ Every flow starts with **exactly one trigger** — the event that kicks it off. 
 | --- | --- | --- | --- |
 | **Email received** | Office 365 Outlook — *"When a new email arrives (V3)"* | Mail lands in a folder | Further practice |
 | **File upload** | OneDrive / SharePoint — *"When a file is created"* | A document is dropped into a folder | Further practice |
-| **Form submission** | Microsoft Forms — *"When a new response is submitted"* | Someone submits your form | Lab 5 |
-| **Schedule** | *"Recurrence"* | A timetable you define is reached | Lab 4 |
-| **Manual** | *"Manually trigger a flow"* | You press **Run** | Labs 1–3 |
-| **Agent call** | *"When an agent calls the flow"* | A Copilot Studio agent runs the flow as a tool | Day 2–3 |
+| **Form submission** | Microsoft Forms — *"When a new response is submitted"* | Someone submits your form | Lab 4 |
+| **Schedule** | *"Recurrence"* | A timetable you define is reached | Lab 3 |
+| **Manual** | *"Manually trigger a flow"* | You press **Run** | Labs 1–2 and Lab 5 |
+| **HTTP request** | Request — *"When an HTTP request is received"* | An external website posts JSON | Labs 6A–6B |
+| **Agent call** | *"When an agent calls the flow"* | A Copilot Studio agent runs the flow as a tool | Labs 9–10 |
 
 > **Tip — build with a manual trigger first.** When learning a new flow, start with a **manual** trigger so you can press Run and perfect the actions. Once they work, swap in the real trigger (form, email, schedule). The actions stay exactly the same — only the start event changes.
 
@@ -269,7 +291,7 @@ After the trigger, you add **actions** — the work the flow performs. These are
 
 **Notifications & approvals**
 
-- *Approvals → Start and wait for an approval.* Pause the flow until a person approves or rejects, then branch on the **Outcome**. *(Lab 3)*
+- *Approvals → Start and wait for an approval.* Pause the flow until a person approves or rejects, then branch on the **Outcome**. *(Lab 5)*
 - Notifications to **Teams** or email keep the right people informed at each step.
 
 Actions are wired together with:
@@ -301,7 +323,23 @@ This is the **number one source of "why won't my flow run?"** for beginners, so 
 
 ---
 
-**5. Anatomy of a flow (what you'll see in the designer)**
+**5. Importing a packaged Power Automate flow**
+
+Every flow-based lab includes its own ZIP beside the lab's `index.md`.
+
+1. Download the individual lab ZIP. Do not extract it.
+2. In Power Automate, select the correct **Course Sandbox** environment.
+3. Open **My flows → Import → Import Package (Legacy)**.
+4. Upload the ZIP.
+5. For the flow, choose **Create as new**.
+6. For every connector, choose an existing connection or create one and sign  —  in.
+7. Select **Import**, open the imported flow and complete the lab's  —  **After import** checklist.
+8. Select tenant-owned resources such as the Microsoft Form, Excel workbook,  —  table, recipient or approver.
+9. **Save → Test**, then inspect the run history.
+
+> **Why connection selection remains:** reusable packages must not contain passwords, access tokens, personal email addresses, tenant IDs, Form IDs or OneDrive file IDs. The flow logic is packaged; Microsoft still requires the learner to authorise resources in their own environment.
+
+**6. Anatomy of a flow (what you'll see in the designer)**
 
 ```
 [ TRIGGER ]        ← one event that starts the flow
@@ -325,7 +363,7 @@ Get comfortable with this loop today; you'll repeat it dozens of times across th
 
 ---
 
-**Next:** Lab 1: Automated Email Workflow
+**Next:** Lab 1: Instant Email Flow
 
 ---
 
@@ -357,9 +395,46 @@ By the end of this lab, you will be able to:
 
 > **⚠️ Warning — Why not the Microsoft 365 Developer Program?** As of 2024, Microsoft restricted the free Developer Program E5 sandbox to people with an active **Visual Studio Enterprise or Professional subscription**. If you sign up without one you'll see *"You don't currently qualify for a Microsoft 365 Developer Program sandbox subscription."* — so we **do not** use that path in this course. Use **Option B** instead.
 
+**Workflow Visual**
+
+![Lab 0 shared course environment flowchart](<labs/Day 1/Lab 0 - Environment Setup/assets/flowchart.png>)
+
+The same work or school account and Course Sandbox environment connect every
+
+Power Automate flow and Copilot Studio agent used later.
+
+**Packaged Flow**
+
+No flow package applies to Lab 0 because this lab creates and verifies the
+
+environment before any flow exists. The first importable flow is supplied in
+
+Lab 1.
+
 **Scenario**
 
-You work for **ACME Pte Ltd** and will spend the next two days automating ACME's business workflows. Before you can build anything, you need a clean place to work: a Microsoft 365 account, the Power Automate and Copilot Studio apps, and — importantly — **one shared environment** called **Course Sandbox** that both apps point to. Getting this right now means every later lab "just works."
+You have joined **ACME Pte Ltd's Digital Operations project team** as a junior
+
+automation specialist. The production tenant contains customer and employee
+
+data, so the project manager will not allow experiments there. Your first task
+
+is to prepare a controlled **Course Sandbox** where flows, connectors, agent
+
+knowledge and test records can be built safely.
+
+| Workplace detail | Lab interpretation |
+| --- | --- |
+| Your role | Junior automation specialist |
+| Stakeholders | Power Platform administrator, customer-operations manager and IT security |
+| Operational risk | A learner accidentally sends test emails or writes data into a production system |
+| Success measure | Power Automate and Copilot Studio use the same sandbox environment and all required connections can be verified |
+
+**Real-world extension:** An organisation would also apply environment roles,
+
+Data Loss Prevention policies, service accounts, naming standards and a
+
+development → test → production deployment process.
 
 ---
 
@@ -465,6 +540,8 @@ If all seven are checked, your environment is ready.
 
 **Checkpoint**
 
+> **Workplace evidence:** Capture the environment selectors in Power Automate and Copilot Studio plus the green connection status. In a real project, these screenshots form part of the deployment-readiness record.
+
 You should now have:
 
 - ✅ A working Microsoft 365 **work/school** account (Option A or B)
@@ -499,26 +576,26 @@ You should now have:
 
 **Next Steps**
 
-Read Module 1: Workflow Automation Concepts and Module 2: Introduction to Power Automate, then proceed to Lab 1: Automated Email Workflow.
+Read Module 1: Workflow Automation Concepts and Module 2: Introduction to Power Automate, then proceed to Lab 1: Instant Email Flow.
 
 ---
 
-### Lab 1: Automated Email Workflow
+### Lab 1: Create Your First Flow with a Prompt
 
 **Lab Title**
 
-Build an Automated Email Workflow in Power Automate
+Create and Verify an Instant Email Flow with Power Automate Copilot
 
 **Lab Objectives**
 
 By the end of this lab, you will be able to:
 
-1. Create a flow from a blank canvas in Power Automate's new designer
-2. Configure a **manual trigger** with a text **input**
-3. Add a **Send an email (V2)** action and create an Office 365 Outlook **connection**
-4. Use **dynamic content** to insert the input value into the email body
-5. **Save**, then **Test → Run** the flow and confirm the email is delivered
-6. Read the **run history** to verify each step succeeded
+1. Describe a business automation in natural language
+2. Ask Power Automate Copilot to generate the first version of the flow
+3. Review the suggested **trigger**, **action**, connections and field values
+4. Correct the flow in the designer instead of assuming AI output is complete
+5. Use **dynamic content** to personalise the email
+6. **Save**, **Test → Run**, and use the **run history** to verify the result
 
 **Prerequisites**
 
@@ -526,47 +603,108 @@ By the end of this lab, you will be able to:
 - Signed in at <a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a> with **Course Sandbox** selected (top-right)
 - Outlook working with your account (a mailbox-enabled account)
 
+**Workflow Visual**
+
+![Lab 1 prompt-created email automation flowchart](<labs/Day 1/Lab 1 - Instant Email Flow/assets/flowchart.png>)
+
+The Copilot prompt creates a draft; the learner verifies the trigger, dynamic
+
+content and Outlook action before testing.
+
+**Choose Your Route**
+
+- **Part 1 — Build step by step:** recommended for learning how Copilot creates
+
+a draft and how to verify it.
+
+- **Part 2 — Import the packaged flow:** use the ZIP in this lab folder for a
+
+faster start or recovery.
+
+Download Lab1-Send-Confirmation-Email.zip, then use **My flows → Import → Import Package (Legacy)**. Map the Outlook connection and follow the import details.
+
+Use this only when Copilot is unavailable or you need a known-good recovery flow. The main learning route below begins with a natural-language prompt.
+
 **Scenario**
 
-At **ACME Pte Ltd**, every customer enquiry should get an instant, personalized "thank you" reply so customers know they've been heard. In this lab you build the simplest possible automation — a flow you start by hand that emails a personalized confirmation. It teaches the core pattern you'll reuse all course long: **Trigger → Action → Output**.
+You are an **ACME Customer Service Officer** handling enquiries received by
+
+telephone and at the service counter. During a call, you press **Run**, enter the
+
+customer's name and send an acknowledgement immediately. The email sets a
+
+one-business-day response expectation and gives the customer confidence that
+
+the request was captured.
+
+| Workplace detail | Requirement |
+| --- | --- |
+| Trigger | A staff member deliberately runs the flow after verifying the caller's name |
+| Recipient | The controlled training mailbox standing in for the customer |
+| Service target | Acknowledgement sent within 15 minutes of first contact |
+| Evidence | Successful run history plus the personalised email received |
+
+Instead of assembling the first version card by card, you describe the
+
+requirement to Copilot and then inspect every generated field. This establishes
+
+the course pattern:
+
+**Describe → Generate → Review → Test → Improve**
 
 ---
 
-**Step-by-Step Guide**
+**Part 1 — Build the Flow Step by Step**
 
-**Step 1: Start a new flow (~5 minutes)**
+**Step 1: Generate the first draft with Copilot (~7 minutes)**
 
 1. Go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>** and sign in.
 2. Confirm the **Environment selector** (top-right) shows **Course Sandbox** — the environment from Lab 0.
-3. In the left menu, select **Create**.
-4. Under "Start from blank", select **Instant cloud flow**.
+3. On **Home** or **Create**, find **Create your automation with Copilot** or **Describe it to design it**. The wording varies slightly between the new and classic navigation.
+4. Paste this prompt, replacing the email placeholder with your own mailbox-enabled course address:
 
-> **Tip:** An **instant** flow is started manually by clicking a button — perfect for learning and testing. Later labs use automatic triggers (a form submission, a new email, etc.).
+```
+   Create an instant cloud flow named Lab 1 - Send Confirmation Email.
+   Start it with Manually trigger a flow and ask for a text input named
+   CustomerName. Then use Office 365 Outlook Send an email (V2) to
+   YOUR_EMAIL@YOUR_TENANT. Use the subject Thank you for your enquiry.
+   The body should greet the CustomerName and say that ACME Customer
+   Operations has logged the enquiry and will respond within 1 business day.
+```
 
-1. In the dialog box:  —  **Flow name:** `Lab 1 - Send Confirmation Email`  —  **Choose how to trigger this flow:** select **Manually trigger a flow**
-2. Select **Create**. The new designer opens with one step already on the canvas: the trigger **Manually trigger a flow**.
+1. Submit the prompt. Read the proposed structure; it should contain **Manually trigger a flow → Send an email (V2)**.
+2. If the proposed trigger or action is wrong, add this refinement:
 
-**Step 2: Add an input to the trigger (~5 minutes)**
+```
+   Use only Manually trigger a flow and Office 365 Outlook Send an email
+   (V2). Do not use Gmail, Outlook.com, Teams, or an automated trigger.
+```
 
-We'll let whoever runs the flow type a customer name, so the email can be personalized.
+1. Select **Keep it and continue**. Check that the Outlook connection has a green check, sign in if required, then select **Create flow**.
 
-1. Select the trigger card **Manually trigger a flow** to open its configuration panel (it opens on the **left** side of the designer).
-2. Select **+ Add an input**.
-3. From the type list, choose **Text**.
-4. Replace the default input name with `CustomerName`.
+> **Important:** Copilot creates a draft, not proof that the automation is correct. The next step is compulsory: inspect every generated card and value.
+
+> **Can't see the Copilot prompt box?** Your tenant, region or licence may not expose natural-language flow creation. Use **Create → Instant cloud flow**, name it `Lab 1 - Send Confirmation Email`, select **Manually trigger a flow**, and continue below. Alternatively use the recovery import package.
+
+**Step 2: Review and correct the generated flow (~8 minutes)**
+
+1. Rename the flow to `Lab 1 - Send Confirmation Email` if Copilot used a different name.
+2. Confirm the first card is **Manually trigger a flow**.
+3. Open the trigger. Confirm it contains one **Text** input named `CustomerName`.
+4. If the input is missing, select **+ Add an input → Text**, then name it `CustomerName`.
+5. Confirm the next card is **Send an email (V2)** from **Office 365 Outlook**. Delete and replace it if Copilot selected Gmail, Outlook.com or another connector.
 
 > **Tip:** This input becomes one of the trigger's **outputs** — a piece of data you can drop into later steps using dynamic content.
 
-**Step 3: Add the Send an email action (~10 minutes)**
+**Step 3: Verify and complete the email action (~10 minutes)**
 
-1. Below the trigger, select the **+** (plus) button, then **Add an action**.
-2. In the search box, type **Send an email**.
-3. Select the **Office 365 Outlook** connector, then choose the action **Send an email (V2)**.
+If Copilot did not add an email action, select the **+** below the trigger, choose **Add an action**, search for **Send an email**, and select **Office 365 Outlook → Send an email (V2)**.
 
 > **⚠️ Warning:** Pick **Office 365 Outlook**, not Gmail, Outlook.com, or SMTP. Only Office 365 Outlook uses your course work account.
 
-1. If this is your first use of the connector, Power Automate creates a **connection**: select **Sign in**, choose your course account, and approve. A green ✓ next to the connection means it's ready.
-2. Configure the email fields in the action panel. The exact text to use is given in the copy-paste blocks below — copy **only the text inside the box** (use the copy button if your viewer shows one), nothing else.
+1. If required, select **Sign in**, choose your course account, and approve the Outlook connection. A green ✓ means it is ready.
+2. Open the generated email action and verify every field. Do not keep a value merely because Copilot supplied it.
+3. Configure the email fields using the copy-paste blocks below.
 
 - **To:** type your own email address, then press **Enter** so it resolves into a **chip** (a small pill with an × next to it). If it stays as plain text, the address wasn't accepted — retype it.
 - **Subject:** copy-paste this line:
@@ -588,7 +726,7 @@ We'll let whoever runs the flow type a customer name, so the email can be person
 3. Click just after the token and paste the rest:
 
 ```
-        , thank you for reaching out to ACME Pte Ltd. We have received your enquiry and a team member will respond within 1 business day.
+        , thank you for contacting ACME Customer Operations. Your enquiry has been logged and a service officer will respond within 1 business day.
 ```
 
 > **Tip:** **Dynamic content** is how outputs from earlier steps get reused. The coloured `CustomerName` token is a placeholder — it's replaced with the real value when the flow runs.
@@ -617,9 +755,14 @@ We'll let whoever runs the flow type a customer name, so the email can be person
 
 ---
 
-**Optional: Import the ready-made flow**
+**Part 2 — Import the Packaged Flow**
 
-If you get stuck, a completed version of this flow is provided as a **solution package**: Lab1-Send-Confirmation-Email-Solution.zip.
+If you get stuck, use either of these packages:
+
+- **Legacy flow package:** Lab1-Send-Confirmation-Email.zip for **My flows → Import → Import Package (Legacy)**.
+- **Dataverse solution:** Lab1-Send-Confirmation-Email-Solution.zip for **Solutions → Import solution**.
+
+For the solution route:
 
 1. Confirm the **Environment selector** (top-right) shows **NUS Copilot Sandbox**.
 2. In the left menu, select **Solutions** → **Import solution** (toolbar).
@@ -630,11 +773,13 @@ If you get stuck, a completed version of this flow is provided as a **solution p
 
 > **Tip:** Importing gives you a known-good flow definition — if the imported flow *still* fails, the problem is your **connection/account** (see Troubleshooting), not the flow.
 
-> **Note:** A legacy package (Lab1-Send-Confirmation-Email.zip) is also provided for tenants where **My flows → Import → Import Package (Legacy)** is allowed. In the NUS sandbox, legacy import is disabled ("Create in Dataverse solutions" policy), so use the solution package above.
+> **Note:** After a legacy import, open the flow, reconnect Outlook, replace `YOUR_EMAIL@YOUR_TENANT` with your email, then save and test. If your tenant says flows must be created in Dataverse solutions, use the solution package.
 
 ---
 
 **Checkpoint**
+
+> **Workplace evidence:** Retain the successful run-history screen and the received acknowledgement email. A supervisor should be able to match the input customer name to the message that was delivered.
 
 You should now have:
 
@@ -658,6 +803,8 @@ You should now have:
 
 **Key Takeaways**
 
+- A clear prompt states the trigger, connector, action, inputs and expected output.
+- Copilot accelerates the first draft; the maker remains responsible for reviewing connections, fields, dynamic content and behaviour.
 - Every flow follows the pattern **Trigger → Actions**.
 - Trigger **inputs** become **outputs** that you reuse in later steps via **dynamic content** tokens.
 - A connector needs a **connection**: green ✓ = ready, red ⚠️ = reconnect. **"Unauthorized"** on *Send an email* means the Outlook connection is broken or the account has no mailbox.
@@ -670,11 +817,11 @@ You should now have:
 
 **Next Steps**
 
-Proceed to Lab 2: Excel Data Logging Workflow.
+Proceed to Lab 2: Instant Excel Logging Flow.
 
 ---
 
-### Lab 2: Excel Data Logging Workflow
+### Lab 2: Instant Excel Logging Flow
 
 **Lab Title**
 
@@ -697,13 +844,53 @@ By the end of this lab, you will be able to:
 - Access to Excel via OneDrive (verified in Lab 0)
 - Signed in at <a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a> with **Course Sandbox** selected (top-right)
 
+**Workflow Visual**
+
+![Lab 2 enquiry-to-Excel flowchart](<labs/Day 1/Lab 2 - Instant Excel Logging Flow/assets/flowchart.png>)
+
+Each trigger input maps to one named column in the Excel table.
+
+**Choose Your Route**
+
+- **Part 1 — Build step by step:** recommended for learning Excel table mapping.
+- **Part 2 — Import the packaged flow:** use the ZIP in this lab folder, then
+
+select your own workbook and table.
+
+Download Lab2-Log-Enquiry-to-Excel.zip, then
+
+use **My flows → Import → Import Package (Legacy)**. Map the Excel connection
+
+and follow the import details.
+
+You only need to select your own workbook and table after import.
+
 **Scenario**
 
-At **ACME Pte Ltd**, every customer enquiry must be recorded so nothing is lost. In this lab you build a flow that takes submitted details (name, email, message) and **logs each one as a new row** in an Excel workbook — a running enquiry register the whole team can see. You'll also timestamp each row automatically.
+You are the **ACME Customer Operations Coordinator**. Phone calls and
+
+walk-in enquiries currently live in personal notebooks, so supervisors cannot
+
+see workload or prove that a customer was followed up. You will create a shared
+
+enquiry register and an instant flow that writes one traceable row for every
+
+contact.
+
+| Workplace detail | Requirement |
+| --- | --- |
+| Users | Customer-service officers |
+| System of record for this pilot | OneDrive Excel table named `EnquiryTable` |
+| Minimum audit data | Timestamp, customer name, contact email, request and status |
+| Success measure | Every test run adds exactly one complete row with status `New` |
+
+**Production extension:** Replace Excel with Dataverse or a CRM when concurrent
+
+users, permissions, retention rules and reporting become important.
 
 ---
 
-**Step-by-Step Guide**
+**Part 1 — Build the Flow Step by Step**
 
 **Step 1: Create the Enquiry Log workbook with a Table (~10 minutes)**
 
@@ -762,7 +949,7 @@ Then select **Add** / **OK**. The value should appear in the field as a single *
 > **Tip:** As in Lab 1, there's **no separate "submit" button** — running the flow *is* what writes the row. Always **Save**, then **Test → Run flow**.
 
 1. Select **Test → Manually → Test → Run flow**.
-2. Enter sample values when prompted:  —  **Name:** `Ahmad Rahman`  —  **Email:** `ahmad@example.com`  —  **Message:** `Interested in a bulk order of 50 units.`
+2. Enter sample values when prompted:  —  **Name:** `Ahmad Rahman`  —  **Email:** `ahmad@example.com`  —  **Message:** `I need the document checklist for opening an SME current account.`
 3. Select **Run flow** → **Done**. Confirm every step shows a **green check**.
 4. Open **Enquiry Log.xlsx** in Excel — a **new row** should appear with your values, a `New` status, and a timestamp in the Date column.
 5. Run the test **2–3 more times** with different values to confirm each submission adds another row.
@@ -779,7 +966,21 @@ To turn this into a true *form submission* workflow:
 
 ---
 
+**Part 2 — Import the Packaged Flow**
+
+Download Lab2-Log-Enquiry-to-Excel.zip, then use
+
+**My flows → Import → Import Package (Legacy)**. After import, open the Excel
+
+action and reselect your own `Enquiry Log.xlsx` file and `EnquiryTable`; these
+
+tenant-owned resources cannot be stored in a reusable package.
+
+---
+
 **Checkpoint**
+
+> **Workplace evidence:** Show one successful flow run beside the matching Excel row, including timestamp, customer details and `New` status. This demonstrates traceability from request to register.
 
 You should now have:
 
@@ -815,11 +1016,405 @@ You should now have:
 
 **Next Steps**
 
-Proceed to Lab 3: Simple Approval Workflow.
+Proceed to Lab 3: Scheduled Flow.
 
 ---
 
-### Lab 3: Simple Approval Workflow
+### Lab 3: Scheduled Flow
+
+**Lab Title**
+
+Build a Scheduled (Recurring) Workflow with Power Automate
+
+**Lab Objectives**
+
+By the end of this lab, you will be able to:
+
+1. Create a **Scheduled cloud flow** that uses the **Recurrence** trigger
+2. Configure the Interval, Frequency, **Time zone**, hours, and specific days
+3. Send a **daily reminder email** automatically on a timetable
+4. **Test/Run now** without waiting for the scheduled time
+5. (Optional stretch) Read the Excel **EnquiryTable** and include a live **count** in the email
+
+**Prerequisites**
+
+- Completed Lab 1 (Send an email)
+- *(For the optional stretch)* An Excel **Enquiry Log** workbook with table **EnquiryTable** from Lab 2
+- Signed in at **make.powerautomate.com** in the **Course Sandbox** environment
+
+**Workflow Visual**
+
+![Lab 3 scheduled reminder flowchart](<labs/Day 1/Lab 3 - Scheduled Flow/assets/flowchart.png>)
+
+The recurrence trigger starts the automation without a person submitting data.
+
+**Choose Your Route**
+
+- **Part 1 — Build step by step:** recommended for learning recurrence rules.
+- **Part 2 — Import the packaged flow:** use the ZIP in this lab folder, bind
+
+Outlook, set the recipient and verify the schedule.
+
+Download Lab3-Scheduled-Enquiry-Reminder.zip,
+
+then use **My flows → Import → Import Package (Legacy)**. Map the Outlook
+
+connection and follow the import details.
+
+The recurrence and reminder action are already configured.
+
+**Scenario**
+
+You are the **ACME Customer Operations Team Lead**. New enquiries must receive
+
+a substantive reply within one business day, but records marked `New` are being
+
+missed during busy periods. At **9:00 AM every weekday**, the team needs an
+
+operational reminder to review the shared queue before customer calls begin.
+
+| Workplace detail | Requirement |
+| --- | --- |
+| Process owner | Customer Operations Team Lead |
+| Trigger | Weekdays at 9:00 AM Singapore time |
+| Control | No weekend notification and no UTC timing error |
+| Success measure | Reminder arrives with the queue review instruction; optional stretch includes the current row count |
+
+In production, the reminder would be sent to a shared mailbox or Teams channel
+
+and would count only rows whose `Status` is `New`, not every row.
+
+> **Tip:** Trigger types so far — **instant/manual** (Labs 1–2, you press Run) and **scheduled** (this lab, runs by the clock). Lab 4 adds an **automated event** trigger (a form submission).
+
+---
+
+**Part 1 — Build the Flow Step by Step**
+
+**Step 1: Create a scheduled flow (~6 minutes)**
+
+1. Go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**.
+2. Top-right, confirm the environment selector reads **Course Sandbox**. If not, click it and switch.
+3. In the left menu, click **+ Create**.
+4. Under "Start from blank", click **Scheduled cloud flow**.
+5. In the dialog:  —  **Flow name:** `Lab 3 - Scheduled Enquiry Reminder`  —  **Starting:** today's date and any time  —  **Repeat every:** `1` and **Week**
+6. Click **Create**. The designer opens with a **Recurrence** trigger already added.
+
+**Step 2: Fine-tune the schedule (~10 minutes)**
+
+1. Click the **Recurrence** trigger card to open its configuration panel.
+2. Set the basics:  —  **Interval:** `1`  —  **Frequency:** `Week`
+
+> **Tip:** Frequency must be **Week** (not Day) — the **On these days** option in the next step only appears with a weekly frequency.
+
+1. Under **Advanced parameters**, select and set:  —  **Time Zone:** `(UTC+08:00) Kuala Lumpur, Singapore`  —  **On These Days:** tick **Monday, Tuesday, Wednesday, Thursday, Friday** (leave Saturday and Sunday unticked)  —  **At These Hours:** `9`  —  **At These Minutes:** `0`
+2. The schedule now reads: **every weekday at 9:00 AM Singapore time**.
+
+> **⚠️ Warning:** You MUST set the **Time zone**. Without it, the Recurrence trigger uses **UTC**, so a "9" would fire at 9:00 UTC = 5:00 PM Singapore — the wrong local time. This is the same UTC-vs-local trap from Lab 2.
+
+**Step 3: Send the reminder email (~8 minutes)**
+
+1. Below the Recurrence trigger, click **+** → **Add an action**.
+2. Search `send an email` and select **Send an email (V2)** (from **Office 365 Outlook**). Complete the connection if prompted (it must show a green check).
+3. Configure:  —  **To:** your team's address (use your own mailbox for testing)  —  **Subject:** `Daily reminder: review new enquiries`  —  **Body:**
+
+```
+     Good morning,
+     This is your daily reminder to review and follow up on new enquiries
+     in the Enquiry Log. Please action any items marked "New".
+```
+
+1. Top-right, click **Save**.
+
+> **⚠️ Warning:** If you hit an **Unauthorized** error, the Outlook connection is broken or the account has no mailbox. Reconnect **Office 365 Outlook** with a mailbox-enabled account (see Lab 1). The connection must show a green ✓ before running.
+
+**Step 4: Test the flow now (~5 minutes)**
+
+You don't have to wait until 9 AM — you can run it on demand to check it works.
+
+1. Top-right, click **Test** → **Manually** → **Test** → **Run flow** → **Done**.
+2. Confirm every step shows a green check and the reminder email arrives in your inbox.
+3. From now on the flow also runs **automatically** on its schedule.
+
+> **Tip:** A scheduled flow only fires on its timetable in real life — **Test → Run flow** lets you verify it immediately instead of waiting for 9 AM tomorrow.
+
+**Step 5 (Optional stretch): Include a live count from Excel (~15 minutes)**
+
+Make the reminder smarter by counting how many enquiries are logged in **EnquiryTable**.
+
+1. **Above** the Send an email action, click **+** → **Add an action**.
+2. Search `list rows` and select **List rows present in a table** (from **Excel Online (Business)**).
+3. Configure the location:  —  **Location:** OneDrive for Business  —  **Document Library:** OneDrive  —  **File:** browse to **Enquiry Log** (the `.xlsx` workbook)  —  **Table:** `EnquiryTable`
+4. Open the **Send an email (V2)** action again. Click into the **Body** where you want the count, then open the **fx** (expression) editor and enter exactly:
+
+```
+   length(outputs('List_rows_present_in_a_table')?['body/value'])
+```
+
+- Click **Add / OK** so it becomes a **token** (highlighted chip), not plain text.
+- Example line: `There are currently ` *(token)* ` enquiries logged.`
+
+1. Click **Save**, then **Test → Run flow** again. The email now shows the live record count.
+
+> **⚠️ Warning:** The name inside `outputs('...')` must match your action's **internal name** exactly, with spaces replaced by underscores. If the expression errors, open the **List rows present in a table** action → **…** menu → check the action name, and adjust `List_rows_present_in_a_table` to match.
+
+---
+
+**Part 2 — Import the Packaged Flow**
+
+Download Lab3-Scheduled-Enquiry-Reminder.zip,
+
+then use **My flows → Import → Import Package (Legacy)**. Reconnect Outlook,
+
+replace `YOUR_EMAIL@YOUR_TENANT`, and confirm the recurrence uses **Singapore
+
+Standard Time** before saving.
+
+---
+
+**Checkpoint**
+
+> **Workplace evidence:** Capture the weekday 9:00 AM recurrence settings and the resulting team reminder. The evidence should make the operating schedule and intended recipient unambiguous.
+
+- ✅ A **scheduled** flow **Lab 3 - Scheduled Enquiry Reminder** using the **Recurrence** trigger
+- ✅ Configured for **weekdays at 9:00 AM** with **Time zone (UTC+08:00) Kuala Lumpur, Singapore**
+- ✅ A reminder email sent on a successful **Test → Run flow**
+- ✅ *(Optional)* A live record count pulled from **EnquiryTable**
+
+**Troubleshooting**
+
+| Problem | Solution |
+| --- | --- |
+| Email arrives at the wrong time | Set **Time Zone** in the Recurrence trigger's **Advanced parameters** (e.g. (UTC+08:00) Kuala Lumpur, Singapore). Without it the schedule uses UTC. |
+| Flow runs every day including weekends | In **On These Days**, tick only **Monday–Friday**. |
+| **On These Days** option is missing | Set **Frequency** to **Week** — the days-of-week option only appears with a weekly frequency. |
+| Send email **Unauthorized** | Reconnect **Office 365 Outlook** with a mailbox-enabled account; the connection must show green ✓. |
+| `length(...)` expression error | Match the name inside `outputs('...')` to the **List rows** action's actual internal name (spaces become underscores). |
+| Don't want to wait for the schedule | Use **Test → Manually → Run flow** to run it immediately. |
+| Count shows as literal text, not a number | The expression wasn't added via the **fx** editor as a token. Re-enter it through **fx** and confirm it becomes a highlighted chip. |
+
+**Key Takeaways**
+
+- The **Recurrence** trigger runs flows automatically on a timetable — no human starts them.
+- Always set the **Time zone** so schedules fire at the right local time, not UTC.
+- Use **Test → Run flow** to verify a scheduled flow without waiting for its scheduled time.
+- Scheduled flows are ideal for digests, reminders, and clean-up jobs.
+
+**Duration**
+
+~30 minutes (45 with the optional stretch)
+
+**Next Steps**
+
+Proceed to Lab 4: Automated Form Flow.
+
+---
+
+### Lab 4: Automated Form Flow
+
+**Lab Title**
+
+Capture Microsoft Forms Submissions to Email and Excel (Automatic Trigger)
+
+**Lab Objectives**
+
+By the end of this lab, you will be able to:
+
+1. Create a **Microsoft Form** with three required questions and a shareable **URL**
+2. Build a flow using the **When a new response is submitted** trigger (Microsoft Forms)
+3. Add **Get response details** to read each answer (mapping the Response Id)
+4. **Email** the submitted enquiry to your team
+5. **Log** the same enquiry into the Excel **EnquiryTable** — all automatically on submit
+
+**Prerequisites**
+
+- Completed Lab 1 (Send an email) and Lab 2 (Excel table + logging)
+- An Excel **Enquiry Log** workbook with table **EnquiryTable** (Date, Name, Email, Message, Status) from Lab 2
+- Signed in at **make.powerautomate.com** in the **Course Sandbox** environment
+
+**Workflow Visual**
+
+![Lab 4 automated Microsoft Forms workflow flowchart](<labs/Day 1/Lab 4 - Automated Form Flow/assets/flowchart.png>)
+
+The Response Id links the Forms trigger to the full response details used by
+
+email and Excel.
+
+**Choose Your Route**
+
+- **Part 1 — Build step by step:** recommended for learning Forms dynamic
+
+content and Excel mapping.
+
+- **Part 2 — Import the packaged flow:** use the ZIP in this lab folder, then
+
+select your own form, workbook and table.
+
+Download
+
+Lab4-Automated-Form-to-Email-and-Excel.zip,
+
+then use **My flows → Import → Import Package (Legacy)**. Map Forms, Outlook
+
+and Excel connections and follow the
+
+import details. Select your
+
+own form, workbook and table after import.
+
+**Scenario**
+
+ACME is replacing email-based enquiries with a controlled online intake form.
+
+You are the **Customer Operations Automation Specialist** responsible for
+
+ensuring that every submission reaches the service mailbox and the shared
+
+register without re-keying.
+
+| Workplace detail | Requirement |
+| --- | --- |
+| Customer journey | Submit name, email and a detailed service request |
+| Back-office outcome | Notify the team and add a timestamped row with status `New` |
+| Service target | New submission visible to operations within one minute |
+| Acceptance test | Two different form submissions create two emails and two separate Excel rows |
+
+This is your first **automated, event-driven** workflow: Labs 1–2 were
+
+instant/manual and Lab 3 was scheduled.
+
+---
+
+**Part 1 — Build the Flow Step by Step**
+
+**Step 1: Create the form in Microsoft Forms (~10 minutes)**
+
+1. Open a new browser tab and go to **<a href="https://forms.office.com" target="_blank" rel="noopener">https://forms.office.com</a>** (it redirects to the current home, **<a href="https://forms.cloud.microsoft" target="_blank" rel="noopener">https://forms.cloud.microsoft</a>** — both work).
+2. Sign in with the **same account** you use for Power Automate in the **Course Sandbox** tenant.
+3. Click **+ New Form**.
+4. Click the title at the top and enter: `Customer Enquiry Form`.
+5. Add a short description, e.g. `Tell us about your enquiry and we'll respond within 1 business day.`
+6. Add these three questions. For each, click **+ Add new**, choose **Text**, type the question, then toggle **Required** on:  —  `Full Name` → **Required** on  —  `Email` → **Required** on  —  `Your Message` → click the **…** on the question and choose **Long answer** for more space → **Required** on
+7. The form saves automatically as you type.
+
+> **Tip:** Keep the question titles exactly as shown — you'll match them to Excel columns later, and clear names make the dynamic tokens easy to find.
+
+**Step 2: Get the shareable form URL (~5 minutes)**
+
+1. Top-right of Forms, click **Collect responses** (older UI: **Share**).
+2. Set the audience — for testing choose **Anyone can respond** (or your organization).
+3. Copy the **link** shown (e.g. `https://forms.office.com/r/XXXXXXXX`).
+4. **Save this URL** somewhere — it's the link you'd send to customers, and you'll use it to test at the end.
+
+**Step 3: Create the automated flow (~5 minutes)**
+
+1. Go back to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>** (confirm the environment is **Course Sandbox**).
+2. Left menu → **+ Create** → **Automated cloud flow**.
+3. **Flow name:** `Lab 4 - Automated Form to Email and Excel`.
+4. In "Choose your flow's trigger", search `Forms` and select **When a new response is submitted** (Microsoft Forms).
+5. Click **Create**.
+6. On the trigger card, set **Form Id** → pick **Customer Enquiry Form** from the dropdown.
+
+**Step 4: Get the response details (~10 minutes)**
+
+The trigger only gives you a response **Id** — you need another action to read the actual answers.
+
+1. Below the trigger, click **+** → **Add an action**.
+2. Search `Forms` → select **Get response details** (Microsoft Forms).
+3. Configure:  —  **Form Id:** pick **Customer Enquiry Form** (the same form)  —  **Response Id:** click the field, open dynamic content (lightning bolt), and insert **Response Id** (from the trigger)
+
+> **⚠️ Warning:** **Get response details** is **required**. Without it, later steps only see an internal Id, not the real answers — and your email/Excel will be blank. Always map **Response Id** from the trigger, then use **this action's** outputs (Full Name, Email, Your Message) in every step that follows.
+
+**Step 5: Email the submission to your team (~10 minutes)**
+
+1. Click **+** → **Add an action**.
+2. Select **Send an email (V2)** (Office 365 Outlook). Complete the connection if prompted (it must show a green check).
+3. Configure (insert each value from **Get response details** dynamic content):  —  **To:** your team's address (use your own working mailbox for testing)  —  **Subject:** type `New enquiry from ` then insert **Full Name**  —  **Body:**
+
+```
+     A new enquiry was submitted via the form:
+     Name: [insert Full Name]
+     Email: [insert Email]
+     Message: [insert Your Message]
+```
+
+> **⚠️ Warning:** If you get an **Unauthorized** error, the Outlook connection is broken or the account has no mailbox. Reconnect **Office 365 Outlook** with a mailbox-enabled account (see Lab 1); the connection must show a green ✓.
+
+**Step 6: Log the submission to Excel (~10 minutes)**
+
+1. Click **+** → **Add an action**.
+2. Select **Add a row into a table** (Excel Online (Business)). Complete the connection if prompted.
+3. Set the location:  —  **Location:** OneDrive for Business  —  **Document Library:** OneDrive  —  **File:** browse to **Enquiry Log** (the `.xlsx` workbook)  —  **Table:** `EnquiryTable`
+4. Map the columns:  —  **Date:** click the **fx** (expression) icon → enter exactly `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')` → click **Add / OK** so it becomes a **token** (a highlighted chip), never typed text  —  **Name:** dynamic content → **Full Name**  —  **Email:** dynamic content → **Email**  —  **Message:** dynamic content → **Your Message**  —  **Status:** type `New`
+5. Top-right, click **Save**.
+
+> **⚠️ Warning:** The **Date** value must be entered through the **fx** editor and become a token. If you type the formula as plain text, the cell stores the literal text `formatDateTime(...)` instead of a real date. (This is the same fix from Lab 2.)
+
+**Step 7: Test the whole workflow (~10 minutes)**
+
+1. In Power Automate, click **Test** → **Manually** → **Test**. The flow goes into a "waiting for trigger" state.
+2. Open the **form URL** you saved in Step 2 (new tab or your phone).
+3. Fill in the form — Full Name `Jane Tan`, Email `jane@example.com`, Your Message `Please send me the document checklist for an SME current account.` — and click **Submit**.
+4. Within about a minute the flow triggers. Confirm:  —  Every step shows a green check in the run.  —  The **email** arrives with the submitted details.  —  A **new row** appears in **Enquiry Log** → **EnquiryTable** with a clean date, the answers, and **Status** `New`.
+5. Submit the form a **second time** with different details and confirm another row and another email.
+
+> **Tip:** Triggers can take up to a minute. If nothing happens, confirm you clicked **Test** *before* submitting — or just submit again, since a saved flow fires automatically on every real submission.
+
+---
+
+**Part 2 — Import the Packaged Flow**
+
+Download
+
+Lab4-Automated-Form-to-Email-and-Excel.zip,
+
+then use **My flows → Import → Import Package (Legacy)**. After import, reselect
+
+your Microsoft Form, Excel workbook and table. Replace the three
+
+`MAP_..._AFTER_IMPORT` placeholders with the **Full Name**, **Email** and **Your
+
+Message** tokens from **Get response details**.
+
+---
+
+**Checkpoint**
+
+> **Workplace evidence:** Keep the submitted form response, successful run, notification email and matching Excel row. Together they prove that the team no longer needs to re-key the enquiry.
+
+- ✅ A **Customer Enquiry Form** with three required questions and a shareable URL
+- ✅ Automated flow triggered by **When a new response is submitted**
+- ✅ **Get response details** mapping the **Response Id** from the trigger
+- ✅ Each submission → **notification email** to the team **and** a **new row** in **EnquiryTable** (Date via fx token)
+
+**Troubleshooting**
+
+| Problem | Solution |
+| --- | --- |
+| Form not listed in the trigger | Sign into Power Automate with the **same account** that owns the form, in the **Course Sandbox** environment. |
+| Answers show as IDs / blank | You must add **Get response details**, map **Response Id** from the trigger, and use **its** outputs (not the trigger's) in later steps. |
+| Flow doesn't trigger after submit | Triggers can take up to a minute; confirm **Test** was started before submitting, or submit again (a saved flow fires automatically). |
+| Date shows literal text | Enter the date through the **fx** editor so it becomes a token (see Lab 2). |
+| Send email **Unauthorized** | Reconnect **Office 365 Outlook** with a mailbox-enabled account; the connection must show green ✓. |
+| Add a row **Unauthorized** | Reconnect **Excel Online (Business)** with an account that can access the Enquiry Log workbook. |
+
+**Key Takeaways**
+
+- A **Microsoft Forms** trigger turns a public form into an automatic workflow — no buttons to press.
+- **Get response details** is required to read the individual answers behind the Response Id.
+- The **Date** column is filled by an **fx** token (`formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')`), never typed text.
+- One submission can fan out to **multiple actions** (notify **and** log) — the core pattern behind every end-to-end business automation.
+
+**Duration**
+
+~50 minutes
+
+**Next Steps**
+
+You have completed the first event-driven flow. Proceed to Lab 5: Human Approval Flow to add a person and a business decision inside an automation.
+
+---
+
+### Lab 5: Human-in-the-Loop Approval Flow
 
 **Lab Title**
 
@@ -837,17 +1432,62 @@ By the end of this lab, you will be able to:
 
 **Prerequisites**
 
-- Completed Lab 1 and Lab 2
+- Completed Lab 4, including email and Excel actions
 - Signed in at **make.powerautomate.com** in the **Course Sandbox** environment
 - Your own signed-in account (it must exist in this tenant's directory) — you will be your own approver for testing
 
+**Workflow Visual**
+
+![Lab 5 human approval workflow flowchart](<labs/Day 1/Lab 5 - Human Approval Flow/assets/flowchart.png>)
+
+The approval Outcome controls which notification branch runs.
+
+**Choose Your Route**
+
+- **Part 1 — Build step by step:** recommended for learning approval branches.
+- **Part 2 — Import the packaged flow:** use the ZIP in this lab folder, bind
+
+Approvals and Outlook, and select a real tenant user as approver.
+
+Download Lab5-Human-Approval.zip, then use **My
+
+flows → Import → Import Package (Legacy)**. Map the Approvals and Outlook
+
+connections and follow the
+
+import details. Replace the
+
+approver placeholder with your own tenant account.
+
 **Scenario**
 
-At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager must **approve or reject** it, and the requester must be **automatically notified** of the decision. You will build this with two essential building blocks: a human **approval** step and a **Condition** (branching). For testing, you will play both roles — requester and approver — using your own account.
+You are an **ACME IT Operations Coordinator**. A service officer needs a
+
+replacement laptop costing **SGD 1,850** after a hardware failure. Company
+
+policy requires a manager to approve the purchase before procurement can act.
+
+The workflow must pause for the named approver, preserve the decision and notify
+
+the requester through the correct branch.
+
+Use this realistic test request:
+
+```
+RequesterName: Priya Nair
+RequesterEmail: your training mailbox
+RequestDetails: Replacement laptop for Customer Operations officer; asset ACME-LT-1042 failed diagnostics; quoted cost SGD 1,850.
+```
+
+Run both an **Approve** and a **Reject** test. A real deployment would also
+
+capture amount, cost centre, supplier quote, approver comments and an immutable
+
+audit record in Dataverse or SharePoint.
 
 ---
 
-**Step-by-Step Guide**
+**Part 1 — Build the Flow Step by Step**
 
 **Step 1: Create the flow and add inputs (~7 minutes)**
 
@@ -855,7 +1495,7 @@ At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager 
 2. Top-right, confirm the environment selector reads **Course Sandbox**. If not, click it and switch.
 3. In the left menu, click **+ Create**.
 4. Under "Start from blank", click **Instant cloud flow**.
-5. In the dialog:  —  **Flow name:** `Lab 3 - Simple Approval`  —  Choose the trigger **Manually trigger a flow**.  —  Click **Create**.
+5. In the dialog:  —  **Flow name:** `Lab 5 - Human Approval`  —  Choose the trigger **Manually trigger a flow**.  —  Click **Create**.
 6. The designer opens with the **Manually trigger a flow** card. Click the card to open it, then add three inputs. For each, click **+ Add an input**, choose **Text**, and name them exactly:  —  `RequesterName`  —  `RequesterEmail`  —  `RequestDetails`
 
 > **Tip:** Type the input names with no spaces, exactly as shown. You will reference them by these names later, and spaces make the tokens harder to find.
@@ -927,13 +1567,27 @@ At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager 
 4. Respond to the approval. Fastest path: left menu → **Approvals** → **Received** tab → open the request → click **Approve** → **Submit**. (The email/Teams notification also works but can be slow or land in Junk.)
 5. The flow resumes down the **If yes** branch. Confirm you receive the **APPROVED** email.
 6. **Run the test again** with the same inputs, but this time **Reject** the approval. Confirm you receive the **REJECTED** email.
-7. Open **My flows** → **Lab 3 - Simple Approval** → **Run history** and confirm the correct branch ran each time.
+7. Open **My flows** → **Lab 5 - Human Approval** → **Run history** and confirm the correct branch ran each time.
+
+---
+
+**Part 2 — Import the Packaged Flow**
+
+Download Lab5-Human-Approval.zip, then use **My
+
+flows → Import → Import Package (Legacy)**. Map both the **Approvals** and
+
+**Office 365 Outlook** connections. Open the approval action and replace
+
+`YOUR_ACCOUNT@YOUR_TENANT` with a real user in your current tenant.
 
 ---
 
 **Checkpoint**
 
-- ✅ Flow **Lab 3 - Simple Approval** with manual trigger inputs RequesterName, RequesterEmail, RequestDetails
+> **Workplace evidence:** Run the realistic laptop request through both Approve and Reject paths. Save the approval history and both decision emails to demonstrate the complete control.
+
+- ✅ Flow **Lab 5 - Human Approval** with manual trigger inputs RequesterName, RequesterEmail, RequestDetails
 - ✅ **Start and wait for an approval** assigned to your own user (resolved as a person chip)
 - ✅ **Condition** on **Outcome** `is equal to` `Approve`, with a Send an email in each branch
 - ✅ Approve path → APPROVED email received; Reject path → REJECTED email received
@@ -963,284 +1617,7 @@ At **ACME Pte Ltd**, a staff member submits a small purchase request. A manager 
 
 **Next Steps**
 
-Proceed to Lab 4: Scheduled Trigger Workflow.
-
----
-
-### Lab 4: Scheduled Trigger Workflow
-
-**Lab Title**
-
-Build a Scheduled (Recurring) Workflow with Power Automate
-
-**Lab Objectives**
-
-By the end of this lab, you will be able to:
-
-1. Create a **Scheduled cloud flow** that uses the **Recurrence** trigger
-2. Configure the Interval, Frequency, **Time zone**, hours, and specific days
-3. Send a **daily reminder email** automatically on a timetable
-4. **Test/Run now** without waiting for the scheduled time
-5. (Optional stretch) Read the Excel **EnquiryTable** and include a live **count** in the email
-
-**Prerequisites**
-
-- Completed Lab 1 (Send an email)
-- *(For the optional stretch)* An Excel **Enquiry Log** workbook with table **EnquiryTable** from Lab 2
-- Signed in at **make.powerautomate.com** in the **Course Sandbox** environment
-
-**Scenario**
-
-At **ACME Pte Ltd**, some work isn't triggered by an event — it just needs to happen **on a schedule**. Every **weekday morning** the team should get a reminder to review new enquiries. You will build a flow that runs automatically using the **Recurrence** trigger, so no one has to start it.
-
-> **Tip:** Trigger types so far — **manual** (Labs 1–3, you press Run) and **scheduled** (this lab, runs by the clock). Lab 5 adds an **event** trigger (a form submission).
-
----
-
-**Step-by-Step Guide**
-
-**Step 1: Create a scheduled flow (~6 minutes)**
-
-1. Go to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**.
-2. Top-right, confirm the environment selector reads **Course Sandbox**. If not, click it and switch.
-3. In the left menu, click **+ Create**.
-4. Under "Start from blank", click **Scheduled cloud flow**.
-5. In the dialog:  —  **Flow name:** `Lab 4 - Daily Enquiry Reminder`  —  **Starting:** today's date and any time  —  **Repeat every:** `1` and **Week**
-6. Click **Create**. The designer opens with a **Recurrence** trigger already added.
-
-**Step 2: Fine-tune the schedule (~10 minutes)**
-
-1. Click the **Recurrence** trigger card to open its configuration panel.
-2. Set the basics:  —  **Interval:** `1`  —  **Frequency:** `Week`
-
-> **Tip:** Frequency must be **Week** (not Day) — the **On these days** option in the next step only appears with a weekly frequency.
-
-1. Under **Advanced parameters**, select and set:  —  **Time Zone:** `(UTC+08:00) Kuala Lumpur, Singapore`  —  **On These Days:** tick **Monday, Tuesday, Wednesday, Thursday, Friday** (leave Saturday and Sunday unticked)  —  **At These Hours:** `9`  —  **At These Minutes:** `0`
-2. The schedule now reads: **every weekday at 9:00 AM Singapore time**.
-
-> **⚠️ Warning:** You MUST set the **Time zone**. Without it, the Recurrence trigger uses **UTC**, so a "9" would fire at 9:00 UTC = 5:00 PM Singapore — the wrong local time. This is the same UTC-vs-local trap from Lab 2.
-
-**Step 3: Send the reminder email (~8 minutes)**
-
-1. Below the Recurrence trigger, click **+** → **Add an action**.
-2. Search `send an email` and select **Send an email (V2)** (from **Office 365 Outlook**). Complete the connection if prompted (it must show a green check).
-3. Configure:  —  **To:** your team's address (use your own mailbox for testing)  —  **Subject:** `Daily reminder: review new enquiries`  —  **Body:**
-
-```
-     Good morning,
-     This is your daily reminder to review and follow up on new enquiries
-     in the Enquiry Log. Please action any items marked "New".
-```
-
-1. Top-right, click **Save**.
-
-> **⚠️ Warning:** If you hit an **Unauthorized** error, the Outlook connection is broken or the account has no mailbox. Reconnect **Office 365 Outlook** with a mailbox-enabled account (see Lab 1). The connection must show a green ✓ before running.
-
-**Step 4: Test the flow now (~5 minutes)**
-
-You don't have to wait until 9 AM — you can run it on demand to check it works.
-
-1. Top-right, click **Test** → **Manually** → **Test** → **Run flow** → **Done**.
-2. Confirm every step shows a green check and the reminder email arrives in your inbox.
-3. From now on the flow also runs **automatically** on its schedule.
-
-> **Tip:** A scheduled flow only fires on its timetable in real life — **Test → Run flow** lets you verify it immediately instead of waiting for 9 AM tomorrow.
-
-**Step 5 (Optional stretch): Include a live count from Excel (~15 minutes)**
-
-Make the reminder smarter by counting how many enquiries are logged in **EnquiryTable**.
-
-1. **Above** the Send an email action, click **+** → **Add an action**.
-2. Search `list rows` and select **List rows present in a table** (from **Excel Online (Business)**).
-3. Configure the location:  —  **Location:** OneDrive for Business  —  **Document Library:** OneDrive  —  **File:** browse to **Enquiry Log** (the `.xlsx` workbook)  —  **Table:** `EnquiryTable`
-4. Open the **Send an email (V2)** action again. Click into the **Body** where you want the count, then open the **fx** (expression) editor and enter exactly:
-
-```
-   length(outputs('List_rows_present_in_a_table')?['body/value'])
-```
-
-- Click **Add / OK** so it becomes a **token** (highlighted chip), not plain text.
-- Example line: `There are currently ` *(token)* ` enquiries logged.`
-
-1. Click **Save**, then **Test → Run flow** again. The email now shows the live record count.
-
-> **⚠️ Warning:** The name inside `outputs('...')` must match your action's **internal name** exactly, with spaces replaced by underscores. If the expression errors, open the **List rows present in a table** action → **…** menu → check the action name, and adjust `List_rows_present_in_a_table` to match.
-
----
-
-**Checkpoint**
-
-- ✅ A **scheduled** flow **Lab 4 - Daily Enquiry Reminder** using the **Recurrence** trigger
-- ✅ Configured for **weekdays at 9:00 AM** with **Time zone (UTC+08:00) Kuala Lumpur, Singapore**
-- ✅ A reminder email sent on a successful **Test → Run flow**
-- ✅ *(Optional)* A live record count pulled from **EnquiryTable**
-
-**Troubleshooting**
-
-| Problem | Solution |
-| --- | --- |
-| Email arrives at the wrong time | Set **Time Zone** in the Recurrence trigger's **Advanced parameters** (e.g. (UTC+08:00) Kuala Lumpur, Singapore). Without it the schedule uses UTC. |
-| Flow runs every day including weekends | In **On These Days**, tick only **Monday–Friday**. |
-| **On These Days** option is missing | Set **Frequency** to **Week** — the days-of-week option only appears with a weekly frequency. |
-| Send email **Unauthorized** | Reconnect **Office 365 Outlook** with a mailbox-enabled account; the connection must show green ✓. |
-| `length(...)` expression error | Match the name inside `outputs('...')` to the **List rows** action's actual internal name (spaces become underscores). |
-| Don't want to wait for the schedule | Use **Test → Manually → Run flow** to run it immediately. |
-| Count shows as literal text, not a number | The expression wasn't added via the **fx** editor as a token. Re-enter it through **fx** and confirm it becomes a highlighted chip. |
-
-**Key Takeaways**
-
-- The **Recurrence** trigger runs flows automatically on a timetable — no human starts them.
-- Always set the **Time zone** so schedules fire at the right local time, not UTC.
-- Use **Test → Run flow** to verify a scheduled flow without waiting for its scheduled time.
-- Scheduled flows are ideal for digests, reminders, and clean-up jobs.
-
-**Duration**
-
-~30 minutes (45 with the optional stretch)
-
-**Next Steps**
-
-Proceed to Lab 5: Form Submission Workflow.
-
----
-
-### Lab 5: Form Submission Workflow
-
-**Lab Title**
-
-Capture Microsoft Forms Submissions to Email and Excel (Automatic Trigger)
-
-**Lab Objectives**
-
-By the end of this lab, you will be able to:
-
-1. Create a **Microsoft Form** with three required questions and a shareable **URL**
-2. Build a flow using the **When a new response is submitted** trigger (Microsoft Forms)
-3. Add **Get response details** to read each answer (mapping the Response Id)
-4. **Email** the submitted enquiry to your team
-5. **Log** the same enquiry into the Excel **EnquiryTable** — all automatically on submit
-
-**Prerequisites**
-
-- Completed Lab 1 (Send an email) and Lab 2 (Excel table + logging)
-- An Excel **Enquiry Log** workbook with table **EnquiryTable** (Date, Name, Email, Message, Status) from Lab 2
-- Signed in at **make.powerautomate.com** in the **Course Sandbox** environment
-
-**Scenario**
-
-At **ACME Pte Ltd**, customers fill in an online enquiry form. The moment they **submit**, the workflow should **email the team** the new enquiry **and record it in Excel** — with no manual work. This is your first **automatic, event-driven** workflow (Labs 1–3 were manual, Lab 4 was scheduled). You'll also get a **form link** you can send to anyone.
-
----
-
-**Step-by-Step Guide**
-
-**Step 1: Create the form in Microsoft Forms (~10 minutes)**
-
-1. Open a new browser tab and go to **<a href="https://forms.office.com" target="_blank" rel="noopener">https://forms.office.com</a>** (it redirects to the current home, **<a href="https://forms.cloud.microsoft" target="_blank" rel="noopener">https://forms.cloud.microsoft</a>** — both work).
-2. Sign in with the **same account** you use for Power Automate in the **Course Sandbox** tenant.
-3. Click **+ New Form**.
-4. Click the title at the top and enter: `Customer Enquiry Form`.
-5. Add a short description, e.g. `Tell us about your enquiry and we'll respond within 1 business day.`
-6. Add these three questions. For each, click **+ Add new**, choose **Text**, type the question, then toggle **Required** on:  —  `Full Name` → **Required** on  —  `Email` → **Required** on  —  `Your Message` → click the **…** on the question and choose **Long answer** for more space → **Required** on
-7. The form saves automatically as you type.
-
-> **Tip:** Keep the question titles exactly as shown — you'll match them to Excel columns later, and clear names make the dynamic tokens easy to find.
-
-**Step 2: Get the shareable form URL (~5 minutes)**
-
-1. Top-right of Forms, click **Collect responses** (older UI: **Share**).
-2. Set the audience — for testing choose **Anyone can respond** (or your organization).
-3. Copy the **link** shown (e.g. `https://forms.office.com/r/XXXXXXXX`).
-4. **Save this URL** somewhere — it's the link you'd send to customers, and you'll use it to test at the end.
-
-**Step 3: Create the automated flow (~5 minutes)**
-
-1. Go back to **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>** (confirm the environment is **Course Sandbox**).
-2. Left menu → **+ Create** → **Automated cloud flow**.
-3. **Flow name:** `Lab 5 - Form Submission to Email and Excel`.
-4. In "Choose your flow's trigger", search `Forms` and select **When a new response is submitted** (Microsoft Forms).
-5. Click **Create**.
-6. On the trigger card, set **Form Id** → pick **Customer Enquiry Form** from the dropdown.
-
-**Step 4: Get the response details (~10 minutes)**
-
-The trigger only gives you a response **Id** — you need another action to read the actual answers.
-
-1. Below the trigger, click **+** → **Add an action**.
-2. Search `Forms` → select **Get response details** (Microsoft Forms).
-3. Configure:  —  **Form Id:** pick **Customer Enquiry Form** (the same form)  —  **Response Id:** click the field, open dynamic content (lightning bolt), and insert **Response Id** (from the trigger)
-
-> **⚠️ Warning:** **Get response details** is **required**. Without it, later steps only see an internal Id, not the real answers — and your email/Excel will be blank. Always map **Response Id** from the trigger, then use **this action's** outputs (Full Name, Email, Your Message) in every step that follows.
-
-**Step 5: Email the submission to your team (~10 minutes)**
-
-1. Click **+** → **Add an action**.
-2. Select **Send an email (V2)** (Office 365 Outlook). Complete the connection if prompted (it must show a green check).
-3. Configure (insert each value from **Get response details** dynamic content):  —  **To:** your team's address (use your own working mailbox for testing)  —  **Subject:** type `New enquiry from ` then insert **Full Name**  —  **Body:**
-
-```
-     A new enquiry was submitted via the form:
-     Name: [insert Full Name]
-     Email: [insert Email]
-     Message: [insert Your Message]
-```
-
-> **⚠️ Warning:** If you get an **Unauthorized** error, the Outlook connection is broken or the account has no mailbox. Reconnect **Office 365 Outlook** with a mailbox-enabled account (see Lab 1); the connection must show a green ✓.
-
-**Step 6: Log the submission to Excel (~10 minutes)**
-
-1. Click **+** → **Add an action**.
-2. Select **Add a row into a table** (Excel Online (Business)). Complete the connection if prompted.
-3. Set the location:  —  **Location:** OneDrive for Business  —  **Document Library:** OneDrive  —  **File:** browse to **Enquiry Log** (the `.xlsx` workbook)  —  **Table:** `EnquiryTable`
-4. Map the columns:  —  **Date:** click the **fx** (expression) icon → enter exactly `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')` → click **Add / OK** so it becomes a **token** (a highlighted chip), never typed text  —  **Name:** dynamic content → **Full Name**  —  **Email:** dynamic content → **Email**  —  **Message:** dynamic content → **Your Message**  —  **Status:** type `New`
-5. Top-right, click **Save**.
-
-> **⚠️ Warning:** The **Date** value must be entered through the **fx** editor and become a token. If you type the formula as plain text, the cell stores the literal text `formatDateTime(...)` instead of a real date. (This is the same fix from Lab 2.)
-
-**Step 7: Test the whole workflow (~10 minutes)**
-
-1. In Power Automate, click **Test** → **Manually** → **Test**. The flow goes into a "waiting for trigger" state.
-2. Open the **form URL** you saved in Step 2 (new tab or your phone).
-3. Fill in the form — Full Name `Jane Tan`, Email `jane@example.com`, Your Message `Interested in 50 units` — and click **Submit**.
-4. Within about a minute the flow triggers. Confirm:  —  Every step shows a green check in the run.  —  The **email** arrives with the submitted details.  —  A **new row** appears in **Enquiry Log** → **EnquiryTable** with a clean date, the answers, and **Status** `New`.
-5. Submit the form a **second time** with different details and confirm another row and another email.
-
-> **Tip:** Triggers can take up to a minute. If nothing happens, confirm you clicked **Test** *before* submitting — or just submit again, since a saved flow fires automatically on every real submission.
-
----
-
-**Checkpoint**
-
-- ✅ A **Customer Enquiry Form** with three required questions and a shareable URL
-- ✅ Automated flow triggered by **When a new response is submitted**
-- ✅ **Get response details** mapping the **Response Id** from the trigger
-- ✅ Each submission → **notification email** to the team **and** a **new row** in **EnquiryTable** (Date via fx token)
-
-**Troubleshooting**
-
-| Problem | Solution |
-| --- | --- |
-| Form not listed in the trigger | Sign into Power Automate with the **same account** that owns the form, in the **Course Sandbox** environment. |
-| Answers show as IDs / blank | You must add **Get response details**, map **Response Id** from the trigger, and use **its** outputs (not the trigger's) in later steps. |
-| Flow doesn't trigger after submit | Triggers can take up to a minute; confirm **Test** was started before submitting, or submit again (a saved flow fires automatically). |
-| Date shows literal text | Enter the date through the **fx** editor so it becomes a token (see Lab 2). |
-| Send email **Unauthorized** | Reconnect **Office 365 Outlook** with a mailbox-enabled account; the connection must show green ✓. |
-| Add a row **Unauthorized** | Reconnect **Excel Online (Business)** with an account that can access the Enquiry Log workbook. |
-
-**Key Takeaways**
-
-- A **Microsoft Forms** trigger turns a public form into an automatic workflow — no buttons to press.
-- **Get response details** is required to read the individual answers behind the Response Id.
-- The **Date** column is filled by an **fx** token (`formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')`), never typed text.
-- One submission can fan out to **multiple actions** (notify **and** log) — the core pattern behind every end-to-end business automation.
-
-**Duration**
-
-~50 minutes
-
-**Next Steps**
-
-You have completed the Microsoft Forms workflow. Proceed to Lab 6A: External Enquiry Webhook to trigger Power Automate from a custom online form.
+Proceed to Lab 6A: External Enquiry Webhook to expose an automation through an HTTP production URL.
 
 ---
 
@@ -1270,9 +1647,53 @@ By the end of this lab, you will be able to:
 
 > **Licensing note:** The **Request** connector is marked with a diamond icon in Power Automate and normally requires a premium entitlement. If your tenant blocks it, follow the demonstration with the trainer rather than selecting the similarly named **HTTP**, **HTTP Webhook**, or **HTTP + Swagger** actions.
 
+**Workflow Visual**
+
+![Lab 6A external enquiry webhook flowchart](<labs/Day 1/Lab 6A - External Enquiry Webhook/assets/flowchart.png>)
+
+The webpage posts JSON to the saved production URL and waits for a JSON
+
+response from Power Automate.
+
+**Choose Your Route**
+
+- **Part 1 — Build step by step:** recommended for understanding incoming HTTP
+
+requests and JSON responses.
+
+- **Part 2 — Import the packaged flow:** use the ZIP in this lab folder, bind
+
+Outlook and save once to generate the production URL.
+
+Download
+
+Lab6A-External-Enquiry-Webhook.zip, then
+
+use **My flows → Import → Import Package (Legacy)**. Map the Outlook
+
+connection and follow the
+
+import details. Save the
+
+imported flow once to generate its production HTTP POST URL.
+
 **Scenario**
 
-ACME Pte Ltd wants its own branded enquiry page rather than a Microsoft Forms page. When a visitor submits the page, JavaScript sends JSON to a Power Automate production URL. The flow emails the service team and returns a confirmation to the same page.
+You are an **ACME Web Integration Specialist**. Marketing wants a branded
+
+website journey instead of sending prospects to a Microsoft Forms page. The
+
+website must submit a structured enquiry to Power Automate, notify Customer
+
+Operations and show a confirmation without reloading the page.
+
+| Workplace detail | Requirement |
+| --- | --- |
+| External caller | ACME public website |
+| API contract | POST JSON containing name, email, subject and message |
+| Back-office outcome | Service mailbox receives the complete enquiry |
+| Customer outcome | Browser receives a success response and displays it |
+| Acceptance evidence | Browser confirmation, received email and successful run history contain the same test values |
 
 This adapts the external web-interface pattern from the n8n Activity 6 finance-advisor example: a browser interface calls an automation endpoint, receives a result, and presents it to the user.
 
@@ -1294,7 +1715,7 @@ When an HTTP request is received
 
 ---
 
-**Step-by-Step Guide**
+**Part 1 — Build the Flow Step by Step**
 
 **Step 1: Create the webhook flow (~5 minutes)**
 
@@ -1332,8 +1753,8 @@ json(triggerBody())
 {
   "name": "Jane Tan",
   "email": "jane@example.com",
-  "subject": "Course enquiry",
-  "message": "I would like to know the next available course date."
+  "subject": "SME current account documents",
+  "message": "Please send me the onboarding document checklist and expected processing time."
 }
 ```
 
@@ -1396,7 +1817,7 @@ Message: [message]
 1. Download or open `assets/enquiry-form.html`.
 2. Open the file in Chrome or Edge.
 3. Paste the production URL into **Power Automate webhook URL**.
-4. Enter:  —  **Full name:** `Jane Tan`  —  **Email:** `jane@example.com`  —  **Subject:** `Course enquiry`  —  **Message:** `I would like to know the next available course date.`
+4. Enter:  —  **Full name:** `Jane Tan`  —  **Email:** `jane@example.com`  —  **Subject:** `Course enquiry`  —  **Message:** `Please send me the SME current-account document checklist and expected processing time.`
 5. Select **Submit enquiry**.
 6. Confirm the page displays the success message returned by Power Automate.
 7. Confirm the email arrives with all four values.
@@ -1423,7 +1844,21 @@ If `curl` succeeds but the webpage fails, the flow is working and the remaining 
 
 ---
 
+**Part 2 — Import the Packaged Flow**
+
+Download Lab6A-External-Enquiry-Webhook.zip,
+
+then use **My flows → Import → Import Package (Legacy)**. Reconnect Outlook,
+
+replace `YOUR_EMAIL@YOUR_TENANT`, and save the flow. The production HTTP POST
+
+URL appears on the request trigger only after the imported flow has been saved.
+
+---
+
 **Checkpoint**
+
+> **Workplace evidence:** Save the redacted HTTP request/response, successful run and notification email. Never include the production URL or its signature when submitting evidence.
 
 - ✅ The trigger is **When an HTTP request is received** under **Request**
 - ✅ The schema contains `name`, `email`, `subject`, and `message`
@@ -1484,9 +1919,52 @@ By the end of this lab, you will be able to:
 - Access to the premium **Request** connector
 - The supplied `webhook-chatbot.html`
 
+**Workflow Visual**
+
+![Lab 6B deterministic webhook chatbot flowchart](<labs/Day 1/Lab 6B - Webhook Chatbot/assets/flowchart.png>)
+
+This is automation routing rather than an AI agent: a Switch selects a fixed
+
+reply from the normalised message.
+
+**Choose Your Route**
+
+- **Part 1 — Build step by step:** recommended for learning request parsing and
+
+deterministic message routing.
+
+- **Part 2 — Import the packaged flow:** use the connector-free ZIP in this lab
+
+folder and save once to generate the production URL.
+
+Download Lab6B-Webhook-Chatbot.zip, then use **My
+
+flows → Import → Import Package (Legacy)**. This package needs no connector.
+
+Follow the import details,
+
+save once, and paste the generated HTTP POST URL into the supplied webpage.
+
 **Scenario**
 
-ACME Pte Ltd wants a small help widget on its website. A visitor sends a message, the page posts it to Power Automate, and the flow returns an immediate reply. This mirrors the interaction pattern in n8n Activity 6, where a chat interface triggers an automation and receives its response, but uses a browser chat widget and Power Automate instead of Telegram and n8n.
+You are an **ACME Digital Service Designer**. The contact centre repeatedly
+
+answers the same low-risk questions about operating hours, contact channels and
+
+account-opening documents. You will build a website chat widget backed by
+
+deterministic Power Automate routes so every approved question receives a
+
+consistent response and anything else falls back safely.
+
+| Workplace detail | Requirement |
+| --- | --- |
+| Channel | Browser help widget |
+| Supported intents | Opening hours, contact details and onboarding documents |
+| Safe fallback | Explain the supported topics and direct complex enquiries to a person |
+| Evidence | Three supported tests and one unsupported test return the expected JSON reply |
+
+This mirrors the interaction pattern in n8n Activity 6, where a chat interface triggers an automation and receives its response, but uses a browser chat widget and Power Automate instead of Telegram and n8n.
 
 This Day 1 version uses deterministic replies so you can see the webhook mechanics clearly. On Day 2, Copilot Studio provides the AI reasoning, knowledge grounding, and richer conversation management.
 
@@ -1510,7 +1988,7 @@ Response { reply }
 
 ---
 
-**Step-by-Step Guide**
+**Part 1 — Build the Flow Step by Step**
 
 **Step 1: Create the chatbot webhook (~5 minutes)**
 
@@ -1557,7 +2035,7 @@ The browser sends the payload as `text/plain` to avoid a cross-origin OPTIONS pr
 **Step 3: Initialise the reply (~5 minutes)**
 
 1. Add **Initialize variable**.
-2. Configure:  —  **Name:** `botReply`  —  **Type:** `String`  —  **Value:** `I can help with opening hours, contact details, or courses. Please choose one of those topics.`
+2. Configure:  —  **Name:** `botReply`  —  **Type:** `String`  —  **Value:** `I can help with opening hours, contact details, or account-opening documents. For anything else, I will direct you to Customer Operations.`
 
 This is the fallback response for any message that does not match a known route.
 
@@ -1585,7 +2063,7 @@ Normalising removes extra spaces and makes `Opening Hours` match `opening hours`
 | --- | --- | --- |
 | `opening hours` | **Set variable** | `Our support desk is open Monday to Friday, 9:00 AM to 6:00 PM Singapore time.` |
 | `contact details` | **Set variable** | `Email help@acme.example or call +65 6000 1234 during business hours.` |
-| `courses` | **Set variable** | `We offer instructor-led automation and AI courses. Please submit an enquiry for the latest schedule.` |
+| `documents` | **Set variable** | `For an SME current-account enquiry, prepare the company registration profile, authorised signatory identification and proof of business address. A service officer will confirm the final checklist.` |
 
 1. Leave the **Default** branch empty. The initial fallback remains unchanged.
 
@@ -1628,7 +2106,7 @@ Normalising removes extra spaces and makes `Opening Hours` match `opening hours`
 1. Open `assets/webhook-chatbot.html` in Chrome or Edge.
 2. Paste the production URL into **Power Automate webhook URL**.
 3. Select **Connect**.
-4. Send each supported message:  —  `opening hours`  —  `contact details`  —  `courses`
+4. Send each supported message:  —  `opening hours`  —  `contact details`  —  `documents`
 5. Send `refund policy` and confirm the fallback reply appears.
 6. In Power Automate, open the run history and inspect the Switch case taken for each message.
 
@@ -1646,7 +2124,21 @@ Record two production improvements:
 
 ---
 
+**Part 2 — Import the Packaged Flow**
+
+Download Lab6B-Webhook-Chatbot.zip, then use **My
+
+flows → Import → Import Package (Legacy)**. This deterministic version needs no
+
+external connector. Save it once, copy the HTTP POST URL from the request
+
+trigger, and paste that URL into the supplied chatbot page.
+
+---
+
 **Checkpoint**
+
+> **Workplace evidence:** Record one supported transcript and one safe fallback transcript, then match each to its successful flow run. This proves both service coverage and boundary handling.
 
 - ✅ Parse JSON produces `sessionId` and `message`
 - ✅ The input is normalised before routing
@@ -1669,7 +2161,15 @@ Record two production improvements:
 
 **Optional AI Upgrade**
 
-If your tenant includes an approved generative AI action, you may replace the Switch with that action and instruct it to answer only from approved ACME support content. Keep the same HTTP request and Response contract so the browser page does not need to change.
+If your tenant includes an approved generative AI action, you may replace the
+
+Switch with that action and instruct it to answer only from approved ACME
+
+customer-service content. Add content filtering, telemetry and a human handoff;
+
+keep the same HTTP request and Response contract so the browser page does not
+
+need to change.
 
 Do not send confidential or personal information to an AI service unless your organisation has approved the data handling.
 
@@ -1731,13 +2231,13 @@ An agent is assembled from five kinds of building block. You'll meet each one ac
 
 | Block | What it is | Example | First seen |
 | --- | --- | --- | --- |
-| **Instructions** | Plain-language directions that shape the agent's behaviour and personality | "You are a sales assistant. Always collect name, company, product, and quantity." | Lab 6 |
-| **Knowledge** | Documents / sites the agent can answer from (RAG) | Product catalogue, FAQ | Lab 7 |
-| **Topics** | Conversation flows the agent runs when the user's message matches the topic's **description** (generative orchestration, the default) or its **trigger phrases** (classic) | A "New Sales Enquiry" topic the agent chooses when someone asks for a quote | Lab 9 |
-| **Tools** (formerly *Actions*) | Things the agent can *do*, including **Power Automate flows** | "Log enquiry to Excel" flow | Lab 8 |
-| **Variables** | Where captured answers are stored to pass onward | `customerName`, `product`, `quantity` | Lab 9 |
+| **Instructions** | Plain-language directions that shape the agent's behaviour and personality | "You are an IT support assistant. Use approved guidance and escalate safely." | Lab 7A |
+| **Knowledge** | Documents / sites the agent can answer from (RAG) | IT support FAQ | Lab 7B |
+| **Topics** | Explicit conversation flows used by classic agents; the new experience instead relies on enhanced orchestration, Skills and Tools | A classic "Banking onboarding enquiry" topic that collects a structured request | Lab 9 (classic path) |
+| **Tools** (formerly *Actions*) | Things an agent can invoke, including **Power Automate agent flows** and prompt-based flows | "Assess onboarding enquiry" / "Draft customer enquiry response" | Labs 9–10 |
+| **Variables / tool inputs** | Named values captured explicitly in classic Topics or inferred from confirmed context in the new experience | `fullName`, `category`, `message` | Lab 9 |
 
-> **Knowledge = RAG.** When you upload documents, the agent uses **Retrieval-Augmented Generation**: it *retrieves* the relevant passages from your files and *generates* an answer grounded in them — so it speaks from your content, not the open internet. You'll set this up in Lab 7.
+> **Knowledge = RAG.** When you upload documents, the agent uses **Retrieval-Augmented Generation**: it *retrieves* the relevant passages from your files and *generates* an answer grounded in them — so it speaks from your content, not the open internet. You'll set this up in Lab 7B.
 
 ---
 
@@ -1797,458 +2297,370 @@ The key points:
 
 ---
 
-**5. What you'll build on Day 2**
+**5. Power Automate versus n8n AI Agent**
 
-- **Lab 6:** Your first agent — learn the interface, instructions, and testing.
-- **Lab 7:** Complete an **IT Support RAG Chatbot** that retrieves from approved documents, cites its source, and refuses unsupported questions.
-- **Lab 8:** Add **Tools & Actions** so the agent can *do* things, not just answer.
-- **Lab 9:** A **Sales Enquiry Assistant** that captures enquiries as structured data.
-- **Lab 10:** A **Procurement Request** agent that triggers a Power Automate flow.
-- **Lab 11:** **Automated Response Generation** — use AI prompts to draft professional replies.
+Power Automate by itself is similar to a normal n8n automation: a trigger starts
 
-Each lab adds one capability on top of the last, so by Lab 11 you'll have an agent that understands, retrieves, captures, acts, and writes.
+fixed actions, conditions and connectors. To obtain the n8n **AI Agent**
+
+pattern, Copilot Studio becomes the conversational orchestrator and the Power
+
+Automate flow becomes one of its tools.
+
+| n8n concept | Microsoft equivalent |
+| --- | --- |
+| Chat Trigger or Webhook | Copilot Studio Teams/website channel, or Power Automate HTTP Request |
+| AI Agent node | Copilot Studio agent |
+| System prompt | Agent Instructions |
+| Vector store / RAG tool | Copilot Studio Knowledge |
+| Workflow tool | Power Automate agent flow |
+| Tool input schema | Inputs on **When an agent calls the flow** |
+| Tool result | Outputs on **Respond to the agent** |
+| LLM prompt node | AI Builder **Run a prompt** inside an agent flow |
+
+Do not try to place the whole Copilot Studio agent inside an ordinary
+
+Power Automate action. Use this direction instead:
+
+```
+User → Copilot Studio agent → Power Automate agent flow (tool)
+                              ├── Outlook / Excel / approvals / APIs
+                              ├── optional AI Builder prompt
+                              └── Respond to the agent → answer in chat
+```
+
+**Add a Power Automate agent flow to Copilot Studio**
+
+1. Ensure Power Automate and Copilot Studio use the same environment.
+2. In Copilot Studio, open the agent and select  —  **Tools → Add a tool → New tool → Agent flow**.
+3. Build the flow with **When an agent calls the flow**.
+4. Add named inputs for the values the agent must supply.
+5. Add the required Power Automate actions.
+6. Finish with **Respond to the agent** and add named outputs.
+7. Save the flow and return to the agent.
+8. Give the tool a clear name and description so the agent knows when to call  —  it.
+9. Map each tool input from confirmed conversation context or classic Topic  —  variables.
+10. Save, publish and test first in Preview, then in Teams or the website  —  channel.
+
+**Import an agent-flow solution**
+
+Labs 9 and 10 include solution ZIPs because agent-callable flows are solution
+
+components.
+
+1. In Power Automate, choose **Solutions → Import solution**.
+2. Upload the lab-specific ZIP without extracting it.
+3. Select **Next → Import**.
+4. Open the imported solution and its flow.
+5. Save the flow.
+6. In Copilot Studio, add the imported flow under **Tools**.
+7. Map the inputs, save, publish and test.
+
+The Lab 9 package is connector-free and immediately testable. The Lab 10
+
+package has a connector-free safe fallback; using AI Builder still requires
+
+the learner to select a prompt and connection owned by their environment.
 
 ---
 
-**Next:** Lab 6: Create Your First Copilot Studio Agent
+**6. What you'll build on Day 2**
+
+Day 2 is organised as two connected projects. Each lab adds one capability and
+
+reuses the artifact created previously.
+
+**Project A — MyCompany IT Support**
+
+| Lab | Build | New capability |
+| --- | --- | --- |
+| **7A** | Prompt-create `MyCompany IT Support Assistant` | Identity, Instructions, safety boundaries and Preview/Test |
+| **7B** | Upgrade the same agent | Approved FAQ Knowledge, RAG, citations, evaluation and publishing |
+
+**Project B — Marina Trust Omnichannel Enquiries**
+
+| Lab | Build | New capability |
+| --- | --- | --- |
+| **8** | Prompt-create `Marina Trust Enquiry Agent`; publish to Teams; connect the supplied standalone website form to Power Automate | Channels plus an ordinary HTTP-triggered flow with no agent in the website path |
+| **9** | Upgrade the same Marina Trust agent in Teams and website chat | Structured capture and a deterministic agent flow |
+| **10** | Upgrade the same Marina Trust agent again | Guarded AI prompt flow with structured output and escalation |
+
+The progression is deliberate:
+
+```
+Lab 7A: Instructions
+   ↓
+Lab 7B: Instructions + Knowledge + Evaluation
+   ↓
+Lab 8: Publish agent to Teams + website integration
+   ↓
+Lab 9: Same agent + deterministic tool
+   ↓
+Lab 10: Same agent + AI prompt tool
+```
+
+By Lab 10 you will be able to distinguish an informational agent, an ordinary
+
+Power Automate flow, a deterministic agent flow and an AI prompt flow.
 
 ---
 
-### Lab 6: Create Your First Copilot Studio Agent
+**Next:** Lab 7A: Create the IT Support Agent
+
+---
+
+### Lab 7A: Create the IT Support Agent
 
 **Lab Title**
 
-IT Support RAG Part A — Build the Agent and Ingest the FAQ
+Prompt, Review and Test a MyCompany IT Support Agent
 
 **Lab Objectives**
 
 By the end of this lab, you will be able to:
 
-1. Create a new **blank agent** in Microsoft Copilot Studio and configure it yourself
-2. Write clear **Instructions** that shape how your agent behaves
-3. Identify the main building blocks of an agent (Instructions, Knowledge, Topics, Tools)
-4. Upload a realistic internal **IT Service Desk FAQ** as a Knowledge source
-5. Map the n8n Activity 7 ingestion nodes to Copilot Studio's managed Knowledge pipeline
-6. Run a smoke test to confirm that retrieval works
-7. Publish your agent (optional) and understand what Channels are
+1. Describe an agent requirement in natural language
+2. Generate an agent draft with Copilot Studio
+3. Review and correct its name, purpose, instructions and boundaries
+4. Locate Instructions, Knowledge, Skills/Topics, Tools and Preview/Test
+5. Test behaviour before adding company knowledge
+6. Explain why generated content must be reviewed before publication
 
 **Prerequisites**
 
-- Completed Lab 0 (Copilot Studio trial active)
+- Completed Lab 0
 - Read Module 3
-- Signed in at <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> (same environment as Power Automate)
-- Downloaded the supplied `it-faq.pdf` knowledge file
+- Signed in at Microsoft Copilot Studio
+- Copilot Studio and Power Automate set to the same **Course Sandbox** environment
+
+**Workflow Visual**
+
+![Lab 7A prompt-created IT support agent flowchart](<labs/Day 2/Lab 7A - Create IT Support Agent/assets/flowchart.png>)
+
+Copilot Studio generates an agent shell that the learner reviews, tests and
+
+improves before adding knowledge or tools.
+
+**Packaged Flow**
+
+No Power Automate flow is used in Lab 7A. This lab creates the Copilot Studio
+
+agent itself, so learners follow the prompt-based setup and use the supplied
+
+instructions rather than importing a flow ZIP.
+
+**Connected Day 2 Journey**
+
+Day 2 contains two connected projects. Each lab adds one capability instead of
+
+rebuilding the same agent:
+
+| Project | Lab | Capability added |
+| --- | --- | --- |
+| **A — IT Support** | **6** | Prompt-create the agent, inspect instructions and test behaviour |
+| **A — IT Support** | **7** | Add FAQ knowledge, validate RAG/citations and publish |
+| **B — Marina Trust** | **8** | Prompt-create one shared banking agent; connect the standalone website to a normal HTTP flow |
+| **B — Marina Trust** | **9** | Upgrade that same agent with a deterministic agent flow |
+| **B — Marina Trust** | **10** | Upgrade that same agent with a guarded AI prompt flow |
 
 **Scenario**
 
-You work on the **MyCompany Singapore IT Service Desk**. Staff repeatedly ask how to reset passwords, unlock accounts, enrol in MFA, connect to VPN, troubleshoot Outlook, report phishing, and raise support tickets. Answering the same questions manually delays urgent work.
+You are the **IT Service Manager at MyCompany Singapore**. The service desk
 
-You will build a grounded **MyCompany IT Support Assistant** that gives concise first-line guidance from the supplied internal FAQ. This is the Copilot Studio equivalent of the **ingestion half** of n8n Activity 7 RAG: load a source document, process it for semantic retrieval, and connect it to an AI agent.
+receives repeated questions about passwords, MFA, VPN access and approved
 
-The agent must never invent procedures, request passwords or MFA codes, or downplay security incidents. When the FAQ does not resolve an issue, it must explain how to escalate to the Service Desk.
+software. Employees often wait for an analyst even when a safe self-service
 
-> **Tip:** An "agent" (sometimes still called a "copilot") is just an AI assistant you configure. You do not write code — you describe what you want in plain English, add some reference material, and test it in a chat window.
+procedure exists. You will create the agent's role, tone, boundaries and
 
-**Activity 7 RAG Pattern in Copilot Studio**
+escalation behaviour before it is allowed to use internal procedures.
 
-The n8n activity exposes each RAG component as a node. Copilot Studio performs the same ingestion work as a managed service:
-
-```
-n8n Activity 7:
-it-faq.pdf → Upload/Webhook → Data Loader → Splitter → Embeddings → Vector Store
-
-Copilot Studio Lab 6:
-it-faq.pdf → Add Knowledge → Managed processing, chunking, embeddings, and search index
-```
-
-| n8n Activity 7 component | Copilot Studio equivalent |
+| Workplace detail | Requirement |
 | --- | --- |
-| Upload Webhook or document input | **Add knowledge → Files / Upload** |
-| Default Data Loader | Managed Knowledge ingestion |
-| Text Splitter | Managed document chunking |
-| Embeddings model | Managed semantic indexing |
-| Simple/Pinecone/Qdrant/Supabase Vector Store | Copilot Studio Knowledge index |
-| Successful vector insertion | Knowledge source status is **Ready** |
+| Users | Employees working in the office and remotely |
+| Agent purpose | First-line guidance and safe escalation—not unrestricted troubleshooting |
+| Safety boundary | Never invent internal URLs, security steps or access approvals |
+| Service target | Resolve routine questions quickly while routing unresolved or risky cases to the Service Desk |
 
-> **Important:** You do not create a separate Pinecone, Qdrant, or Supabase database in these labs. Copilot Studio manages the retrieval index. Lab 7 connects the answering behaviour to this ready source and tests the retrieval path.
+The agent deliberately has **no internal FAQ yet**. Test it with
 
-**Which interface are you using?**
+`My VPN disconnects every few minutes when I work from home`. At this stage, a
 
-Microsoft currently provides two Copilot Studio authoring experiences. Use the path that matches your screen:
+safe agent should acknowledge the issue and escalate rather than fabricate a
 
-| If your screen shows… | Follow… |
-| --- | --- |
-| **Overview**, **Knowledge**, **Topics**, **Tools/Actions**, and a **Test** pane | **Classic experience** |
-| **Build**, **Preview**, **Evaluate**, **Monitor**, with **Knowledge**, **Skills**, and **Tools** on the right | **New experience** |
+company-specific fix. Lab 7B adds the approved knowledge and turns the same
 
-> **Important:** The two interfaces achieve the same Lab 6 outcome. Do not switch experiences or recreate your agent halfway through the lab. Agents created in the new experience cannot currently be converted to the classic experience.
+agent into a grounded RAG assistant.
+
+The working cycle mirrors Lab 1 in Power Automate:
+
+**Describe → Generate → Review → Test → Improve**
+
+**Production extension:** Use authenticated employee access, data-loss
+
+prevention policies, analytics, an incident-management connector and a defined
+
+handoff that creates a ticket with the user's consent.
+
+**Interface Map**
+
+Use the column that matches your screen:
+
+| Capability | Classic experience | New experience |
+| --- | --- | --- |
+| Create | Home/Agents natural-language prompt or **Create blank agent** | Home natural-language prompt or **Agents → New Agent** |
+| Configure | **Overview** | **Build** |
+| Behaviour | **Instructions** | Main **Instructions** editor |
+| Facts | **Knowledge** tab | **Knowledge +** |
+| Reusable conversation logic | **Topics** | **Skills** and enhanced orchestration |
+| Actions | **Tools/Actions** | **Tools +** |
+| Interactive test | **Test** pane | **Preview** |
+| Repeatable tests | Manual test cases | **Evaluate** |
+
+> Stay in one authoring experience for the whole project. New-experience agents cannot currently be converted into classic agents.
 
 ---
 
 **Step-by-Step Guide**
 
-**Step 1: Confirm your environment (~3 minutes)**
+**Step 1: Confirm the environment (~3 minutes)**
 
-Before you build anything, make sure you are in the correct environment. This is the single most common cause of problems later in the course.
+1. Open Copilot Studio.
+2. Locate the environment selector in the Copilot Studio shell.
+3. Select **Course Sandbox**, matching the environment used for Day 1 flows.
+4. Open **Agents** and confirm you are not editing an older agent with the same name.
 
-1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and sign in with your course account.
-2. Find the **environment selector**:  —  **Classic:** usually at the top-right of the screen.  —  **New:** use the globe/environment control in the Copilot Studio shell (commonly at the lower-left; its position can vary by rollout).
-3. Click it and select **Course Sandbox** (your course environment from Lab 0).
+> **Why this matters:** Agents and agent flows must share an environment. A perfect flow in the wrong environment will not appear as an agent tool.
 
-> **⚠️ Warning:** Copilot Studio **must use the same environment as Power Automate**. If your agent is built in one environment and your flows live in another, they will not be able to connect to each other in Lab 10. Always confirm the environment name in the top-right before you start. The environment also needs **Dataverse** enabled, because agents are stored there.
+**Step 2: Generate the agent from a prompt (~8 minutes)**
 
-**Step 2: Create a blank agent and configure it (~10 minutes)**
+On **Home** or **Agents**, find the natural-language creation box and paste:
 
-Use the instructions below for your interface.
+```
+Create an internal IT support agent for MyCompany Singapore employees.
+Name it MyCompany IT Support Assistant.
+It should be friendly, concise and professional.
+It should help with passwords, MFA, VPN, Wi-Fi, Outlook, printers,
+company software, laptops, phishing and escalation to the Service Desk.
+It must never request passwords, MFA codes, recovery codes or other secrets.
+For security incidents it should emphasise urgent escalation.
+Until an approved IT FAQ is added, it must not invent troubleshooting steps;
+it should explain its scope and direct the user to the Service Desk.
+```
 
-**Classic experience**
+1. Submit the description.
+2. Review the generated name, description and instructions.
+3. Continue with the generated agent.
+4. Wait for provisioning to finish before editing.
 
-1. Select **Agents** in the left navigation, then select **Create blank agent**. On some classic Home pages, use **Create an agent** under **Start building from scratch**.
-2. Wait for the agent's **Overview** page to open.
-3. In **Details**, select **Edit** and enter:  —  **Name:** `MyCompany IT Support Assistant`  —  **Description:** `Provides first-line IT troubleshooting and escalation guidance for MyCompany Singapore staff.`
-4. Select **Save**.
-5. In **Instructions**, select **Edit**, paste the instruction block below, then select **Save**.
+> **No natural-language creation box?** Your environment may not support this feature. Select **Create blank agent** in classic or **Agents → New Agent** in the new experience. Use the name and instruction block in Step 3. The learning outcome is still the same: review and improve an agent configuration.
 
-**New experience**
+**Step 3: Review and correct the generated draft (~10 minutes)**
 
-1. Select **Agents** in the left navigation, then select **New Agent**.
-2. The designer opens on **Build**, with the agent name field in focus.
-3. Enter **Name:** `MyCompany IT Support Assistant`.
-4. Paste the instruction block below into the main **Instructions** editor.
-5. Select the **Save** (disk) icon at the top.
+Open **Overview** in classic or **Build** in the new experience. Verify:
 
-> **New-interface note:** The current Build page does not expose the classic editable **Description** field. Skip that field for Lab 6. If a description field appears during publishing, enter `Provides first-line IT troubleshooting and escalation guidance for MyCompany Singapore staff.` there. The **… > Settings > Agent details** page contains system identity values such as schema name, solution, and language; it is not the classic Description editor.
+- **Name:** `MyCompany IT Support Assistant`
+- **Description**, when editable: `Provides safe first-line IT support and escalation guidance for MyCompany Singapore employees.`
+- **Primary language:** English
 
-**Instructions for both interfaces**
+Replace or refine the generated Instructions with this reviewed baseline:
 
 ```
 You are the MyCompany Singapore IT Support Assistant for employees.
-Use the IT Service Desk FAQ as your source for troubleshooting and escalation guidance.
-Give concise, numbered steps in the order staff should perform them.
-Never ask for or repeat passwords, MFA codes, recovery codes, or other secrets.
-For phishing, lost devices, or suspected security incidents, clearly state the urgent action from the FAQ.
-If the FAQ does not cover the issue or its steps fail, say so and direct the user to the IT Portal or ithelpdesk@mycompany-sg.example.com.
-When escalating, remind the user to include their full name, asset tag, exact error message, when the issue started, and what they already tried.
-Do not invent policies, contact details, system names, or resolution times.
-Keep routine answers under 120 words unless the user asks for more detail.
+Be friendly, concise and professional.
+Explain that you cover passwords, MFA, VPN, Wi-Fi, Outlook, printers,
+company software, laptops, phishing and Service Desk escalation.
+Never ask for or repeat passwords, MFA codes, recovery codes or secrets.
+Treat phishing, lost devices and suspected compromise as urgent.
+Do not invent procedures, contacts, system names, policies or resolution times.
+No approved internal FAQ has been added yet. Until it is added, explain your
+scope and direct users to the Service Desk instead of giving procedural steps.
+Keep replies under 100 words unless the user asks for more detail.
 ```
 
-> **Tip:** Think of the three fields like this — **Name** is what people see, **Description** is a short note for *you* (and helps other agents/tools recognise it later), and **Instructions** are the actual rules the AI follows in every conversation. Instructions are where almost all of your effort goes.
+Save the agent.
 
-**Step 3: Tour the agent workspace (~5 minutes)**
+> In the new experience, **… → Settings → Agent details** contains system identity fields such as schema name, solution and language. It is not a replacement for the classic editable Description box.
 
-Now that the agent exists, use this interface map to locate its building blocks:
+**Step 4: Inspect the agent building blocks (~5 minutes)**
 
-| Building block | Classic experience | New experience |
-| --- | --- | --- |
-| Agent configuration | **Overview** | **Build** |
-| Behaviour rules | **Instructions** on Overview | Main **Instructions** editor on Build |
-| Facts and grounding | **Knowledge** tab | **Knowledge +** on the right of Build |
-| Scripted behaviour | **Topics** tab | Primarily **Instructions** and reusable **Skills**; no direct Topics tab |
-| Actions and integrations | **Tools** or **Actions** tab | **Tools +** on the right of Build |
-| Interactive testing | **Test** pane | **Preview** tab |
-| Structured repeatable tests | Not normally used in this lab | **Evaluate** tab |
-| Usage and run information | Analytics/monitoring pages | **Monitor** tab |
+Locate, but do not configure, each area:
 
-Click through the relevant areas once so you know where they are. You do not need to add a Skill, Tool, or evaluation yet.
+1. **Instructions** — behaviour, tone, boundaries and orchestration guidance.
+2. **Knowledge** — approved facts and documents; added in Lab 7B.
+3. **Topics/Skills** — repeatable conversation behaviour.
+4. **Tools** — flows and actions; introduced in Labs 9–10.
+5. **Test/Preview** — interactive verification before publishing.
+6. **Evaluate**, if available — repeatable test sets.
 
-> **Tip:** Remember the four building blocks: **Instructions** = behaviour and tone, **Knowledge** = facts the agent can look up, **Topics** = scripted conversations, **Tools** = things the agent can do. Almost everything in Copilot Studio is one of these four.
+Write down one sentence explaining each block. Do not add the FAQ or a tool yet.
 
-> **New-interface note:** Enhanced orchestration uses Instructions, Knowledge, Skills, and Tools to decide what to do. The classic **Topics** tab does not have a one-to-one replacement in this experience.
+**Step 5: Test the agent shell (~7 minutes)**
 
-**Step 4: Ingest the IT FAQ into Knowledge (~10 minutes)**
+Open **Test** in classic or **Preview** in the new experience. Start a new chat
 
-Right now your agent has behaviour rules but no company-specific procedures. Ground it with the supplied `it-faq.pdf`, adapted from the Activity 7 RAG mock data in the Agentic AI Automation with n8n repository.
+and run these tests:
 
-**Classic experience**
-
-1. Open the **Knowledge** tab.
-2. Select **+ Add knowledge**.
-3. Choose **Files** or **Upload file**.
-4. Upload `it-faq.pdf`.
-5. Set the name to `MyCompany IT Service Desk FAQ` and, if requested, enter: `Internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook, software, printers, hardware, access, phishing, and IT ticket escalation.`
-6. Select **Add to agent**.
-7. Wait until the source status changes from **Processing** to **Ready**.
-
-**New experience**
-
-1. On **Build**, select **+** beside **Knowledge** on the right.
-2. Choose **Files** or **Upload file**.
-3. Upload `it-faq.pdf`.
-4. Set the source name to `MyCompany IT Service Desk FAQ`.
-5. If a description is requested, enter: `Internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook, software, printers, hardware, access, phishing, and IT ticket escalation.`
-6. Select **Add to agent**, then select the **Save** (disk) icon.
-7. Wait for processing to finish. Depending on the rollout, the source may show **Ready**, a spinner, or simply appear as a `MyCompany IT Service Desk FAQ` chip.
-
-> **Tip:** This PDF is internal mock data. Its `.example.com` addresses and phone number are intentionally fictional; do not replace them with personal contact information.
-
-> **RAG checkpoint:** When the source becomes **Ready**, Copilot Studio has completed the equivalent of n8n's load → split → embed → upsert sequence. A visible source alone is not enough; wait for processing to finish.
-
-**Step 5: Smoke-test the retrieval path (~7 minutes)**
-
-1. Open the testing surface:  —  **Classic:** open the **Test** pane on the right. If hidden, select **Test** at the top-right.  —  **New:** select the **Preview** tab.
-2. Start with these three ingestion smoke tests:  —  `I entered the wrong password several times and my account is locked. What should I do?`  —  `How do I connect to the corporate VPN while working from home?`  —  `I clicked a link in a suspicious email and entered my password. What should I do now?`
-3. Compare the responses with the expected evidence:
-
-| Test | What a grounded answer should include |
+| Test message | Expected behaviour before Lab 7B |
 | --- | --- |
-| Locked account | Wait 15 minutes; use self-service password reset if needed; escalate if still locked |
-| VPN | Open GlobalConnect; use `vpn.mycompany-sg.example.com`; sign in and approve MFA |
-| Phishing compromise | Report phishing, change the password immediately, and call the Service Desk |
+| `What can you help me with?` | Lists the approved IT support scope concisely |
+| `Give me the exact VPN server and setup steps.` | Does not invent them; says approved FAQ knowledge is not yet available |
+| `My MFA code is 123456. Can you check it?` | Refuses to accept or repeat the code |
+| `I clicked a suspicious link and entered my password.` | Treats it as urgent and directs the user to the Service Desk |
+| `How many days of annual leave do I have?` | Says this is outside its IT support scope |
 
-1. Confirm that the agent never asks for the user's password or MFA code.
-2. Check for a citation or reference to `it-faq.pdf` where the interface provides citations.
+Record **Pass** or **Needs improvement** for every test.
 
-> **Tip:** This is only a smoke test that the ingestion path works. In Lab 7 you will perform a fuller RAG evaluation with citations, negative tests, source-only controls, and troubleshooting.
+**Step 6: Improve one instruction and retest (~5 minutes)**
 
-**Step 6: Iterate on your Instructions (~5 minutes)**
-
-The first version of an agent is rarely perfect. Tuning the Instructions is normal and expected.
-
-1. Review your test results. If answers are too vague, too long, or omit escalation details, return to your instruction editor:  —  **Classic:** open **Overview** and select **Edit** in **Instructions**.  —  **New:** return to **Build** and click in the main **Instructions** editor.
-2. Add a line to make the change you want, for example:
+1. Identify one response that was too vague, too long or unsafe.
+2. Add one precise instruction, for example:
 
 ```
-   For every troubleshooting answer, separate "Try this first" from "Escalate when".
-   Never ask the user to share a password, MFA code, recovery code, or authentication secret.
-```
-
-1. Save the change:  —  **Classic:** select **Save**.  —  **New:** select the **Save** (disk) icon.
-2. Start a fresh test:  —  **Classic:** return to the **Test** pane and select **Start new test session** (circular-arrow/refresh).  —  **New:** return to **Preview** and select **New chat**.
-3. Ask the questions again and confirm the updated behaviour.
-
-> **⚠️ Warning:** Existing test conversations do **not** always pick up changes. Start a new test session in Classic or a **New chat** in the new experience after editing Instructions.
-
-**Step 7: Publish the agent (optional) (~5 minutes)**
-
-Publishing makes your latest version live so it can be shared. You do not have to deploy it anywhere yet.
-
-> **Note:** A Copilot Studio **trial** license lets you create and test agents in the Test pane, but does **not** let you publish them. If Publish is blocked on your account, simply read through this step — everything else in the course works from the Test pane.
-
-1. Select **Publish** at the top-right, then confirm by selecting **Publish** again.
-2. After publishing:  —  **Classic:** open **Channels** to browse Microsoft Teams, demo website, and other deployment options.  —  **New:** use the publish confirmation options to **Share** the agent or add it to the organisation catalogue. Channel availability may differ while the new experience is in preview.
-3. You do not need to connect a channel or share the agent for this lab.
-
----
-
-**Checkpoint**
-
-You have successfully completed this lab when:
-
-- ✅ You confirmed you are in the **Course Sandbox** environment (matching Power Automate)
-- ✅ An agent named **MyCompany IT Support Assistant** exists with your custom **Instructions**
-- ✅ The supplied **MyCompany IT Service Desk FAQ** is ready or has finished processing
-- ✅ You can explain how **Add knowledge** replaces the n8n loader, splitter, embeddings, and vector-store nodes
-- ✅ The agent passes the account-lockout, VPN, and phishing smoke tests in **Test** (Classic) or **Preview** (New)
-- ✅ The agent never requests passwords, MFA codes, or other secrets
-- ✅ You edited the Instructions and saw the change after starting a fresh test session or **New chat**
-
-**Troubleshooting**
-
-| Problem | Cause | Solution |
-| --- | --- | --- |
-| Agent ignores your new instructions | The test is using an existing conversation | Save, then use **Start new test session** (Classic) or **New chat** in Preview (New). |
-| Knowledge source stuck on "Processing" | File processing or a busy service | Wait a minute or two and confirm the PDF opens locally. If it persists, remove the source and upload `it-faq.pdf` again. |
-| Replies are generic or unhelpful | No grounding, or vague instructions | Make sure a Knowledge source is **Ready** and tighten your Instructions (be specific about tone and scope). |
-| Can't see the Test pane | You are using the new experience, or the Classic pane is collapsed | Select **Test** in Classic or open the **Preview** tab in the new experience. |
-| Can't find Description | The new Build page does not expose the classic Description field | Skip it for Lab 6; do not enter it under **Agent settings**. Add it during Publish only if a description field appears. |
-| Can't find Topics | The new experience uses enhanced orchestration | Use **Instructions**, **Skills**, and **Tools**; no Topic is required in Lab 6. |
-| Tools/flows won't connect later | Wrong environment | Use the **environment selector** (top-right) to switch to the same environment as Power Automate (**Course Sandbox**). |
-| Can't find **Create blank agent** | Interface variation | In Classic use **Create blank agent** or **Create an agent**. In the new experience use **Agents > New Agent**. |
-
-**Key Takeaways**
-
-- An agent's behaviour is shaped mainly by its **Instructions** — clear instructions give predictable answers.
-- The classic building blocks are **Instructions**, **Knowledge**, **Topics**, and **Tools/Actions**; the new experience emphasises **Instructions**, **Knowledge**, **Skills**, and **Tools**.
-- **Knowledge** grounds answers in real content so the agent stops guessing.
-- A **Ready** source is the Copilot Studio equivalent of a successfully populated vector store.
-- Real IT support agents need explicit security boundaries: never request secrets and escalate suspected compromise immediately.
-- The **Test** pane (Classic) or **Preview** tab (New) is your build-and-iterate loop.
-- Always work in the **same environment** as your Power Automate flows, and that environment needs **Dataverse**.
-
-**Duration**
-
-~45 minutes
-
-**Next Steps**
-
-Proceed to Lab 7: Create an IT Support RAG Chatbot.
-
----
-
-### Lab 7: Create an IT Support RAG Chatbot with Copilot Studio
-
-**Lab Title**
-
-Build and Validate a Grounded IT Support RAG Chatbot
-
-**Lab Objectives**
-
-By the end of this lab, you will be able to:
-
-1. Turn the IT Support agent from Lab 6 into a working **RAG chatbot**
-2. Explain **grounding** and **RAG** (Retrieval-Augmented Generation) in plain, everyday terms
-3. Add and verify an approved IT support **Knowledge** source in Copilot Studio
-4. Turn off **Allow ungrounded responses** so the chatbot answers only from approved content
-5. Test grounded answers and verify their visible **citations**
-6. Confirm the chatbot refuses unsupported questions instead of making up answers
-7. Map the n8n Activity 7 retriever-and-chat workflow to Copilot Studio
-
-**Prerequisites**
-
-- Completed Lab 6 (you have an agent)
-- The supplied `it-faq.pdf` from Lab 6
-
-**Scenario**
-
-Your **MyCompany IT Support Assistant** from Lab 6 already has an indexed IT FAQ. You will now complete it as a usable **IT Support RAG Chatbot**: connect the agent's behaviour to the approved knowledge source, retrieve relevant passages, generate grounded answers, expose the result in chat, show citations, and reject unsupported questions.
-
-In this lab you will inspect and harden the **MyCompany IT Service Desk FAQ** knowledge source, then prove that the agent answers from that source and nothing else. This is the technique that makes business agents trustworthy.
-
-> **Tip:** **Grounding** means tying the agent's answers to specific source material you provide, so it cannot just invent things. **RAG** (Retrieval-Augmented Generation) is the technology that does this.
-
-**How RAG works (in plain terms)**
-
-1. You add documents to **Knowledge**. Copilot Studio breaks them into small passages and indexes them.
-2. A user asks a question.
-3. The agent **retrieves** the few passages most relevant to that question.
-4. The agent **generates** an answer using *only* those passages, and shows **citations** pointing back to the source.
-
-> **RAG in one line:** *Find the relevant text in your documents → hand it to the AI → it answers from that text, with citations.* This keeps answers accurate and up to date without retraining any model.
-
-**Activity 7 answering workflow translated**
-
-```
-n8n Activity 7:
-Chat/Telegram/Webhook → AI Agent → Vector Store Retriever → Chat Model → Response
-
-Copilot Studio Lab 7:
-Test or Preview chat → Generative orchestration → Ready Knowledge source → Grounded answer + citation
-```
-
-| n8n Activity 7 component | Copilot Studio equivalent |
-| --- | --- |
-| Telegram Trigger, Chat Trigger, or Webhook | **Test** pane (Classic) or **Preview** (New) |
-| AI Agent node | Copilot Studio agent with **Instructions** |
-| Vector Store Retriever tool | Ready **Knowledge** source |
-| Chat model | Agent model selected by the environment |
-| Respond to Webhook / Telegram message | Agent chat response with citation |
-| Retriever returns no matching content | Agent declines and offers escalation |
-
-> **Why there is no webhook in this lab:** Copilot Studio supplies its own test chat and publishable channels. A Power Automate HTTP webhook is useful when an external application must call a flow, but it is not required to prove that this agent retrieves from its Knowledge source.
-
----
-
-**Step-by-Step Guide**
-
-**Step 1: Prepare a knowledge source (~5 minutes)**
-
-1. Download or locate the supplied `it-faq.pdf`.
-2. Open it and identify at least four topics, such as password reset, VPN, phishing, and laptop troubleshooting.
-3. If you already uploaded this file in Lab 6, reuse that ready source. If it is missing, you will upload it in Step 3.
-
-> **Tip:** Keep the document focused and tidy — use clear headings and short paragraphs. Clean, well-structured content leads to much better retrieval and more accurate answers.
-
-**Step 2: Open the agent and verify its Knowledge source (~3 minutes)**
-
-1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and confirm the **environment selector** (top-right) shows **Course Sandbox**.
-2. Open your **MyCompany IT Support Assistant** agent from Lab 6.
-3. Locate Knowledge using the path for your interface:  —  **Classic:** select the **Knowledge** tab.  —  **New:** on **Build**, locate **Knowledge** on the right.
-4. Confirm **MyCompany IT Service Desk FAQ** appears. Do not add a duplicate source.
-
-> **⚠️ Warning:** Make sure you are in the **same environment** as your Lab 6 agent and your Power Automate flows. If the environment is wrong, you may be editing a different (or empty) agent.
-
-**Step 3: Repair the ingestion only if the source is missing (~10 minutes)**
-
-1. Look for **MyCompany IT Service Desk FAQ** in the Knowledge list.
-2. If it is already present, confirm its status is **Ready** and continue to Step 4.
-3. If it is missing, select **+ Add knowledge**, choose **Files** / **Upload**, and upload `it-faq.pdf`.
-4. Give the source the name `MyCompany IT Service Desk FAQ`.
-5. If prompted for a description, enter `Approved first-line IT support, troubleshooting, security incident, and Service Desk escalation procedures for MyCompany Singapore staff.`
-6. Select **Add to agent** and wait until its status changes from **Processing** to **Ready**.
-
-> **⚠️ Warning:** Do **not** test until the status reads **Ready**. While a source is still **Processing**, the agent cannot use it and may reply that it has no information.
-
-**Step 4: Restrict answers to approved sources (~4 minutes)**
-
-By default the agent may blend in general AI/web knowledge. For an internal IT helpdesk you usually want procedural answers **only** from approved MyCompany documents.
-
-1. Apply the controls available in your interface:  —  **Classic:** open **Settings → Generative AI**. In **Knowledge**, turn **Allow ungrounded responses** **Off**. Also turn **Use information from the web** or **Web Search** **Off**.  —  **New:** on **Build**, remove the **Search all websites** source if it is present. Open **… → Settings → AI & behavior** and turn off a general-knowledge or ungrounded-response option if your tenant exposes one.
-2. Add or confirm these lines in **Instructions**:
-
-```
-   Answer IT procedure questions only from the approved Knowledge sources and cite the source.
-   If the source does not contain the answer, say that clearly and offer the Service Desk escalation route.
+   When a user shares an authentication secret, do not quote it back.
+   Tell the user to invalidate or change it and contact the Service Desk.
 ```
 
 1. Save the agent.
-2. Start a new test conversation so the controls take effect.
+2. Start a **new test session** in classic or **New chat** in Preview.
+3. Repeat the affected test and confirm the improvement.
 
-> **Tip:** Turn **Allow ungrounded responses** (and **Web Search**) **on** when you want the agent to also answer broad, everyday questions. Turn them **off** when you need tight control and want to prevent answers that did not come from your documents.
-
-**Step 5: Test that answers come from your document (~10 minutes)**
-
-1. Open the testing surface and start a fresh conversation:  —  **Classic:** open **Test** and select **Start new test session**.  —  **New:** open **Preview** and select **New chat**.
-2. Ask questions that can **only** be answered from `it-faq.pdf`, for example:  —  `My account is locked. What should I do?`  —  `How do I connect to GlobalConnect VPN?`  —  `Where should I report a suspicious email?`
-3. Confirm each answer matches the facts in your document.
-4. Look **underneath each answer** for **citations** or **references** (often numbered, like `[1]`, or a "1 reference" link). Click a citation to confirm it points back to your source.
-
-> **Tip:** Citations are your proof that grounding worked. If an answer has no citation, it may have come from general knowledge rather than your document.
-
-**Step 6: Confirm the agent declines when it doesn't know (~5 minutes)**
-
-This is the most important test — it proves the agent will not make things up.
-
-1. In **Test** (Classic) or **Preview** (New), ask something that is **not** in your document, for example:  —  `How many days of annual leave do I have?`  —  `Can you give me the finance team's payroll schedule?`
-2. The agent should say the FAQ does not contain that information and direct the user to the appropriate department or Service Desk instead of inventing an answer.
-3. If instead it confidently invents an answer, that is a **hallucination**. Re-check that **Allow ungrounded responses is Off** (Step 4) and that your Instructions tell it to answer only from provided sources.
-
-> **Tip:** A trustworthy business agent saying *"I don't have that information"* is a success, not a failure. Declining gracefully is exactly the behaviour you want.
-
-**Step 7: Tune your sources (~5 minutes)**
-
-1. If an answer is weak or missing, improve the **source document** — add clearer headings and more detail — then re-upload or refresh the source.
-2. Add a **second** Knowledge source for broader coverage (for example, a product page website). Give each source a **distinct name and description** so the agent can tell them apart.
-3. Reinforce grounding in the **Instructions** (Overview tab). Add a line such as:
-
-```
-   Only answer using the provided knowledge sources, and cite them.
-   If the answer is not in the sources, say you don't have that information.
-```
-
-1. Select **Save**, refresh the Test pane, and re-test.
+> Existing conversations can preserve old context. Always start a fresh test after changing Instructions.
 
 ---
 
 **Checkpoint**
 
-You have successfully created the IT Support RAG Chatbot when:
+> **Workplace evidence:** Capture the reviewed instructions, one correct routine-support answer and one safe refusal for an unknown procedure. Do not include passwords, tokens or personal data.
 
-- ✅ At least one **Knowledge** source shows the status **Ready**
-- ✅ The agent answers IT support questions **from `it-faq.pdf`**, with visible **citations**
-- ✅ **Allow ungrounded responses** is turned **Off** (if you chose the recommended setup)
-- ✅ The agent **declines** to answer (no hallucination) when the information is not in your sources
-- ✅ You can map the n8n **AI Agent + Vector Store Retriever + response** chain to Copilot Studio
-- ✅ You can explain the difference between **Instructions** and **Knowledge**
+You have completed Lab 7A when:
+
+- ✅ `MyCompany IT Support Assistant` exists in **Course Sandbox**
+- ✅ It was generated from a prompt, or created blank using the documented fallback
+- ✅ You reviewed and corrected its Instructions
+- ✅ You can locate Instructions, Knowledge, Topics/Skills, Tools and Test/Preview
+- ✅ It does not invent missing IT procedures
+- ✅ It does not accept or repeat authentication secrets
+- ✅ You improved one instruction and confirmed the change in a fresh chat
 
 **Troubleshooting**
 
-| Problem | Cause | Solution |
+| Problem | Likely cause | Fix |
 | --- | --- | --- |
-| Source stuck on "Processing" | Large or busy source | Wait a minute or two; if it persists, try a smaller file or a single web page. |
-| Agent ignores the document | Source not ready, or no description | Confirm the source is **Ready**; add a clear description; in Instructions, tell it to answer from knowledge. |
-| Answers come from the web, not my doc | Web search / ungrounded answers are on | Turn **off** **Allow ungrounded responses** and **Use information from the web** in Settings → **Generative AI** (Knowledge section), then **Save** and refresh the Test pane. |
-| No citations appear | Answer was not grounded | Ensure the answer actually came from a Ready source; check that **Allow ungrounded responses** is off. |
-| Agent makes things up | Hallucination | Turn off **Allow ungrounded responses** and add an Instruction to decline when info is missing. |
-| Edits not reflected in chat | Test pane caching | Select the **Start new test session** (refresh) icon at the top of the **Test** pane to restart the conversation. |
+| Natural-language creation is missing | Tenant, region or model access does not expose it | Create a blank/new agent and paste the reviewed baseline Instructions |
+| Agent appears in the wrong place | Wrong environment | Select **Course Sandbox** and reopen Agents |
+| Can't edit Description | New experience | Edit the visible name and Instructions; skip Description unless publishing exposes it |
+| Can't find Topics | New enhanced-orchestration experience | Use Instructions, Skills and Tools; no Topic is required in Lab 7A |
+| Changed instructions have no effect | Existing chat retains context | Save and start a new Test session/New chat |
+| Agent invents VPN steps | Boundary instruction is missing or weak | Add the reviewed baseline instruction that no approved FAQ exists yet |
 
 **Key Takeaways**
 
-- **Knowledge = grounding (RAG):** the agent retrieves passages from your documents and answers from them, with citations.
-- Use **Instructions** for *behaviour and tone*; use **Knowledge** for *facts*.
-- Turning **Allow ungrounded responses off** (and **Web Search off**) keeps answers strictly inside your own content.
-- **Citations** let you and your users verify exactly where an answer came from.
-- A grounded agent that **declines** when it doesn't know is working correctly — that is how you avoid hallucinations.
+- Natural-language creation accelerates the first draft; it does not replace review.
+- Instructions define role, tone, scope, safety boundaries and orchestration guidance.
+- Knowledge provides approved facts; do not ask an agent to use knowledge it does not have.
+- Test before publishing and retest in a fresh conversation after every material change.
+- Day 2 uses the same maker discipline as Day 1: generate, inspect, test and improve.
 
 **Duration**
 
@@ -2256,192 +2668,281 @@ You have successfully created the IT Support RAG Chatbot when:
 
 **Next Steps**
 
-Proceed to Lab 8: Add Tools and Actions to Your Agent.
+Proceed to Lab 7B: Ground and Evaluate the IT Support RAG Agent.
 
 ---
 
-### Lab 8: Add Tools and Actions to Your Agent
+### Lab 7B: Ground and Evaluate the IT Support RAG Agent
 
 **Lab Title**
 
-Give Your Agent Tools — Connectors, Prebuilt Actions, and Flows
+Add Approved Knowledge, Validate Citations and Publish the IT Support Agent
 
 **Lab Objectives**
 
 By the end of this lab, you will be able to:
 
-1. Explain what **Tools/Actions** are and how they differ from **Knowledge**
-2. Add a **prebuilt connector action** as a tool (e.g. Send an email V2) and create its connection
-3. Write a clear tool **name and description** that tells the agent *when* to use the tool
-4. Set tool **inputs**, either as fixed values or filled by AI from the conversation
-5. (Alternative) Add a **multi-step Power Automate agent flow** as a tool (using **Add a row into a table**), and **disable a competing tool** so the agent calls the right one
-6. Test the agent actually **performing an action**, and read the **Activity map**
+1. Continue with the agent created in Lab 7A
+2. Add an approved PDF as a Knowledge source
+3. Explain Copilot Studio's managed RAG pipeline
+4. Restrict procedural answers to approved knowledge
+5. Verify grounded answers and citations
+6. Test unsupported and security-sensitive questions
+7. Publish the completed agent when licensing permits
 
 **Prerequisites**
 
-- Completed Lab 6 and Lab 7
-- A working **Office 365 Outlook** connection (a mailbox-enabled account you can sign in with)
+- Completed Lab 7A
+- The existing `MyCompany IT Support Assistant`
+- The supplied `it-faq.pdf`
+
+**Workflow Visual**
+
+![Lab 7B IT support RAG flowchart](<labs/Day 2/Lab 7B - IT Support RAG Agent/assets/flowchart.png>)
+
+The agent searches the approved FAQ, grounds the answer in retrieved content
+
+and refuses unsupported answers when no evidence exists.
+
+**Packaged Flow**
+
+No Power Automate flow is used in Lab 7B. The supplied
+
+`it-faq.pdf`
+
+is the importable knowledge asset. Add it under **Knowledge**, then test the
+
+same agent created in Lab 7A.
 
 **Scenario**
 
-So far your **MyCompany IT Support Assistant** can *answer* questions using the approved IT FAQ. Staff also need it to *do* something useful — email the Service Desk with a structured escalation summary when first-line troubleshooting does not resolve an issue.
+The **MyCompany Knowledge Manager** has approved a version-controlled IT Service
 
-**Knowledge lets an agent answer; Tools let it act.** In this lab you will give your agent a tool so a chat conversation can trigger real work, such as sending an email. This is the bridge to the end-to-end agent-plus-flow workflow you will build in Lab 10.
+Desk FAQ covering password reset, account lockout, MFA, VPN, Wi-Fi, Outlook,
 
-> **Knowledge vs Tools:** - **Knowledge** = read and answer from your documents (Lab 7). - **Tools/Actions** = perform actions in other systems — send an email, create a record, run a Power Automate flow (this lab).
+software installation, printing, hardware, access requests, shared drives,
 
----
+phishing and ticket escalation. As the **IT Service Manager**, you must add only
 
-**Step-by-Step Guide**
+this approved source and prove that the agent retrieves the correct passage
 
-**Step 1: Open the Tools tab (~5 minutes)**
+instead of relying on general model knowledge.
 
-1. Go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>** and confirm the **environment selector** (top-right) shows **Course Sandbox** — the same environment as your Power Automate flows.
-2. Open your **MyCompany IT Support Assistant** agent from Lab 6.
-3. Select the **Tools** tab (this was labelled **Actions** in older versions).
-4. Select **+ Add a tool**. Microsoft groups tools into several **core tool types**:  —  **Prebuilt / custom connector action** — a single ready-made operation from a connector like Office 365 Outlook, Excel, or Teams (you use this in Steps 2–4).  —  **Agent flow** — a multi-step Power Automate flow with conditions and logic, used as one tool (you use this in Step 5).  —  **Prompt** — a single-turn AI prompt that returns text.  —  **REST API / MCP tool / Computer use** — connect to web services, a Model Context Protocol server, or GUI automation (advanced; out of scope here).
+Use this realistic acceptance set:
 
-> **How the agent picks a tool:** With **generative orchestration**, the agent chooses *which* tool to call at runtime **based purely on each tool's name and description** — there are no fixed trigger phrases. That is why a clear, intent-rich **description** (Step 3) is the single most important thing you write, and why two tools with overlapping descriptions confuse the agent (see Step 5a).
-
-> **⚠️ Warning:** Tools and the flows they call must live in the **same environment** as the agent. If your flow was built in a different environment, the agent will not be able to see or call it.
-
-**Step 2: Add a prebuilt connector action (~10 minutes)**
-
-You will add a "send an email" action directly as a tool.
-
-1. Select **+ Add a tool**, then apply the **Connector** filter.
-2. In the search box, type `Send an email` and select **Send an email (V2)** under **Office 365 Outlook**.
-3. If you are prompted to **sign in / create a connection**, do so now using a **mailbox-enabled account** (an account that can actually send email). Approve any consent prompt.
-4. The action is added to your tools list. Open it to see its **inputs**: **To**, **Subject**, and **Body**.
-
-> **⚠️ Warning:** If you ever see an **Unauthorized** error when the tool runs, the connection is broken or signed in with the wrong account. Open the tool's **connection** settings and **reconnect** with a mailbox-enabled account.
-
-**Step 3: Name and describe the tool (~5 minutes)**
-
-The description is the most important part — it is how the agent decides **when** to call this tool.
-
-1. Open the tool and set a clear **name** and **description**, for example:  —  **Name:** `Send notification email`  —  **Description:** `Use this to email a summary to the support team when the user asks to escalate an issue or notify someone.`
-2. Be specific. A vague description like `sends email` makes the agent unsure when to use it; a precise description makes it reliable.
-
-> **Tip:** The agent reads the tool **description** the way you would read a label. If the label clearly says what the tool is for, the agent picks it at the right moment.
-
-**Step 4: Configure the tool's inputs (~7 minutes)**
-
-Decide how each input (To, Subject, Body) gets its value. You have two choices per input:
-
-1. **Fixed value** — you type the value once and it never changes. Good for **To**: set it to your own email so test messages go to you, e.g. `you@yourcompany.com`.
-2. **Filled by AI** (dynamic) — the agent fills the value from the conversation. Choose **Fill using AI** (or **Dynamically**) for **Subject** and **Body** so the agent writes them based on what the user said.
-
-> **Tip:** For your first test, set **To** as a **fixed** value (your own inbox). That way you can confirm the email actually arrives without risking sending it to the wrong person.
-
-**Step 5: (Alternative path) Add a Power Automate flow as a tool (~15 minutes)**
-
-A single connector action (Steps 2–4) is perfect for **one** step. But real business work is usually **multi-step** — you often need to *log a record* **and** *notify someone* **and** *return a result* in one go. A single connector tool cannot do that; a **Power Automate agent flow** can. In this step you will build a flow that **logs a support request to a table**, then add that flow to the agent as a second tool.
-
-> **Why a different action here?** In Steps 2–4 your agent already learned to *send an email* with a single connector tool. To show what a flow adds, this step uses a **different** action — **Add a row into a table** — so the flow *records* the request instead of emailing it. (Do **not** add another *Send an email* action here; that would just duplicate the tool you already built and confuse the agent about which one to call.)
-
-**Step 5a — Turn OFF the connector tool from Step 4 first (do not skip)**
-
-If you leave the **Send notification email** connector tool (Steps 2–4) **enabled** while you add and test the new flow tool, your agent now has **two** tools that both look like "do something with the user's request." The orchestrator may keep choosing the old email tool and never call your new flow — making it look like the flow is broken when it is not. Disable the old tool so this exercise has exactly **one** active tool to reason about.
-
-1. In your agent, open the **Tools** tab.
-2. Find the **Send notification email** tool you added in Steps 2–4.
-3. Select its **… (More actions)** menu and turn the tool **Off** (toggle/disable it). *Do not delete it* — you will switch it back on later.
-4. Confirm the tool now shows as **Off / Disabled** in the list before continuing.
-
-> **⚠️ Warning:** This was the step most learners discovered was missing. With **both** tools on, the agent often fires the Step 4 email tool instead of the new flow, and the flow appears to "do nothing." Turning the connector tool **Off** isolates the flow so you can confirm it works.
-
-**Step 5b — Create the agent flow**
-
-1. In Copilot Studio's left navigation, select **Flows**, then **New flow** → **Agent flow**. *(From inside the agent you can instead use the **Tools** tab → **+ Add a tool** → **New Agent flow**.)*
-2. The **agent flow designer** opens (the same designer Power Automate uses) with two steps already in place: the trigger **When an agent calls the flow** and a **Respond to the agent** action. Every agent flow follows this three-part shape: **trigger → do the work → respond**.
-
-**Step 5c — Define the flow's input**
-
-1. Select the trigger **When an agent calls the flow**, then **+ Add an input**.
-2. Choose **Text**, name it `Request summary`, and give it the hint `A short summary of the support request`. This is the value the agent will pass in from the conversation.
-3. Open the **Overview** tab → **Details** → **Edit**, set **Flow name** to `Log support request` and **Description** to `Logs a support request as a new row in the requests table`, then **Save**.
-
-**Step 5d — Add the work: "Add a row into a table" (the only action here)**
-
-1. Back on the **Designer** tab, select the **+** between the trigger and **Respond to the agent** to insert an action.
-2. Search for `Excel`, choose **Excel Online (Business)**, then the action **Add a row into a table** (reuse the workbook and table from Lab 2, or any table with a `Request` column).
-3. Map the row's **Request** column to the trigger's `Request summary` input using **Dynamic content**.
-
-> **Reminder:** Add **a row into a table** here — **not** a *Send an email* action. The email path was already covered by the connector tool in Steps 2–4.
-
-**Step 5e — Respond to the agent**
-
-1. Select the **Respond to the agent** node, then **+ Add an output**.
-2. Choose **Text**, name it `status`, and set its value to `Logged` (or use **Dynamic content** to return the new row's ID). The flow **must** end here, or the agent never gets a result back.
-
-**Step 5f — Publish**
-
-1. Select **Save draft**, then **Publish**.
-2. Return to **Tools** and confirm the flow's status is **Ready**.
-
-**Step 5g — Add the flow to the agent and map its input**
-
-1. In the agent, open the **Tools** tab → **+ Add a tool**, apply the **Flow** filter, select **Log support request**, then **Add and configure**.
-2. Set a clear **Description**: `Records a support request to the requests table when the user asks to log or file an issue.`
-3. Under **Additional details**, review **When this tool may be used**, **Ask the end user before running**, and **Credentials to use** (end-user credentials, with a sign-in prompt like `Please sign in to log the request`).
-4. Under **Inputs**, for the `Request summary` input set **Fill using** → **Dynamically fill with AI** so the agent writes the summary from the conversation (or **Custom value** to bind a variable), just like the fixed-vs-AI choice in Step 4.
-5. Under **Completion**, set **After running** → **Write the response with generative AI** so the agent confirms the result in natural language. **Save**.
-
-> **Tip:** Every flow used as a tool follows the same three-part shape: **When an agent calls the flow** (trigger) → **do the work** → **Respond to the agent** (give a result back). You will reuse this pattern in Lab 10.
-
-**Step 6: Test the agent performing the action (~8 minutes)**
-
-1. Open the **Test** pane and select the **Start new test session** (refresh) icon at the top so it picks up the new flow tool.
-2. Type a message that should trigger the flow, for example:  —  `Please log a support request: I need help with order 123.`
-3. Watch the agent decide to **call the Log support request flow**. If it asks for confirmation or shows a sign-in prompt, approve it.
-4. Confirm the action really happened — open your table and check that a **new row** was added with the request summary.
-5. Open the **Activity map** (a diagram of the conversation, if shown) to see the tool being called and the exact data passed into it. This is the best way to understand *why* the agent did what it did.
-6. **Switch the email tool back on:** return to the **Tools** tab and turn the **Send notification email** tool (Steps 2–4) back **On**. With both tools live and clearly described, the agent can now *log* a request **and** *email* support — choosing each by its **description**.
-
-> **Tip:** If the flow does nothing, check three things in order: is the **Send notification email** tool still **Off** during the isolation test, did the flow **Publish** to status **Ready**, and did the agent actually choose the flow (look at the **Activity map**)?
-
-**Step 7: Refine the tool (~5 minutes)**
-
-1. **Agent never calls the tool?** Improve the tool **description** to clearly state the trigger situations, and add an example trigger phrase in the agent's **Instructions** (e.g. *"When a user asks to notify or escalate, use the Send notification email tool."*).
-2. **Agent calls the tool with the wrong data?** Tighten the input setup — use a fixed value where the data should never change, or add a clearer hint for the AI-filled inputs.
-3. **Save**, refresh the Test pane, and test again.
-
----
-
-**Checkpoint**
-
-You have successfully completed this lab when:
-
-- ✅ A **tool** (a connector action and/or a flow) is added to your agent
-- ✅ The tool has a clear **name and description** that tells the agent when to use it
-- ✅ The tool's **connection** is signed in with a mailbox-enabled account (no Unauthorized error)
-- ✅ The agent **performs the action** during a test conversation (e.g. the email arrives)
-- ✅ You found the tool call in the **Activity map**
-
-**Troubleshooting**
-
-| Problem | Cause | Solution |
+| Test | Employee message | Expected operational behaviour |
 | --- | --- | --- |
-| Agent never calls the tool | Description too vague | Rewrite the **description** to name the exact situations; add a trigger example in **Instructions**. |
-| Connection / Unauthorized error | Broken connection or wrong account | Open the tool's connection and **reconnect** with a **mailbox-enabled** account. |
-| Email never arrives | Wrong recipient or tool not called | Check the **To** value, confirm the connection, and verify the tool ran in the **Activity map**. |
-| Wrong data sent to the tool | AI filled inputs incorrectly | Use **fixed values** where data shouldn't change, or add clearer input hints; test again. |
-| Tool not listed after adding | Wrong environment, or not refreshed | Confirm the agent and flow are in the **same environment** (Course Sandbox); refresh the page. |
-| Flow tool fails to return | No response step | Make sure the flow ends with **Respond to the agent** with an output, then re-publish it. |
-| Agent calls the old email tool, never the flow | Two competing tools both enabled | Turn the **Send notification email** connector tool **Off** while you test the flow (Step 5a), then test again. |
-| Flow shows up but status isn't **Ready** | Not published | **Save draft** then **Publish** the flow; the **Tools** list must show status **Ready** before the agent can call it. |
+| Routine | `How do I reset an expired password?` | Give the approved self-service steps and cite the FAQ |
+| Remote work | `GlobalConnect VPN keeps dropping at home.` | Retrieve the VPN troubleshooting steps, then explain when to raise a ticket |
+| Security | `I clicked a suspicious payroll link. What should I do?` | Prioritise the approved security escalation; do not continue ordinary troubleshooting |
+| Unsupported | `Can you approve administrator access for me?` | Refuse to approve access and route to the authorised Service Desk process |
+
+The completed agent should reduce repetitive tickets without bypassing security
+
+or access-control processes. In production, the knowledge owner would review
+
+content on a schedule and evaluation results would become release evidence.
+
+**RAG Pattern**
+
+```
+it-faq.pdf
+    ↓
+Copilot Studio managed ingestion
+    ├── extract text
+    ├── split passages
+    ├── create semantic index
+    └── make passages retrievable
+    ↓
+User question → retrieve relevant passage → grounded answer + citation
+```
+
+| n8n Activity 7 component | Copilot Studio equivalent |
+| --- | --- |
+| Upload/document input | **Add knowledge → Files** |
+| Data loader | Managed document extraction |
+| Text splitter | Managed chunking |
+| Embeddings and vector store | Managed semantic Knowledge index |
+| Retriever tool | Ready Knowledge source |
+| AI Agent + chat model | Copilot Studio agent and selected model |
+| Respond to chat/webhook | Test/Preview or published channel |
+
+---
+
+**Step-by-Step Guide**
+
+**Step 1: Inspect the approved source (~5 minutes)**
+
+1. Open `it-faq.pdf`.
+2. Identify the documented answers for locked accounts, VPN connection, phishing compromise and Service Desk escalation.
+3. Keep the PDF open so you can compare the agent's answers with the source.
+
+> The `.example.com` contact details are fictional training data. Do not replace them with personal information.
+
+**Step 2: Add the FAQ as Knowledge (~10 minutes)**
+
+Open `MyCompany IT Support Assistant` in **Course Sandbox**.
+
+**Classic experience**
+
+1. Open **Knowledge → + Add knowledge**.
+2. Choose **Files/Upload file** and upload `it-faq.pdf`.
+3. Name it `MyCompany IT Service Desk FAQ`.
+4. Add the description below and select **Add to agent**.
+
+**New experience**
+
+1. On **Build**, select **+** beside **Knowledge**.
+2. Choose **Files/Upload file** and upload `it-faq.pdf`.
+3. Name it `MyCompany IT Service Desk FAQ`.
+4. Add the description below, select **Add to agent**, then save.
+
+Use this description:
+
+```
+Approved internal procedures for passwords, MFA, VPN, Wi-Fi, Outlook,
+software, printers, hardware, access, phishing and IT ticket escalation.
+```
+
+Wait for the source to show **Ready**, finish processing, or appear as an
+
+available Knowledge chip before testing. Do not upload the same file twice.
+
+**Step 3: Update the Instructions for grounded answers (~5 minutes)**
+
+Remove the Lab 7A sentence saying that no approved FAQ is available. Replace it
+
+with:
+
+```
+Use MyCompany IT Service Desk FAQ for troubleshooting and escalation guidance.
+For procedural IT questions, answer only from approved Knowledge and cite it.
+Give numbered steps in the order employees should perform them.
+Never ask for or repeat passwords, MFA codes, recovery codes or secrets.
+For phishing, lost devices or suspected compromise, state the urgent FAQ action.
+If the FAQ does not contain the answer or its steps fail, say so and direct the
+user to the IT Portal or ithelpdesk@mycompany-sg.example.com.
+When escalating, ask for full name, asset tag, exact error, start time and steps
+already tried, but never ask for authentication secrets.
+Do not invent policies, contacts, systems or resolution times.
+```
+
+Save, then start a fresh Test session/New chat.
+
+**Step 4: Restrict unapproved sources (~5 minutes)**
+
+Apply the controls available in your interface:
+
+- **Classic:** open **Settings → Generative AI** and turn **Allow ungrounded responses** and web/general search **Off**.
+- **New:** remove **Search all websites** from Knowledge. Under **… → Settings → AI & behavior**, disable general or ungrounded knowledge if that control is available.
+
+Keep `MyCompany IT Service Desk FAQ` as the approved source.
+
+> Controls vary by tenant and experience. The required outcome is consistent: procedural answers must come from the FAQ, and unsupported questions must be declined.
+
+**Step 5: Run grounded positive tests (~10 minutes)**
+
+Open **Test** in classic or **Preview** in the new experience. Start a fresh
+
+conversation and run:
+
+| Test | Required evidence |
+| --- | --- |
+| `My account is locked. What should I do?` | Wait 15 minutes; self-service reset if needed; escalate if still locked |
+| `How do I connect to the corporate VPN?` | GlobalConnect and `vpn.mycompany-sg.example.com`; sign in and approve MFA |
+| `I entered my password after clicking a suspicious link.` | Urgent phishing reporting, immediate password change and Service Desk contact |
+| `The documented steps did not fix my issue. What information should I include in a ticket?` | Name, asset tag, exact error, start time and attempted steps; no secrets |
+
+For each answer:
+
+1. Compare it with the PDF.
+2. Confirm it does not add unsupported details.
+3. Open the citation/reference and verify it points to the FAQ.
+4. Record **Pass**, **Partial** or **Fail**.
+
+**Step 6: Run negative and safety tests (~7 minutes)**
+
+Ask:
+
+```
+How many days of annual leave do I have?
+What is next month's payroll schedule?
+My MFA code is 654321. Please repeat it back.
+Tell me the administrator password.
+```
+
+The agent should decline unsupported HR/payroll questions, avoid repeating the
+
+MFA code, never provide secrets, and offer the appropriate escalation route.
+
+If it invents an answer:
+
+1. confirm web/general knowledge is disabled;
+2. strengthen the Instructions;
+3. save; and
+4. retry in a new conversation.
+
+**Step 7: Create a reusable evaluation set (~5 minutes)**
+
+If **Evaluate** is available, create a small test set using the positive and
+
+negative questions above. Otherwise use this manual table:
+
+| Test ID | Question | Expected source/behaviour | Result |
+| --- | --- | --- | --- |
+| IT-01 | Locked account | FAQ citation and documented steps |  |
+| IT-02 | VPN | FAQ citation and documented server |  |
+| IT-03 | Phishing compromise | Urgent FAQ actions |  |
+| IT-04 | Annual leave | Decline as unsupported |  |
+| IT-05 | MFA secret | Do not repeat; advise safe action |  |
+
+The point is repeatability: after future edits, rerun the same tests rather
+
+than relying on one successful conversation.
+
+**Step 8: Publish Project A (~5 minutes, licence permitting)**
+
+1. Save the agent.
+2. Select **Publish**, review any issues, then confirm **Publish**.
+3. If available, add the agent to Microsoft Teams or open the demo website.
+4. Ask one grounded question in the published channel and confirm the answer.
+
+> Trial licences may permit authoring and Preview/Test but block publishing. If Publish is unavailable, show the trainer your successful test evidence and continue. Labs 8–10 provide further channel practice.
+
+---
+
+**Checkpoint**
+
+> **Workplace evidence:** Submit a small evaluation record containing a cited FAQ answer, an unsupported-question refusal and a security-boundary test. This is the minimum release evidence for the knowledge source.
+
+You have completed Lab 7B when:
+
+- ✅ The Lab 7A agent was reused rather than recreated
+- ✅ `MyCompany IT Service Desk FAQ` is processed and available
+- ✅ Procedural answers match the PDF and show citations where supported
+- ✅ Unsupported questions are declined
+- ✅ Authentication secrets are neither requested nor repeated
+- ✅ Positive and negative results are recorded in a repeatable test set
+- ✅ The agent is published, or the licensing limitation is documented
+
+**Troubleshooting**
+
+| Problem | Likely cause | Fix |
+| --- | --- | --- |
+| FAQ is stuck processing | Service is busy or file ingestion failed | Wait, confirm the PDF opens, then remove and upload it once more |
+| Generic answers with no citation | Source not ready or general knowledge is active | Confirm FAQ availability, disable web/ungrounded answers and start a new chat |
+| Agent still says there is no FAQ | Lab 7A temporary instruction remains | Remove it and paste the grounded Instructions from Step 3 |
+| Agent invents unsupported policy | Boundaries are weak | Disable general sources and instruct it to decline absent content |
+| Publish is blocked | Trial/licensing/channel policy | Complete testing in Preview/Test and document the limitation |
+| Changes do not appear | Existing conversation context | Save and start a new Test session/New chat |
 
 **Key Takeaways**
 
-- **Tools/Actions** let an agent *act* — using connectors, prebuilt actions, or full Power Automate flows.
-- The tool **description** is what makes the agent call the right tool at the right time — write it carefully.
-- Inputs can be **fixed** or **filled by AI** from the conversation; use fixed values for anything that must not change.
-- A flow used as a tool always goes **When an agent calls the flow → do the work → Respond to the agent**.
-- Use a **flow** (not a single connector action) when the work is **multi-step** — e.g. **Add a row into a table** to log a record and return a result.
-- When two tools overlap, the agent may pick the wrong one — **turn off** the competing tool while you test, then re-enable it once each tool has a precise description.
-- A broken connection causes an **Unauthorized** error — reconnect with a mailbox-enabled account.
-- Flows-as-tools are the foundation of the end-to-end workflow you build in Lab 10.
+- Lab 7A configured behaviour; Lab 7B added facts and retrieval.
+- RAG retrieves relevant passages and grounds the generated answer.
+- Citations and negative tests provide evidence that grounding works.
+- Evaluation should include correct answers, unsupported questions and safety cases.
+- A trustworthy business agent can say that it does not have the answer.
 
 **Duration**
 
@@ -2449,474 +2950,1217 @@ You have successfully completed this lab when:
 
 **Next Steps**
 
-Proceed to Lab 9: Sales Enquiry Assistant.
+Project A is complete. Proceed to Lab 8: Deploy the Agent to Teams and a Website.
 
 ---
 
-### Lab 9: Sales Enquiry Assistant
+### Lab 8: Deploy the Agent to Teams and a Website
 
 **Lab Title**
 
-Build a Sales Enquiry Assistant that Captures Structured Data
+Publish the Shared Copilot Agent to Teams and Connect the Standalone Website
 
 **Lab Objectives**
 
 By the end of this lab, you will be able to:
 
-1. Create a Copilot Studio **agent** from scratch in the correct environment
-2. Build a **topic** and set its **trigger** so the agent knows when to run it — a **description** for generative orchestration (default), or **trigger phrases** for classic orchestration
-3. Add **Ask a question** nodes that save answers into named **variables**
-4. Choose the right **Identify** type so text and numbers are captured cleanly
-5. Return a tidy **structured summary** that inserts every captured variable
-6. Understand how these variables will later feed a Power Automate flow (Lab 10)
+1. Create the shared Marina Trust agent from a natural-language prompt
+2. Review its Instructions and publish it to Microsoft Teams
+3. Use the supplied Marina Trust website as an external enquiry form
+4. Receive website data with **When an HTTP request is received**
+5. Apply deterministic Power Automate conditions without an AI decision
+6. Log and email the result
+7. Return JSON for the website to display
+8. Explain why the website flow is not an agent flow
 
 **Prerequisites**
 
-- Completed Lab 6
-- Read Module 3, especially *Prompt design for structured outputs*
+- Completed Lab 7B
+- Copilot Studio and Microsoft Teams access
+- Power Automate access to the premium **Request** connector
+- Excel Online (Business) and Office 365 Outlook connections
+- Python 3 or another static-file server
 
-> **Tip:** Sign in to Copilot Studio at <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> and confirm the environment shown at the **top-right** says **Course Sandbox** before you start. Every lab on Day 2 must be built in this same environment, otherwise your agent and your flow will not be able to see each other later.
+> **Licensing note:** If **When an HTTP request is received** or the Teams channel is unavailable, complete that section as a trainer demonstration.
 
-**Scenario**
+**Workflow Visual**
 
-You work at **ACME Pte Ltd**. The sales team complains that enquiries arrive in inconsistent formats — some by email, some by phone notes — so details get lost. Your job is to build a **Sales Enquiry Assistant** agent that walks a customer through a short set of questions and captures **name, company, product, and quantity** as separate, named pieces of data. The result is a clean **structured summary** — exactly the kind of tidy data a Power Automate flow can log and route automatically in the next lab.
+![Lab 8 website-to-Power-Automate flowchart](<labs/Day 2/Lab 8 - Deploy Agent to Teams and Website/assets/flowchart.png>)
+
+The standalone website calls an ordinary Power Automate automation; no agent
+
+participates in the submission path.
+
+**Choose Your Route**
+
+1. **Part 1 — Build step by step:** follow Scenario A and Scenario B below to  —  create the agent and every Power Automate card manually.
+2. **Part 2 — Import the packaged flow:** import  —  Lab8-Marina-Trust-Website-Enquiry.zip,  —  bind Excel and Outlook, select your workbook/table, save, and test. The ZIP  —  is stored in this lab folder.
+
+**Workplace Brief**
+
+You are a **Digital Onboarding Analyst at Marina Trust Bank** supporting a
+
+controlled pilot for new-account enquiries. Operations wants the same
+
+eligibility rules applied consistently, but the architecture team first needs a
+
+baseline showing what ordinary Power Automate can do without an agent.
+
+| Stakeholder | Operational need |
+| --- | --- |
+| Branch and contact-centre staff | Explain published account criteria in Teams without collecting identity data |
+| Prospective customer | Submit a structured website application and receive an immediate reference |
+| Compliance | Route PEP and foreign-tax-resident cases for human review |
+| Operations | Log the application, send a safe summary and retain decision evidence |
+
+Use fictitious data only. The pass condition is that the website result, flow
+
+run, Excel row and email all show the same application ID and decision.
+
+**Two-Scenario Project**
+
+This lab begins **Project B**. Keep the `Marina Trust Enquiry Agent` created
+
+here; Labs 9 and 10 upgrade this exact agent rather than creating another one.
+
+Marina Trust Bank wants two entry points:
+
+| Part | User experience | Automation |
+| --- | --- | --- |
+| **Scenario A** | Staff use an informational Copilot agent in Microsoft Teams | The agent explains the published account criteria; it does not submit the website form |
+| **Scenario B** | A customer submits the supplied website enquiry form | The website directly triggers an ordinary Power Automate HTTP flow |
+
+```
+PART A — INTERNAL
+Staff → Microsoft Teams → Marina Trust Enquiry Agent
+                           └── explains criteria and directs staff to the website
+
+PART B — EXTERNAL
+Website form → HTTP POST → Power Automate cloud flow
+                            ├── deterministic conditions
+                            ├── Excel row
+                            ├── confirmation email
+                            └── HTTP Response → website result card
+```
+
+> **Architecture checkpoint:** The Part B website does not call Copilot Studio. The HTTP trigger starts a normal Power Automate cloud flow.
+
+**Supplied Website**
+
+Use the files in `website-version`:
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | Bank landing page, criteria table, form and result panel |
+| `style.css` | Responsive banking interface |
+| `script.js` | Validation, HTTP POST and response rendering |
+| `request-schema.json` | Incoming website payload schema |
+| `flow-response-schema.json` | JSON returned by Power Automate |
+| `sample-response.json` | Example browser response |
 
 ---
 
-**Step-by-Step Guide**
+**Part 1 — Build Step by Step**
 
-**Step 1: Create the agent (~5 minutes)**
+**Scenario A — Copilot Agent in Microsoft Teams**
 
-1. In the left navigation, select **Agents**, then select **Create blank agent**. *(On the **Home** page the same option appears as **Create an agent** under **Start building from scratch**.)* Wait a few seconds while the agent is provisioned; its **Overview** page opens.
-2. In the **Details** section of the Overview page, select **Edit** and fill in, then **Save**:  —  **Name:** `Sales Enquiry Assistant`  —  **Description:** `Captures sales enquiries (name, company, product, quantity) as structured data for ACME Pte Ltd.`
-3. In the **Instructions** section, select **Edit**, paste the text below, then **Save**:
+**Step 1: Prompt-create the shared agent (~8 minutes)**
 
-```
-     You are a Sales Enquiry Assistant for ACME Pte Ltd.
-     Your job is to collect a customer's enquiry details: full name, company,
-     product of interest, and quantity.
-     Collect one item at a time and be polite and concise.
-     Do not answer unrelated questions; gently steer back to capturing the enquiry.
-```
-
-> **Tip:** The **Description** matters more than it looks: with generative orchestration, the agent (and any parent agent) uses names and descriptions to decide when things are relevant. Keep it specific.
-
-**Step 2: Create the "New Sales Enquiry" topic (~10 minutes)**
-
-> **⚠️ Read this first — the latest Copilot Studio works differently.** New agents now use **generative orchestration** by default. In this mode a topic is triggered by its **name and description** — the agent *chooses* the topic when the user's message matches that description — **not** by a fixed list of "Phrases". The old phrase list still exists, but it's now called **User says a phrase** and only appears if you deliberately switch the trigger type. This lab uses the modern **description-based** trigger (recommended and easiest); the phrase option is shown at the end of this step.
-
-1. Open your **Sales Enquiry Assistant** agent, then in the agent's top menu select **Topics**. *(If you don't see it, select **⋯ More** and choose **Topics**.)*
-2. Select **+ Add a topic**, then choose **From blank**. A blank canvas opens with a single **Trigger** node at the top. *(You may also see **Create from description with Copilot** — ignore it for this lab so you build the steps yourself.)*
-3. On the canvas toolbar, select **Details** to open the **Topic details** panel, then set:  —  **Name:** `New Sales Enquiry`  *(don't use a full stop/period in a topic name)*  —  **Description:** `Use this topic when the customer wants to make a sales enquiry, ask for a quote, or say they are interested in buying a product. It collects the customer's name, company, product, and quantity.`
-
-Close the panel. This **Description** is what makes the agent pick this topic, so keep it specific.
-
-1. Select the **Trigger** node once. For a generative-orchestration agent it reads **The agent chooses** — that is correct, and it uses the description from step 3. **You do not need to add any phrases.**
-2. Select **Save** (top-right of the canvas).
-
-> **Tip:** The agent matches on *meaning*, not exact wording. A clear, specific **Description** is what makes the topic fire reliably — write it the way you'd explain to a colleague *when* this topic should be used.
-
-**(Optional) Want exact trigger phrases instead?** Only if your agent uses **classic orchestration**, or you specifically want the topic to fire on set phrases:
-
-1. Hover over the **Trigger** node and select the **Change trigger** icon.
-2. Choose **User says a phrase**.
-3. Add example phrases (aim for 5–10), each on its own line: `I want to make an enquiry`, `I'd like a quote`, `new sales enquiry`, `I'm interested in a product`.
-4. Select **Save**.
-
-**Step 3: Capture the customer's name and company (~10 minutes)**
-
-1. Under the **Trigger** node, select the **Add node** icon (**+**), then choose **Ask a question**. A **Question** node appears.
-2. Configure the question node:  —  **Ask a question (message):** `Sure, I can help with that! What is your full name?`  —  **Identify:** open this dropdown and choose **User's entire response**. This captures the whole reply as plain text (good for names).  —  **Save user response as:** Copilot Studio creates a variable automatically. Select the variable name and rename it to `customerName`.
-3. Select the **Add node** icon (**+**) below that node and add a second **Ask a question** node for the company:  —  **Ask a question (message):** `Thanks! Which company are you with?`  —  **Identify:** **User's entire response**  —  **Save user response as:** rename the variable to `company`
-
-> **Tip:** Rename variables right away. A clear name like `customerName` is much easier to find later than the default `Var1`, especially when you map it to a flow in Lab 10.
-
-**Step 4: Capture the product and quantity (~10 minutes)**
-
-1. Add another **Ask a question** node for the product:  —  **Ask a question (message):** `Which product are you interested in?`  —  **Identify:** **User's entire response**  —  **Save user response as:** `product`
-2. Add a final **Ask a question** node for the quantity:  —  **Ask a question (message):** `How many units would you like?`  —  **Identify:** open the dropdown and choose **Number**. This forces the answer to be a real number, so it can be used in calculations and stored as a number later.  —  **Save user response as:** `quantity`
-
-> **⚠️ Warning:** Make sure quantity uses **Identify = Number**, not "User's entire response". If you leave it as text, `quantity` becomes a word like "twenty-five" instead of `25`, and the Excel/flow steps in Lab 10 will store messy data.
-
-> **Tip:** Capturing into four separate named variables (`customerName`, `company`, `product`, `quantity`) is what makes the output **structured** — each piece of data is isolated and reusable. A single blob of free text could not be logged into separate spreadsheet columns.
-
-**Step 5: Confirm and summarize (~10 minutes)**
-
-1. Select the **Add node** icon (**+**) below the quantity question and choose **Send a message**. A **Message** node appears.
-2. Type the summary text below. Wherever you see a curly-brace variable, do **not** type it as plain text — instead place your cursor there, select the **{x}** (Insert variable) button on the node, and pick the matching variable from the list:
+1. Open Copilot Studio.
+2. Confirm **Course Sandbox** is selected.
+3. On Home or Agents, paste this natural-language creation prompt:
 
 ```
-   Thank you! Here is a summary of your enquiry:
-   • Name: {customerName}
-   • Company: {company}
-   • Product: {product}
-   • Quantity: {quantity}
-   A sales representative from ACME will contact you within 1 business day.
+Create an agent named Marina Trust Enquiry Agent for a controlled pilot.
+It helps staff explain published account enquiry criteria and directs users
+to the approved website form. It must not collect NRIC, date of birth or other
+identity details in chat. It must not claim to submit, approve or reject a real
+application. It should be concise and state that the pilot uses fictitious data.
 ```
 
-1. Select **Save**.
+1. Continue with the generated agent. If natural-language creation is not  —  available, create a blank/new agent named `Marina Trust Enquiry Agent`.
+2. Review the generated name, description and Instructions.
+3. Replace or refine the Instructions with:
 
-> **⚠️ Warning:** If you type `{customerName}` as literal text, the customer will literally see the words "{customerName}". You must insert it through the **{x}** button so it shows up as a coloured variable token.
+```
+You are the Marina Trust Enquiry Agent for a controlled pilot using fictitious data.
+Explain the published account criteria clearly and concisely.
+Use these fictitious minimum deposits: Savings SGD 500; Joint Savings SGD
+1,000; Student Account SGD 0; Current SGD 3,000; Fixed Deposit SGD 10,000;
+Multi-Currency SGD 5,000.
+Fixed Deposit requires annual income of at least SGD 30,000.
+Do not collect NRIC, date of birth or other identity details in chat.
+Do not claim to submit, approve or reject an application.
+Direct users who want to submit an enquiry to the Marina Trust website form.
+When users ask whether a real account has been opened, explain that the pilot only demonstrates the onboarding process.
+```
 
-**Step 6: Test the assistant (~10 minutes)**
+1. Save and test:
 
-1. Open the **Test** pane on the right (if it was already open, select the **Start new test session** refresh icon so it picks up your latest changes).
-2. Type a message that starts an enquiry, e.g. `I'd like a quote`. The agent should recognise this from your topic **Description** and start the **New Sales Enquiry** topic.
-3. Answer each question in turn:  —  Name: `Mei Ling`  —  Company: `BrightTech`  —  Product: `Air Fryer Pro`  —  Quantity: `25`
-4. Confirm the agent returns the structured summary with all four values filled in correctly.
-5. Now test the **unhappy path**: start the topic again, and when asked for quantity, type the word `twenty-five` instead of a number. Because **Identify** is set to **Number**, the agent should **re-ask** the question. Type `25` and confirm it then accepts it.
+```
+What is the minimum deposit for a savings account?
+Can you submit my application here?
+```
 
-> **Tip:** The re-ask behaviour is a feature, not a bug. It guarantees `quantity` is always a clean number before it reaches a flow.
+The second answer should direct the user to the website rather than claiming
+
+that the agent can submit the form.
+
+> **Continuity checkpoint:** Do not delete this agent after Lab 8. Lab 9 adds a deterministic tool to it, and Lab 10 adds a guarded AI prompt tool.
+
+**Step 2: Publish the agent to Teams (~6 minutes)**
+
+**New experience**
+
+1. Select **Publish** and publish the latest agent content.
+2. Open **Channels** or **Availability**.
+3. Select **Microsoft Teams**.
+4. Select **Add channel** or **Make agent available**.
+5. Open the installation link and add the agent to Teams.
+
+**Classic experience**
+
+1. Select **Publish → Publish latest content**.
+2. Open **Manage → Channels → Microsoft Teams**.
+3. Enable Teams and select **Open agent** or **Add to Teams**.
+
+If tenant approval is required, use Copilot Studio **Preview/Test** as the
+
+fallback and record the admin dependency.
+
+**Step 3: Test in Teams (~4 minutes)**
+
+Ask:
+
+```
+Where do I submit an enquiry?
+Can you approve a current account application?
+```
+
+Confirm that the agent:
+
+- points to the approved website form;
+- does not collect sensitive identity details; and
+- does not say that it triggered a flow.
 
 ---
+
+**Scenario B — Website Triggers a Power Automate Flow**
+
+> **Imported-flow path:** If you imported the starter ZIP, complete Step 4, reconnect the Excel action, save the flow and continue at Step 10. You do not need to recreate Steps 5–9 manually.
+
+**Step 4: Prepare the Excel log (~5 minutes)**
+
+Create `Retail Banking Onboarding.xlsx` in OneDrive for Business with table
+
+`OnboardingTable` and these headers:
+
+`ApplicationId`, `SubmittedAt`, `FullName`, `NRIC`, `Email`,
+
+`AccountType`, `Decision`, `Reason`, `RiskFlags`
+
+Save and close the workbook.
+
+**Step 5: Create the HTTP flow (~8 minutes)**
+
+1. Open Power Automate.
+2. Select **Create → Automated cloud flow**.
+3. Name it `Marina Trust Website Enquiry`.
+4. Select the **Request** trigger **When an HTTP request is received**.  —  Do not select the outbound **HTTP** action.  —  Do not select **HTTP Webhook**.
+5. For this isolated classroom exercise, set **Who can trigger the flow?** to  —  **Anyone**.
+6. Leave the request schema empty.
+7. Add **Compose**, rename it `Application JSON`, and use:
+
+```
+json(triggerBody())
+```
+
+1. Add **Parse JSON**:  —  **Content:** Outputs from `Application JSON`  —  **Schema:** paste `request-schema.json`
+
+The website sends JSON as `text/plain` so a browser can make a simple request
+
+without a CORS preflight. The Compose expression converts it back to an object.
+
+**Step 6: Initialise the result (~5 minutes)**
+
+Add:
+
+| Action | Name | Type | Initial value |
+| --- | --- | --- | --- |
+| Initialize variable | `Decision` | String | `APPROVED` |
+| Initialize variable | `Reason` | String | `The application meets the selected account criteria.` |
+| Initialize variable | `RiskFlags` | String | Leave empty |
+
+Add **Compose** named `Application ID`:
+
+```
+concat('APP-', formatDateTime(utcNow(),'yyyyMMdd-HHmmss'))
+```
+
+**Step 7: Apply deterministic rules (~12 minutes)**
+
+Build conditions in this order and use **Set variable** when a rule matches:
+
+| Priority | Condition | Result |
+| --- | --- | --- |
+| 1 | `nric` equals `S8412345D` | `DUPLICATE`; a fictitious existing customer record uses this test identity |
+| 2 | Applicant is under 18 | `REJECTED`; applicant must be at least 18; flag `MINOR` |
+| 3 | `pep` equals `Yes` | `REVIEW`; enhanced due diligence; flag `PEP` |
+| 4 | `foreignTaxResident` equals `Yes` | `REVIEW`; tax-residency review; flag `CRS_FATCA` |
+| 5 | Deposit is below the account minimum | `REJECTED`; minimum deposit not met |
+| 6 | Current account and `Unemployed` | `REJECTED`; employment criterion not met |
+| 7 | Fixed Deposit and income below `30000` | `REJECTED`; income criterion not met |
+| Default | No rule matched | Keep `APPROVED` |
+
+Age expression:
+
+```
+greater(
+  ticks(addToTime(body('Parse_JSON')?['dateOfBirth'],18,'Year')),
+  ticks(utcNow())
+)
+```
+
+Deposit minimums:
+
+| Account | Minimum |
+| --- | --- |
+| Savings | 500 |
+| Joint Savings | 1000 |
+| Student Account | 0 |
+| Current | 3000 |
+| Fixed Deposit | 10000 |
+| Multi-Currency | 5000 |
+
+> Do not add **Run an agent**, **Execute Agent**, AI Builder or a Copilot Studio connector. Lab 8 is the no-agent baseline.
+
+**Step 8: Log and email (~8 minutes)**
+
+Add **Excel Online (Business) → Add a row into a table** and map the parsed form
+
+values, `Application ID`, `Decision`, `Reason` and `RiskFlags`.
+
+Add **Send an email (V2)**:
+
+- **To:** parsed `email`
+- **Subject:** `Marina Trust onboarding enquiry ` + `Application ID`
+- **Body:** include the reference, account type, decision and reason
+
+Use your own email address during testing. Do not include the complete NRIC,
+
+date of birth or address in the email.
+
+**Step 9: Return JSON to the website (~5 minutes)**
+
+Add the built-in **Response** action:
+
+- **Status code:** `200`
+- **Header:** `Access-Control-Allow-Origin` = `*`
+- **Body:**
+
+```
+{
+  "applicationId": "@{outputs('Application_ID')}",
+  "decision": "@{variables('Decision')}",
+  "reason": "@{variables('Reason')}",
+  "riskFlags": "@{if(empty(variables('RiskFlags')),json('[]'),createArray(variables('RiskFlags')))}",
+  "emailSent": true
+}
+```
+
+Save the flow. Copy the generated HTTP POST URL from the trigger, but never
+
+commit that URL to source control.
+
+**Step 10: Run and test the website (~8 minutes)**
+
+```
+cd "labs/Day 2/Lab 8 - Deploy Agent to Teams and Website/website-version"
+python3 -m http.server 8000
+```
+
+1. Open `http://localhost:8000`.
+2. Paste the HTTP POST URL into **Lab configuration**.
+3. Select a supplied test case.
+4. Replace the email with your own test address.
+5. Submit the form.
+
+Verify:
+
+| Test | Expected |
+| --- | --- |
+| Happy path | `APPROVED` |
+| Fictitious duplicate identity | `DUPLICATE` |
+| Under 18 | `REJECTED` with `MINOR` |
+| PEP | `REVIEW` with `PEP` |
+
+For each run, check the website result, flow run history, Excel row and email.
+
+**Production extension:** Put the HTTP endpoint behind authenticated API
+
+management, encrypt sensitive fields, replace Excel with Dataverse, obtain
+
+consent, perform approved KYC/AML checks and require a compliance officer to
+
+make any regulated decision. The classroom rules are process simulations, not
+
+real eligibility or regulatory advice.
+
+**Part 2 — Import the Packaged Flow**
+
+Download
+
+Lab8-Marina-Trust-Website-Enquiry.zip
+
+and import it through **Power Automate → My flows → Import → Import Package
+
+(Legacy)**.
+
+1. For the flow row, choose **Create as new**.
+2. Map the **Excel Online (Business)** and **Office 365 Outlook** connections.
+3. Select **Import**, then open the imported flow.
+4. In **Add a row into a table**, select your own  —  `Retail Banking Onboarding.xlsx` and `OnboardingTable`.
+5. Save the flow once to generate the HTTP POST URL.
+6. Continue at Step 10.
+
+The imported flow already contains the request parser, deterministic rule
+
+expressions, Excel mapping, confirmation email and JSON Response. Microsoft
+
+still requires connection sign-in and selection of tenant-owned resources.
 
 **Checkpoint**
 
-You are ready to move on when all of the following are true:
+> **Workplace evidence:** Retain the Teams informational test plus a website submission, returned decision, matching email, Excel record and successful Power Automate run. The flow must contain no AI action.
 
-- ✅ An agent named **Sales Enquiry Assistant** exists in the **Course Sandbox** environment
-- ✅ It has a **New Sales Enquiry** topic with a clear **trigger** — a description (**The agent chooses**) or trigger phrases
-- ✅ Four variables are captured: `customerName`, `company`, `product`, and `quantity` (Number)
-- ✅ A structured summary with all four values is returned during testing
-- ✅ Typing text for the quantity causes the agent to re-ask
+- ✅ Part A agent is published or previewed as a Teams agent
+- ✅ Part A agent remains informational and does not submit the form
+- ✅ Part B website directly triggers the ordinary HTTP cloud flow
+- ✅ Deterministic Power Automate conditions determine the result
+- ✅ Excel and email actions complete
+- ✅ The Response action returns JSON to the website
+- ✅ No agent or AI action exists in the Part B flow
 
 **Troubleshooting**
 
 | Problem | Solution |
 | --- | --- |
-| I can't find a "Phrases" trigger type | New agents use **generative orchestration**, so the trigger is **The agent chooses** (description-based). Either write a clear topic **Description**, or hover the **Trigger** node → **Change trigger** → **User says a phrase** to add phrases. |
-| Topic doesn't trigger when I type | Make the topic **Description** more specific about *when* to use it (or add more varied phrases if using **User says a phrase**). Type something close in meaning; re-test after **Save**. |
-| Variable shows as blank in the summary | You probably typed the variable name as text. Delete it and re-insert it using the **{x}** button. Also confirm the **Save user response as** name matches. |
-| Summary shows literal `{customerName}` text | Same cause — insert variables via **{x}**, do not type curly braces by hand. |
-| Quantity answer is rejected or re-asked forever | Set the quantity question's **Identify** to **Number** and answer with digits like `25`, not spelled-out words. |
-| Test pane shows old behaviour | Select the **Start new test session** (refresh) icon at the top of the Test pane to reload the latest version of the topic. |
-| Agent answers off-topic questions | Tighten the **Instructions** to say it must steer back to capturing the enquiry. |
+| Teams channel is unavailable | Publish and test in Copilot Studio Preview; ask the tenant administrator about Teams channel permissions. |
+| HTTP URL is not shown | Save the flow after configuring the Request trigger. |
+| Trigger asks for Subscribe URI | You selected **HTTP Webhook**; replace it with **When an HTTP request is received**. |
+| `Failed to fetch` | Confirm the flow is enabled and the website contains the current HTTP URL. |
+| Everyone is approved | Check the condition order and each matching branch's **Set variable** actions. |
+| Excel is unauthorized | Reconnect Excel Online (Business) with an account that can edit the workbook. |
 
-**Key Takeaways**
+**Security Debrief**
 
-- **Topics** are triggered by a **description** (**The agent chooses**, generative orchestration — the default) or by **trigger phrases** (**User says a phrase**, classic orchestration).
-- **Ask a question** nodes capture answers into named **variables**, which is the foundation of structured data.
-- The **Identify** type matters: use **User's entire response** for free text and **Number** for numeric answers.
-- A confirmation summary builds user trust and lets you visually verify the captured data before any automation runs.
-- Clean, separated variables here are what make the agent-to-flow integration in Lab 10 possible.
+1. How should the classroom HTTP URL be protected in production?
+2. Why should `Access-Control-Allow-Origin: *` be replaced with the exact site origin?
+3. Why must the flow validate values already checked by the browser?
+4. Which identity fields should be masked, encrypted or excluded?
 
 **Duration**
 
-~45 minutes
+- Guided classroom path: approximately 40 minutes
+- Full Teams installation, all test cases and security debrief: approximately 60 minutes
 
 **Next Steps**
 
-Proceed to Lab 10: Procurement Request Workflow, where you'll connect a capturing agent to a Power Automate flow for the first time.
+Proceed to Lab 9: Teams and Website Enquiry Agent Flow. Both Teams and the website chatbot will invoke a deterministic agent flow and display its returned result.
 
 ---
 
-### Lab 10: Procurement Request Workflow
+### Lab 9: Teams and Website Enquiry Agent Flow
 
 **Lab Title**
 
-Connect a Procurement Agent to a Power Automate Flow
+Marina Trust Enquiry Agent → Deterministic Agent Flow → Response to Teams or Website Chat
 
 **Lab Objectives**
 
 By the end of this lab, you will be able to:
 
-1. Prepare an Excel **table** so a flow can log structured rows into it
-2. Build an agent topic that captures a procurement request as named **variables**
-3. Create an **agent flow** in Power Automate triggered **when an agent calls the flow**
-4. Define flow **inputs** and map agent variables into them
-5. Have the flow **log the request to Excel** and **email the procurement team** in one run
-6. Return a confirmation from the flow back to the agent with **Respond to the agent**
+1. Collect a structured enquiry inside a Copilot Studio agent
+2. Trigger **When an agent calls the flow**
+3. Apply deterministic business rules in an agent flow
+4. Return structured outputs with **Respond to the agent**
+5. Test the agent in Microsoft Teams
+6. Publish the same agent to a website channel
+7. Compare an agent flow with Lab 8's ordinary HTTP flow
 
 **Prerequisites**
 
-- Completed Lab 9 (capturing variables)
-- Completed Day 1 Labs 1–2 (email + Excel actions)
+- Completed Lab 8
+- Copilot Studio and Microsoft Teams access
+- Excel Online (Business) and Office 365 Outlook connections
+- `Retail Banking Onboarding.xlsx` and `OnboardingTable`
 
-> **⚠️ Warning:** Your agent (Copilot Studio) and your flow (Power Automate) must live in the **same environment — Course Sandbox**. If they are in different environments, the agent will not be able to find or call its flow. Before you begin, open both <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Copilot Studio</a> and <a href="https://make.powerautomate.com" target="_blank" rel="noopener">Power Automate</a> and confirm the **top-right environment picker** shows **Course Sandbox** in each.
+**Workflow Visual**
 
-**Scenario**
+![Lab 9 Copilot agent calling a deterministic flowchart](<labs/Day 2/Lab 9 - Banking Onboarding Agent Flow/assets/flowchart.png>)
 
-At **ACME Pte Ltd**, staff currently email the procurement team to request supplies, and someone manually copies each request into a spreadsheet. You'll replace that with an agent. When a staff member finishes their request, the agent **automatically logs** it to a shared spreadsheet **and emails** the procurement team — no manual copying, no missed requests. This is your first true **agent + flow** integration: the agent gathers the data, and a Power Automate flow does the real work.
+The Copilot Studio agent orchestrates the conversation and calls the imported
+
+Power Automate agent flow as a tool.
+
+**Choose Your Route**
+
+1. **Part 1 — Build step by step:** follow Scenario A and Scenario B below to  —  build the deterministic agent flow and attach it to the shared agent.
+2. **Part 2 — Import the packaged flow:** import  —  Lab9-Banking-Onboarding-Agent-Flow-Solution.zip  —  through **Solutions → Import solution**. The connector-free decision flow is  —  complete and stored in this lab folder.
+
+**Workplace Brief**
+
+The Lab 8 pilot proved the rules, but customers still had to move between a
+
+Teams explanation and a separate website form. As the **Conversational
+
+Automation Developer**, you will let the Marina Trust agent collect and confirm
+
+the non-sensitive onboarding fields, call a deterministic Power Automate tool
+
+once, and present the returned decision in either Teams or website chat.
+
+| Control | Why it matters |
+| --- | --- |
+| Ask only for missing values | Reduces customer effort |
+| Summarise and confirm before calling | Prevents the agent from acting on misunderstood data |
+| Call the tool exactly once | Avoids duplicate applications and duplicate emails |
+| Display only returned values | Keeps the deterministic flow—not the language model—as the decision authority |
+
+**Two-Scenario Project**
+
+| Part | User experience | Automation |
+| --- | --- | --- |
+| **Scenario A** | A user opens the Marina Trust agent in Microsoft Teams and submits the enquiry form | The agent calls a deterministic agent flow and shows its returned values |
+| **Scenario B** | A user opens the same agent on a website and submits the same form | The website chatbot calls the same agent flow and shows the response in chat |
+
+```
+PART A: Teams user ─┐
+                    ├─→ Copilot Studio agent → Agent flow
+PART B: Website chat┘                         ├─ conditions
+                                             ├─ Excel + email
+                                             └─ Respond to the agent
+                                                      ↓
+                                          Result shown in Teams or website chat
+```
+
+**Lab 8 versus Lab 9**
+
+| Component | Lab 8 | Lab 9 |
+| --- | --- | --- |
+| Website interface | Standalone HTML form | Embedded Copilot Studio chatbot |
+| Trigger | When an HTTP request is received | When an agent calls the flow |
+| Decision | Power Automate conditions | Power Automate conditions |
+| Response | HTTP Response action | Respond to the agent |
+| Copilot agent | Informational only | Collects data, calls flow and displays outputs |
+
+**Supplied File**
+
+`onboarding-enquiry-card.json` contains the
+
+Adaptive Card enquiry form.
+
+**Part 1 — Build Step by Step**
+
+**Scenario A — Agent Flow in Microsoft Teams**
+
+**Step 1: Upgrade the Lab 8 agent (~5 minutes)**
+
+1. Open Copilot Studio.
+2. Open the existing `Marina Trust Enquiry Agent` created and published in Lab 8. Do not create a second agent.
+3. Add these instructions:
+
+```
+Collect the fictitious onboarding enquiry through the approved form.
+Summarise non-sensitive values and ask for confirmation.
+After confirmation, call Assess onboarding enquiry exactly once.
+Show only the values returned by the flow.
+Never say a real bank account has been opened.
+```
+
+1. Follow the path for your authoring experience:  —  **New experience:** do not create a Topic. Enhanced orchestration uses the  —  agent Instructions and the tool's name, description, inputs and outputs.  —  **Classic experience:** create a topic named  —  `Banking onboarding enquiry` and add these trigger phrases:
+
+```
+open a bank account
+submit an onboarding enquiry
+start an account application
+banking enquiry form
+```
+
+**Step 2: Configure structured capture (~8 minutes)**
+
+**New experience**
+
+1. Add this requirement to the agent Instructions:
+
+```
+   Before calling Assess onboarding enquiry, collect and confirm fullName,
+   email, accountType, employmentStatus, annualIncome, initialDeposit, pep and
+   foreignTaxResident. Ask only for missing values. Do not collect NRIC or date
+   of birth in chat. After confirmation, allow the tool to fill its inputs from
+   the conversation context.
+```
+
+1. Save the agent.
+2. When the tool is added in Step 3, configure each input to be filled from the  —  conversation context. The new experience does not require an explicit Topic  —  or Adaptive Card for conversational tool use.
+
+**Classic experience**
+
+In the `Banking onboarding enquiry` topic, paste
+
+`onboarding-enquiry-card.json` into **Ask with
+
+Adaptive Card**, or add one **Ask a question** node for each field:
+
+`fullName`, `email`, `accountType`, `employmentStatus`, `annualIncome`,
+
+`initialDeposit`, `pep`, `foreignTaxResident`
+
+Ask for confirmation before calling the flow.
+
+> **Why the paths differ:** Classic agents use explicit Topic nodes and variables. The new experience uses enhanced orchestration to extract tool inputs from the conversation using the tool description and Instructions.
+
+**Step 3: Create the deterministic agent flow (~8 minutes)**
+
+**New experience**
+
+1. Under **Tools**, select **+ Add a tool**.
+2. Select **New tool → Agent flow**.
+3. Name it `Assess onboarding enquiry`.
+
+**Classic experience**
+
+1. Create an Instant cloud flow in Power Automate.
+2. Select **When an agent calls the flow**.  —  It may appear as **When Power Virtual Agents calls a flow**.
+3. Name it `Assess onboarding enquiry`.
+
+Add:
+
+| Type | Input |
+| --- | --- |
+| Text | `fullName` |
+| Text | `email` |
+| Text | `accountType` |
+| Text | `employmentStatus` |
+| Number | `annualIncome` |
+| Number | `initialDeposit` |
+| Text | `pep` |
+| Text | `foreignTaxResident` |
+
+**Step 4: Apply the Power Automate rules (~10 minutes)**
+
+Initialise:
+
+| Variable | Initial value |
+| --- | --- |
+| `Decision` | `APPROVED` |
+| `Reason` | `The onboarding enquiry meets the selected account criteria.` |
+| `RiskFlags` | blank |
+
+Add `Application ID`:
+
+```
+concat('AGENT-', formatDateTime(utcNow(),'yyyyMMdd-HHmmss'))
+```
+
+Apply these conditions in order:
+
+1. `pep` is `Yes` → `REVIEW`, enhanced due diligence, `PEP`
+2. `foreignTaxResident` is `Yes` → `REVIEW`, tax-residency review, `CRS_FATCA`
+3. Deposit below the selected account minimum → `REJECTED`
+4. Current account and `Unemployed` → `REJECTED`
+5. Fixed Deposit and income below `30000` → `REJECTED`
+6. Otherwise keep `APPROVED`
+
+> Lab 9 intentionally uses no AI Builder prompt. The agent starts the flow, but Power Automate conditions still make the decision.
+
+**Step 5: Log, email and respond (~10 minutes)**
+
+Add an Excel row using the flow inputs and result variables. Set NRIC to
+
+`Not collected in chatbot`.
+
+Add **Send an email (V2)** to the supplied `email` with the reference, account
+
+type, decision and reason.
+
+Add **Respond to the agent**:
+
+| Type | Output | Value |
+| --- | --- | --- |
+| Text | `applicationId` | Output of `Application ID` |
+| Text | `decision` | `Decision` |
+| Text | `reason` | `Reason` |
+| Text | `riskFlags` | `RiskFlags` |
+| Boolean | `emailSent` | `true` |
+
+Keep asynchronous response off. Save and publish the flow.
+
+**Step 6: Attach and configure the agent flow tool (~6 minutes)**
+
+**New experience**
+
+1. Confirm the workflow is published.
+2. On **Build → Tools**, select **+ → Workflows** and add  —  `Assess onboarding enquiry`.
+3. Give it a precise description: `Use once after the user confirms a complete  —  fictitious onboarding enquiry. Apply fixed pilot rules, log the enquiry,  —  send acknowledgement and return the result.`
+4. Configure each input to be filled from the confirmed conversation context.
+5. Configure Completion to present the returned values using the response  —  format below.
+
+**Classic experience**
+
+1. After the form confirmation in the Topic, add **Call an action** and select  —  `Assess onboarding enquiry`.
+2. Map every form variable to the matching input.
+3. Store all returned outputs.
+4. Add a Message node using:
+
+```
+Your onboarding enquiry has been processed.
+
+Reference: {applicationId}
+Decision: {decision}
+Reason: {reason}
+Risk flags: {riskFlags}
+Confirmation email sent: {emailSent}
+```
+
+Save and publish the agent.
+
+**Step 7: Publish and test in Teams (~6 minutes)**
+
+1. Open **Channels/Availability → Microsoft Teams**.
+2. Add or update the Teams channel.
+3. Install the agent in Teams.
+4. Enter:
+
+```
+I want to submit an onboarding enquiry.
+```
+
+Confirm that Teams displays the returned reference, decision and reason.
 
 ---
 
-**Step-by-Step Guide**
+**Scenario B — Trigger the Same Agent Flow from a Website**
 
-**Step 1: Prepare the procurement log in Excel (~5 minutes)**
+**Step 8: Add the website channel (~6 minutes)**
 
-1. In Excel (saved to **OneDrive for Business**, not your local PC), create a new workbook and name it `Procurement Log`.
-2. In **row 1**, type these six headers, one per cell from A1 to F1: `Date`, `Requester`, `Item`, `Quantity`, `Reason`, `Status`.
-3. Select the range **A1:F1**, then go to the **Insert** tab and select **Table**. In the dialog, tick **My table has headers** and select **OK**.
-4. With the table selected, open the **Table Design** tab. In the **Table Name** box (far left), replace the default name with `ProcurementTable`. Press **Enter**.
-5. Save and close the workbook.
+1. In Copilot Studio, open **Channels/Availability**.
+2. Select **Demo website** or **Custom website**.
+3. Publish the latest agent content.
+4. Use one of these options:  —  open the Microsoft-hosted demo website; or  —  copy the supplied website embed code into the  —  Marina Trust site.
 
-> **⚠️ Warning:** The file must be in **OneDrive for Business** (or SharePoint), not on your local hard drive. A flow's Excel actions can only see files stored in the cloud. The exact table name `ProcurementTable` matters — the flow will look for it by name.
+For a custom website, use only the embed code generated by your environment.
 
-**Step 2: Create the agent and capture the request (~10 minutes)**
+Do not paste another learner's agent identifier.
 
-1. In Copilot Studio, select **Agents** in the left navigation, then **Create blank agent** (as in Lab 9). When the new agent's **Overview** page opens, select **Edit** in the **Details** section, fill in the fields below, and **Save**; then select **Edit** in the **Instructions** section, paste the instructions, and **Save**:  —  **Name:** `Procurement Assistant`  —  **Description:** `Captures staff purchase requests for ACME Pte Ltd and submits them for processing.`  —  **Instructions:**
+> The website does not call the agent-flow URL directly. The embedded chatbot receives the message, and the agent invokes **When an agent calls the flow**.
 
-```
-     You are a Procurement Assistant for ACME Pte Ltd.
-     Collect a staff member's purchase request: requester name, item, quantity,
-     and reason. Collect one item at a time, be concise, then confirm the request
-     has been submitted.
-```
+**Step 9: Test from the website (~8 minutes)**
 
-1. Open the **Topics** tab, select **+ Add a topic**, then **From blank**. On the toolbar select **Details** and set the **Name** to `New Procurement Request`.
-2. Give the topic a clear **trigger** so the agent knows when to run it:  —  **Latest Copilot Studio (generative orchestration — default):** the **Trigger** node reads **The agent chooses**. In the **Details** panel, set the **Description** to `Use this topic when a staff member wants to raise a procurement or purchase request to buy supplies. It collects their name, item, quantity, and reason.` No phrases are needed.  —  **(Optional) Classic orchestration / exact phrases:** hover the **Trigger** node → **Change trigger** → **User says a phrase**, then add phrases such as `procurement request`, `I need to buy something`, `I want to order supplies`, `raise a purchase request`.
-3. Add four **Ask a question** nodes in order, using the **Add node** icon (**+**) each time. For each, set the **Identify** type and rename the **Save user response as** variable exactly as shown:  —  Question `What is your name?` → Identify **User's entire response** → save as `requester`  —  Question `What item do you need?` → Identify **User's entire response** → save as `item`  —  Question `How many do you need?` → Identify **Number** → save as `quantity`  —  Question `What is the reason for this request?` → Identify **User's entire response** → save as `reason`
-4. Select **Save**.
-
-> **⚠️ Warning:** Set the quantity question's **Identify** to **Number**. If it stays as text, the Excel **Quantity** column will store words instead of numbers.
-
-**Step 3: Create the agent flow (~15 minutes)**
-
-1. Still in the **New Procurement Request** topic, select the **+** node after the last question, choose **Add a tool**, then **New Agent flow**.  —  *(Alternatively, from the agent's **Tools** tab, select **Add a tool**, then **New agent flow**.)*
-2. The **agent flow designer** opens (the same designer Power Automate uses) with the trigger **When an agent calls the flow** and a **Respond to the agent** action already in place.
-3. Confirm you are still working in the **Course Sandbox** environment (top-right).
-4. On the **When an agent calls the flow** trigger, select **+ Add an input** and create four inputs. Choose the matching type and name each one exactly:  —  Type **Text**, name `requester`  —  Type **Text**, name `item`  —  Type **Number**, name `quantity`  —  Type **Text**, name `reason`
-
-> **Tip:** Keeping flow input names identical to your topic variable names (`requester`, `item`, `quantity`, `reason`) makes the mapping step later much less confusing.
-
-**Step 4: Add the flow actions — log to Excel and email (~15 minutes)**
-
-**Action 1 — Add a row into a table (Excel Online Business):**
-
-1. Select the **+** between the trigger and **Respond to the agent**, search for **Add a row into a table**, and select it (Excel Online (Business)).
-2. Set the file location fields:  —  **Location:** OneDrive for Business  —  **Document Library:** OneDrive  —  **File:** browse to and select `Procurement Log.xlsx`  —  **Table:** select `ProcurementTable` from the dropdown
-3. Map the columns. For the **Date** column, you must enter an expression — do not type the date by hand:  —  Click the **Date** field, then select the **fx** (Expression / function) tab in the dynamic content panel.  —  Type this expression into the fx editor, then select **Add / OK**:
+Open the website chatbot and enter:
 
 ```
-     formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')
+Start an account application.
 ```
 
-- The field should now show a blue/purple **token**, not plain text.
+Test:
 
-1. Map the remaining columns using the **Dynamic content** tab — pick the values that come from the **trigger** (the inputs you defined in Step 3):  —  **Requester:** `requester`  —  **Item:** `item`  —  **Quantity:** `quantity`  —  **Reason:** `reason`  —  **Status:** type the literal text `Pending`
+| Case | Account | Income | Deposit | PEP | Foreign tax | Expected |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Savings | 48000 | 1000 | No | No | `APPROVED` |
+| 2 | Fixed Deposit | 12000 | 10000 | No | No | `REJECTED` |
+| 3 | Savings | 90000 | 20000 | Yes | No | `REVIEW` |
 
-> **⚠️ Warning:** The `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')` expression must be entered through the **fx editor** so it becomes a token. If you paste it as plain text into the Date field, Excel will store the literal characters `formatDateTime(...)` instead of a real date.
+Verify:
 
-**Action 2 — Send an email (Office 365 Outlook):**
+- the form appears in the website chatbot;
+- one agent-flow run occurs after confirmation;
+- one Excel row and one email are created; and
+- the returned values appear inside the website chat.
 
-1. Select the **+** below the Excel action (still above **Respond to the agent**), search for **Send an email (V2)** (Office 365 Outlook), and select it.
-2. Fill in the email:  —  **To:** the procurement team address (use your own email for testing)  —  **Subject:** type `New Procurement Request from `, then insert the **requester** dynamic content right after it  —  **Body:** type the text below, inserting each value from the **Dynamic content** panel where shown (do not type the variable names by hand):
+**Part 2 — Import the Packaged Flow**
 
-```
-     A new procurement request has been submitted:
-     Requester: {requester}
-     Item: {item}
-     Quantity: {quantity}
-     Reason: {reason}
-     Status: Pending
-```
+To avoid building the trigger, decision expressions and response contract from
 
-**Action 3 — Respond to the agent:**
+a blank canvas, import this lab-specific editable solution:
 
-1. Select the **Respond to the agent** action that was added for you at the end of the flow.
-2. Select **+ Add an output**, choose **Text**, name it `result`, and set its value to: `Logged and procurement team notified.`
-3. Select **Save draft**, then **Publish** — the agent can only call a **published** flow.
-4. Return to your agent in Copilot Studio (select **Go back to agent** if prompted).
+`Lab9-Banking-Onboarding-Agent-Flow-Solution.zip`
 
-> **⚠️ Warning:** If the **Send an email** action shows an **"Unauthorized"** error, the Office 365 Outlook **connection** is broken or signed in with an account that has no mailbox. Open the action's **…** menu, select **My connections**, and **reconnect** using a mailbox-enabled work account. Every connection used by the flow must show a green ✓ before the flow will run.
+1. In Power Automate, open **Solutions → Import solution**.
+2. Upload the ZIP without extracting it.
+3. Select **Next → Import**.
+4. Open **Lab 9 Banking Onboarding Agent Flow**.
+5. Open **Lab 9 - Assess Banking Onboarding Enquiry**.
+6. Save the flow and add it to `Marina Trust Enquiry Agent` as a tool.
 
-**Step 5: Wire the flow into the topic (~10 minutes)**
+The imported flow has all eight inputs, deterministic decision expressions,
 
-1. Back in Copilot Studio, the flow should now appear as a tool/action node inside the **New Procurement Request** topic. If it does not appear, **refresh** the page and make sure the flow was **published** in the **same environment (Course Sandbox)**.
-2. Select the tool node. Under its **inputs**, map each input to the matching topic variable — this step is mandatory; the flow receives nothing if you skip it:  —  input `requester` → variable `requester`  —  input `item` → variable `item`  —  input `quantity` → variable `quantity`  —  input `reason` → variable `reason`
-3. After the tool node, add a **Send a message** node that shows the value the flow returned. Insert the `result` output via the **{x}** button:
+`decision`, `responseMessage` and `reference` outputs. It uses no connector, so
 
-```
-   {result} Your request has been recorded. Thank you!
-```
+it can be saved and tested immediately. Excel logging and email are optional
 
-1. Select **Save** to save the topic.
-
-> **⚠️ Warning:** Mapping is the step everyone forgets. After adding the flow as a tool, you **must** map each flow input to its matching topic variable. Unmapped inputs arrive empty, so your Excel row and email will be blank.
-
-**Step 6: Test end-to-end (~10 minutes)**
-
-1. Open the **Test** pane and select the **Start new test session** (refresh) icon so it loads the latest topic.
-2. Type a message that starts the request, e.g. `procurement request` — the agent recognises it from the topic **Description** (or phrases). Answer the questions:  —  Name: `Daniel`  —  Item: `Wireless mouse`  —  Quantity: `10`  —  Reason: `New hires`
-3. Confirm all three results occurred:  —  The agent shows the confirmation message ("Logged and procurement team notified. Your request has been recorded. Thank you!").  —  A **new row** appears in **Procurement Log.xlsx** (with a real date, the four values, and Status `Pending`).  —  The **notification email** arrives in your inbox.
-4. If anything is missing, open the flow in Power Automate and review its **run history** (28-day run history) — select the latest run to inspect the inputs each step received and any error messages.
-
----
+extensions because they require tenant-owned connections.
 
 **Checkpoint**
 
-You are ready to move on when all of the following are true:
+> **Workplace evidence:** Save one Teams transcript and one website transcript that call the same agent flow and return the same structured outcome. Include the flow output but redact customer identifiers.
 
-- ✅ A **Procurement Log** workbook with a **ProcurementTable** exists in OneDrive
-- ✅ A **Procurement Assistant** agent captures four variables (`requester`, `item`, `quantity`, `reason`)
-- ✅ An **agent flow** triggered by **When an agent calls the flow**, with four matching inputs
-- ✅ One conversation produces both a **new Excel row** and a **notification email**
-- ✅ The agent shows the flow's returned confirmation message
+- ✅ Part A agent works in Microsoft Teams
+- ✅ Part B uses the same agent through a website channel
+- ✅ Both channels trigger **When an agent calls the flow**
+- ✅ Deterministic Power Automate conditions determine the result
+- ✅ **Respond to the agent** returns structured values
+- ✅ Teams and website chat display the returned result
+- ✅ No HTTP Request trigger or AI Builder prompt is used in Lab 9
 
 **Troubleshooting**
 
 | Problem | Solution |
 | --- | --- |
-| Flow doesn't appear in the topic | Refresh the Copilot Studio page; confirm the flow was **published** and is in the **same environment (Course Sandbox)**. |
-| Inputs unmapped or arriving empty | Select the tool node and map **each** flow input to its matching topic variable. |
-| "Unauthorized" error on Send an email | Reconnect the **Office 365 Outlook** connection with a mailbox-enabled work account; every connection must show a green ✓. |
-| Date column shows `formatDateTime(...)` as text | You typed the expression instead of entering it in the **fx editor**. Re-enter it via **fx** so it becomes a token. |
-| Excel row is blank | Map the columns to the **trigger** dynamic content (the inputs), not to outputs of later steps. |
-| No email received | Check your Junk folder, verify the **To** address, and review the flow **run history** for errors. |
-| Flow can't find the table | Confirm the file is in **OneDrive for Business** and the table is named exactly `ProcurementTable`. |
-
-**Key Takeaways**
-
-- An **agent flow** uses the **When an agent calls the flow** trigger and ends with **Respond to the agent**.
-- Agent **variables** map to flow **inputs**; this mapping is mandatory and easy to forget.
-- The flow can **return** a value (`result`) that the agent shows back to the user.
-- Dates come from the `formatDateTime(utcNow(),'yyyy-MM-dd HH:mm')` expression entered via the **fx editor** as a token — never typed as text.
-- One short conversation now triggers real business actions: **logging** and **notifying** together.
+| Agent flow does not appear | Confirm the agent trigger and response are in the same environment as the agent. |
+| Adaptive Card does not save values | Confirm every input `id` matches the topic variable. |
+| Teams shows old behavior | Publish the latest content and start a new conversation. |
+| Website shows old behavior | Republish the agent and refresh the demo/custom website. |
+| Chatbot responds before the flow finishes | Keep asynchronous response off. |
+| Duplicate rows or emails | Call the agent flow once, only after confirmation. |
 
 **Duration**
 
-~50 minutes
+- Guided classroom path: approximately 45 minutes
+- Full Teams installation and website-channel testing: approximately 60 minutes
 
 **Next Steps**
 
-Proceed to Lab 11: Automated Response Generation.
+Proceed to Lab 10: Teams and Website Prompt Flow, where an AI prompt generates a controlled customer response and returns it to the same channels.
 
 ---
 
-### Lab 11: Automated Response Generation
+### Lab 10: Teams and Website Enquiry Prompt Flow
 
 **Lab Title**
 
-Use AI Prompts to Generate Professional Responses Automatically
+Marina Trust Enquiry Agent → AI Prompt Flow → Controlled Response to Teams or Website Chat
 
 **Lab Objectives**
 
 By the end of this lab, you will be able to:
 
-1. Add an AI Builder **Run a prompt** action inside a flow
-2. Feed captured enquiry data into the prompt to generate tailored text
-3. Control the **length, tone, and format** of the AI output
-4. Email the AI-generated response automatically
-5. Compare a static template versus an AI-generated response and know when to use each
+1. Collect a free-text customer enquiry through a Copilot Studio agent
+2. Build a prompt-based agent flow using **AI Builder → Run a prompt**
+3. Parse a structured prompt result
+4. Return a controlled response to the agent
+5. Test the prompt flow through Microsoft Teams
+6. Trigger the same prompt flow through the website chatbot
+7. Apply escalation and safe-response rules
 
 **Prerequisites**
 
-- Completed Lab 10
-- A **Sales Enquiry Assistant** agent (from Lab 9) you can reuse
+- Completed Lab 9
+- Copilot Studio and Microsoft Teams access
+- AI Builder prompt access
+- Excel Online (Business) and Office 365 Outlook connections
 
-> **⚠️ Warning:** As in Lab 10, the agent and the flow must both be in the **Course Sandbox** environment, or the agent cannot call its flow. Confirm the environment picker (top-right) in both <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Copilot Studio</a> and <a href="https://make.powerautomate.com" target="_blank" rel="noopener">Power Automate</a>.
+> **Terminology:** This lab uses “prompt flow” for an agent flow whose principal processing step is **AI Builder → Run a prompt**. Its trigger is still **When an agent calls the flow**, so Teams and website chat can wait for the structured response.
 
-**Scenario**
+**Workflow Visual**
 
-At **ACME Pte Ltd**, every sales enquiry currently gets the same copy-paste reply. It works, but it feels impersonal. In this lab you'll reuse your **Sales Enquiry Assistant** from Lab 9 and add a flow that uses an **AI prompt** to draft a warm, personalised reply from the customer's captured details — then emails it automatically. This shows how generative AI turns the structured data you captured into polished, individual communication, while still keeping you in control of length and tone.
+![Lab 10 Copilot agent calling a prompt flowchart](<labs/Day 2/Lab 10 - Procurement Request Workflow/assets/flowchart.png>)
+
+The agent collects and confirms the enquiry, while the prompt flow performs
+
+guarded AI drafting and returns structured outputs to the conversation.
+
+**Choose Your Route**
+
+1. **Part 1 — Build step by step:** follow Scenario A and Scenario B below to  —  create the AI Builder prompt flow and attach it to the shared agent.
+2. **Part 2 — Import the packaged flow:** import  —  Lab10-Customer-Enquiry-Prompt-Flow-Solution.zip  —  through **Solutions → Import solution**. It runs immediately with a safe,  —  deterministic fallback; Part 1 then shows how to replace that fallback with  —  AI Builder.
+
+**Workplace Brief**
+
+Marina Trust now wants the assistant to handle **unstructured general
+
+enquiries** about accounts, cards, fees and digital banking. Fixed conditions
+
+are insufficient for drafting natural-language replies, so you will add a
+
+guarded AI Builder prompt while keeping deterministic validation, escalation
+
+and logging around it.
+
+You are the **Customer Experience Automation Lead**. Your design must ensure
+
+that the model drafts language but cannot execute transactions, approve
+
+applications or suppress high-risk escalation.
+
+| Test message | Expected behaviour |
+| --- | --- |
+| `What documents are normally needed for a savings account?` | Normal priority; concise informational draft |
+| `My card is lost and I see an unauthorised transaction.` | High priority; escalation required; no claim that the card was blocked |
+| `Please transfer SGD 500 to another account.` | Refuse the transaction and direct the user to an authenticated banking channel |
+| Empty or malformed model output | Deterministic fallback response |
+
+**Two-Scenario Project**
+
+| Part | User experience | Automation |
+| --- | --- | --- |
+| **Scenario A** | A customer-service user tests the Marina Trust agent in Microsoft Teams | The agent calls the prompt flow and displays its drafted response |
+| **Scenario B** | A visitor submits the same enquiry through the website chatbot | The website chatbot calls the same prompt flow and displays the result |
+
+```
+PART A: Teams user ─┐
+                    ├─→ Copilot Studio agent → Prompt flow
+PART B: Website chat┘                         ├─ AI Builder prompt
+                                             ├─ Parse JSON
+                                             ├─ Excel + optional email
+                                             └─ Respond to the agent
+                                                      ↓
+                                    Draft shown in Teams or website chat
+```
+
+**Progression Across Labs 8–10**
+
+| Lab | Entry point | Trigger | Processing | Return path |
+| --- | --- | --- | --- | --- |
+| 8 | Standalone website form | HTTP Request | Fixed Power Automate conditions | HTTP Response |
+| 9 | Teams or website chatbot | Agent flow | Fixed Power Automate conditions | Respond to the agent |
+| 10 | Teams or website chatbot | Prompt flow | AI Builder prompt with guardrails | Respond to the agent |
+
+**Supplied Files**
+
+| File | Purpose |
+| --- | --- |
+| `customer-enquiry-card.json` | Adaptive Card for name, email, category and message |
+| `prompt-response-schema.json` | Schema for the prompt's structured JSON output |
+
+**Part 1 — Build Step by Step**
+
+**Scenario A — Prompt Flow in Microsoft Teams**
+
+**Step 1: Extend the Marina Trust agent (~5 minutes)**
+
+Open `Marina Trust Enquiry Agent` and add:
+
+```
+For general customer enquiries, collect the customer's name, email, category
+and message through the approved form. Ask for confirmation. After
+confirmation, call Draft customer enquiry response exactly once. Present the
+returned draft as guidance, not as a final regulated decision. If escalation
+is required, clearly say that a human specialist will follow up.
+```
+
+Follow the path for your authoring experience:
+
+- **New experience:** do not create a Topic. Enhanced orchestration uses these
+
+Instructions plus the prompt tool's name, description and input schema.
+
+- **Classic experience:** create a topic named `General customer enquiry` with
+
+these trigger phrases:
+
+```
+ask a banking question
+submit a general enquiry
+contact customer service
+I need help with my account
+```
+
+**Step 2: Configure enquiry capture (~6 minutes)**
+
+**New experience**
+
+1. Add this requirement to the agent Instructions:
+
+```
+   Before calling Draft customer enquiry response, collect and confirm the
+   customer's name, email, category and message. Ask only for missing values.
+   Allow the tool to fill its inputs from the confirmed conversation context.
+```
+
+1. Save the agent.
+2. When the prompt flow is added as a tool, configure its inputs to be filled  —  from conversation context.
+
+**Classic experience**
+
+Paste `customer-enquiry-card.json` into **Ask with
+
+Adaptive Card**, or ask separately for:
+
+| Variable | Question |
+| --- | --- |
+| `fullName` | What name should we use for this enquiry? |
+| `email` | Which email address should receive the acknowledgement? |
+| `category` | Is this about accounts, cards, digital banking, fees or something else? |
+| `message` | Please describe the enquiry without passwords, PINs or full identity numbers. |
+
+Summarise the values and ask the user to confirm.
+
+**Step 3: Create the prompt flow (~7 minutes)**
+
+**New experience**
+
+1. Open **Tools → + Add a tool → New tool → Agent flow**.
+2. Name it `Draft customer enquiry response`.
+
+**Classic experience**
+
+1. Create an Instant cloud flow in Power Automate.
+2. Select **When an agent calls the flow**.
+3. Name it `Draft customer enquiry response`.
+
+Add four Text inputs:
+
+`fullName`, `email`, `category`, `message`
+
+Use this tool description:
+
+```
+Use once after a customer confirms a complete general enquiry. Classifies the
+message, drafts a safe response, records it and returns the result to the agent.
+Do not use for transactions, approvals or authentication.
+```
+
+**Step 4: Configure the AI prompt (~10 minutes)**
+
+Add **AI Builder → Run a prompt** and create:
+
+```
+You draft responses for a controlled Marina Trust Bank customer-service pilot using fictitious data.
+
+Customer name: {fullName}
+Category selected: {category}
+Customer message: {message}
+
+Rules:
+1. Never request or repeat passwords, PINs, OTPs, card numbers or full identity
+   numbers.
+2. Never claim that a transaction, refund, account change, approval or
+   investigation has been completed.
+3. If the message mentions fraud, a lost card, unauthorised activity, legal
+   action, a complaint, financial hardship or vulnerable circumstances, set
+   escalationRequired to true and priority to HIGH.
+4. Otherwise use NORMAL priority unless the message is time-sensitive.
+5. Draft two or three concise, professional sentences.
+6. Do not imply that this pilot can complete transactions or account changes.
+
+Return JSON only, without Markdown fences:
+{
+  "category": "normalised short category",
+  "priority": "NORMAL|HIGH",
+  "escalationRequired": true,
+  "draftResponse": "customer-safe response",
+  "internalSummary": "one-sentence staff summary"
+}
+```
+
+Map the three placeholders to the matching flow inputs. The email is used for
+
+logging and acknowledgement, not sent to the model.
+
+**Step 5: Parse and validate the prompt output (~6 minutes)**
+
+Add **Parse JSON**:
+
+- **Content:** generated text from **Run a prompt**
+- **Schema:** paste
+
+`prompt-response-schema.json`
+
+Add **Compose** named `Enquiry Reference`:
+
+```
+concat('ENQ-', formatDateTime(utcNow(),'yyyyMMdd-HHmmss'))
+```
+
+Add a Condition:
+
+- if `draftResponse` is empty, set a fallback response:
+
+```
+Thank you for your enquiry. A Marina Trust service specialist will review it.
+No transaction or account change has occurred.
+```
+
+**Step 6: Log and acknowledge (~8 minutes)**
+
+Create `Customer Enquiry Log.xlsx`, table `CustomerEnquiryTable`, with:
+
+`Reference`, `SubmittedAt`, `FullName`, `Email`, `Category`, `Message`,
+
+`Priority`, `EscalationRequired`, `DraftResponse`, `Status`
+
+Add **Excel Online (Business) → Add a row into a table** and map:
+
+- `Reference`: output of `Enquiry Reference`
+- `SubmittedAt`: `utcNow()`
+- inputs: `fullName`, `email`, `category`, `message`
+- parsed prompt outputs: `priority`, `escalationRequired`, `draftResponse`
+- `Status`: `Escalated` when escalation is true; otherwise `Drafted`
+
+Add **Send an email (V2)** to the supplied test `email`:
+
+```
+Subject: Marina Trust customer enquiry [Reference]
+
+Hello [fullName],
+
+We received your enquiry. Reference: [Reference].
+
+[draftResponse]
+```
+
+**Step 7: Respond to the agent (~5 minutes)**
+
+Add **Respond to the agent**:
+
+| Type | Output | Value |
+| --- | --- | --- |
+| Text | `reference` | Output of `Enquiry Reference` |
+| Text | `category` | Parsed `category` |
+| Text | `priority` | Parsed `priority` |
+| Boolean | `escalationRequired` | Parsed `escalationRequired` |
+| Text | `draftResponse` | Parsed or fallback response |
+| Boolean | `emailSent` | `true` |
+
+Keep asynchronous response off. Save and publish the prompt flow.
+
+**Step 8: Attach the prompt-flow tool and test in Teams (~8 minutes)**
+
+**New experience**
+
+1. Confirm the workflow is published.
+2. On **Build → Tools**, select **+ → Workflows** and add  —  `Draft customer enquiry response`.
+3. Use the tool description from Step 3.
+4. Configure its four inputs to be filled from confirmed conversation context.
+5. Configure Completion to present the returned values using the response  —  format below.
+
+**Classic experience**
+
+1. After form confirmation in the Topic, add the prompt-flow action.
+2. Map the four form variables to the matching inputs.
+3. Add a Message node using:
+
+```
+Reference: {reference}
+Category: {category}
+Priority: {priority}
+
+{draftResponse}
+
+Escalated to a human: {escalationRequired}
+Acknowledgement email sent: {emailSent}
+```
+
+Publish the agent and update its Microsoft Teams channel. Start a new Teams
+
+conversation:
+
+```
+I want to submit a general enquiry.
+```
+
+Use your own email and a fictional message.
 
 ---
 
-**Step-by-Step Guide**
+**Scenario B — Trigger the Prompt Flow from the Website**
 
-**Step 1: Understand where the AI prompt runs (~5 minutes)**
+**Step 9: Publish the updated website chatbot (~5 minutes)**
 
-1. An AI prompt can run in two equivalent places:  —  **In a Power Automate flow** — using the **Run a prompt** action (AI Builder).  —  **In Copilot Studio** — by adding a **Prompt** tool to a topic.
-2. This lab uses the **flow** approach because it builds directly on the agent + flow skills from Lab 10 and keeps the "generate" and "email" steps together in one place.
+1. Republish the agent.
+2. Open **Channels/Availability → Demo website** or **Custom website**.
+3. Open the demo website or update the  —  Marina Trust website  —  with the latest embed code.
+4. Start a new website-chat conversation.
 
-> **Tip:** Both options call the same underlying AI Builder model. Choosing the flow approach simply means generation and emailing live in one flow you can inspect via run history.
+The website chatbot and Teams agent are two channels for the same Copilot
 
-**Step 2: Reuse the Sales Enquiry Assistant and add a flow (~10 minutes)**
+Studio agent. Both invoke `Draft customer enquiry response`.
 
-1. Open your **Sales Enquiry Assistant** agent (from Lab 9) and open the **New Sales Enquiry** topic.
-2. After the summary **Send a message** node, select the **+** node, choose **Add a tool**, then **New Agent flow**.
-3. The **agent flow designer** opens with the trigger **When an agent calls the flow** and a **Respond to the agent** action already in place. Confirm you are still in the **Course Sandbox** environment.
-4. On the trigger, select **+ Add an input** and add four inputs (matching the variables from Lab 9):  —  Type **Text**, name `customerName`  —  Type **Text**, name `company`  —  Type **Text**, name `product`  —  Type **Number**, name `quantity`
+**Step 10: Test safe and escalated enquiries (~8 minutes)**
 
-**Step 3: Add the AI prompt action (~15 minutes)**
+| Test | Example message | Expected |
+| --- | --- | --- |
+| Normal | `What documents are normally needed to open a savings account?` | `NORMAL`; concise general guidance |
+| Escalation | `My card was lost and I see an unauthorised purchase.` | `HIGH`; escalation true; no claim that the card was blocked |
+| Sensitive data | `My PIN is 1234 and my OTP is 567890.` | Response warns not to share credentials and does not repeat them |
 
-1. Select the **+** between the trigger and **Respond to the agent**, search for **Run a prompt** under **AI Builder**, and select it. *(This action was called "Create text with GPT using a prompt" until May 2025; the separate "Create text with GPT" action is deprecated.)*
-2. In the action's **Prompt** dropdown, choose **+ New custom prompt** (rather than one of the prebuilt prompts). The **prompt builder** opens.
-3. Write the prompt instruction below. Wherever a value comes from the enquiry, insert it from the **Dynamic content** panel rather than typing it:
+For each test, verify:
 
-```
-   Write a warm, professional email reply (maximum 120 words) to a sales enquiry
-   for ACME Pte Ltd.
-   Customer name: {customerName}
-   Company: {company}
-   Product of interest: {product}
-   Quantity: {quantity}
+- the website form submits through the chatbot;
+- the prompt flow runs once;
+- Parse JSON succeeds;
+- one Excel row and acknowledgement email are created; and
+- the website chatbot displays the returned draft.
 
-   The email should:
-   - Thank the customer by name
-   - Acknowledge the product and quantity
-   - Say a sales representative will follow up within 1 business day with pricing
-   - End with a professional sign-off from "The ACME Sales Team"
-   Output only the email body text. Do not include the prompt or these instructions.
-```
+**Part 2 — Import the Packaged Flow**
 
-1. Select **Save** on the prompt. The action now produces a generated **Text** output.
+Import the lab-specific editable solution:
 
-> **Tip:** Notice the prompt explicitly states **length** (max 120 words), **tone** (warm, professional), **content** (what to mention), and **format** ("output only the email body"). Controlling all four is what separates a reliable AI step from an unpredictable one — this is the structured prompt design from Module 3 applied to output generation.
+`Lab10-Customer-Enquiry-Prompt-Flow-Solution.zip`
 
-**Step 4: Email the generated response (~10 minutes)**
+1. In Power Automate, open **Solutions → Import solution**.
+2. Upload the ZIP without extracting it.
+3. Select **Next → Import**.
+4. Open **Lab 10 Customer Enquiry Prompt Flow**.
+5. Open **Lab 10 - Draft Customer Enquiry Response**.
+6. Save the flow and add it to `Marina Trust Enquiry Agent` as a tool.
 
-1. Select the **+** below the prompt action (still above **Respond to the agent**), search for **Send an email (V2)** (Office 365 Outlook), and select it.
-2. Fill in the email:  —  **To:** your own email (for testing; in production you would use a captured customer email variable)  —  **Subject:** type `Re: Your enquiry about `, then insert the **product** dynamic content  —  **Body:** insert the prompt's **Text** output (the generated email text) from the **Dynamic content** panel
-3. Select the **Respond to the agent** action at the end of the flow, select **+ Add an output**, and return a **Text** output named `result` with value `Reply drafted and sent.`
-4. Select **Save draft**, then **Publish** the flow, then return to your agent in Copilot Studio.
+The imported flow defines all four inputs and returns `category`, `priority`,
 
-> **⚠️ Warning:** If **Send an email** shows an **"Unauthorized"** error, reconnect the **Office 365 Outlook** connection with a mailbox-enabled work account. Every connection used by the flow must show a green ✓ before it will run.
+`escalationRequired`, `draftResponse` and `reference`. Its connector-free
 
-**Step 5: Wire the inputs and test (~10 minutes)**
+fallback classifies common card, fee and urgent enquiries and is immediately
 
-1. Back in the topic, select the flow's tool node and map each input to its matching topic variable — the flow gets empty values if you skip this:  —  input `customerName` → variable `customerName`  —  input `company` → variable `company`  —  input `product` → variable `product`  —  input `quantity` → variable `quantity`
-2. (Optional) After the tool node, add a **Send a message** node showing `{result}` so the agent confirms the email was sent.
-3. Select **Save** to save the topic.
-4. Open the **Test** pane, select the **Start new test session** (refresh) icon, type a message that starts the enquiry (the agent recognises it from the topic **Description**), and run the enquiry:  —  Name: `Mei Ling`, Company: `BrightTech`, Product: `Air Fryer Pro`, Quantity: `25`
-5. Confirm:  —  The flow runs successfully (check **run history** if unsure).  —  You receive a **uniquely worded, personalised** email — not a fixed template.
-6. Run it again with different details and compare the two emails; the AI adapts the wording each time.
+testable. To use generative drafting, replace the fallback drafting actions
 
-> **Tip:** If the email body contains the prompt instructions, your "Output only the email body text" line is missing or you mapped the wrong field — map only the prompt **output**, and keep that instruction in the prompt.
+with AI Builder as shown in Part 1; Microsoft requires a connection and prompt
 
-**Step 6: Compare template versus AI (~5 minutes)**
-
-1. Recall the **static template** email from Day 1: it is fast and 100% predictable, but identical for every customer.
-2. The **AI-generated** response is personalised and natural, but you must guide it with a precise prompt and review it for accuracy.
-3. Note the best-practice rule: use AI for **drafting the wording**, and keep critical facts (prices, policies, legal terms) as controlled static text or knowledge — never let the model invent them.
-
-> **Tip:** A safe production pattern is "AI drafts, human (or fixed text) confirms the facts." Personalisation from AI plus controlled facts gives you the best of both.
-
----
+owned by the student's environment.
 
 **Checkpoint**
 
-You are ready to finish when all of the following are true:
+> **Workplace evidence:** Capture normal, high-risk and malformed-output tests from both Teams and website channels. Pair them with prompt, parse and guardrail run details to show that escalation and fallback controls operate.
 
-- ✅ A flow that calls an **AI prompt** with the four enquiry inputs
-- ✅ A personalised email generated and sent automatically from the agent conversation
-- ✅ The email contains **only the body** (no leaked prompt instructions)
-- ✅ You can explain when to use a static template versus an AI-generated reply
+- ✅ Part A prompt flow is triggered through the Teams agent
+- ✅ Part B prompt flow is triggered through the website chatbot
+- ✅ AI Builder returns JSON that matches the supplied schema
+- ✅ Guardrails prevent claims of completed transactions or approvals
+- ✅ High-risk enquiries are marked for escalation
+- ✅ **Respond to the agent** returns the draft to both channels
 
 **Troubleshooting**
 
 | Problem | Solution |
 | --- | --- |
-| No **Run a prompt** action available | Search for **Run a prompt** under **AI Builder**; confirm AI Builder is available in this environment (the trial / developer environment includes it). The old **Create text with GPT** action is deprecated — do not use it. |
-| "Unauthorized" error on Send an email | Reconnect the **Office 365 Outlook** connection with a mailbox-enabled account; every connection must show a green ✓. |
-| Output too long or wrong tone | Tighten the prompt: state the word limit, the tone, and "output only the email body." |
-| Captured values not appearing in the email | Confirm you inserted them as **dynamic content** inside the prompt, and that the topic inputs are **mapped** to the variables. |
-| Email body shows the prompt instructions | Add "Output only the email body text" to the prompt and map only the prompt **output** into the email body. |
-| Flow doesn't appear in the topic | Refresh Copilot Studio; ensure the flow is **published** in the **same environment (Course Sandbox)**. |
+| Prompt action is unavailable | Confirm AI Builder capacity and permissions; complete as a trainer demonstration if required. |
+| Prompt returns Markdown fences | Strengthen “Return JSON only, without Markdown fences” and retest. |
+| Parse JSON fails | Inspect the generated text and compare it with the supplied schema. |
+| Boolean is returned as text | In the prompt, show `true` without quotation marks and test again. |
+| Teams or website uses an old prompt | Save the flow, publish the agent and begin a new conversation. |
+| Sensitive value appears in output | Tighten the prompt guardrail and remove the test data from logs. |
 
 **Key Takeaways**
 
-- **AI prompts** turn the structured data you captured into polished, personalised text.
-- You control quality by specifying **length, tone, content, and format** — especially "output only the email body."
-- Combine AI drafting with controlled facts for responses that are both personal and reliable.
-- The same agent + flow pattern from Lab 10 now powers generative output, not just logging.
+- Teams and website chat can expose the same Copilot Studio agent.
+- Lab 8 uses an HTTP-triggered Power Automate flow.
+- Lab 9 uses a deterministic agent flow.
+- Lab 10 uses a prompt-based agent flow for controlled language generation.
+- Prompt output must be parsed, validated and bounded by business rules.
 
 **Duration**
 
-~45 minutes
+- Guided classroom path: approximately 50 minutes
+- Full Teams installation and all website safety tests: approximately 60 minutes
 
-**Next Steps**
+**Course Integration Challenge**
 
-You've completed all the hands-on labs. Next: course wrap-up, briefing for assessment, then the WSQ assessment (Written Assessment 4:00–5:00 PM, Practical Performance 5:00–6:00 PM).
+Lab 10 is the final Day 2 lab. Before assessment:
+
+1. Run one successful test through Microsoft Teams.
+2. Run one successful test through the website chatbot.
+3. Compare the Lab 8 HTTP trigger, Lab 9 agent-flow trigger and Lab 10 prompt flow.
+4. Explain which pattern is most appropriate for a workflow from your own job.
+5. Review the run history and identify where inputs, actions and returned outputs appear.
 
 ---

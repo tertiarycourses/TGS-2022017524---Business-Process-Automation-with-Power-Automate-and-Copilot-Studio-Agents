@@ -16,8 +16,40 @@ By the end of this lab, you will be able to:
 - Access to the premium **Request** connector
 - The supplied [`webhook-chatbot.html`](assets/webhook-chatbot.html)
 
+## Workflow Visual
+
+![Lab 6B deterministic webhook chatbot flowchart](assets/flowchart.png)
+
+This is automation routing rather than an AI agent: a Switch selects a fixed
+reply from the normalised message.
+
+## Choose Your Route
+
+- **Part 1 — Build step by step:** recommended for learning request parsing and
+  deterministic message routing.
+- **Part 2 — Import the packaged flow:** use the connector-free ZIP in this lab
+  folder and save once to generate the production URL.
+
+Download [Lab6B-Webhook-Chatbot.zip](Lab6B-Webhook-Chatbot.zip), then use **My
+flows → Import → Import Package (Legacy)**. This package needs no connector.
+Follow the [import details](#part-2--import-the-packaged-flow),
+save once, and paste the generated HTTP POST URL into the supplied webpage.
+
 ## Scenario
-ACME Pte Ltd wants a small help widget on its website. A visitor sends a message, the page posts it to Power Automate, and the flow returns an immediate reply. This mirrors the interaction pattern in [n8n Activity 6](https://github.com/tertiarycourses/TGS-2023035977-Agentic-AI-Automation-with-n8n/tree/main/labs/activity6-finance-advisor), where a chat interface triggers an automation and receives its response, but uses a browser chat widget and Power Automate instead of Telegram and n8n.
+You are an **ACME Digital Service Designer**. The contact centre repeatedly
+answers the same low-risk questions about operating hours, contact channels and
+account-opening documents. You will build a website chat widget backed by
+deterministic Power Automate routes so every approved question receives a
+consistent response and anything else falls back safely.
+
+| Workplace detail | Requirement |
+|---|---|
+| Channel | Browser help widget |
+| Supported intents | Opening hours, contact details and onboarding documents |
+| Safe fallback | Explain the supported topics and direct complex enquiries to a person |
+| Evidence | Three supported tests and one unsupported test return the expected JSON reply |
+
+This mirrors the interaction pattern in [n8n Activity 6](https://github.com/tertiarycourses/TGS-2023035977-Agentic-AI-Automation-with-n8n/tree/main/labs/activity6-finance-advisor), where a chat interface triggers an automation and receives its response, but uses a browser chat widget and Power Automate instead of Telegram and n8n.
 
 This Day 1 version uses deterministic replies so you can see the webhook mechanics clearly. On Day 2, Copilot Studio provides the AI reasoning, knowledge grounding, and richer conversation management.
 
@@ -41,7 +73,7 @@ Response { reply }
 
 ---
 
-## Step-by-Step Guide
+## Part 1 — Build the Flow Step by Step
 
 ### Step 1: Create the chatbot webhook (~5 minutes)
 
@@ -91,7 +123,7 @@ The browser sends the payload as `text/plain` to avoid a cross-origin OPTIONS pr
 2. Configure:
    - **Name:** `botReply`
    - **Type:** `String`
-   - **Value:** `I can help with opening hours, contact details, or courses. Please choose one of those topics.`
+   - **Value:** `I can help with opening hours, contact details, or account-opening documents. For anything else, I will direct you to Customer Operations.`
 
 This is the fallback response for any message that does not match a known route.
 
@@ -119,7 +151,7 @@ Normalising removes extra spaces and makes `Opening Hours` match `opening hours`
 |---|---|---|
 | `opening hours` | **Set variable** | `Our support desk is open Monday to Friday, 9:00 AM to 6:00 PM Singapore time.` |
 | `contact details` | **Set variable** | `Email help@acme.example or call +65 6000 1234 during business hours.` |
-| `courses` | **Set variable** | `We offer instructor-led automation and AI courses. Please submit an enquiry for the latest schedule.` |
+| `documents` | **Set variable** | `For an SME current-account enquiry, prepare the company registration profile, authorised signatory identification and proof of business address. A service officer will confirm the final checklist.` |
 
 4. Leave the **Default** branch empty. The initial fallback remains unchanged.
 
@@ -167,7 +199,7 @@ Normalising removes extra spaces and makes `Opening Hours` match `opening hours`
 4. Send each supported message:
    - `opening hours`
    - `contact details`
-   - `courses`
+   - `documents`
 5. Send `refund policy` and confirm the fallback reply appears.
 6. In Power Automate, open the run history and inspect the Switch case taken for each message.
 
@@ -185,7 +217,18 @@ Record two production improvements:
 
 ---
 
+## Part 2 — Import the Packaged Flow
+
+Download [Lab6B-Webhook-Chatbot.zip](Lab6B-Webhook-Chatbot.zip), then use **My
+flows → Import → Import Package (Legacy)**. This deterministic version needs no
+external connector. Save it once, copy the HTTP POST URL from the request
+trigger, and paste that URL into the supplied chatbot page.
+
+---
+
 ## Checkpoint
+> **Workplace evidence:** Record one supported transcript and one safe fallback transcript, then match each to its successful flow run. This proves both service coverage and boundary handling.
+
 - ✅ Parse JSON produces `sessionId` and `message`
 - ✅ The input is normalised before routing
 - ✅ A Switch supplies three supported replies and one fallback
@@ -207,7 +250,11 @@ Record two production improvements:
 
 ## Optional AI Upgrade
 
-If your tenant includes an approved generative AI action, you may replace the Switch with that action and instruct it to answer only from approved ACME support content. Keep the same HTTP request and Response contract so the browser page does not need to change.
+If your tenant includes an approved generative AI action, you may replace the
+Switch with that action and instruct it to answer only from approved ACME
+customer-service content. Add content filtering, telemetry and a human handoff;
+keep the same HTTP request and Response contract so the browser page does not
+need to change.
 
 Do not send confidential or personal information to an AI service unless your organisation has approved the data handling.
 
